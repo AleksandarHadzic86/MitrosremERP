@@ -1,0 +1,49 @@
+﻿@using MitrosremERP.Domain.Models;
+@model IEnumerable<Zaposleni>
+
+
+<div class="align-items-center container-xxl ">
+<div class="row pb-3 ">
+    <div class="mt-5 mb-2">
+        <form asp-action="Index" method="get">
+            <div class="form-actions d-flex flex-row align-items-end">
+                <div class="col-lg-3">
+                    <input type="search" class="form-control me-sm-2" placeholder="Pretrazi po Imenu" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                </div>
+              @*   <div class="col-lg-3 mx-2">
+                    <a class="btn btn-secondary my-2 my-sm-0" asp-action="Index">ListaZaposlenih</a>
+                </div>  *@                        
+            </div>
+        </form>
+    </div>
+    
+    @foreach(var zaposleni in Model)
+    {
+        <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6 col-sm-12 mt-2 ">
+                <div class="card mb-3 h-100 text-center">
+
+                <h4 class="card-header">@zaposleni.Ime @zaposleni.Prezime</h4>
+                        <div class="card-body">
+                             <h6 class="card-title">@zaposleni.Napomena</h6> 
+                        </div>
+                        <div>
+                              <img  style="width:150px;height:150px;" class="card-img-top" /> 
+                        </div>
+                     
+                        <ul class="list-group list-group-flush">
+                             <li class="list-group-item">Zaposlen na: @zaposleni.JMBG</li> 
+                        </ul>
+                         <div class="card-body">
+                            <a href="#" class="card-link">Card link</a>
+                        </div> 
+                        <div class="card-footer text-muted m-0 p-0">
+                    <a asp-action="Details" class="btn btn-primary form-control  rounded-0" >Detaljnije</a>
+                        </div>
+                 </div>
+        </div>                           
+    }
+</div>
+</div>
+
+
+

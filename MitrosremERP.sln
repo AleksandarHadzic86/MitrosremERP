@@ -5,11 +5,11 @@ VisualStudioVersion = 17.8.34004.107
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MitrosremERP", "MitrosremERP\MitrosremERP.csproj", "{07C874B1-1BBE-417B-8104-52AC6E476206}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MitrosremERP.DAL", "MitrosremERP.DAL\MitrosremERP.DAL.csproj", "{5DBEAA03-BCBF-4845-9CD4-500FDA014EED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MitrosremERP.Aplication", "MitrosremERP.DAL\MitrosremERP.Aplication.csproj", "{5DBEAA03-BCBF-4845-9CD4-500FDA014EED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MitrosremERP.Service", "MitrosremERP.Service\MitrosremERP.Service.csproj", "{A78FA13B-1328-404F-A61A-927031520548}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MitrosremERP.Infrastructure", "MitrosremERP.Service\MitrosremERP.Infrastructure.csproj", "{A78FA13B-1328-404F-A61A-927031520548}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MitrosremERP.Domain", "MitrosremERP.Domain\MitrosremERP.Domain.csproj", "{47FCF618-A79B-498F-8A59-FC355B1A3FEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MitrosremERP.Domain", "MitrosremERP.Domain\MitrosremERP.Domain.csproj", "{47FCF618-A79B-498F-8A59-FC355B1A3FEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
