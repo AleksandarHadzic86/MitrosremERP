@@ -1,228 +1,414 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;500;600&display=swap');
 
-/*root {
-    --main-color: #22BAA0;
-    --color-dark: #34425A;
-    --text-grey: #B0B0B0;
+/* Variables  */
+:root {
+    --color_ActiveLink: #c73704;
+    --color_SideBar: #e95420;
+    --color_DropDown: #c73704;
+    --color_Light1: #f2f2f2;
+    --color_Light2: #f2f2f2;
 }
-*/
-* { 
+
+ {
     margin: 0;
     padding: 0;
-    
     box-sizing: border-box;
-/*    font-family: 'Merriweather', sans-serif;
-*/    list-style-type: none;
+    font-family: 'Merriweather', sans-serif;
+    list-style-type: none;
     text-decoration: none;
 }
-#sidebar-toggle{
-    display: none;
-}
 
+/* =============== Sidebar =============== */
 .sidebar {
     position: fixed;
-    height: 100%;
-    width: 250px;
+    top: 0;
     left: 0;
-    top: 0;
+    height: 100%;
+    width: 260px;
+    background-color: var(--color_SideBar);
+    transition: all .5s ease;
     z-index: 100;
-    overflow-y: auto;
-    background-color: #e95420;
-    transition: width 500ms;
-  
+}
+.sidebar.close {
+        width: 78px;
 }
 
-.sidebar-header {
+/* --------- Logo ------------ */
+.logobox {
+    height: 60px;
+    width: 100%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    height: 60px;
-    padding: 1rem 1rem 1rem 1.8rem;
-    color: white;
-    font-size:1.6rem;
-    margin-top:35px;
-}
-main{
-    margin-top:120px;
-
-}
-header {
-    position: fixed;
-    left: 250px;
-    top: 0;
-    z-index: 100;
-    width: calc(100% - 250px);
-    background: #f2f2f2; /*#F8F8F8;*/
-    height: 50px;
-    /*   display: flex;*/
-    align-items: center;
-    border-bottom: 1px solid #ccc;
-    transition: left 500ms;
-    padding: 0rem 1rem;
-}
-.underheader {
-    position: fixed;
-    left: 250px;
-    top: 150px;
-    z-index: 100;
-    width: calc(100% - 250px);
-    background: #f2f2f2; /*#F8F8F8;*/
-    height: 50px;
-    /*   display: flex;*/
-    align-items: center;
-    border-bottom: 1px solid #ccc;
-    transition: left 500ms;
-    padding: 0rem 1rem;
-}
-    header nav ul {
-        list-style-type: none;
-        margin: 0;
-        display: inline;
-        background-color: #f2f2f2;
-
-    }
-.nav li a:hover {
-    background-color: #F1F1F1;
+    transition: all .5s ease;
 }
 
-.sidebar-menu {
-    margin-top: 10px;
-    padding: 0rem;
-    transition: left 500ms;
-    align-content:center; 
-}
-
-.sidebar-menu li {
-        height: 30px;
-        
-}
-.sidebar-menu li a {
-          
-}
-
-.sidebar-menu li a:hover:first-child {
-        font-size: 1.2rem;
-        transition: all 200ms ease-in-out;
-        text-shadow: 0.5px 2px black;
-}
-
-.sidebar-menu li span:last-child {
-        position: fixed;
-
-}
-.sidebar li {
-    margin-bottom: 1.2rem; 
-}
-
-.sidebar a {
-    color: #fff;
-    font-size: 1rem; 
-}
-.navbar {
- /*   margin-left: 250px;
-    position: relative;
-*/    transition: margin-left 500ms;
-}
-
-
-    .sidebar a span:last-child {
-        padding-left: .6rem;     
-    }
-
-#sidebar-toggle:checked ~ .sidebar{
-    width: 80px;
-}
-
-
-#sidebar-toggle:checked ~ .sidebar li span:last-child{
-    display:none;
-}
-
-#sidebar-toggle:checked ~ .main-content{
-    margin-left: 170px;
-}
-
-#sidebar-toggle:checked ~ .main-content header{
-    left: 80px;
-    width:calc(100% - 80px);
-}
-.main-content{
-    position:relative;
-    margin-left:250px;
-    transition: margin-left 500ms;
-}
-.main-content header{
-
-}
-.logos{
-    margin: 0;
-    height: 60px;
-    padding: 0;
-}
-.logocorn{
-    margin-left:15px;
+.sidebar.close .logobox .logocorn{
+    transition: transform 0.3s;
+    transform: rotate(360deg);
 }
 
 .logomitrosrem {
-    
-}
-.logomitrosrem img {
     margin-right: 1px;
-    width: 170px;
+    width: 160px;
+    transition: all .5s ease;
 }
 
-.logocorn img{  
+.logocorn {
     width: 50px;
-    margin-right:1px;
+    margin-right: 1px;
+    margin-left: 15px;
+    transition: all .5s ease;
 }
 
-#sidebar-toggle:checked ~ .sidebar .logomitrosrem img {
+/* ---------- Sidebar List ---------- */
+.sidebar-list {
+    height: 100%;
+    padding: 30px 0 150px 0;
+    overflow: auto;
+}
+
+    .sidebar-list::-webkit-scrollbar {
+        display: none;
+    }
+
+    .sidebar-list li {
+        transition: all .5s ease;
+    }
+
+        .sidebar-list li:hover {
+            background-color: var(--color_DropDown);
+        }
+
+        .sidebar-list li .title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all .5s ease;
+            cursor: pointer;
+        }
+
+        .sidebar-list li.active .title {
+            background-color: var(--color_ActiveLink);
+            
+        }
+
+        .sidebar-list li.active .bxs-chevron-down {
+            transition: all .5s ease;
+            transform: rotate(180deg);
+        }
+
+        .sidebar-list li .title .link {
+            display: flex;
+            align-items: center;
+
+        }
+
+        .sidebar-list li .title i {
+            height: 50px;
+            min-width: 78px;
+            text-align: center;
+            line-height: 50px;
+            color: var(--color_Light1);
+            font-size: 20px;
+        }
+
+        .sidebar-list li .title .name {
+            font-size: 18px;
+            font-weight: 400;
+            color: var(--color_Light1);
+        }
+
+        /* ---------------- Submenu ------------- */
+        .sidebar-list li .submenu {
+            width: 0;
+            height: 0;
+            opacity: 0;
+            transition: all .5s ease;
+        }
+
+        .sidebar-list li.dropdown.active .submenu {
+            width: unset;
+            height: unset;
+            opacity: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 6px 6px 14px 80px;
+            background-color: var(--color_DropDown);
+        }
+
+.submenu .link {
+    color: var(--color_Light2);
+    font-size: 15px;
+    padding: 5px 0;
+
+   /* transition: all .5s ease;*/
+}
+
+.submenu .link:hover {
+        color: white;
+        font-weight: bold;
+}
+.submenu .link.active {
+        color: white;
+        font-weight: bold;
+    }
+.submenu-title {
     display: none;
 }
 
-@media only screen and (max-width: 1200px){
-    .sidebar {
-        width: 80px;
-        z-index: 150;
+/* ---------------- Submenu Close ------------- */
+.sidebar.close .logo-name,
+.sidebar.close .title .name,
+.sidebar.close .title .bxs-chevron-down {
+    display: none;
+}
+.sidebar.close .logobox .logomitrosrem{
+    display: none;
+}
+.sidebar.close .sidebar-list {
+    overflow: visible;
+}
+
+    .sidebar.close .sidebar-list li {
+        position: relative;
+      
     }
-    .sidebar li span:last-child {
+
+        .sidebar.close .sidebar-list li .submenu {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            left: 100%;
+            top: -10px;
+            margin-top: 0;
+            padding: 10px 20px;
+            border-radius: 0 6px 6px 0;
+            height: max-content;
+            width: max-content;
+            opacity: 0;
+            transition: all .5s ease;
+            pointer-events: none;
+           
+        }
+
+        .sidebar.close .sidebar-list li:hover .submenu {
+            opacity: 1;
+            top: 0;
+            pointer-events: initial;
+            background-color: var(--color_DropDown);
+        }
+
+.sidebar.close .submenu-title {
+    display: block;
+    font-style: 18px;
+    color: var(--color_Light1);
+}
+
+/* =============== Main Section =============== */
+.main-content {
+    position: relative;
+    background-color: white;
+    left: 260px;
+    width: calc(100% - 260px);
+    height: 100vh;
+    transition: all .5s ease;
+}
+
+.sidebar.close ~ .main-content {
+    left: 78px;
+    width: calc(100% - 78px);
+}
+
+.toggle-sidebar {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    cursor: pointer;
+    
+}
+
+.toggle-sidebar i {
+        font-size: 35px;
+        color: var(--color_Light1);
+        margin-left: 20px;
+
+    }
+
+/*------Togle bar----------*/
+
+
+/* ============ Responsive / Breakpoints ========== */
+@media (max-width: 1080px) {
+}
+
+/* For Medium Devices */
+@media (max-width: 774px) {
+}
+
+
+
+@media (max-width: 560px) {
+    .toggle-sidebar i {
+        display:none;
+    }
+    .sidebar{
+        width: 78px;
+    }
+   .sidebar ~ .main-content {
+            left: 78px;
+            width: calc(100% - 78px);
+   }
+    .logomitrosrem{
+        display: none;
+    }
+
+    /* ---------- Sidebar List ---------- */
+    .sidebar-list {
+        height: 100%;
+        padding: 30px 0 150px 0;
+        overflow: auto;
+    }
+
+        .sidebar-list::-webkit-scrollbar {
             display: none;
         }
 
-    .main-content {
-        margin-left: 80px;
+        .sidebar-list li {
+            transition: all .5s ease;
+        }
+
+            .sidebar-list li:hover {
+                background-color: var(--color_DropDown);
+            }
+
+            .sidebar-list li .title {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                transition: all .5s ease;
+                cursor: pointer;
+            }
+
+            .sidebar-list li.active .title {
+                background-color: var(--color_ActiveLink);
+            }
+
+            .sidebar-list li.active .bxs-chevron-down {
+                transition: all .5s ease;
+                transform: rotate(180deg);
+            }
+
+            .sidebar-list li .title .link {
+                display: flex;
+                align-items: center;
+            }
+
+            .sidebar-list li .title i {
+                height: 50px;
+                min-width: 78px;
+                text-align: center;
+                line-height: 50px;
+                color: var(--color_Light1);
+                font-size: 20px;
+            }
+
+            .sidebar-list li .title .name {
+                font-size: 18px;
+                font-weight: 400;
+                color: var(--color_Light1);
+            }
+
+            /* ---------------- Submenu ------------- */
+            .sidebar-list li .submenu {
+                width: 0;
+                height: 0;
+                opacity: 0;
+                transition: all .5s ease;
+            }
+
+            .sidebar-list li.dropdown.active .submenu {
+              
+                height: unset;
+                opacity: 1;
+                display: flex;
+                flex-direction: column;
+                padding: 6px 6px 14px 15px;
+                background-color: var(--color_DropDown);
+            }
+
+    .submenu .link {
+        color: var(--color_Light2);
+        font-size: 15px;
+        padding: 5px 0;
+        
+        /* transition: all .5s ease;*/
     }
 
-    .main-content header{
-        left: 80px;
-        width: calc(100% - 80px);
-    }
+        .submenu .link:hover {
+            color: white;
+            font-weight: bold;
+        }
 
-    .sidebar .logomitrosrem img {
+        .submenu .link.active {
+            color: white;
+            font-weight: bold;
+        }
+
+    .submenu-title {
         display: none;
     }
-    #sidebar-toggle:checked ~ .sidebar {
-        width: 250px;
-    }
-    #sidebar-toggle:checked ~ .sidebar li span:last-child {
-        display: inline;
-    }
-    #sidebar-toggle:checked ~ .sidebar .sidebar-header{
-        display: flex;
-        justify-content:space-between;
-    }
-    #sidebar-toggle:checked ~ .sidebar li{
-        display: block;
-    }
-    #sidebar-toggle:checked ~ .main-content{
-        margin-left: 80px;
-    }
-    #sidebar-toggle:checked ~ .main-content header {
-        left: 80px;
-        
-    }
-}
-@media only screen and (max-width: 860px){
 
-    
+
+    /* ---------------- Submenu Close ------------- */
+    .sidebar .logo-name,
+    .sidebar .title .name,
+    .sidebar .title .bxs-chevron-down {
+        display: none;
+    }
+
+    .sidebar .logobox .logomitrosrem {
+        display: none;
+    }
+
+    .sidebar .sidebar-list {
+        overflow: visible;
+    }
+
+        .sidebar .sidebar-list li {
+            position: relative;
+        }
+
+            .sidebar .sidebar-list li .submenu {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                left: 100%;
+                top: -10px;
+                margin-top: 0;
+                padding: 10px 20px;
+                border-radius: 0 6px 6px 0;
+                height: max-content;
+                width: max-content;
+                opacity: 0;
+                transition: all .5s ease;
+                pointer-events: none;
+                align-content: center;
+            }
+
+            .sidebar .sidebar-list li:hover .submenu {
+                opacity: 1;
+                top: 0;
+                pointer-events: initial;
+                background-color: var(--color_DropDown);
+            }
+
+    .sidebar .submenu-title {
+        display: block;
+        font-style: 18px;
+        color: var(--color_Light1);
+    }
+
+/* For Small Devices */
+@media (max-width: 360px) {
 }

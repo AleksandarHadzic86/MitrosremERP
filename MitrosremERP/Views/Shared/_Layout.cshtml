@@ -7,19 +7,176 @@
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
     <link href="~/css/bootswatchthemes.css" rel="stylesheet" />
     <link href="~/css/profildetalji.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css" />
+@*     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+ *@    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css" />
     <link href="~/css/navbar.css" rel="stylesheet" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 </head>
-<body class="d-flex flex-column min-vh-100">
-    @*    --------SideNavMenu-------- *@
-
-    <input type="checkbox" id="sidebar-toggle" />
+<body>
     <div class="sidebar">
-        <div class="d-flex align-content-center logos">
+        <!-- ========== Logo ============  -->
+        <div class="logobox">
+            
+                <img src="~/images/logo/logocorn.png" class="logocorn" />
+           
+            
+                <img src="~/images/logo/logomitrosremcut.png" class="logomitrosrem" />
+           
+        </div>
+        <!-----Togle------>
+        <div class="toggle-sidebar">
+            <i class="bx bx-menu"></i>
+        </div>
+        <!-- ========== List ============  -->
+        <ul class="sidebar-list">
+            <!-- -------- Non Dropdown List Item ------- -->
+            <li>
+                <div class="title">
+                    <a href="#" class="link">
+                        <i class='bx bx-grid-alt'></i>
+                        <span class="name">Dashboard</span>
+                    </a>
+                    <!-- <i class='bx bxs-chevron-down'></i> -->
+                </div>
+                <div class="submenu">
+                    <a href="#" class="link submenu-title">Dashboard</a>
+                    <!-- submenu links here  -->
+                </div>
+            </li>
+
+            <!-- -------- Dropdown List Item ------- -->
+            <li class="dropdown">
+                <div class="title">
+                    <a href="#" class="link">
+                        <i class='bx bx-collection'></i>
+                        <span class="name">Category</span>
+                    </a>
+                    <i class='bx bxs-chevron-down'></i>
+                </div>
+                <div class="submenu">
+                    <a href="#" class="link submenu-title">Category</a>
+                    <a href="#" class="link">HTML & CSS</a>
+                    <a href="#" class="link">JavaScript</a>
+                    <a href="#" class="link">PHP & MySQL</a>
+                </div>
+            </li>
+
+            <!-- -------- Dropdown List Item ------- -->
+            <li class="dropdown">
+                <div class="title">
+                    <a href="#" class="link">
+                        <i class='bx bx-book-alt'></i>
+                        <span class="name">Posts</span>
+                    </a>
+                    <i class='bx bxs-chevron-down'></i>
+                </div>
+                <div class="submenu">
+                    <a href="#" class="link submenu-title">Posts</a>
+                    <a href="#" class="link">Web Design</a>
+                    <a href="#" class="link">Login Form</a>
+                    <a href="#" class="link">Card Design</a>
+                </div>
+            </li>
+
+            <!-- -------- Non Dropdown List Item ------- -->
+            <li>
+                <div class="title">
+                    <a href="#" class="link">
+                        <i class='bx bx-line-chart'></i>
+                        <span class="name">Analytics</span>
+                    </a>
+                    <!-- <i class='bx bxs-chevron-down'></i> -->
+                </div>
+                <div class="submenu">
+                    <a href="#" class="link submenu-title">Analytics</a>
+                    <!-- submenu links here  -->
+                </div>
+            </li>
+
+            <!-- -------- Non Dropdown List Item ------- -->
+            <li>
+                <div class="title">
+                    <a href="#" class="link">
+                        <i class='bx bx-pie-chart-alt-2'></i>
+                        <span class="name">Chart</span>
+                    </a>
+                    <!-- <i class='bx bxs-chevron-down'></i> -->
+                </div>
+                <div class="submenu">
+                    <a href="#" class="link submenu-title">Chart</a>
+                    <!-- submenu links here  -->
+                </div>
+            </li>
+
+            <!-- -------- Dropdown List Item ------- -->
+            <li class="dropdown">
+                <div class="title">
+                    <a href="#" class="link">
+                        <i class='bx bx-extension'></i>
+                        <span class="name">Plugins</span>
+                    </a>
+                    <i class='bx bxs-chevron-down'></i>
+                </div>
+                <div class="submenu">
+                    <a href="#" class="link submenu-title">Plugins</a>
+                    <a href="#" class="link">UI Face</a>
+                    <a href="#" class="link">Pigments</a>
+                    <a href="#" class="link">Box Icons</a>
+                </div>
+            </li>
+
+            <!-- -------- Non Dropdown List Item ------- -->
+            <li>
+                <div class="title">
+                    <a href="#" class="link">
+                        <i class='bx bx-compass'></i>
+                        <span class="name">Explore</span>
+                    </a>
+                    <!-- <i class='bx bxs-chevron-down'></i> -->
+                </div>
+                <div class="submenu">
+                    <a href="#" class="link submenu-title">Explore</a>
+                    <!-- submenu links here  -->
+                </div>
+            </li>
+
+            <!-- -------- Non Dropdown List Item ------- -->
+            <li>
+                <div class="title">
+                    <a href="#" class="link">
+                        <i class='bx bx-history'></i>
+                        <span class="name">History</span>
+                    </a>
+                    <!-- <i class='bx bxs-chevron-down'></i> -->
+                </div>
+                <div class="submenu">
+                    <a href="#" class="link submenu-title">History</a>
+                    <!-- submenu links here  -->
+                </div>
+            </li>
+
+            <!-- -------- Non Dropdown List Item ------- -->
+            <li>
+                <div class="title">
+                    <a href="#" class="link">
+                        <i class='bx bx-cog'></i>
+                        <span class="name">Settings</span>
+                    </a>
+                    <!-- <i class='bx bxs-chevron-down'></i> -->
+                </div>
+                <div class="submenu">
+                    <a href="#" class="link submenu-title">Settings</a>
+                    <!-- submenu links here  -->
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!--       --------SideNavMenu--------
+    <div class="sidebar close">
+       
+        --------logo------- 
+        <div class="logobox">
             <div class="logocorn mt-1">
                 <img src="~/images/logo/logocorn.png" />
             </div>
@@ -27,58 +184,41 @@
                 <img src="~/images/logo/logomitrosremcut.png" />
             </div>
         </div>
-        <div class="sidebar-header">
-            <label for="sidebar-toggle" class="ti-menu-alt"></label>
+         -----Togle------ 
+        <div class="toggle-sidebar">
+            <i class="bx bx-menu"></i>
         </div>
-
-        <div class="sidebar-menu">
-            <ul>
-
-                <li>
-                    <a asp-controller="Zaposleni" asp-action="Index">
-                        <span class="ti-face-smile"></span>
-                        <span>Zaposleni</span>
+         -------- List -------- 
+        <ul class="sidebar-list">
+             -----dropdown list Item-------- 
+            <li class="dropdown">
+                <div class="title">
+                    <a href="#" class="link">
+                        <i class="bx bx-grid-alt"></i>
+                        <span class="name">Zaposleni</span>
                     </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="ti-agenda"></span>
-                        <span>Zadaci</span>
+                    <i class="bx bxs-chevron-down"></i>
+                </div>
+                <div class="submenu">
+                    <a href="#" class="link submenu-title">Zaposleni</a>
+                    <a href="#" class="link ">Ugovori</a>
+                    <a href="#" class="link ">Bolovanja</a>
+                    <a href="#" class="link ">Godisnji Odmori</a>
+                </div>
+            </li>
+             -----non dropdown list -------- 
+            <li>
+                <div class="title">
+                    <a href="#" class="link">
+                        <i class="bx bx-grid-alt"></i>
+                        <span class="name">Finansije</span>
                     </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="ti-clipboard"></span>
-                        <span>Odlasci</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="ti-folder"></span>
-                        <span>Projekti</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="ti-time"></span>
-                        <span>Kalendar</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="ti-book"></span>
-                        <span>Kontakti</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="ti-settings"></span>
-                        <span>Podesavanja</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
+                </div>               
+            </li>
+        </ul>
+    </div> -->
+   
+    
     @*  ----Header menu--- *@
     <div class="main-content">
         <header>
@@ -96,7 +236,7 @@
                         </li>
                         <li class="nav-item dropdown mx-2">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="" role="button" aria-expanded="false"> Galavni Meni</a>
-                            <ul class="dropdown-menu bg-danger ">@* ------ovde pogledaj dropdown------ *@
+                            <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" asp-controller="Zaposleni" asp-action="Index">Zaposleni</a></li>
                                 <li><a class="dropdown-item" >Finansije</a></li>
                                 <li><a class="dropdown-item" >Administracija</a></li>
@@ -109,26 +249,6 @@
         </header>
      @*    -----Under Header menu---- *@
 
-        <header style="margin-top: 50px;">
-            <nav class="navbar navbar-expand-xl ">
-                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item mx-2">
-                            <a class="nav-link active" asp-area="Customer" asp-controller="Home" asp-action="Index">
-                                Pocetna
-                                <span class="visually-hidden">(current)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item mx-2">
-                            <a class="nav-link " href="" role="button" aria-expanded="false"> Galavni Meni</a>                           
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
 
 
 
@@ -144,11 +264,12 @@
             &copy; 2023 - MitrosremERP - <a asp-controller="Category" asp-action="Index">Category</a>
         </div>
     </footer>
-
+   
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@*     <script src="~/js/site.js" asp-append-version="true"></script>
+ *@     <script src="~/js/navbar.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
     @await RenderSectionAsync("Scripts", required: false)
