@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MitrosremERP.Aplication.Data;
 
@@ -11,9 +12,11 @@ using MitrosremERP.Aplication.Data;
 namespace MitrosremERP.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230914093101_moreEmploye")]
+    partial class moreEmploye
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,65 +95,6 @@ namespace MitrosremERP.Infrastructure.Migrations
                     b.ToTable("GodisnjiOdmori");
                 });
 
-            modelBuilder.Entity("MitrosremERP.Domain.Models.StepenStrucneSpreme", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("StepenObrazovanja")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("StepenStrucneSpreme");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            StepenObrazovanja = "I Stepen - Osnovno Obrazovanje."
-                        },
-                        new
-                        {
-                            Id = 2,
-                            StepenObrazovanja = "II Stepen - Strucno osposobljavanje u trajanju do 1 godine."
-                        },
-                        new
-                        {
-                            Id = 3,
-                            StepenObrazovanja = "III Stepen - Srednje strucno obrazovanje 3 godine."
-                        },
-                        new
-                        {
-                            Id = 4,
-                            StepenObrazovanja = "IV Stepen - Srednje strucno obrazovanje 4 godine."
-                        },
-                        new
-                        {
-                            Id = 5,
-                            StepenObrazovanja = "VI-1 Stepen - Osnovne strukovne studije."
-                        },
-                        new
-                        {
-                            Id = 6,
-                            StepenObrazovanja = "VI-2 Stepen - Osnovne akademske i Specijalisticke strukovne studije."
-                        },
-                        new
-                        {
-                            Id = 7,
-                            StepenObrazovanja = "VII-1 Stepen - Master akademske i master strukovne studije"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            StepenObrazovanja = "VIII Stepen - Doktorske studije"
-                        });
-                });
-
             modelBuilder.Entity("MitrosremERP.Domain.Models.Ugovor", b =>
                 {
                     b.Property<int>("Id")
@@ -220,7 +164,8 @@ namespace MitrosremERP.Infrastructure.Migrations
 
                     b.Property<string>("Grad")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Ime")
                         .IsRequired()
@@ -243,20 +188,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Profesija")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("RadnoMesto")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StepenStrucneSpremeId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("StepenStrucneSpremeId");
 
                     b.ToTable("Zaposleni");
 
@@ -269,9 +201,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Ime = "Aleksandar",
                             JMBG = 1702986890023m,
                             Mobilni = "0605574477",
-                            Prezime = "Hadzic",
-                            Profesija = "Elektro Tehnicar",
-                            StepenStrucneSpremeId = 4
+                            Prezime = "Hadzic"
                         },
                         new
                         {
@@ -281,9 +211,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Ime = "Petar",
                             JMBG = 4302386890023m,
                             Mobilni = "06553427",
-                            Prezime = "Petrovic",
-                            Profesija = "Elektro Tehnicar",
-                            StepenStrucneSpremeId = 4
+                            Prezime = "Petrovic"
                         },
                         new
                         {
@@ -293,9 +221,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Ime = "Jovan",
                             JMBG = 2132986890023m,
                             Mobilni = "0605574477",
-                            Prezime = "Jovanovic",
-                            Profesija = "Elektro Tehnicar",
-                            StepenStrucneSpremeId = 4
+                            Prezime = "Jovanovic"
                         },
                         new
                         {
@@ -305,9 +231,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Ime = "Sreten",
                             JMBG = 3123986890023m,
                             Mobilni = "0605574477",
-                            Prezime = "Sretenovic",
-                            Profesija = "Elektro Tehnicar",
-                            StepenStrucneSpremeId = 4
+                            Prezime = "Sretenovic"
                         },
                         new
                         {
@@ -317,9 +241,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Ime = "Goran",
                             JMBG = 1702986890023m,
                             Mobilni = "0605574477",
-                            Prezime = "Goranic",
-                            Profesija = "Elektro Tehnicar",
-                            StepenStrucneSpremeId = 4
+                            Prezime = "Goranic"
                         },
                         new
                         {
@@ -329,9 +251,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Ime = "MIlan",
                             JMBG = 4302386890023m,
                             Mobilni = "06553427",
-                            Prezime = "Milanovic",
-                            Profesija = "Elektro Tehnicar",
-                            StepenStrucneSpremeId = 4
+                            Prezime = "Milanovic"
                         },
                         new
                         {
@@ -341,9 +261,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Ime = "Zoran",
                             JMBG = 2132986890023m,
                             Mobilni = "0605574477",
-                            Prezime = "Zoranovic",
-                            Profesija = "Elektro Tehnicar",
-                            StepenStrucneSpremeId = 4
+                            Prezime = "Zoranovic"
                         },
                         new
                         {
@@ -353,9 +271,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Ime = "Stevan",
                             JMBG = 3123986890023m,
                             Mobilni = "0605574477",
-                            Prezime = "Stevanovic",
-                            Profesija = "Elektro Tehnicar",
-                            StepenStrucneSpremeId = 4
+                            Prezime = "Stevanovic"
                         });
                 });
 
@@ -389,22 +305,6 @@ namespace MitrosremERP.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Zaposleni");
-                });
-
-            modelBuilder.Entity("MitrosremERP.Domain.Models.Zaposleni", b =>
-                {
-                    b.HasOne("MitrosremERP.Domain.Models.StepenStrucneSpreme", "StepenStrucneSpreme")
-                        .WithMany("Zaposleni")
-                        .HasForeignKey("StepenStrucneSpremeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("StepenStrucneSpreme");
-                });
-
-            modelBuilder.Entity("MitrosremERP.Domain.Models.StepenStrucneSpreme", b =>
-                {
                     b.Navigation("Zaposleni");
                 });
 

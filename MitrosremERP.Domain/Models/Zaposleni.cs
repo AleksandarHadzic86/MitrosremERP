@@ -19,18 +19,27 @@ namespace MitrosremERP.Domain.Models
         public string Prezime { get; set; }
         [Range(13,13, ErrorMessage = "JMBG mora da sadrzi 13 cifara")]
         public UInt64 JMBG { get; set; }
+        public string? Profesija { get; set; }
+        public string? RadnoMesto { get; set; }
+
         [StringLength(50)]
         [Required(ErrorMessage = "Morate uneti mesto prebivalista")]
         public string Grad { get; set; }
+
         [StringLength(50)]
         [Required(ErrorMessage = "Morate uneti adresu")]
         public string Adresa { get; set; }
+
         [StringLength(50)]
         public string? Fiksni { get; set; }
+
         [StringLength(50)]
         [Required(ErrorMessage = "Morate uneti mobilni telefon")]
         public string Mobilni { get; set; }
         public string? Napomena { get; set; }
+
+        public int StepenStrucneSpremeId { get; set; }
+        public StepenStrucneSpreme StepenStrucneSpreme { get; set; }
         public ICollection<Ugovor>? Ugovori { get; set; }
 
         public ICollection<Bolovanje>? Bolovanja { get; set; }

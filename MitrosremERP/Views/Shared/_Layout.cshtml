@@ -7,13 +7,11 @@
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
     <link href="~/css/bootswatchthemes.css" rel="stylesheet" />
     <link href="~/css/profildetalji.css" rel="stylesheet" />
-@*     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
- *@    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css" />
     <link href="~/css/navbar.css" rel="stylesheet" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 </head>
-<body>
+<body >
     <div class="sidebar">
         <!-- ========== Logo ============  -->
         <div class="logobox">
@@ -35,12 +33,12 @@
                 <div class="title">
                     <a href="#" class="link">
                         <i class='bx bx-grid-alt'></i>
-                        <span class="name">Dashboard</span>
+                        <span class="name">Kontrolna tabla</span>
                     </a>
                     <!-- <i class='bx bxs-chevron-down'></i> -->
                 </div>
                 <div class="submenu">
-                    <a href="#" class="link submenu-title">Dashboard</a>
+                    <a href="#" class="link submenu-title">Kontrolna tabla</a>
                     <!-- submenu links here  -->
                 </div>
             </li>
@@ -48,17 +46,18 @@
             <!-- -------- Dropdown List Item ------- -->
             <li class="dropdown">
                 <div class="title">
-                    <a href="#" class="link">
+                    <a class="link">
                         <i class='bx bx-collection'></i>
-                        <span class="name">Category</span>
+                        <span class="name">Zaposleni</span>
                     </a>
                     <i class='bx bxs-chevron-down'></i>
                 </div>
                 <div class="submenu">
-                    <a href="#" class="link submenu-title">Category</a>
-                    <a href="#" class="link">HTML & CSS</a>
-                    <a href="#" class="link">JavaScript</a>
-                    <a href="#" class="link">PHP & MySQL</a>
+                    <a href="#" class="link submenu-title">Zaposleni</a>
+                    <a asp-controller="Zaposleni" asp-action="Index" class="link">Zaposleni</a>
+                    <a href="#" class="link">Ugovori</a>
+                    <a href="#" class="link">Bolovanja</a>
+                    <a href="#" class="link">Godisnji Odmori</a>
                 </div>
             </li>
 
@@ -217,54 +216,60 @@
             </li>
         </ul>
     </div> -->
-   
+  
+       
+
     
     @*  ----Header menu--- *@
     <div class="main-content">
-        <header>
-            <nav class="navbar navbar-expand-xl ">
+        <nav class="navbar navbar-expand-xl bg-light">
+            <div class="container-fluid">
                 <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
                         <li class="nav-item mx-2">
-                            <a class="nav-link active" asp-area="Customer" asp-controller="Home" asp-action="Index">
+                            <a class="nav-link active" aria-current="page" asp-area="Customer" asp-controller="Home" asp-action="Index">
                                 Pocetna
-                                <span class="visually-hidden">(current)</span>
+                              <span class="visually-hidden">(current)</span>
+                               
                             </a>
                         </li>
                         <li class="nav-item dropdown mx-2">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="" role="button" aria-expanded="false"> Galavni Meni</a>
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="" role="button" aria-expanded="false"> Administracija</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" asp-controller="Zaposleni" asp-action="Index">Zaposleni</a></li>
-                                <li><a class="dropdown-item" >Finansije</a></li>
-                                <li><a class="dropdown-item" >Administracija</a></li>
-                                <li><a class="dropdown-item" >Finansije</a></li>
+                                <li><a class="dropdown-item" asp-controller="Zaposleni" asp-action="Index">Koriscnicki Nalozi</a></li>
+                                <li><a class="dropdown-item">Autorizacija</a></li>
+                                <li><a class="dropdown-item">Uloge Naloga</a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
-            </nav>
-        </header>
+            </div>
+        </nav>
      @*    -----Under Header menu---- *@
 
 
 
 
    @*   --------Main-------- *@
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3 ">
             <partial name="_Notification" />
             @RenderBody()
         </main>
-    </div>
 
-    <footer class="border-top footer mt-auto h-25">
-        <div class="container d-flex justify-content-center">
+
+
+
+     <footer class="border-top footer">
+        <div class="justify-content-center">
             &copy; 2023 - MitrosremERP - <a asp-controller="Category" asp-action="Index">Category</a>
         </div>
     </footer>
-   
+
+    </div>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 @*     <script src="~/js/site.js" asp-append-version="true"></script>

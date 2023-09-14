@@ -16,32 +16,55 @@
             </div>
         </form>
     </div>
-    
-    @foreach(var zaposleni in Model)
-    {
-        <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6 col-sm-12 mt-2 ">
-                <div class="card mb-3 h-100 text-center">
-
-                <h4 class="card-header">@zaposleni.Ime @zaposleni.Prezime</h4>
-                        <div class="card-body">
-                             <h6 class="card-title">@zaposleni.Napomena</h6> 
-                        </div>
-                        <div>
-                              <img  style="width:150px;height:150px;" class="card-img-top" /> 
-                        </div>
-                     
-                        <ul class="list-group list-group-flush">
-                             <li class="list-group-item">Zaposlen na: @zaposleni.JMBG</li> 
-                        </ul>
-                         <div class="card-body">
-                            <a href="#" class="card-link">Card link</a>
-                        </div> 
-                        <div class="card-footer text-muted m-0 p-0">
-                    <a asp-action="Details" class="btn btn-primary form-control  rounded-0" >Detaljnije</a>
-                        </div>
-                 </div>
-        </div>                           
-    }
+        
+            <table class="table align-middle mb-0 bg-white">
+              <thead class="bg-light">
+                    <tr>
+                        <th>Ime i Prezime</th>
+                        <th>Profesija</th>
+                        <th>Status po ugovoru</th>
+                        <th>Radno mesto</th>
+                        <th>Akcija</th>
+                    </tr>
+                @foreach (var zaposleni in Model)
+                {              
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                                     alt=""
+                                     style="width: 45px; height: 45px"
+                                     class="rounded-circle" />
+                                <div class="ms-3">
+                                    <p class="fw-bold mb-1">@zaposleni.Ime @zaposleni.Prezime</p>
+                                    <p class="text-muted mb-0">@zaposleni.Mobilni</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">@zaposleni.Profesija</p>
+                            @* <p class="text-muted mb-0">IT department</p> *@
+                        </td>
+                        <td>
+                            <span class="badge badge-success rounded-pill d-inline bg-success">Aktivan</span>
+                        </td>
+                        <td>@zaposleni.RadnoMesto</td>
+                        <td>
+                           <div class="btnbtn-group" role="group">
+                                <a asp-controller="Zaposlni" asp-action="Edit" class="btn btn-primary mx-2"><i class='bx bxs-edit'></i>Uredi</a>
+                              
+                                <a asp-controller="Zaposleni" asp-action="Delete" class="btn btn-danger mx-2"><i class='bx bx-trash'></i>Obrisi</a>
+                           </div>
+                        </td> 
+                       
+                    </tr>
+                    
+                </tbody>
+                }
+           </thead>
+         </table>
+      
 </div>
 </div>
 

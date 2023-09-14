@@ -9,7 +9,7 @@
     --color_Light2: #f2f2f2;
 }
 
- {
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -200,20 +200,23 @@
 
 .sidebar.close .submenu-title {
     display: block;
-    font-style: 18px;
+    font-size: 18px;
     color: var(--color_Light1);
 }
 
 /* =============== Main Section =============== */
-.main-content {
+.main-content{
     position: relative;
     background-color: white;
     left: 260px;
     width: calc(100% - 260px);
-    height: 100vh;
+    height: 100%;
     transition: all .5s ease;
+   
 }
-
+.main-content {
+    space
+}
 .sidebar.close ~ .main-content {
     left: 78px;
     width: calc(100% - 78px);
@@ -234,7 +237,18 @@
         margin-left: 20px;
 
     }
+.footer {
+    position:relative;
+    transition: all .5s ease;
+    text-align:center;
+    height: 20px;
+    max-height: 20px;
+}
 
+.sidebar.close ~ .footer {
+    left: 78px;
+    width: calc(100% - 78px);
+}
 /*------Togle bar----------*/
 
 
@@ -249,22 +263,37 @@
 
 
 @media (max-width: 560px) {
-    .toggle-sidebar i {
-        display:none;
-    }
-    .sidebar{
-        width: 78px;
-    }
-   .sidebar ~ .main-content {
-            left: 78px;
-            width: calc(100% - 78px);
-   }
-    .logomitrosrem{
-        display: none;
+   .toggle-sidebar i {
+       
     }
 
+   .sidebar.close {
+        width: 78px;
+    }
+ 
+        .sidebar ~ .main-content {
+            left: 78px;
+            width: calc(100% - 78px);
+        }
+
+/*    .footer.close {
+        left: 78px;
+        width: calc(100% - 78px);   
+        transition: all .5s ease;
+        text-align: center;
+        height: 3em;
+        max-height: 3em;
+        overflow-y: auto;
+    }*/
+
+/*
+
+    .logomitrosrem {
+        display: none;
+    }*/
+
     /* ---------- Sidebar List ---------- */
-    .sidebar-list {
+    /*.sidebar-list {
         height: 100%;
         padding: 30px 0 150px 0;
         overflow: auto;
@@ -317,10 +346,10 @@
                 font-size: 18px;
                 font-weight: 400;
                 color: var(--color_Light1);
-            }
+            }*/
 
             /* ---------------- Submenu ------------- */
-            .sidebar-list li .submenu {
+            /*.sidebar-list li .submenu {
                 width: 0;
                 height: 0;
                 opacity: 0;
@@ -328,7 +357,6 @@
             }
 
             .sidebar-list li.dropdown.active .submenu {
-              
                 height: unset;
                 opacity: 1;
                 display: flex;
@@ -340,10 +368,9 @@
     .submenu .link {
         color: var(--color_Light2);
         font-size: 15px;
-        padding: 5px 0;
-        
+        padding: 5px 0;*/
         /* transition: all .5s ease;*/
-    }
+    /*}
 
         .submenu .link:hover {
             color: white;
@@ -357,11 +384,11 @@
 
     .submenu-title {
         display: none;
-    }
+    }*/
 
 
     /* ---------------- Submenu Close ------------- */
-    .sidebar .logo-name,
+    /*.sidebar .logo-name,
     .sidebar .title .name,
     .sidebar .title .bxs-chevron-down {
         display: none;
@@ -407,8 +434,8 @@
         display: block;
         font-style: 18px;
         color: var(--color_Light1);
-    }
-
+    }*/
+}
 /* For Small Devices */
 @media (max-width: 360px) {
 }
