@@ -45,8 +45,10 @@ listItems.forEach((item) => {
 //        else item.classList.add("active");
 //    });
 //});
+
+
 const toggleSidebar = document.querySelector(".toggle-sidebar");
-const logo = document.querySelector(".logocorn");
+const logo = document.querySelector(".logobox");
 const sidebar = document.querySelector(".sidebar");
 
 toggleSidebar.addEventListener("click", () => {
@@ -56,3 +58,21 @@ toggleSidebar.addEventListener("click", () => {
 logo.addEventListener("click", () => {
     sidebar.classList.toggle("close");
 });
+
+
+const toggleSidebardiv = document.querySelector(".sidebar");
+const mediaQuery = window.matchMedia('(max-width: 560px)');
+function toggleSidebarFunc() {
+    if (mediaQuery.matches) {
+        // Activate .sidebar.close when the media query matches
+        toggleSidebardiv.classList.add('close'); // Add a CSS class to activate it
+    } else {
+        // Deactivate .sidebar.close when the media query doesn't match
+        toggleSidebardiv.classList.remove('close'); // Remove the CSS class to deactivate it
+    }
+       
+}
+
+// Call the function on page load and when the window is resized
+window.addEventListener('load', toggleSidebarFunc());
+window.addEventListener('resize', toggleSidebarFunc());

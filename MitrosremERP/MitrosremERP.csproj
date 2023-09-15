@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MitrosremERP.DAL\MitrosremERP.Aplication.csproj" />
     <ProjectReference Include="..\MitrosremERP.Domain\MitrosremERP.Domain.csproj" />
     <ProjectReference Include="..\MitrosremERP.Service\MitrosremERP.Infrastructure.csproj" />
   </ItemGroup>

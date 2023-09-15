@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MitrosremERP.Domain.Models
+namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
 {
     public class GodisnjiOdmor
     {
@@ -26,7 +26,7 @@ namespace MitrosremERP.Domain.Models
         [Required(ErrorMessage = "Obavezan unos status godisnjeg")]
         public string StatusGodisnjeg { get; set; }
 
-        public string? Napomena{ get; set; }
+        public string? Napomena { get; set; }
 
 
         [ForeignKey("ZaposleniId")]

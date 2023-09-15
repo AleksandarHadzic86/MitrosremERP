@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MitrosremERP.Domain.Models;
+using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -23,14 +23,14 @@ namespace MitrosremERP.Aplication.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Zaposleni>().HasData(
-                new Zaposleni { Id = 1, Ime = "Aleksandar", Prezime = "Hadzic", Grad = "Sr.Mitrovica", Adresa = "Stari Sor", JMBG = 1702986890023, Mobilni = "0605574477",Profesija = "Elektro Tehnicar",StepenStrucneSpremeId = 4 },
-                new Zaposleni { Id = 2, Ime = "Petar", Prezime = "Petrovic", Grad = "Sid", Adresa = "BB", JMBG = 4302386890023, Mobilni = "06553427", Profesija = "Elektro Tehnicar", StepenStrucneSpremeId = 4 },
-                new Zaposleni { Id = 3, Ime = "Jovan", Prezime = "Jovanovic", Grad = "Sabac", Adresa = "BB", JMBG = 2132986890023, Mobilni = "0605574477", Profesija = "Elektro Tehnicar", StepenStrucneSpremeId = 4 },
-                new Zaposleni { Id = 4, Ime = "Sreten", Prezime = "Sretenovic", Grad = "Beograd", Adresa = "BB", JMBG = 3123986890023, Mobilni = "0605574477", Profesija = "Elektro Tehnicar", StepenStrucneSpremeId = 4 },
-                new Zaposleni { Id = 5, Ime = "Goran", Prezime = "Goranic", Grad = "Sr.Mitrovica", Adresa = "Stari Sor", JMBG = 1702986890023, Mobilni = "0605574477", Profesija = "Elektro Tehnicar", StepenStrucneSpremeId = 4 },
-                new Zaposleni { Id = 6, Ime = "MIlan", Prezime = "Milanovic", Grad = "Sid", Adresa = "BB", JMBG = 4302386890023, Mobilni = "06553427", Profesija = "Elektro Tehnicar", StepenStrucneSpremeId = 4 },
-                new Zaposleni { Id = 7, Ime = "Zoran", Prezime = "Zoranovic", Grad = "Sabac", Adresa = "BB", JMBG = 2132986890023, Mobilni = "0605574477", Profesija = "Elektro Tehnicar", StepenStrucneSpremeId = 4 },
-                new Zaposleni { Id = 8, Ime = "Stevan", Prezime = "Stevanovic", Grad = "Beograd", Adresa = "BB", JMBG = 3123986890023, Mobilni = "0605574477", Profesija = "Elektro Tehnicar", StepenStrucneSpremeId = 4 }
+                new Zaposleni { Id = 1, Ime = "Aleksandar", Prezime = "Hadzic", Grad = "Sr.Mitrovica", Adresa = "Stari Sor", JMBG = 1702986890023, Mobilni = "0605574477",Profesija = "Elektro Tehnicar",StepenStrucneSpremeId = 4,RadnoMesto = "Odrzavanje el.instalacija" },
+                new Zaposleni { Id = 2, Ime = "Petar", Prezime = "Petrovic", Grad = "Sid", Adresa = "BB", JMBG = 4302386890023, Mobilni = "06553427", Profesija = "Masinski Tehnicar", StepenStrucneSpremeId = 4,RadnoMesto = "Odrzavanje masicna" },
+                new Zaposleni { Id = 3, Ime = "Jovan", Prezime = "Jovanovic", Grad = "Sabac", Adresa = "BB", JMBG = 2132986890023, Mobilni = "0605574477", Profesija = "Diplomirani Tehnolog", StepenStrucneSpremeId = 6,RadnoMesto = "Tehnolog hrane" },
+                new Zaposleni { Id = 4, Ime = "Sreten", Prezime = "Sretenovic", Grad = "Beograd", Adresa = "BB", JMBG = 3123986890023, Mobilni = "0605574477", Profesija = "System Administrator", StepenStrucneSpremeId = 5, RadnoMesto = "IT Administrator" },
+                new Zaposleni { Id = 5, Ime = "Goran", Prezime = "Goranic", Grad = "Sr.Mitrovica", Adresa = "Stari Sor", JMBG = 1702986890023, Mobilni = "0605574477", Profesija = "Developer", StepenStrucneSpremeId = 5, RadnoMesto = "Programer" },
+                new Zaposleni { Id = 6, Ime = "MIlan", Prezime = "Milanovic", Grad = "Sid", Adresa = "BB", JMBG = 4302386890023, Mobilni = "06553427", Profesija = "Master Ekonomista", StepenStrucneSpremeId = 7,RadnoMesto = "Finansije" },
+                new Zaposleni { Id = 7, Ime = "Zoran", Prezime = "Zoranovic", Grad = "Sabac", Adresa = "BB", JMBG = 2132986890023, Mobilni = "0605574477", Profesija = "Diplomirani Ekonomista", StepenStrucneSpremeId = 6, RadnoMesto = "Racunovodstvo" },
+                new Zaposleni { Id = 8, Ime = "Stevan", Prezime = "Stevanovic", Grad = "Beograd", Adresa = "BB", JMBG = 3123986890023, Mobilni = "0605574477", Profesija = "Trgovac", StepenStrucneSpremeId = 3, RadnoMesto = "Maloprodaja" }
                 );
 
             modelBuilder.Entity<Ugovor>().HasData(

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MitrosremERP.Domain.Models
+namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
 {
     public class StepenStrucneSpreme
     {

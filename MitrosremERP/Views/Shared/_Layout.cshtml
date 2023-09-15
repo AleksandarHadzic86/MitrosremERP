@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - MitrosremERP</title>
+    <link href="~/css/site.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
     <link href="~/css/bootswatchthemes.css" rel="stylesheet" />
     <link href="~/css/profildetalji.css" rel="stylesheet" />
@@ -12,7 +13,7 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 </head>
 <body >
-    <div class="sidebar">
+    <div class="sidebar activate">
         <!-- ========== Logo ============  -->
         <div class="logobox">
             
@@ -53,8 +54,8 @@
                     <i class='bx bxs-chevron-down'></i>
                 </div>
                 <div class="submenu">
-                    <a href="#" class="link submenu-title">Zaposleni</a>
-                    <a asp-controller="Zaposleni" asp-action="Index" class="link">Zaposleni</a>
+                    <a href="#" class="link submenu-title ">Zaposleni</a>
+                    <a asp-controller="Zaposleni" asp-action="Index" class="link">Lista Zaposlenih</a>
                     <a href="#" class="link">Ugovori</a>
                     <a href="#" class="link">Bolovanja</a>
                     <a href="#" class="link">Godisnji Odmori</a>
@@ -171,57 +172,9 @@
             </li>
         </ul>
     </div>
-    <!--       --------SideNavMenu--------
-    <div class="sidebar close">
-       
-        --------logo------- 
-        <div class="logobox">
-            <div class="logocorn mt-1">
-                <img src="~/images/logo/logocorn.png" />
-            </div>
-            <div class="logomitrosrem mt-1">
-                <img src="~/images/logo/logomitrosremcut.png" />
-            </div>
-        </div>
-         -----Togle------ 
-        <div class="toggle-sidebar">
-            <i class="bx bx-menu"></i>
-        </div>
-         -------- List -------- 
-        <ul class="sidebar-list">
-             -----dropdown list Item-------- 
-            <li class="dropdown">
-                <div class="title">
-                    <a href="#" class="link">
-                        <i class="bx bx-grid-alt"></i>
-                        <span class="name">Zaposleni</span>
-                    </a>
-                    <i class="bx bxs-chevron-down"></i>
-                </div>
-                <div class="submenu">
-                    <a href="#" class="link submenu-title">Zaposleni</a>
-                    <a href="#" class="link ">Ugovori</a>
-                    <a href="#" class="link ">Bolovanja</a>
-                    <a href="#" class="link ">Godisnji Odmori</a>
-                </div>
-            </li>
-             -----non dropdown list -------- 
-            <li>
-                <div class="title">
-                    <a href="#" class="link">
-                        <i class="bx bx-grid-alt"></i>
-                        <span class="name">Finansije</span>
-                    </a>
-                </div>               
-            </li>
-        </ul>
-    </div> -->
-  
-       
-
-    
+   
     @*  ----Header menu--- *@
-    <div class="main-content">
+    <div class="main-content ">
         <nav class="navbar navbar-expand-xl bg-light">
             <div class="container-fluid">
                 <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -250,11 +203,11 @@
         </nav>
      @*    -----Under Header menu---- *@
 
-
+   
 
 
    @*   --------Main-------- *@
-        <main role="main" class="pb-3 ">
+        <main role="main" class="pb-3 min-vh-100">
             <partial name="_Notification" />
             @RenderBody()
         </main>
@@ -262,7 +215,7 @@
 
 
 
-     <footer class="border-top footer">
+        <footer class="border-top footer ">
         <div class="justify-content-center">
             &copy; 2023 - MitrosremERP - <a asp-controller="Category" asp-action="Index">Category</a>
         </div>

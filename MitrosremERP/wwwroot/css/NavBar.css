@@ -171,7 +171,6 @@
 
     .sidebar.close .sidebar-list li {
         position: relative;
-      
     }
 
         .sidebar.close .sidebar-list li .submenu {
@@ -202,6 +201,7 @@
     display: block;
     font-size: 18px;
     color: var(--color_Light1);
+  
 }
 
 /* =============== Main Section =============== */
@@ -210,13 +210,11 @@
     background-color: white;
     left: 260px;
     width: calc(100% - 260px);
-    height: 100%;
+    height: 100vh;
     transition: all .5s ease;
    
 }
-.main-content {
-    space
-}
+
 .sidebar.close ~ .main-content {
     left: 78px;
     width: calc(100% - 78px);
@@ -239,6 +237,7 @@
     }
 .footer {
     position:relative;
+    bottom:0;
     transition: all .5s ease;
     text-align:center;
     height: 20px;
@@ -263,18 +262,22 @@
 
 
 @media (max-width: 560px) {
-   .toggle-sidebar i {
-       
-    }
 
-   .sidebar.close {
-        width: 78px;
+   /*  .toggle-sidebar i {
+     
     }
+  .sidebar {
+        width: 78px;
+  
+    }*/
+  /* .sidebar.close {
+        width: 78px;
+    }*/
  
-        .sidebar ~ .main-content {
+       /* .sidebar ~ .main-content {
             left: 78px;
             width: calc(100% - 78px);
-        }
+        }*/
 
 /*    .footer.close {
         left: 78px;

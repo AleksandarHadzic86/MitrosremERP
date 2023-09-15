@@ -9,7 +9,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MitrosremERP.Domain.Models
+namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
 {
     public class Ugovor
     {
@@ -23,8 +23,8 @@ namespace MitrosremERP.Domain.Models
         [MaxLength(50)]
         [Required(ErrorMessage = "Tip Ugovora je obavezan")]
         [Display(Name = "Tip ugovora")]
-        public string? TipUgovora { get; set; }  
-        
+        public string? TipUgovora { get; set; }
+
         [Required(ErrorMessage = "Datum Pocetka ugovora obavezan")]
         [DataType(DataType.Date)]
         [Display(Name = "Datum Pocetka")]
