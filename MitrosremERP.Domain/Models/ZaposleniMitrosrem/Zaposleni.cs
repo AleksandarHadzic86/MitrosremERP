@@ -38,6 +38,7 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
         public string Mobilni { get; set; }
         public string? Napomena { get; set; }
 
+        [Display(Name = "Stepen strucne spreme")]
         public int StepenStrucneSpremeId { get; set; }
         public ICollection<StepenStrucneSpreme> StepenStrucneSpreme { get; set; }
         public ICollection<Ugovor>? Ugovori { get; set; }

@@ -47,6 +47,7 @@ listItems.forEach((item) => {
 //});
 
 
+
 const toggleSidebar = document.querySelector(".toggle-sidebar");
 const logo = document.querySelector(".logobox");
 const sidebar = document.querySelector(".sidebar");

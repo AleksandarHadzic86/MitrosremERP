@@ -8,7 +8,6 @@
     --color_Light1: #f2f2f2;
     --color_Light2: #f2f2f2;
 }
-
 *{
     margin: 0;
     padding: 0;
@@ -46,11 +45,15 @@
     transition: transform 0.3s;
     transform: rotate(360deg);
 }
+.sidebar.close .logobox .logomitrosrem {
+    transition: all 0.5s ease-in-out;
+}
 
 .logomitrosrem {
     margin-right: 1px;
     width: 160px;
-    transition: all .5s ease;
+    transition: all 1s ease-in-out;
+    overflow: auto;
 }
 
 .logocorn {
@@ -136,22 +139,36 @@
             background-color: var(--color_DropDown);
         }
 
-.submenu .link {
-    color: var(--color_Light2);
-    font-size: 15px;
-    padding: 5px 0;
-
-   /* transition: all .5s ease;*/
-}
-
-.submenu .link:hover {
-        color: white;
-        font-weight: bold;
-}
-.submenu .link.active {
-        color: white;
-        font-weight: bold;
+    .submenu .link {
+        color: var(--color_Light2);
+        font-size: 15px;
+        padding: 5px 0;
+        /* transition: all .5s ease;*/
     }
+.submenu .active-link {
+    /* Add your styles to highlight the active link here */
+    font-weight: bold; /* Example: change font weight */
+    color: white; /* Example: change text color */
+    font-size:15px;
+}
+.submenu .link:hover {
+    color: white;
+    font-size: 15px;
+}
+/*.submenu .link.active {
+    color: white;
+    font-weight: bold;
+}*/
+.bxs-chevron-right {
+    visibility: hidden;
+}
+.active-link .bxs-chevron-right {
+    visibility: visible;
+}
+.bxs-chevron-right{
+    visibility:hidden;
+}
+
 .submenu-title {
     display: none;
 }
@@ -201,18 +218,16 @@
     display: block;
     font-size: 18px;
     color: var(--color_Light1);
-  
 }
 
 /* =============== Main Section =============== */
-.main-content{
+.main-content {
     position: relative;
     background-color: white;
     left: 260px;
     width: calc(100% - 260px);
     height: 100vh;
     transition: all .5s ease;
-   
 }
 
 .sidebar.close ~ .main-content {
@@ -252,6 +267,16 @@
 
 
 /* ============ Responsive / Breakpoints ========== */
+
+@media only screen and (min-width: 1200px) {
+    .main-content main {
+        padding: 2px 50px;
+
+    }
+
+}
+
+
 @media (max-width: 1080px) {
 }
 
@@ -270,9 +295,9 @@
         width: 78px;
   
     }*/
-  /* .sidebar.close {
+   .sidebar.close {
         width: 78px;
-    }*/
+    }
  
        /* .sidebar ~ .main-content {
             left: 78px;

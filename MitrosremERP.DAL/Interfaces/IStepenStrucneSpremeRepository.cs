@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace MitrosremERP.Aplication.Interfaces
 {
-    public interface IEmployeeRepository:IRepository<Zaposleni>
+    public interface IStepenStrucneSpremeRepository:IRepository<StepenStrucneSpreme>
     {
-        void Update(Zaposleni zaposleni);
+        void Update(StepenStrucneSpreme stepenStrucneSpreme);
     }
 }

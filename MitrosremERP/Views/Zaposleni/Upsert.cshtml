@@ -3,26 +3,26 @@
 
 <div class="container-xxl">
     <form method="post" asp-action="Upsert" enctype="multipart/form-data">
-        <input asp-for="Id" hidden />
+        <input asp-for="ZaposleniVM.Id" hidden />
         <div class="row justify-content-center p-1">
             <div class="border p-3 d-flex justify-content-center mt-4  row">
                 <div class="row pb-2">
-                    <h2 class="text-primary">(Id != 0 ? "Update" : "Create") Product</h2>
+                    <h2 class="text-primary">@(Model.ZaposleniVM.Id != 0 ? "Update" : "Create") Zaposlenog</h2>
                     <hr />
                 </div>
 
                 <div class=" row d-flex justify-content-between ">
                     <div class="col-lg-6 col-sm-12 row m-0 p-0">
                         <div class="mb-3">
-                            <label asp-for="Ime"></label>
-                            <input asp-for="Ime" class="form-control" />
-                            <span asp-validation-for="Ime" class="text-danger"></span>
+                            <label asp-for="ZaposleniVM.Ime"></label>
+                            <input asp-for="ZaposleniVM.Ime" class="form-control" />
+                            <span asp-validation-for="ZaposleniVM.Ime" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
-                            <label asp-for="Prezime"></label>
-                            <textarea asp-for="Prezime" rows="3" class="form-control"></textarea>
-                            <span asp-validation-for="Prezime" class="text-danger"></span>
+                            <label asp-for="ZaposleniVM.Prezime"></label>
+                            <textarea asp-for="ZaposleniVM.Prezime" rows="3" class="form-control"></textarea>
+                            <span asp-validation-for="ZaposleniVM.Prezime" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-lg-6 col-sm-12 row m-0 p-0">
@@ -34,37 +34,37 @@
                 <div class="row d-flex justify-content-between">
                     <div class="col-lg-6 col-sm-12 row m-0 p-0">
                         <div class="mb-3">
-                            <label asp-for="JMBG"></label>
-                            <input asp-for="JMBG" class="form-control" />
-                            <span asp-validation-for="JMBG" class="text-danger"></span>
+                            <label asp-for="ZaposleniVM.JMBG"></label>
+                            <input asp-for="ZaposleniVM.JMBG" class="form-control" />
+                            <span asp-validation-for="ZaposleniVM.JMBG" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
-                            <label asp-for="Grad"></label>
-                            <input asp-for="Grad" class="form-control" />
-                            <span asp-validation-for="Grad" class="text-danger"></span>
+                            <label asp-for="ZaposleniVM.Grad"></label>
+                            <input asp-for="ZaposleniVM.Grad" class="form-control" />
+                            <span asp-validation-for="ZaposleniVM.Grad" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
-                            <label asp-for="Adresa"></label>
-                            <input asp-for="Adresa" class="form-control" />
-                            <span asp-validation-for="Adresa" Price" class="text-danger"></span>
+                            <label asp-for="ZaposleniVM.Adresa"></label>
+                            <input asp-for="ZaposleniVM.Adresa" class="form-control" />
+                            <span asp-validation-for="ZaposleniVM.Adresa" Price" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-lg-6 col-sm-12 row m-0 p-0">
                         <div class="mb-3">
-                            <label asp-for="Fiksni"></label>
-                            <input asp-for="Fiksni" class="form-control" />
-                            <span asp-validation-for="Fiksni" class="text-danger"></span>
+                            <label asp-for="ZaposleniVM.Fiksni"></label>
+                            <input asp-for="ZaposleniVM.Fiksni" class="form-control" />
+                            <span asp-validation-for="ZaposleniVM.Fiksni" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
-                            <label asp-for="Mobilni"></label>
-                            <input asp-for="Mobilni" class="form-control" />
-                            <span asp-validation-for="Mobilni" class="text-danger"></span>
+                            <label asp-for="ZaposleniVM.Mobilni"></label>
+                            <input asp-for="ZaposleniVM.Mobilni" class="form-control" />
+                            <span asp-validation-for="ZaposleniVM.Mobilni" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
-                            <label asp-for="Profesija"></label>
-                            <input asp-for="Profesija" class="form-control" />
-                            <span asp-validation-for="Profesija" class="text-danger"></span>
+                            <label asp-for="ZaposleniVM.Profesija"></label>
+                            <input asp-for="ZaposleniVM.Profesija" class="form-control" />
+                            <span asp-validation-for="ZaposleniVM.Profesija" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -72,11 +72,11 @@
 
                 <div class="row d-flex justify-content-between">
                     <div class="col-lg-6 col-sm-12 mb-3">
-                        <label asp-for="StepenStrucneSpremeId"></label>
-                        <select asp-for="StepenStrucneSpremeId"  class="form-select">
-                            <option disabled selected>--Select Category--</option>
+                        <label asp-for="ZaposleniVM.StepenStrucneSpremeId"></label>
+                        <select asp-for="ZaposleniVM.StepenStrucneSpremeId" asp-items="@Model.StepenStrucneSpremeLista" class="form-select">
+                            <option disabled selected>--Odaberi Stepen Obrazovanja--</option>
                         </select>
-                        <span asp-validation-for="StepenStrucneSpremeId" class="text-danger"></span>
+                        <span asp-validation-for="ZaposleniVM.StepenStrucneSpremeId" class="text-danger"></span>
                     </div>
 
       @*               <div class=" col-12 mb-3">
@@ -88,7 +88,7 @@
                     <div asp-validation-summary="All" class="text-danger"></div>
 
                     <div class="col-12">
-                        @if (Model.Id != 0)
+                        @if (Model.ZaposleniVM.Id != 0)
                         {
                             <button type="submit" class="btn btn-primary">Update</button>
                         }
@@ -96,7 +96,7 @@
                         {
                             <button type="submit" class="btn btn-primary">Create</button>
                         }
-                        <a asp-controller="Product" asp-action="Index" class="btn btn-secondary">Back to List</a>
+                        <a asp-controller="Zaposleni" asp-action="Index" class="btn btn-secondary">Back to List</a>
                     </div>
                 </div>
             </div>
