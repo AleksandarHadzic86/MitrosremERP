@@ -14,7 +14,7 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
         [StringLength(250)]
         [Required(ErrorMessage = "Stepen obrazovanja obavezan!")]
         [Display(Name = "Stepen obrazovanja")]
-        public string StepenObrazovanja { get; set; }
+        public string StepenObrazovanja { get; set; } = null!;
 
         public ICollection<Zaposleni> Zaposleni { get; set; }
     }

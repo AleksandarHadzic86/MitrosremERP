@@ -4,11 +4,11 @@
     color: #69707a;
 }*/
 
-.img-account-profile {
+.img-account-profile-profile {
     height: 10rem;
 }
 
-.rounded-circle {
+.rounded-circle-profile {
     border-radius: 50% !important;
 }
 
@@ -30,7 +30,11 @@
     background-color: rgba(33, 40, 50, 0.03);
     border-bottom: 1px solid rgba(33, 40, 50, 0.125);
 }
+.card table thead{
 
+    background-color: rgba(33, 40, 50, 0.03);
+    border-bottom: 1px solid rgba(33, 40, 50, 0.125);
+}
 .form-control, .dataTable-input {
     display: block;
     width: 100%;
@@ -49,12 +53,12 @@
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-.nav-borders .nav-link.active {
-    color: #0061f2;
-    border-bottom-color: #0061f2;
+.nav-borders-profile .nav-link.active {
+    color: #e95420;
+    border-bottom-color: red;
 }
 
-.nav-borders .nav-link {
+.nav-borders-profile .nav-link {
     color: #69707a;
     border-bottom-width: 0.125rem;
     border-bottom-style: solid;

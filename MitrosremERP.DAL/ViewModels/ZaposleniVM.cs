@@ -14,7 +14,7 @@ namespace MitrosremERP.Aplication.ViewModels
     {
    
         public Zaposleni Zaposleni { get; set; }
-        [ValidateNever]
+        [ValidateNever]      
         public IEnumerable<SelectListItem> StepenStrucneSpremeLista { get; set; }
         [ValidateNever]
         public IEnumerable<SelectListItem> OdaberiPolLista { get; set; }

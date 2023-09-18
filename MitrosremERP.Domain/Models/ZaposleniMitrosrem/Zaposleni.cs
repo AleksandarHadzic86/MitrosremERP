@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using MitrosremERP.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,6 +7,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Resources;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,42 +27,43 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
         [Required(ErrorMessage = "Morate uneti Prezime")]
         public string Prezime { get; set; } = null!;
 
-        [Required(ErrorMessage = "Morate uneti JMBG")]
-        //[Range(13, 13, ErrorMessage = "JMBG mora da sadrzi 13 cifara")]
-        public long JMBG { get; set; }
+        [StringLength(13)]
+        [Required(ErrorMessage = "JMBG je obavezan.")]
+        [RegularExpression(@"^\d{13}$", ErrorMessage = "JMBG mora sadržavati tačno 13 cifara.")]
+        public string JMBG { get; set; } = null!;
 
         [StringLength(50)]
         [Required(ErrorMessage = "Morate odabrati pol")]
-        public string? Pol { get; set; }
+        public string Pol { get; set; } = null!;
 
-        [StringLength(50, ErrorMessage = "Maksimalna duzina karaktera je 50")]
-        [Required(ErrorMessage = "Morate uneti profesiju Zaposlenog")]   
-        public string Profesija { get; set; }
+        [StringLength(50)]
+        [Required(ErrorMessage = "Morate uneti profesiju Zaposlenog")]
+        public string Profesija { get; set; } = null!;
 
-        [StringLength(50, ErrorMessage = "Maksimalna duzina karaktera je 50")]
+        [StringLength(50)]
         [Required(ErrorMessage = "Morate uneti radno mesto Zaposlenog")]
-        public string RadnoMesto { get; set; }
+        public string RadnoMesto { get; set; } = null!;
 
-        [StringLength(50, ErrorMessage = "Maksimalna duzina karaktera je 50")]
+        [StringLength(50)]
         [Required(ErrorMessage = "Morate uneti mesto prebivalista")]
-        public string Grad { get; set; }
+        public string Grad { get; set; } = null!;
 
-        [StringLength(50, ErrorMessage = "Maksimalna duzina karaktera je 50")]
+        [StringLength(50)]
         [Required(ErrorMessage = "Morate uneti adresu")]
-        public string Adresa { get; set; }
+        public string Adresa { get; set; } = null!;
 
-        [StringLength(50, ErrorMessage = "Maksimalna duzina karaktera je 50")]
+        [StringLength(50)]
         public string? Fiksni { get; set; }
 
-        [StringLength(50, ErrorMessage = "Maksimalna duzina karaktera je 50")]
+        [StringLength(50)]
         [Required(ErrorMessage = "Morate uneti mobilni telefon")]
-        public string Mobilni { get; set; }
+        public string Mobilni { get; set; } = null!;
         public string? Napomena { get; set; }
 
-        [ValidateNever]
-        public string ImageUrl { get; set; }
+        
+        public string? ImageUrl { get; set; }
 
-
+        [Required(ErrorMessage = "Obavezan unos")]
         [Display(Name = "Stepen strucne spreme")]
         [ForeignKey("StepenStrucneSpremeId")]
         public int StepenStrucneSpremeId { get; set; }

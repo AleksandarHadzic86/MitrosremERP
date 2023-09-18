@@ -19,4 +19,8 @@
     <ProjectReference Include="..\MitrosremERP.Service\MitrosremERP.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\zaposleni\" />
+  </ItemGroup>
+
 </Project>

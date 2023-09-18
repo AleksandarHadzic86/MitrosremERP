@@ -9,6 +9,7 @@
     <link href="~/css/profildetalji.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css" />
     <link href="~/css/navbar.css" rel="stylesheet" />
+    <link href="~/css/profildetalji.css" rel="stylesheet" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 </head>
 <body>
@@ -55,9 +56,9 @@
                     @* @(ViewContext.RouteData.Values["controller"].ToString() == "Zaposleni" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active-link" : "") *@
                     <a href="#" class="link submenu-title">Zaposleni</a>
                     <a asp-controller="Zaposleni" asp-action="Index" asp-active="true" class="link">Lista Zaposlenih <i class='bx bxs-chevron-right'></i></a>
-                    <a href="#" class="link">Ugovori</a>
-                    <a href="#" class="link">Bolovanja</a>
-                    <a href="#" class="link">Godisnji Odmori</a>
+                    <a href="#" class="link">Ugovori<i class='bx bxs-chevron-right'></i></a>
+                    <a href="#" class="link">Bolovanja<i class='bx bxs-chevron-right'></i></a>
+                    <a href="#" class="link">Godisnji Odmori<i class='bx bxs-chevron-right'></i></a>
                 </div>
             </li>
 
@@ -71,10 +72,10 @@
                     <i class='bx bxs-chevron-down'></i>
                 </div>
                 <div class="submenu">
-                    <a href="#" class="link submenu-title">Posts</a>
-                    <a href="#" class="link">Web Design</a>
-                    <a href="#" class="link">Login Form</a>
-                    <a href="#" class="link">Card Design</a>
+                    <a href="#" class="link submenu-title">Posts<i class='bx bxs-chevron-right'></i></a>
+                    <a href="#" class="link doted">Web Design<i class='bx bxs-chevron-right'></i></a>
+                    <a href="#" class="link">Login Form<i class='bx bxs-chevron-right'></i></a>
+                    <a href="#" class="link">Card Design<i class='bx bxs-chevron-right'></i></a>
                 </div>
             </li>
 
@@ -118,10 +119,10 @@
                     <i class='bx bxs-chevron-down'></i>
                 </div>
                 <div class="submenu">
-                    <a href="#" class="link submenu-title">Plugins</a>
-                    <a href="#" class="link">UI Face</a>
-                    <a href="#" class="link">Pigments</a>
-                    <a href="#" class="link">Box Icons</a>
+                    <a href="#" class="link submenu-title">Plugins<i class='bx bxs-chevron-right'></i></a>
+                    <a href="#" class="link">UI Face<i class='bx bxs-chevron-right'></i></a>
+                    <a href="#" class="link">Pigments<i class='bx bxs-chevron-right'></i></a>
+                    <a href="#" class="link">Box Icons<i class='bx bxs-chevron-right'></i></a>
                 </div>
             </li>
 
@@ -206,7 +207,7 @@
 
 
    @*   --------Main-------- *@
-        <main role="main" class="  container-fluid">
+        <main role="main" class="container-fluid">
             <partial name="_Notification" />
             @RenderBody()
         </main>
@@ -216,7 +217,7 @@
 
         <footer class="border-top footer ">
         <div class="justify-content-center">
-            &copy; 2023 - MitrosremERP - <a asp-controller="Category" asp-action="Index">Category</a>
+            &copy; 2023 - MitrosremERP - <a href="aleksandarhadzic.com">Aleksandar H.</a>
         </div>
     </footer>
 

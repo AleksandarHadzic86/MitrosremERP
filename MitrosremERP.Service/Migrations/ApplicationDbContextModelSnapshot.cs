@@ -229,7 +229,6 @@ namespace MitrosremERP.Infrastructure.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Ime")
@@ -237,8 +236,9 @@ namespace MitrosremERP.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<long>("JMBG")
-                        .HasColumnType("bigint");
+                    b.Property<string>("JMBG")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Mobilni")
                         .IsRequired()
@@ -285,7 +285,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Grad = "Sr.Mitrovica",
                             ImageUrl = "",
                             Ime = "Aleksandar",
-                            JMBG = 1702986890023L,
+                            JMBG = "1702986890023",
                             Mobilni = "0605574477",
                             Pol = "Musko",
                             Prezime = "Hadzic",
@@ -300,7 +300,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Grad = "Sid",
                             ImageUrl = "",
                             Ime = "Petar",
-                            JMBG = 4302386890023L,
+                            JMBG = "4302386890023",
                             Mobilni = "06553427",
                             Pol = "Musko",
                             Prezime = "Petrovic",
@@ -315,7 +315,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Grad = "Sabac",
                             ImageUrl = "",
                             Ime = "Jovan",
-                            JMBG = 2132986890023L,
+                            JMBG = "2132986890023",
                             Mobilni = "0605574477",
                             Pol = "Musko",
                             Prezime = "Jovanovic",
@@ -330,7 +330,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Grad = "Beograd",
                             ImageUrl = "",
                             Ime = "Sreten",
-                            JMBG = 3123986890023L,
+                            JMBG = "3123986890023",
                             Mobilni = "0605574477",
                             Pol = "Musko",
                             Prezime = "Sretenovic",
@@ -345,7 +345,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Grad = "Sr.Mitrovica",
                             ImageUrl = "",
                             Ime = "Goran",
-                            JMBG = 1702986890023L,
+                            JMBG = "1702986890023",
                             Mobilni = "0605574477",
                             Pol = "Musko",
                             Prezime = "Goranic",
@@ -360,7 +360,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Grad = "Sid",
                             ImageUrl = "",
                             Ime = "MIlan",
-                            JMBG = 4302386890023L,
+                            JMBG = "4302386890023",
                             Mobilni = "06553427",
                             Pol = "Musko",
                             Prezime = "Milanovic",
@@ -375,7 +375,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Grad = "Sabac",
                             ImageUrl = "",
                             Ime = "Zoran",
-                            JMBG = 2132986890023L,
+                            JMBG = "2132986890023",
                             Mobilni = "0605574477",
                             Pol = "Musko",
                             Prezime = "Zoranovic",
@@ -390,7 +390,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Grad = "Beograd",
                             ImageUrl = "",
                             Ime = "Stevan",
-                            JMBG = 3123986890023L,
+                            JMBG = "3123986890023",
                             Mobilni = "0605574477",
                             Pol = "Musko",
                             Prezime = "Stevanovic",

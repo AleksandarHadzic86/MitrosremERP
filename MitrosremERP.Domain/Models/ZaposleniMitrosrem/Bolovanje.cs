@@ -26,7 +26,7 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
 
         [StringLength(50)]
         [Required(ErrorMessage = "Obavezan unos status bolovanja")]
-        public string StatusBolovanja { get; set; }
+        public string StatusBolovanja { get; set; } = null!;
 
         [StringLength(250)]
         public string? Napomena { get; set; }

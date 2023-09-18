@@ -103,7 +103,7 @@
         .sidebar-list li .title .link {
             display: flex;
             align-items: center;
-
+           
         }
 
         .sidebar-list li .title i {
@@ -113,6 +113,7 @@
             line-height: 50px;
             color: var(--color_Light1);
             font-size: 20px;
+           
         }
 
         .sidebar-list li .title .name {
@@ -139,22 +140,30 @@
             background-color: var(--color_DropDown);
         }
 
-    .submenu .link {
-        color: var(--color_Light2);
-        font-size: 15px;
-        padding: 5px 0;
-        /* transition: all .5s ease;*/
-    }
+.submenu .link {
+    color: var(--color_Light2);
+    font-size: 15px;
+    padding: 5px 0;
+
+    /*transition: all .5s ease;*/
+}
+
 .submenu .active-link {
     /* Add your styles to highlight the active link here */
     font-weight: bold; /* Example: change font weight */
     color: white; /* Example: change text color */
-    font-size:15px;
+    font-size: 15px;
+   
 }
 .submenu .link:hover {
     color: white;
     font-size: 15px;
 }
+    .submenu .link:hover .bxs-chevron-right {
+        visibility:visible;
+        transition: all 0.5s ease;
+       
+    }
 /*.submenu .link.active {
     color: white;
     font-weight: bold;

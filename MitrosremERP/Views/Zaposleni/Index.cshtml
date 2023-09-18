@@ -2,15 +2,81 @@
 
 @model IEnumerable<Zaposleni>
 
+<div class=" align-items-center container-fluid table-responsive-sm sm-font-size pb-5">
+    <div class=" row mt-5 mb-3 pb-3 border-bottom">
+        <div class="d-flex align-items-center col-6">
+            <span class="fs-4 text-primary">Lista Zaposlenih</span>
+        </div>
 
-<div class="align-items-center container-fluid table-responsive-sm sm-font-size pb-5">
+        <div class="col-6 text-end">
+            <a asp-controller="Zaposleni" asp-action="Upsert" class="btn btn-primary">
+                <i class='bx bx-plus-circle'></i>
+                Kreiraj Zaposlenog
+            </a>
+
+        </div>
+    </div>
+
+    <div class="card">
+            <table class="table mt-2 align-middle mb-0 bg-white">
+                
+              <thead class="bg-light ">
+                    <tr>
+                        <th>Ime i Prezime</th>
+                        <th>Profesija</th>
+                        <th>Status po ugovoru</th>
+                        <th>Radno mesto</th>
+                        <th>Akcija</th>
+                    </tr>
+              </thead>
+                @foreach (var zaposleni in Model)
+                {
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="@zaposleni.ImageUrl"
+                                     alt=""
+                                     style="width: 45px; height: 45px"
+                                     class="rounded-circle" />
+                                <div class="ms-3">
+                                    <p class="fw-bold mb-1">@zaposleni.Ime @zaposleni.Prezime</p>
+                                    <p class="text-muted mb-0">@zaposleni.Mobilni</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">@zaposleni.Profesija</p>
+                        </td>
+                        <td>
+                            <span class="badge badge-success rounded-pill d-inline bg-success">Aktivan</span>
+                        </td>
+                        <td>@zaposleni.RadnoMesto</td>
+                        <td>
+                           <div class="btnbtn-group" role="group">
+                                <a asp-controller="Zaposleni" asp-action="Upsert" asp-route-id="@zaposleni.Id" class="btn btn-primary mx-2"><i class='bx bxs-edit'></i>Uredi</a>
+
+                                <a asp-controller="Zaposleni" asp-action="Delete" class="btn btn-danger mx-2"><i class='bx bx-trash'></i>Obrisi</a>
+                           </div>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+                }
+
+       </table>
+
+    </div>
+</div>  
+@*  <div class=" align-items-center container-fluid table-responsive-sm sm-font-size pb-5">
     <div class="row mt-5 mb-2 pb-3 border-bottom">
         <div class="d-flex align-items-center col-6">
             <span class="fs-4 text-primary">Lista Zaposlenih</span>
         </div>
-        @* <div class="col-6">
+         <div class="col-6">
             <h4 class="text-primary ">Lista zaposlenih</h4>
-        </div> *@
+        </div> 
         <div class="col-6 text-end">
             <a asp-controller="Zaposleni" asp-action="Upsert" class="btn btn-primary">
                 <i class='bx bx-plus-circle'></i>
@@ -49,7 +115,6 @@
                         </td>
                         <td>
                             <p class="fw-normal mb-1">@zaposleni.Profesija</p>
-                            @* <p class="text-muted mb-0">IT department</p> *@
                         </td>
                         <td>
                             <span class="badge badge-success rounded-pill d-inline bg-success">Aktivan</span>
@@ -71,7 +136,7 @@
        </table>
       
 
-</div>
+</div>  *@
 
 
 

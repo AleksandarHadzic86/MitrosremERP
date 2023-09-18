@@ -79,11 +79,11 @@ namespace MitrosremERP.Controllers
                 {
                     if(zaposleniVM.Zaposleni.Pol == "Musko")
                     {
-                        zaposleniVM.Zaposleni.ImageUrl = @"\images\zaposleni\user.jpg";
+                        zaposleniVM.Zaposleni.ImageUrl = @"\images\zaposleniDefault\user.jpg";
                     }
                     else if(zaposleniVM.Zaposleni.Pol == "Zensko")
                     {
-                        zaposleniVM.Zaposleni.ImageUrl = @"\images\zaposleni\userW.jpg";
+                        zaposleniVM.Zaposleni.ImageUrl = @"\images\zaposleniDefault\userW.jpg";
                     }
                 }
                 if (zaposleniVM.Zaposleni.Id == 0)
