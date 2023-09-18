@@ -23,20 +23,21 @@ namespace MitrosremERP.Aplication.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Zaposleni>().HasData(
-                new Zaposleni { Id = 1, Ime = "Aleksandar", Prezime = "Hadzic", Grad = "Sr.Mitrovica", Adresa = "Stari Sor", JMBG = 1702986890023, Mobilni = "0605574477",Profesija = "Elektro Tehnicar",StepenStrucneSpremeId = 4,RadnoMesto = "Odrzavanje el.instalacija" },
-                new Zaposleni { Id = 2, Ime = "Petar", Prezime = "Petrovic", Grad = "Sid", Adresa = "BB", JMBG = 4302386890023, Mobilni = "06553427", Profesija = "Masinski Tehnicar", StepenStrucneSpremeId = 4,RadnoMesto = "Odrzavanje masicna" },
-                new Zaposleni { Id = 3, Ime = "Jovan", Prezime = "Jovanovic", Grad = "Sabac", Adresa = "BB", JMBG = 2132986890023, Mobilni = "0605574477", Profesija = "Diplomirani Tehnolog", StepenStrucneSpremeId = 6,RadnoMesto = "Tehnolog hrane" },
-                new Zaposleni { Id = 4, Ime = "Sreten", Prezime = "Sretenovic", Grad = "Beograd", Adresa = "BB", JMBG = 3123986890023, Mobilni = "0605574477", Profesija = "System Administrator", StepenStrucneSpremeId = 5, RadnoMesto = "IT Administrator" },
-                new Zaposleni { Id = 5, Ime = "Goran", Prezime = "Goranic", Grad = "Sr.Mitrovica", Adresa = "Stari Sor", JMBG = 1702986890023, Mobilni = "0605574477", Profesija = "Developer", StepenStrucneSpremeId = 5, RadnoMesto = "Programer" },
-                new Zaposleni { Id = 6, Ime = "MIlan", Prezime = "Milanovic", Grad = "Sid", Adresa = "BB", JMBG = 4302386890023, Mobilni = "06553427", Profesija = "Master Ekonomista", StepenStrucneSpremeId = 7,RadnoMesto = "Finansije" },
-                new Zaposleni { Id = 7, Ime = "Zoran", Prezime = "Zoranovic", Grad = "Sabac", Adresa = "BB", JMBG = 2132986890023, Mobilni = "0605574477", Profesija = "Diplomirani Ekonomista", StepenStrucneSpremeId = 6, RadnoMesto = "Racunovodstvo" },
-                new Zaposleni { Id = 8, Ime = "Stevan", Prezime = "Stevanovic", Grad = "Beograd", Adresa = "BB", JMBG = 3123986890023, Mobilni = "0605574477", Profesija = "Trgovac", StepenStrucneSpremeId = 3, RadnoMesto = "Maloprodaja" }
+                new Zaposleni { Id = 1, Ime = "Aleksandar", Prezime = "Hadzic", Grad = "Sr.Mitrovica", Adresa = "Stari Sor", JMBG = 1702986890023, Mobilni = "0605574477",Profesija = "Elektro Tehnicar",StepenStrucneSpremeId = 4,RadnoMesto = "Odrzavanje el.instalacija",ImageUrl = "", Pol = "Musko"},
+                new Zaposleni { Id = 2, Ime = "Petar", Prezime = "Petrovic", Grad = "Sid", Adresa = "BB", JMBG = 4302386890023, Mobilni = "06553427", Profesija = "Masinski Tehnicar", StepenStrucneSpremeId = 4,RadnoMesto = "Odrzavanje masicna", ImageUrl = "", Pol = "Musko" },
+                new Zaposleni { Id = 3, Ime = "Jovan", Prezime = "Jovanovic", Grad = "Sabac", Adresa = "BB", JMBG = 2132986890023, Mobilni = "0605574477", Profesija = "Diplomirani Tehnolog", StepenStrucneSpremeId = 6,RadnoMesto = "Tehnolog hrane", ImageUrl = "", Pol = "Musko" },
+                new Zaposleni { Id = 4, Ime = "Sreten", Prezime = "Sretenovic", Grad = "Beograd", Adresa = "BB", JMBG = 3123986890023, Mobilni = "0605574477", Profesija = "System Administrator", StepenStrucneSpremeId = 5, RadnoMesto = "IT Administrator", ImageUrl = "", Pol = "Musko" },
+                new Zaposleni { Id = 5, Ime = "Goran", Prezime = "Goranic", Grad = "Sr.Mitrovica", Adresa = "Stari Sor", JMBG = 1702986890023, Mobilni = "0605574477", Profesija = "Developer", StepenStrucneSpremeId = 5, RadnoMesto = "Programer", ImageUrl = "", Pol = "Musko" },
+                new Zaposleni { Id = 6, Ime = "MIlan", Prezime = "Milanovic", Grad = "Sid", Adresa = "BB", JMBG = 4302386890023, Mobilni = "06553427", Profesija = "Master Ekonomista", StepenStrucneSpremeId = 7,RadnoMesto = "Finansije", ImageUrl = "", Pol = "Musko" },
+                new Zaposleni { Id = 7, Ime = "Zoran", Prezime = "Zoranovic", Grad = "Sabac", Adresa = "BB", JMBG = 2132986890023, Mobilni = "0605574477", Profesija = "Diplomirani Ekonomista", StepenStrucneSpremeId = 6, RadnoMesto = "Racunovodstvo", ImageUrl = "", Pol = "Musko" },
+                new Zaposleni { Id = 8, Ime = "Stevan", Prezime = "Stevanovic", Grad = "Beograd", Adresa = "BB", JMBG = 3123986890023, Mobilni = "0605574477", Profesija = "Trgovac", StepenStrucneSpremeId = 3, RadnoMesto = "Maloprodaja", ImageUrl = "", Pol = "Musko" }
                 );
 
             modelBuilder.Entity<Ugovor>().HasData(
                 new Ugovor { Id = 1, BrojUgovora = "MS0001", TipUgovora ="Odredjeno", DatumPocetka = new DateOnly(1992, 2, 17),BrojDanaGodisnjeg = 22, ZaposleniId = 1}
                 );
 
+           
             modelBuilder.Entity<StepenStrucneSpreme>().HasData(
                    new StepenStrucneSpreme { Id = 1, StepenObrazovanja = "I Stepen - Osnovno Obrazovanje." },
                    new StepenStrucneSpreme { Id = 2, StepenObrazovanja = "II Stepen - Strucno osposobljavanje u trajanju do 1 godine." },

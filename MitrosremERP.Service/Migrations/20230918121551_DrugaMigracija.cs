@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MitrosremERP.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class SeedDataNovo : Migration
+    public partial class DrugaMigracija : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,17 +30,17 @@ namespace MitrosremERP.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Zaposleni",
-                columns: new[] { "Id", "Adresa", "Fiksni", "Grad", "Ime", "JMBG", "Mobilni", "Napomena", "Prezime", "Profesija", "RadnoMesto", "StepenStrucneSpremeId" },
+                columns: new[] { "Id", "Adresa", "Fiksni", "Grad", "ImageUrl", "Ime", "JMBG", "Mobilni", "Napomena", "Pol", "Prezime", "Profesija", "RadnoMesto", "StepenStrucneSpremeId" },
                 values: new object[,]
                 {
-                    { 1, "Stari Sor", null, "Sr.Mitrovica", "Aleksandar", 1702986890023m, "0605574477", null, "Hadzic", "Elektro Tehnicar", null, 4 },
-                    { 2, "BB", null, "Sid", "Petar", 4302386890023m, "06553427", null, "Petrovic", "Elektro Tehnicar", null, 4 },
-                    { 3, "BB", null, "Sabac", "Jovan", 2132986890023m, "0605574477", null, "Jovanovic", "Elektro Tehnicar", null, 4 },
-                    { 4, "BB", null, "Beograd", "Sreten", 3123986890023m, "0605574477", null, "Sretenovic", "Elektro Tehnicar", null, 4 },
-                    { 5, "Stari Sor", null, "Sr.Mitrovica", "Goran", 1702986890023m, "0605574477", null, "Goranic", "Elektro Tehnicar", null, 4 },
-                    { 6, "BB", null, "Sid", "MIlan", 4302386890023m, "06553427", null, "Milanovic", "Elektro Tehnicar", null, 4 },
-                    { 7, "BB", null, "Sabac", "Zoran", 2132986890023m, "0605574477", null, "Zoranovic", "Elektro Tehnicar", null, 4 },
-                    { 8, "BB", null, "Beograd", "Stevan", 3123986890023m, "0605574477", null, "Stevanovic", "Elektro Tehnicar", null, 4 }
+                    { 1, "Stari Sor", null, "Sr.Mitrovica", "", "Aleksandar", 1702986890023L, "0605574477", null, "Musko", "Hadzic", "Elektro Tehnicar", "Odrzavanje el.instalacija", 4 },
+                    { 2, "BB", null, "Sid", "", "Petar", 4302386890023L, "06553427", null, "Musko", "Petrovic", "Masinski Tehnicar", "Odrzavanje masicna", 4 },
+                    { 3, "BB", null, "Sabac", "", "Jovan", 2132986890023L, "0605574477", null, "Musko", "Jovanovic", "Diplomirani Tehnolog", "Tehnolog hrane", 6 },
+                    { 4, "BB", null, "Beograd", "", "Sreten", 3123986890023L, "0605574477", null, "Musko", "Sretenovic", "System Administrator", "IT Administrator", 5 },
+                    { 5, "Stari Sor", null, "Sr.Mitrovica", "", "Goran", 1702986890023L, "0605574477", null, "Musko", "Goranic", "Developer", "Programer", 5 },
+                    { 6, "BB", null, "Sid", "", "MIlan", 4302386890023L, "06553427", null, "Musko", "Milanovic", "Master Ekonomista", "Finansije", 7 },
+                    { 7, "BB", null, "Sabac", "", "Zoran", 2132986890023L, "0605574477", null, "Musko", "Zoranovic", "Diplomirani Ekonomista", "Racunovodstvo", 6 },
+                    { 8, "BB", null, "Beograd", "", "Stevan", 3123986890023L, "0605574477", null, "Musko", "Stevanovic", "Trgovac", "Maloprodaja", 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -61,26 +61,6 @@ namespace MitrosremERP.Infrastructure.Migrations
                 table: "StepenStrucneSpreme",
                 keyColumn: "Id",
                 keyValue: 2);
-
-            migrationBuilder.DeleteData(
-                table: "StepenStrucneSpreme",
-                keyColumn: "Id",
-                keyValue: 3);
-
-            migrationBuilder.DeleteData(
-                table: "StepenStrucneSpreme",
-                keyColumn: "Id",
-                keyValue: 5);
-
-            migrationBuilder.DeleteData(
-                table: "StepenStrucneSpreme",
-                keyColumn: "Id",
-                keyValue: 6);
-
-            migrationBuilder.DeleteData(
-                table: "StepenStrucneSpreme",
-                keyColumn: "Id",
-                keyValue: 7);
 
             migrationBuilder.DeleteData(
                 table: "StepenStrucneSpreme",
@@ -126,6 +106,26 @@ namespace MitrosremERP.Infrastructure.Migrations
                 table: "Zaposleni",
                 keyColumn: "Id",
                 keyValue: 8);
+
+            migrationBuilder.DeleteData(
+                table: "StepenStrucneSpreme",
+                keyColumn: "Id",
+                keyValue: 3);
+
+            migrationBuilder.DeleteData(
+                table: "StepenStrucneSpreme",
+                keyColumn: "Id",
+                keyValue: 5);
+
+            migrationBuilder.DeleteData(
+                table: "StepenStrucneSpreme",
+                keyColumn: "Id",
+                keyValue: 6);
+
+            migrationBuilder.DeleteData(
+                table: "StepenStrucneSpreme",
+                keyColumn: "Id",
+                keyValue: 7);
 
             migrationBuilder.DeleteData(
                 table: "Zaposleni",

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 using System;
 using System.Collections.Generic;
@@ -9,11 +10,13 @@ using System.Threading.Tasks;
 
 namespace MitrosremERP.Aplication.ViewModels
 {
-    public class KreirajZaposlenogVM
+    public class ZaposleniVM
     {
-        public Zaposleni ZaposleniVM { get; set; }
-
+   
+        public Zaposleni Zaposleni { get; set; }
+        [ValidateNever]
         public IEnumerable<SelectListItem> StepenStrucneSpremeLista { get; set; }
-
+        [ValidateNever]
+        public IEnumerable<SelectListItem> OdaberiPolLista { get; set; }
     }
 }

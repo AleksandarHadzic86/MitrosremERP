@@ -228,8 +228,11 @@
     width: calc(100% - 260px);
     height: 100vh;
     transition: all .5s ease;
+    
 }
-
+.main-content main{
+    min-height: 90%;
+}
 .sidebar.close ~ .main-content {
     left: 78px;
     width: calc(100% - 78px);
@@ -271,7 +274,7 @@
 @media only screen and (min-width: 1200px) {
     .main-content main {
         padding: 2px 50px;
-
+      
     }
 
 }

@@ -16,17 +16,17 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
         [Key]
         public int Id { get; set; }
 
+        [StringLength(50, ErrorMessage = "Maksimalan broj karaktera 50")]
         [Required(ErrorMessage = "Broj ugovora obavezan")]
         [Display(Name = "Broj Ugovora")]
         public string? BrojUgovora { get; set; }
 
-        [MaxLength(50)]
+        [MaxLength(50, ErrorMessage = "Maksimalan broj karaktera 50")]
         [Required(ErrorMessage = "Tip Ugovora je obavezan")]
         [Display(Name = "Tip ugovora")]
         public string? TipUgovora { get; set; }
 
-        [Required(ErrorMessage = "Datum Pocetka ugovora obavezan")]
-        [DataType(DataType.Date)]
+        [DataType(DataType.Date, ErrorMessage = "Obavezan unos datuma")]
         [Display(Name = "Datum Pocetka")]
         [DisplayFormat(DataFormatString = "{0:dd,MM,yyyy}", ApplyFormatInEditMode = true)]
         public DateOnly DatumPocetka { get; set; }

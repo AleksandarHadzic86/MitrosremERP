@@ -21,7 +21,27 @@ namespace MitrosremERP.Infrastructure.Repositories
 
         public void Update(Zaposleni zaposleni)
         {
-            throw new NotImplementedException();
+            var zaposleniFromDb = _context.Zaposleni.FirstOrDefault(u => u.Id == zaposleni.Id);
+            if(zaposleniFromDb != null)
+            {
+                zaposleniFromDb.Ime = zaposleni.Ime;
+                zaposleniFromDb.Prezime = zaposleni.Prezime;
+                zaposleniFromDb.JMBG = zaposleni.JMBG;
+                zaposleniFromDb.Pol = zaposleni.Pol;
+                zaposleniFromDb.Profesija = zaposleni.Profesija;
+                zaposleniFromDb.RadnoMesto = zaposleni.RadnoMesto;
+                zaposleniFromDb.Grad = zaposleni.Grad;
+                zaposleniFromDb.Adresa = zaposleni.Adresa;
+                zaposleniFromDb.Fiksni = zaposleni.Fiksni;
+                zaposleniFromDb.Mobilni = zaposleni.Mobilni;
+                zaposleniFromDb.Napomena = zaposleni.Napomena;
+                zaposleniFromDb.StepenStrucneSpremeId = zaposleni.StepenStrucneSpremeId;
+                if (zaposleniFromDb.ImageUrl != null)
+                {
+                    zaposleniFromDb.ImageUrl = zaposleni.ImageUrl;
+                }
+              
+            }
         }
     }
 }

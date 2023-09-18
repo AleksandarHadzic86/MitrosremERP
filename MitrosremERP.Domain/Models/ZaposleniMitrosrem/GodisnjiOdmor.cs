@@ -12,20 +12,23 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
     {
         [Key]
         public int Id { get; set; }
-        [Required(ErrorMessage = "Obavezan unos pocetak Godisnjeg")]
-        [DataType(DataType.Date)]
+
+        [DataType(DataType.Date, ErrorMessage = "Obavezan unos pocetak Godisnjeg")]
+        [Display(Name = "Datum od: ")]
         public DateOnly PocetakGodisnjegOdmora { get; set; }
 
-
-        [DataType(DataType.Date)]
+        [DataType(DataType.Date, ErrorMessage = "Obavezan unos kraj Godisnjeg")]
+        [Display(Name = "Datum do: ")]
         public DateOnly ZavrsetakGodisnjegOdmora { get; set; }
 
-        public int? BrojDanaGodisnjeg { get; set; }
+        [Required(ErrorMessage = "Obavezan unos broj dana godisnjeg odmora")]
+        public int BrojDanaGodisnjeg { get; set; }
 
         [StringLength(50)]
         [Required(ErrorMessage = "Obavezan unos status godisnjeg")]
         public string StatusGodisnjeg { get; set; }
 
+        [StringLength(250)]
         public string? Napomena { get; set; }
 
 

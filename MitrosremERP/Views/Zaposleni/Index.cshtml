@@ -3,7 +3,7 @@
 @model IEnumerable<Zaposleni>
 
 
-<div class="align-items-center container-fluid table-responsive-sm sm-font-size">
+<div class="align-items-center container-fluid table-responsive-sm sm-font-size pb-5">
     <div class="row mt-5 mb-2 pb-3 border-bottom">
         <div class="d-flex align-items-center col-6">
             <span class="fs-4 text-primary">Lista Zaposlenih</span>
@@ -37,7 +37,7 @@
                     <tr>
                         <td>
                             <div class="d-flex align-items-center">
-                                <img src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                                <img src="@zaposleni.ImageUrl"
                                      alt=""
                                      style="width: 45px; height: 45px"
                                      class="rounded-circle" />
@@ -57,7 +57,7 @@
                         <td>@zaposleni.RadnoMesto</td>
                         <td>
                            <div class="btnbtn-group" role="group">
-                                <a asp-controller="Zaposlni" asp-action="Upsert" class="btn btn-primary mx-2"><i class='bx bxs-edit'></i>Uredi</a>
+                                <a asp-controller="Zaposleni" asp-action="Upsert" asp-route-id="@zaposleni.Id" class="btn btn-primary mx-2"><i class='bx bxs-edit'></i>Uredi</a>
                               
                                 <a asp-controller="Zaposleni" asp-action="Delete" class="btn btn-danger mx-2"><i class='bx bx-trash'></i>Obrisi</a>
                            </div>
