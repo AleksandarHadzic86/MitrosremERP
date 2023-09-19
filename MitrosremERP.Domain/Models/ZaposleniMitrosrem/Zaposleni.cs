@@ -32,6 +32,10 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
         [RegularExpression(@"^\d{13}$", ErrorMessage = "JMBG mora sadržavati tačno 13 cifara.")]
         public string JMBG { get; set; } = null!;
 
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Datum Rodjenja")]
+        public DateOnly DatumRodjenja { get; set; }
+
         [StringLength(50)]
         [Required(ErrorMessage = "Morate odabrati pol")]
         public string Pol { get; set; } = null!;

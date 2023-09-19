@@ -1,4 +1,8 @@
-﻿
+﻿@using System.Globalization;
+@{
+    CultureInfo culture = new CultureInfo("sr-Latn-RS"); // Serbian (Latin)
+}
+
 @model MitrosremERP.Aplication.ViewModels.ZaposleniVM
 @section Scripts{
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
@@ -89,133 +93,126 @@
     </div>
 </div>  *@
 
-  <div class="container-fluid ">
-    <form method="post" class="row" asp-action="Upsert" enctype="multipart/form-data">
-       <div class="col-8 card px-3">
-        <input asp-for="Zaposleni.Id" hidden />
-        <input asp-for="Zaposleni.ImageUrl" hidden/>
-        <div class="row justify-content-center p-1">
-            <div class=" p-3 d-flex justify-content-center  row">
-                <div class="row card-header">
-                    <h4 class="text-primary">@(Model.Zaposleni.Id != 0 ? "Izmeni" : "Kreiraj") Zaposlenog</h4>
-                    <hr />
-                </div>
+  <div class="container-fluid mt-5 mb-5">
+    <form method="post" class="row"  enctype="multipart/form-data" >
+        <div class="col-lg-8 px-3">
+           <div class="card mb-4 mb-xl-0">
 
-                <div class=" row d-flex justify-content-between ">
-                    <div class="col-lg-6 col-sm-12 row m-0 p-0">
+            <input asp-for="Zaposleni.Id" hidden />
+            <input asp-for="Zaposleni.ImageUrl" hidden/>              
+                <p class="card-header">@(Model.Zaposleni.Id != 0 ? "Izmeni" : "Kreiraj") Podatke Zaposlenog</p>         
+              <div class="row px-3">
+                <div class="col-lg-4 col-sm-8 card-body" >
                         <div class="mb-3">
-                            <label asp-for="Zaposleni.Ime"></label>
+                            <label class="small mb-1" asp-for="Zaposleni.Ime"></label>
                             <input asp-for="Zaposleni.Ime" class="form-control" />
                             <span asp-validation-for="Zaposleni.Ime" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
-                            <label asp-for="Zaposleni.Prezime"></label>
+                            <label class="small mb-1" asp-for="Zaposleni.Prezime"></label>
                             <input asp-for="Zaposleni.Prezime" class="form-control" />
                             <span asp-validation-for="Zaposleni.Prezime" class="text-danger"></span>
                         </div>
-                    </div>
-                @*     <div class="col-lg-6 col-sm-12 row m-0 p-0">
-                        <div class=" mb-3">
-                            <img class="form-control border-0 mx-auto d-block" style="width:200px; height:200px;" />
-                        </div>
-                    </div> *@
-                </div>
-                <div class="row d-flex justify-content-between">
-                    <div class="col-lg-6 col-sm-12 row m-0 p-0">
+                    
                         <div class="mb-3">
-                            <label asp-for="Zaposleni.JMBG"></label>
+                            <label class="small mb-1" asp-for="Zaposleni.JMBG"></label>
                             <input asp-for="Zaposleni.JMBG" class="form-control" />
                             <span asp-validation-for="Zaposleni.JMBG" class="text-danger"></span>
                         </div>
-
                         <div class="mb-3">
-                            <label asp-for="Zaposleni.Grad"></label>
-                            <input asp-for="Zaposleni.Grad" class="form-control" />
-                            <span asp-validation-for="Zaposleni.Grad" class="text-danger"></span>
+                            <label class="small mb-1" asp-for="Zaposleni.DatumRodjenja"></label>
+                            <input type="date" asp-for="Zaposleni.DatumRodjenja" value="@Model.Zaposleni.DatumRodjenja.ToString("MM-dd-yyyy", culture)" class="form-control" />
+                            <span asp-validation-for="Zaposleni.DatumRodjenja" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
-                            <label asp-for="Zaposleni.Adresa"></label>
-                            <input asp-for="Zaposleni.Adresa" class="form-control" />
-                            <span asp-validation-for="Zaposleni.Adresa" Price" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-sm-12 row m-0 p-0">
-                        <div class="mb-3">
-                            <label asp-for="Zaposleni.Fiksni"></label>
-                            <input asp-for="Zaposleni.Fiksni" class="form-control" />
-                            <span asp-validation-for="Zaposleni.Fiksni" class="text-danger"></span>
-                        </div>
-                        <div class="mb-3">
-                            <label asp-for="Zaposleni.Mobilni"></label>
-                            <input asp-for="Zaposleni.Mobilni" class="form-control" />
-                            <span asp-validation-for="Zaposleni.Mobilni" class="text-danger"></span>
-                        </div>
-                        <div class="mb-3">
-                            <label asp-for="Zaposleni.Profesija"></label>
+                            <label class="small mb-1" asp-for="Zaposleni.Profesija"></label>
                             <input asp-for="Zaposleni.Profesija" class="form-control" />
                             <span asp-validation-for="Zaposleni.Profesija" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
-                            <label asp-for="Zaposleni.RadnoMesto"></label>
+                            <label class="small mb-1"  asp-for="Zaposleni.RadnoMesto"></label>
                             <input asp-for="Zaposleni.RadnoMesto" class="form-control" />
                             <span asp-validation-for="Zaposleni.RadnoMesto" class="text-danger"></span>
                         </div>
-                    </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Zaposleni.Grad"></label>
+                            <input asp-for="Zaposleni.Grad" class="form-control" />
+                            <span asp-validation-for="Zaposleni.Grad" class="text-danger"></span>
+                        </div>
+                                           
                 </div>
 
 
-                <div class="row d-flex justify-content-between">
-                    <div class="col-lg-6 col-sm-12 mb-3">
-                        <label asp-for="Zaposleni.StepenStrucneSpremeId"></label>
-                        <select asp-for="Zaposleni.StepenStrucneSpremeId" asp-items="@Model.StepenStrucneSpremeLista" class="form-select">
+                <div class="col-lg-4 col-sm-8 card-body">
+                        
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Zaposleni.Adresa"></label>
+                            <input asp-for="Zaposleni.Adresa" class="form-control" />
+                            <span asp-validation-for="Zaposleni.Adresa" Price" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Zaposleni.Fiksni"></label>
+                            <input asp-for="Zaposleni.Fiksni" class="form-control" />
+                            <span asp-validation-for="Zaposleni.Fiksni" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Zaposleni.Mobilni"></label>
+                            <input asp-for="Zaposleni.Mobilni" class="form-control" />
+                            <span asp-validation-for="Zaposleni.Mobilni" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Zaposleni.StepenStrucneSpremeId"></label>
+                        <select asp-for="Zaposleni.StepenStrucneSpremeId" asp-items="@Model.StepenStrucneSpremeLista" class="small form-select">
                             <option disabled selected>--Odaberi Stepen Obrazovanja--</option>
                         </select>
                         <span asp-validation-for="Zaposleni.StepenStrucneSpremeId" class="text-danger"></span>
                     </div>
-                    <div class="col-lg-6 col-sm-12 mb-3">
-                        <label asp-for="Zaposleni.Pol"></label>
-                        <select asp-for="Zaposleni.Pol"  asp-items="@Model.OdaberiPolLista" class="form-select">
+                    <div class="mb-3">
+                            <label class="small mb-1" asp-for="Zaposleni.Pol"></label>
+                        <select asp-for="Zaposleni.Pol"  asp-items="@Model.OdaberiPolLista" class="form-select small">
                             <option disabled selected>--Odaberi Pol--</option>
                         </select>
                         <span asp-validation-for="Zaposleni.Pol" class="text-danger"></span>
                     </div>
+                    <div class="mb-3">
+                            <label class="small mb-1" asp-for="Zaposleni.Napomena"></label>
+                            <textarea asp-for="Zaposleni.Napomena" rows="3" class=" form-control" ></textarea>
+                            <span asp-validation-for="Zaposleni.Napomena" class="text-danger"></span>
+                    </div>
+                       
+                </div>
+            </div>
+         </div>
+      </div>
+      
 
-                    @* <div class=" col-12 mb-3">
-                        <label asp-for="Zaposleni.ImageUrl"></label>
-                        <input type="file" name="file" class="form-control" />
-                        <span asp-validation-for="Zaposleni.ImageUrl" class="text-danger"></span>
-                    </div> *@
 
 
-                    <div class="col-12">
-                        @if (Model.Zaposleni.Id != 0)
-                        {
-                            <button type="submit" class="btn btn-primary">Update</button>
-                        }
-                        else
-                        {
-                            <button type="submit" class="btn btn-primary">Create</button>
-                        }
-                        <a asp-controller="Zaposleni" asp-action="Index" class="btn btn-secondary">Back to List</a>
+
+        <div class="col-lg-4 px-3">
+                <div class="card mb-4 mb-xl-0">
+                    <div class="card-header">Fotografija</div>
+                    <div class="card-body text-center ">
+                    <img class="img-account rounded-circle mb-2" src="@Model.Zaposleni.ImageUrl" />
+                        <div class="small font-italic text-muted mb-4">JPG ili PNG, ne vece od 2MB</div>
+                    <label class="small mb-1" asp-for="Zaposleni.ImageUrl">Odaberi Fotografiju</label>
+                    <input type="file" name="file" class="form-control" />
                     </div>
                 </div>
-            </div>
         </div>
-      </div>
-      <div class="col-4 card px-3">
-            <div class="card mb-4 mb-xl-0">
-                <div class="card-header">Profile Picture</div>
-                <div class="card-body text-center">
-                    <!-- Profile picture image-->
-                    <img class="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-                    <!-- Profile picture help block-->
-                    <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
-                    <!-- Profile picture upload button-->
-                    <button class="btn btn-primary" type="button">Upload new image</button>
-                </div>
-            </div>
-      </div>
+
+        <div class="col-8 px-3 py-3">
+            @if (Model.Zaposleni.Id != 0)
+            {
+                <button type="submit" class="btn btn-primary">Update</button>
+            }
+            else
+            {
+                <button type="submit" class="btn btn-primary">Create</button>
+            }
+            <a asp-controller="Zaposleni" asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </div>
     </form>
 </div>  
 
