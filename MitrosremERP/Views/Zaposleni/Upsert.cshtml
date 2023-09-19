@@ -1,12 +1,11 @@
 ﻿@using System.Globalization;
+@* @using System.Globalization;
 @{
     CultureInfo culture = new CultureInfo("sr-Latn-RS"); // Serbian (Latin)
-}
+} *@
 
 @model MitrosremERP.Aplication.ViewModels.ZaposleniVM
-@section Scripts{
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+
 @* <div class="container-fluid px-4 mt-4">
 
     <!-- Account page navigation-->
@@ -97,7 +96,7 @@
     <form method="post" class="row"  enctype="multipart/form-data" >
         <div class="col-lg-8 px-3">
            <div class="card mb-4 mb-xl-0">
-
+           
             <input asp-for="Zaposleni.Id" hidden />
             <input asp-for="Zaposleni.ImageUrl" hidden/>              
                 <p class="card-header">@(Model.Zaposleni.Id != 0 ? "Izmeni" : "Kreiraj") Podatke Zaposlenog</p>         
@@ -122,7 +121,8 @@
                         </div>
                         <div class="mb-3">
                             <label class="small mb-1" asp-for="Zaposleni.DatumRodjenja"></label>
-                            <input type="date" asp-for="Zaposleni.DatumRodjenja" value="@Model.Zaposleni.DatumRodjenja.ToString("MM-dd-yyyy", culture)" class="form-control" />
+                                
+                            <input type="text" name="Zaposleni.DatumRodjenja" id="Zaposleni.DatumRodjenja" value="@Model.Zaposleni.DatumRodjenja.ToString("dd.MMMM.yyyy")" class="datepicker form-control" />
                             <span asp-validation-for="Zaposleni.DatumRodjenja" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
@@ -216,3 +216,23 @@
     </form>
 </div>  
 
+@section Scripts{
+
+    <script>
+        $(function () {
+            $('.datepicker').datepicker({
+                dateFormat: 'dd.MM.yy',
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                regional: "sr-SR",
+                maxDate: new Date()
+            });
+        });
+    </script>
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

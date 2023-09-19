@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using MitrosremERP.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Resources;
@@ -32,9 +34,29 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
         [RegularExpression(@"^\d{13}$", ErrorMessage = "JMBG mora sadržavati tačno 13 cifara.")]
         public string JMBG { get; set; } = null!;
 
+        
+        private DateTime? _datumRodjenja;
+
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Datum Rodjenja")]
-        public DateOnly DatumRodjenja { get; set; }
+        public DateTime DatumRodjenja 
+        {
+            get
+            {
+                if (_datumRodjenja == null)
+                {
+                    // If _datumRodjenja is null, set it to DateTime.Now
+                    _datumRodjenja = DateTime.Now;
+                }
+                return _datumRodjenja.Value;
+            }
+            set
+            {
+                _datumRodjenja = value;
+            }
+        }
+
+
 
         [StringLength(50)]
         [Required(ErrorMessage = "Morate odabrati pol")]

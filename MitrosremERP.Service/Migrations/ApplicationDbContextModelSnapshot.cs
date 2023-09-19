@@ -219,8 +219,8 @@ namespace MitrosremERP.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateOnly>("DatumRodjenja")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("DatumRodjenja")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Fiksni")
                         .HasMaxLength(50)
@@ -286,7 +286,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         {
                             Id = 1,
                             Adresa = "Stari Sor",
-                            DatumRodjenja = new DateOnly(1, 1, 1),
+                            DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Grad = "Sr.Mitrovica",
                             ImageUrl = "",
                             Ime = "Aleksandar",
@@ -302,7 +302,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         {
                             Id = 2,
                             Adresa = "BB",
-                            DatumRodjenja = new DateOnly(1, 1, 1),
+                            DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Grad = "Sid",
                             ImageUrl = "",
                             Ime = "Petar",
@@ -318,7 +318,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         {
                             Id = 3,
                             Adresa = "BB",
-                            DatumRodjenja = new DateOnly(1, 1, 1),
+                            DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Grad = "Sabac",
                             ImageUrl = "",
                             Ime = "Jovan",
@@ -334,7 +334,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         {
                             Id = 4,
                             Adresa = "BB",
-                            DatumRodjenja = new DateOnly(1, 1, 1),
+                            DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Grad = "Beograd",
                             ImageUrl = "",
                             Ime = "Sreten",
@@ -350,7 +350,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         {
                             Id = 5,
                             Adresa = "Stari Sor",
-                            DatumRodjenja = new DateOnly(1, 1, 1),
+                            DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Grad = "Sr.Mitrovica",
                             ImageUrl = "",
                             Ime = "Goran",
@@ -366,7 +366,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         {
                             Id = 6,
                             Adresa = "BB",
-                            DatumRodjenja = new DateOnly(1, 1, 1),
+                            DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Grad = "Sid",
                             ImageUrl = "",
                             Ime = "MIlan",
@@ -382,7 +382,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         {
                             Id = 7,
                             Adresa = "BB",
-                            DatumRodjenja = new DateOnly(1, 1, 1),
+                            DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Grad = "Sabac",
                             ImageUrl = "",
                             Ime = "Zoran",
@@ -398,7 +398,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         {
                             Id = 8,
                             Adresa = "BB",
-                            DatumRodjenja = new DateOnly(1, 1, 1),
+                            DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Grad = "Beograd",
                             ImageUrl = "",
                             Ime = "Stevan",
