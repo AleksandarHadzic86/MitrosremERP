@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MitrosremERP.Aplication.ViewModels
 {
-    public class BolovanjaVM
+    public class KreirajBolovanjeVM
     {
         public Bolovanje Bolovanje { get; set; }
         public IEnumerable<Zaposleni> ListaZaposleni { get; set; }

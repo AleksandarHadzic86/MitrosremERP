@@ -35,7 +35,7 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
 
         [StringLength(13)]
         [Required(ErrorMessage = "JMBG je obavezan.")]
-        [RegularExpression(@"^\d{13}$", ErrorMessage = "JMBG mora da sadrži tačno 13 cifara.")]
+        [RegularExpression(@"^\d{13}$", ErrorMessage = "JMBG mora da sadrži 13 cifara.")]
         public string JMBG { get; set; } = null!;
 
 

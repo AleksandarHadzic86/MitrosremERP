@@ -26,7 +26,7 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
 
         [StringLength(50)]
         [Required(ErrorMessage = "Obavezan unos status godisnjeg")]
-        public string StatusGodisnjeg { get; set; }
+        public string StatusGodisnjeg { get; set; } = null!;
 
         [StringLength(250)]
         public string? Napomena { get; set; }
