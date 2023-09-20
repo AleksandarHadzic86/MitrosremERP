@@ -1,106 +1,18 @@
-﻿@using System.Globalization;
-@* @using System.Globalization;
-@{
-    CultureInfo culture = new CultureInfo("sr-Latn-RS"); // Serbian (Latin)
-} *@
-
-@model MitrosremERP.Aplication.ViewModels.ZaposleniVM
-
-@* <div class="container-fluid px-4 mt-4">
-
-    <!-- Account page navigation-->
-    <nav class="nav nav-borders-profile">
-        <a class="nav-link active ms-0 text-primary " href="https://www.bootdey.com/snippets/view/bs5-edit-profile-account-details" target="__blank">Kreiraj zaposlenog</a>
-    </nav>
-    <hr class="mt-0 mb-4">
-    <div class="row">
-        <div class="col-xl-4">
-            <!-- Profile picture card-->
-            <div class="card mb-4 mb-xl-0">
-                <div class="card-header">Profile Picture</div>
-                <div class="card-body text-center">
-                    <!-- Profile picture image-->
-                    <img class="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-                    <!-- Profile picture help block-->
-                    <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
-                    <!-- Profile picture upload button-->
-                    <button class="btn btn-primary" type="button">Upload new image</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-8">
-            <!-- Account details card-->
-            <div class="card mb-4">
-                <div class="card-header">Account Details</div>
-                <div class="card-body">
-                    <form>
-                        <!-- Form Group (username)-->
-                        <div class="mb-3">
-                            <label class="small mb-1" for="inputUsername">Username (how your name will appear to other users on the site)</label>
-                            <input class="form-control" id="inputUsername" type="text" placeholder="Enter your username" value="username">
-                        </div>
-                        <!-- Form Row-->
-                        <div class="row gx-3 mb-3">
-                            <!-- Form Group (first name)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputFirstName">First name</label>
-                                <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" value="Valerie">
-                            </div>
-                            <!-- Form Group (last name)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputLastName">Last name</label>
-                                <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" value="Luna">
-                            </div>
-                        </div>
-                        <!-- Form Row        -->
-                        <div class="row gx-3 mb-3">
-                            <!-- Form Group (organization name)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputOrgName">Organization name</label>
-                                <input class="form-control" id="inputOrgName" type="text" placeholder="Enter your organization name" value="Start Bootstrap">
-                            </div>
-                            <!-- Form Group (location)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputLocation">Location</label>
-                                <input class="form-control" id="inputLocation" type="text" placeholder="Enter your location" value="San Francisco, CA">
-                            </div>
-                        </div>
-                        <!-- Form Group (email address)-->
-                        <div class="mb-3">
-                            <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                            <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" value="name@example.com">
-                        </div>
-                        <!-- Form Row-->
-                        <div class="row gx-3 mb-3">
-                            <!-- Form Group (phone number)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputPhone">Phone number</label>
-                                <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number" value="555-123-4567">
-                            </div>
-                            <!-- Form Group (birthday)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputBirthday">Birthday</label>
-                                <input class="form-control" id="inputBirthday" type="text" name="birthday" placeholder="Enter your birthday" value="06/10/1988">
-                            </div>
-                        </div>
-                        <!-- Save changes button-->
-                        <button class="btn btn-primary" type="button">Save changes</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>  *@
+﻿@model MitrosremERP.Aplication.ViewModels.ZaposleniVM
 
   <div class="container-fluid mt-5 mb-5">
-    <form method="post" class="row"  enctype="multipart/form-data" >
+    <form method="post" class="row" autocomplete="off" enctype="multipart/form-data">
         <div class="col-lg-8 px-3">
            <div class="card mb-4 mb-xl-0">
            
             <input asp-for="Zaposleni.Id" hidden />
-            <input asp-for="Zaposleni.ImageUrl" hidden/>              
-                <p class="card-header">@(Model.Zaposleni.Id != 0 ? "Izmeni" : "Kreiraj") Podatke Zaposlenog</p>         
-              <div class="row px-3">
+            <input asp-for="Zaposleni.ImageUrl" hidden/>
+                @* <div class="card-header col-12 px-3 py-2">
+                    <i class='@(Model.Zaposleni.Id != 0 ? "bx bx-message-square-edit" : "bx bx-message-square-add")' style="font-size:28px;"></i>
+              </div> *@
+                  <h-3 class="card-header text-black">@(Model.Zaposleni.Id != 0 ? "Izmeni" : "Kreiraj") Zaposlenog</h-3> 
+           
+                <div class="row px-3">
                 <div class="col-lg-4 col-sm-8 card-body" >
                         <div class="mb-3">
                             <label class="small mb-1" asp-for="Zaposleni.Ime"></label>
@@ -113,16 +25,24 @@
                             <input asp-for="Zaposleni.Prezime" class="form-control" />
                             <span asp-validation-for="Zaposleni.Prezime" class="text-danger"></span>
                         </div>
-                    
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Zaposleni.Email"></label>
+                            <input asp-for="Zaposleni.Email" class="form-control" />
+                            <span asp-validation-for="Zaposleni.Email" class="text-danger"></span>
+                        </div>
                         <div class="mb-3">
                             <label class="small mb-1" asp-for="Zaposleni.JMBG"></label>
-                            <input asp-for="Zaposleni.JMBG" class="form-control" />
+                            <input asp-for="Zaposleni.JMBG" class="form-control jmbgText" />
                             <span asp-validation-for="Zaposleni.JMBG" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
                             <label class="small mb-1" asp-for="Zaposleni.DatumRodjenja"></label>
-                                
-                            <input type="text" name="Zaposleni.DatumRodjenja" id="Zaposleni.DatumRodjenja" value="@Model.Zaposleni.DatumRodjenja.ToString("dd.MMMM.yyyy")" class="datepicker form-control" />
+                             <div class="input-group">
+                                 <div  class="input-group-text" >
+                                     <i class='bx bx-calendar'></i>
+                                 </div>
+                                <input readonly asp-for="Zaposleni.DatumRodjenja" type="text" name="Zaposleni.DatumRodjenja" id="Zaposleni.DatumRodjenja" value="@Model.Zaposleni.DatumRodjenja.ToString("dd.MMMM.yyyy")" class="datepicker form-control" />
+                             </div>
                             <span asp-validation-for="Zaposleni.DatumRodjenja" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
@@ -135,21 +55,21 @@
                             <input asp-for="Zaposleni.RadnoMesto" class="form-control" />
                             <span asp-validation-for="Zaposleni.RadnoMesto" class="text-danger"></span>
                         </div>
+                      
+                                           
+                </div>
+
+
+                <div class="col-lg-4 col-sm-8 card-body ">
                         <div class="mb-3">
                             <label class="small mb-1" asp-for="Zaposleni.Grad"></label>
                             <input asp-for="Zaposleni.Grad" class="form-control" />
                             <span asp-validation-for="Zaposleni.Grad" class="text-danger"></span>
                         </div>
-                                           
-                </div>
-
-
-                <div class="col-lg-4 col-sm-8 card-body">
-                        
                         <div class="mb-3">
                             <label class="small mb-1" asp-for="Zaposleni.Adresa"></label>
                             <input asp-for="Zaposleni.Adresa" class="form-control" />
-                            <span asp-validation-for="Zaposleni.Adresa" Price" class="text-danger"></span>
+                            <span asp-validation-for="Zaposleni.Adresa" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
                             <label class="small mb-1" asp-for="Zaposleni.Fiksni"></label>
@@ -164,20 +84,20 @@
                         <div class="mb-3">
                             <label class="small mb-1" asp-for="Zaposleni.StepenStrucneSpremeId"></label>
                         <select asp-for="Zaposleni.StepenStrucneSpremeId" asp-items="@Model.StepenStrucneSpremeLista" class="small form-select">
-                            <option disabled selected>--Odaberi Stepen Obrazovanja--</option>
+                            <option selected>--Odaberi Stepen Obrazovanja--</option>
                         </select>
                         <span asp-validation-for="Zaposleni.StepenStrucneSpremeId" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
                             <label class="small mb-1" asp-for="Zaposleni.Pol"></label>
-                        <select asp-for="Zaposleni.Pol"  asp-items="@Model.OdaberiPolLista" class="form-select small">
-                            <option disabled selected>--Odaberi Pol--</option>
+                        <select  asp-for="Zaposleni.Pol"  asp-items="@Model.OdaberiPolLista" class="form-select small">
+                            <option  selected>--Odaberi Pol--</option>
                         </select>
                         <span asp-validation-for="Zaposleni.Pol" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
                             <label class="small mb-1" asp-for="Zaposleni.Napomena"></label>
-                            <textarea asp-for="Zaposleni.Napomena" rows="3" class=" form-control" ></textarea>
+                            <textarea rows="3" asp-for="Zaposleni.Napomena"  class="form-control "  ></textarea>
                             <span asp-validation-for="Zaposleni.Napomena" class="text-danger"></span>
                     </div>
                        
@@ -192,12 +112,12 @@
 
         <div class="col-lg-4 px-3">
                 <div class="card mb-4 mb-xl-0">
-                    <div class="card-header">Fotografija</div>
+                    <div class="card-header text-black">Fotografija</div>
                     <div class="card-body text-center ">
                     <img class="img-account rounded-circle mb-2" src="@Model.Zaposleni.ImageUrl" />
                         <div class="small font-italic text-muted mb-4">JPG ili PNG, ne vece od 2MB</div>
-                    <label class="small mb-1" asp-for="Zaposleni.ImageUrl">Odaberi Fotografiju</label>
-                    <input type="file" name="file" class="form-control" />
+                    <label class="small mb-1" ></label>
+                    <input  type="file" name="file" class="form-control" />
                     </div>
                 </div>
         </div>
@@ -205,34 +125,22 @@
         <div class="col-8 px-3 py-3">
             @if (Model.Zaposleni.Id != 0)
             {
-                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="submit" class="btn btn-primary">Izmeni</button>
             }
             else
             {
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-primary">Kreiraj</button>
             }
-            <a asp-controller="Zaposleni" asp-action="Index" class="btn btn-secondary">Back to List</a>
+            <a asp-controller="Zaposleni" asp-action="Index" class="btn btn-secondary">Povratak na listu</a>
         </div>
     </form>
 </div>  
 
 @section Scripts{
-
-    <script>
-        $(function () {
-            $('.datepicker').datepicker({
-                dateFormat: 'dd.MM.yy',
-                showOtherMonths: true,
-                selectOtherMonths: true,
-                changeMonth: true,
-                changeYear: true,
-                regional: "sr-SR",
-                maxDate: new Date()
-            });
-        });
-    </script>
-
     @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        @await Html.PartialAsync("_DatePicker")
+        @await Html.PartialAsync("_ValidationScriptsPartial")
     }
 }
+
+    

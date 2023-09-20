@@ -34,6 +34,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Ime = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Prezime = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     JMBG = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
                     DatumRodjenja = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Pol = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
@@ -148,17 +149,17 @@ namespace MitrosremERP.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Zaposleni",
-                columns: new[] { "Id", "Adresa", "DatumRodjenja", "Fiksni", "Grad", "ImageUrl", "Ime", "JMBG", "Mobilni", "Napomena", "Pol", "Prezime", "Profesija", "RadnoMesto", "StepenStrucneSpremeId" },
+                columns: new[] { "Id", "Adresa", "DatumRodjenja", "Email", "Fiksni", "Grad", "ImageUrl", "Ime", "JMBG", "Mobilni", "Napomena", "Pol", "Prezime", "Profesija", "RadnoMesto", "StepenStrucneSpremeId" },
                 values: new object[,]
                 {
-                    { 1, "Stari Sor", new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Sr.Mitrovica", "", "Aleksandar", "1702986890023", "0605574477", null, "Musko", "Hadzic", "Elektro Tehnicar", "Odrzavanje el.instalacija", 4 },
-                    { 2, "BB", new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Sid", "", "Petar", "4302386890023", "06553427", null, "Musko", "Petrovic", "Masinski Tehnicar", "Odrzavanje masicna", 4 },
-                    { 3, "BB", new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Sabac", "", "Jovan", "2132986890023", "0605574477", null, "Musko", "Jovanovic", "Diplomirani Tehnolog", "Tehnolog hrane", 6 },
-                    { 4, "BB", new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Beograd", "", "Sreten", "3123986890023", "0605574477", null, "Musko", "Sretenovic", "System Administrator", "IT Administrator", 5 },
-                    { 5, "Stari Sor", new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Sr.Mitrovica", "", "Goran", "1702986890023", "0605574477", null, "Musko", "Goranic", "Developer", "Programer", 5 },
-                    { 6, "BB", new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Sid", "", "MIlan", "4302386890023", "06553427", null, "Musko", "Milanovic", "Master Ekonomista", "Finansije", 7 },
-                    { 7, "BB", new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Sabac", "", "Zoran", "2132986890023", "0605574477", null, "Musko", "Zoranovic", "Diplomirani Ekonomista", "Racunovodstvo", 6 },
-                    { 8, "BB", new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Beograd", "", "Stevan", "3123986890023", "0605574477", null, "Musko", "Stevanovic", "Trgovac", "Maloprodaja", 3 }
+                    { 1, "Stari Sor", new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "mitrosrem@ad.rs", null, "Sr.Mitrovica", "", "Aleksandar", "1702986890023", "0605574477", null, "Musko", "Hadzic", "Elektro Tehnicar", "Odrzavanje el.instalacija", 4 },
+                    { 2, "BB", new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "mitrosrem@ad.rs", null, "Sid", "", "Petar", "4302386890023", "06553427", null, "Musko", "Petrovic", "Masinski Tehnicar", "Odrzavanje masicna", 4 },
+                    { 3, "BB", new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "mitrosrem@ad.rs", null, "Sabac", "", "Jovan", "2132986890023", "0605574477", null, "Musko", "Jovanovic", "Diplomirani Tehnolog", "Tehnolog hrane", 6 },
+                    { 4, "BB", new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "mitrosrem@ad.rs", null, "Beograd", "", "Sreten", "3123986890023", "0605574477", null, "Musko", "Sretenovic", "System Administrator", "IT Administrator", 5 },
+                    { 5, "Stari Sor", new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "mitrosrem@ad.rs", null, "Sr.Mitrovica", "", "Goran", "1702986890023", "0605574477", null, "Musko", "Goranic", "Developer", "Programer", 5 },
+                    { 6, "BB", new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "mitrosrem@ad.rs", null, "Sid", "", "MIlan", "4302386890023", "06553427", null, "Musko", "Milanovic", "Master Ekonomista", "Finansije", 7 },
+                    { 7, "BB", new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "mitrosrem@ad.rs", null, "Sabac", "", "Zorana", "2132986890023", "0605574477", null, "Zensko", "Zoranovic", "Diplomirani Ekonomista", "Racunovodstvo", 6 },
+                    { 8, "BB", new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "mitrosrem@ad.rs", null, "Beograd", "", "Stevan", "3123986890023", "0605574477", null, "Musko", "Stevanovic", "Trgovac", "Maloprodaja", 3 }
                 });
 
             migrationBuilder.InsertData(

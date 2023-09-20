@@ -1,5 +1,125 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model MitrosremERP.Aplication.ViewModels.ZaposleniVM
+
+
+
+<div class="container-fluid mt-5 mb-5">
+    <form method="post" class="row" autocomplete="off" enctype="multipart/form-data">
+        <div class="col-lg-8 px-3">
+            <div class="card mb-4 mb-xl-0">
+                <input asp-for="Zaposleni.Id" hidden />
+                <input asp-for="Zaposleni.ImageUrl" hidden />
+                <p class="card-header text-black">Obrisi Zaposlenog</p>
+
+                <div class="row px-3">
+                    <div class="col-lg-4 col-sm-8 card-body">
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Zaposleni.Ime"></label>
+                            <input asp-for="Zaposleni.Ime" class="form-control" readonly/>
+                            <span asp-validation-for="Zaposleni.Ime" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Zaposleni.Prezime"></label>
+                            <input asp-for="Zaposleni.Prezime" class="form-control" readonly/>
+                            <span asp-validation-for="Zaposleni.Prezime" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Zaposleni.Email"></label>
+                            <input asp-for="Zaposleni.Email" class="form-control" readonly/>
+                            <span asp-validation-for="Zaposleni.Email" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Zaposleni.JMBG"></label>
+                            <input asp-for="Zaposleni.JMBG" class="form-control jmbgText" readonly/>
+                            <span asp-validation-for="Zaposleni.JMBG" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Zaposleni.DatumRodjenja"></label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class='bx bx-calendar'></i>
+                                </div>
+                                <input disabled asp-for="Zaposleni.DatumRodjenja" type="text" name="Zaposleni.DatumRodjenja" id="Zaposleni.DatumRodjenja" value="@Model.Zaposleni.DatumRodjenja.ToString("dd.MMMM.yyyy")" class="datepicker form-control" />
+                            </div>
+                            <span asp-validation-for="Zaposleni.DatumRodjenja" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Zaposleni.Profesija"></label>
+                            <input asp-for="Zaposleni.Profesija" class="form-control" readonly/>
+                            <span asp-validation-for="Zaposleni.Profesija" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Zaposleni.RadnoMesto"></label>
+                            <input asp-for="Zaposleni.RadnoMesto" class="form-control" readonly/>
+                            <span asp-validation-for="Zaposleni.RadnoMesto" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Zaposleni.Grad"></label>
+                            <input asp-for="Zaposleni.Grad" class="form-control" readonly/>
+                            <span asp-validation-for="Zaposleni.Grad" class="text-danger"></span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-lg-4 col-sm-8 card-body">
+
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Zaposleni.Adresa"></label>
+                            <input asp-for="Zaposleni.Adresa" class="form-control" readonly/>
+                            <span asp-validation-for="Zaposleni.Adresa" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Zaposleni.Fiksni"></label>
+                            <input asp-for="Zaposleni.Fiksni" class="form-control" readonly/>
+                            <span asp-validation-for="Zaposleni.Fiksni" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Zaposleni.Mobilni"></label>
+                            <input asp-for="Zaposleni.Mobilni" class="form-control" readonly/>
+                            <span asp-validation-for="Zaposleni.Mobilni" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Zaposleni.StepenStrucneSpremeId"></label>
+                            <select disabled asp-for="Zaposleni.StepenStrucneSpremeId" asp-items="@Model.StepenStrucneSpremeLista" class="small form-select">
+                                <option disabled selected>--Odaberi Stepen Obrazovanja--</option>
+                            </select>
+                            <span asp-validation-for="Zaposleni.StepenStrucneSpremeId" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Zaposleni.Pol"></label>
+                            <select disabled asp-for="Zaposleni.Pol" asp-items="@Model.OdaberiPolLista" class="form-select small">
+                                <option selected>--Odaberi Pol--</option>
+                            </select>
+                            <span asp-validation-for="Zaposleni.Pol" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Zaposleni.Napomena"></label>
+                            <textarea disabled asp-for="Zaposleni.Napomena" rows="3" class=" form-control"></textarea>
+                            <span asp-validation-for="Zaposleni.Napomena" class="text-danger"></span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 px-3">
+            <div class="card mb-4 mb-xl-0">
+                <div class="card-header text-black">Fotografija</div>
+                <div class="card-body text-center ">
+                    <img class="img-account rounded-circle mb-2" src="@Model.Zaposleni.ImageUrl" />
+                    <div class="small font-italic text-muted mb-4">JPG ili PNG, ne vece od 2MB</div>
+                    <label class="small mb-1" ></label>
+                    <input disabled type="file" name="file" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-8 px-3 py-3">         
+             <button type="submit" class="btn btn-primary" asp-controller="Zaposleni" asp-action="DeletePost" asp-route-id="@Model.Zaposleni.Id">Obrisi</button>            
+            <a asp-controller="Zaposleni" asp-action="Index" class="btn btn-secondary">Povratak na listu</a>
+        </div>
+    </form>
+</div>
+
+

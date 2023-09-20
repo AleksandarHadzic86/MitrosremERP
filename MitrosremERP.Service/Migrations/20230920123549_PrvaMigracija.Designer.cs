@@ -12,7 +12,7 @@ using MitrosremERP.Aplication.Data;
 namespace MitrosremERP.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230919214343_PrvaMigracija")]
+    [Migration("20230920123549_PrvaMigracija")]
     partial class PrvaMigracija
     {
         /// <inheritdoc />
@@ -225,6 +225,10 @@ namespace MitrosremERP.Infrastructure.Migrations
                     b.Property<DateTime>("DatumRodjenja")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Fiksni")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -290,6 +294,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Id = 1,
                             Adresa = "Stari Sor",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "mitrosrem@ad.rs",
                             Grad = "Sr.Mitrovica",
                             ImageUrl = "",
                             Ime = "Aleksandar",
@@ -306,6 +311,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Id = 2,
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "mitrosrem@ad.rs",
                             Grad = "Sid",
                             ImageUrl = "",
                             Ime = "Petar",
@@ -322,6 +328,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Id = 3,
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "mitrosrem@ad.rs",
                             Grad = "Sabac",
                             ImageUrl = "",
                             Ime = "Jovan",
@@ -338,6 +345,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Id = 4,
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "mitrosrem@ad.rs",
                             Grad = "Beograd",
                             ImageUrl = "",
                             Ime = "Sreten",
@@ -354,6 +362,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Id = 5,
                             Adresa = "Stari Sor",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "mitrosrem@ad.rs",
                             Grad = "Sr.Mitrovica",
                             ImageUrl = "",
                             Ime = "Goran",
@@ -370,6 +379,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Id = 6,
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "mitrosrem@ad.rs",
                             Grad = "Sid",
                             ImageUrl = "",
                             Ime = "MIlan",
@@ -386,12 +396,13 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Id = 7,
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "mitrosrem@ad.rs",
                             Grad = "Sabac",
                             ImageUrl = "",
-                            Ime = "Zoran",
+                            Ime = "Zorana",
                             JMBG = "2132986890023",
                             Mobilni = "0605574477",
-                            Pol = "Musko",
+                            Pol = "Zensko",
                             Prezime = "Zoranovic",
                             Profesija = "Diplomirani Ekonomista",
                             RadnoMesto = "Racunovodstvo",
@@ -402,6 +413,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Id = 8,
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "mitrosrem@ad.rs",
                             Grad = "Beograd",
                             ImageUrl = "",
                             Ime = "Stevan",

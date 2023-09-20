@@ -16,6 +16,10 @@
     list-style-type: none;
     text-decoration: none;
 }
+.jmbgText{
+    letter-spacing: 3px;
+    color: red;
+}
 
 /* =============== Sidebar =============== */
 .sidebar {

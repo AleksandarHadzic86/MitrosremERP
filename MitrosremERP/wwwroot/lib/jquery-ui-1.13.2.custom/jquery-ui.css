@@ -449,10 +449,12 @@ button.ui-button::-moz-focus-inner {
 	font-size: 1em;
 	margin: 1px 0;
 }
-.ui-datepicker select.ui-datepicker-month,
-.ui-datepicker select.ui-datepicker-year {
-	width: 45%;
-}
+	.ui-datepicker select.ui-datepicker-month,
+	.ui-datepicker select.ui-datepicker-year {
+		width: 45%;
+		max-height: 100px; /* Set your desired maximum height here */
+		overflow-y: hidden; /* Add vertical scrollbar if needed */
+	}
 .ui-datepicker table {
 	width: 100%;
 	font-size: .9em;

@@ -29,34 +29,33 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
         [Required(ErrorMessage = "Morate uneti Prezime")]
         public string Prezime { get; set; } = null!;
 
+        [Required(ErrorMessage = "Potrebno je uneti email adresu")]
+        [EmailAddress(ErrorMessage = "Email adresa nije validna")]
+        public string Email { get; set; } = null!;
+
         [StringLength(13)]
         [Required(ErrorMessage = "JMBG je obavezan.")]
-        [RegularExpression(@"^\d{13}$", ErrorMessage = "JMBG mora sadržavati tačno 13 cifara.")]
+        [RegularExpression(@"^\d{13}$", ErrorMessage = "JMBG mora da sadrži tačno 13 cifara.")]
         public string JMBG { get; set; } = null!;
 
-        
-        private DateTime? _datumRodjenja;
+
+        private DateTime _datumRodjenja = DateTime.MinValue;
 
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Datum Rodjenja")]
+        [Required(ErrorMessage = "Datum je obavezan")]
         public DateTime DatumRodjenja 
         {
             get
             {
-                if (_datumRodjenja == null)
-                {
-                    // If _datumRodjenja is null, set it to DateTime.Now
-                    _datumRodjenja = DateTime.Now;
-                }
-                return _datumRodjenja.Value;
+
+                return (_datumRodjenja == DateTime.MinValue) ? DateTime.Now : _datumRodjenja;
             }
             set
             {
                 _datumRodjenja = value;
             }
         }
-
-
 
         [StringLength(50)]
         [Required(ErrorMessage = "Morate odabrati pol")]

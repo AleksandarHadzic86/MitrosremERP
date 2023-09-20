@@ -209,7 +209,7 @@
 
    @*   --------Main-------- *@
         <main role="main" class="container-fluid">
-            <partial name="_Notification" />
+            @await Html.PartialAsync("_Notification")
             @RenderBody()
         </main>
 
