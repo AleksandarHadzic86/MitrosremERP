@@ -1,5 +1,4 @@
-﻿
-using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
+﻿using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,25 +9,25 @@ using System.Threading.Tasks;
 
 namespace MitrosremERP.Aplication.ViewModels
 {
-    public class GodisnjiOdmoriVM
+    public class BolovanjeVM
     {
         [Key]
         public int Id { get; set; }
 
-        [DataType(DataType.Date, ErrorMessage = "Obavezan unos pocetak Godisnjeg")]
+        [DataType(DataType.Date, ErrorMessage = "Obavezan unos pocetak bolovanja")]
         [Display(Name = "Datum od: ")]
-        public DateOnly PocetakGodisnjegOdmora { get; set; }
+        public DateOnly PocetakBolovanja { get; set; }
 
-        [DataType(DataType.Date, ErrorMessage = "Obavezan unos kraj Godisnjeg")]
+        [DataType(DataType.Date, ErrorMessage = "Obavezan unos zavrstek bolovanja")]
         [Display(Name = "Datum do: ")]
-        public DateOnly ZavrsetakGodisnjegOdmora { get; set; }
+        public DateOnly? ZakljucenoBolovanje { get; set; }
 
-        [Required(ErrorMessage = "Obavezan unos broj dana godisnjeg odmora")]
-        public int BrojDanaGodisnjeg { get; set; }
+        [Required(ErrorMessage = "Obavezan unos, broj dana bolovanja")]
+        public int? BrojDanaBolovanja { get; set; }
 
         [StringLength(50)]
-        [Required(ErrorMessage = "Obavezan unos status godisnjeg")]
-        public string StatusGodisnjeg { get; set; } = null!;
+        [Required(ErrorMessage = "Obavezan unos status bolovanja")]
+        public string StatusBolovanja { get; set; } = null!;
 
         [StringLength(250)]
         public string? Napomena { get; set; }
@@ -37,6 +36,7 @@ namespace MitrosremERP.Aplication.ViewModels
         [ForeignKey("ZaposleniId")]
         public int ZaposleniId { get; set; }
         public Zaposleni Zaposleni { get; set; } = null!;
+      
 
     }
 }

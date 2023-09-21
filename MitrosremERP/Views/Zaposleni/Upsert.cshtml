@@ -5,86 +5,84 @@
         <div class="col-lg-8 px-3">
            <div class="card mb-4 mb-xl-0">
            
-            <input asp-for="Zaposleni.Id" hidden />
-            <input asp-for="Zaposleni.ImageUrl" hidden/>
-                @* <div class="card-header col-12 px-3 py-2">
-                    <i class='@(Model.Zaposleni.Id != 0 ? "bx bx-message-square-edit" : "bx bx-message-square-add")' style="font-size:28px;"></i>
-              </div> *@
-                  <h-3 class="card-header bg-primary text-white">@(Model.Zaposleni.Id != 0 ? "Izmeni" : "Kreiraj") Zaposlenog</h-3> 
+            <input asp-for="Id" hidden />
+            <input asp-for="ImageUrl" hidden/>
+
+                  <h-3 class="card-header bg-primary text-white">@(Model.Id != 0 ? "Izmeni" : "Kreiraj") Zaposlenog</h-3> 
            
                 <div class="row px-3">
                 <div class="col-lg-4 col-sm-8 card-body" >
                         <div class="mb-3">
-                            <label class="small mb-1" asp-for="Zaposleni.Ime"></label>
+                            <label class="small mb-1" asp-for="Ime"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                     <i class='bx bxs-user-circle'></i>
                                 </div>
-                                <input asp-for="Zaposleni.Ime" class="form-control" />
+                                <input asp-for="Ime" class="form-control" />
                             </div>
-                            <span asp-validation-for="Zaposleni.Ime" class="text-danger"></span>
+                            <span asp-validation-for="Ime" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
-                            <label class="small mb-1" asp-for="Zaposleni.Prezime"></label>
+                            <label class="small mb-1" asp-for="Prezime"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                     <i class='bx bxs-user-circle'></i>
                                 </div>
-                                <input asp-for="Zaposleni.Prezime" class="form-control" />
+                                <input asp-for="Prezime" class="form-control" />
                             </div>
-                            <span asp-validation-for="Zaposleni.Prezime" class="text-danger"></span>
+                            <span asp-validation-for="Prezime" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
-                            <label class="small mb-1" asp-for="Zaposleni.Email"></label>
+                            <label class="small mb-1" asp-for="Email"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                     <i class='bx bx-envelope'></i>
                                 </div>
-                                <input asp-for="Zaposleni.Email" class="form-control" />
+                                <input asp-for="Email" class="form-control" />
                             </div>
-                            <span asp-validation-for="Zaposleni.Email" class="text-danger"></span>
+                            <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
-                            <label class="small mb-1" asp-for="Zaposleni.JMBG"></label>
+                            <label class="small mb-1" asp-for="JMBG"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                     <i class='bx bx-id-card'></i>
                                 </div>
-                                <input asp-for="Zaposleni.JMBG" class="form-control jmbgText" />
+                                <input asp-for="JMBG" class="form-control jmbgText" />
                             </div>
 
-                            <span asp-validation-for="Zaposleni.JMBG" class="text-danger"></span>
+                            <span asp-validation-for="JMBG" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
-                            <label class="small mb-1" asp-for="Zaposleni.DatumRodjenja"></label>
+                            <label class="small mb-1" asp-for="DatumRodjenja"></label>
                              <div class="input-group">
                                  <div  class="input-group-text" >
                                      <i class='bx bx-calendar'></i>
                                  </div>
-                                <input readonly asp-for="Zaposleni.DatumRodjenja" type="text" name="Zaposleni.DatumRodjenja" id="Zaposleni.DatumRodjenja" value="@Model.Zaposleni.DatumRodjenja.ToString("dd.MMMM.yyyy")" class="datepicker form-control" />
+                                <input readonly asp-for="DatumRodjenja" type="text" name="Zaposleni.DatumRodjenja" id="Zaposleni.DatumRodjenja" value="@Model.DatumRodjenja.ToString("dd.MMMM.yyyy")" class="datepicker form-control" />
                              </div>
-                            <span asp-validation-for="Zaposleni.DatumRodjenja" class="text-danger"></span>
+                            <span asp-validation-for="DatumRodjenja" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
-                            <label class="small mb-1" asp-for="Zaposleni.Profesija"></label>
+                            <label class="small mb-1" asp-for="Profesija"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                     <i class='bx bxs-school'></i>
                                 </div>
-                                <input asp-for="Zaposleni.Profesija" class="form-control" />
+                                <input asp-for="Profesija" class="form-control" />
                             </div>
-                            <span asp-validation-for="Zaposleni.Profesija" class="text-danger"></span>
+                            <span asp-validation-for="Profesija" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
-                            <label class="small mb-1"  asp-for="Zaposleni.RadnoMesto"></label>
+                            <label class="small mb-1"  asp-for="RadnoMesto"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                     <i class='bx bx-briefcase'></i>
                                 </div>
-                                <input asp-for="Zaposleni.RadnoMesto" class="form-control" />
+                                <input asp-for="RadnoMesto" class="form-control" />
                             </div>
-                            <span asp-validation-for="Zaposleni.RadnoMesto" class="text-danger"></span>
+                            <span asp-validation-for="RadnoMesto" class="text-danger"></span>
                         </div>
                       
                                            
@@ -93,80 +91,80 @@
 
                 <div class="col-lg-4 col-sm-8 card-body ">
                         <div class="mb-3">
-                            <label class="small mb-1" asp-for="Zaposleni.Grad"></label>
+                            <label class="small mb-1" asp-for="Grad"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                     <i class='bx bxs-city'></i>
                                 </div>
-                                <input asp-for="Zaposleni.Grad" class="form-control" />
+                                <input asp-for="Grad" class="form-control" />
                             </div>
-                            <span asp-validation-for="Zaposleni.Grad" class="text-danger"></span>
+                            <span asp-validation-for="Grad" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
-                            <label class="small mb-1" asp-for="Zaposleni.Adresa"></label>
+                            <label class="small mb-1" asp-for="Adresa"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                     <i class='bx bx-home'></i>
                                 </div>
-                                <input asp-for="Zaposleni.Adresa" class="form-control" />
+                                <input asp-for="Adresa" class="form-control" />
                             </div>
-                            <span asp-validation-for="Zaposleni.Adresa" class="text-danger"></span>
+                            <span asp-validation-for="Adresa" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
-                            <label class="small mb-1" asp-for="Zaposleni.Fiksni"></label>
+                            <label class="small mb-1" asp-for="Fiksni"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                     <i class='bx bx-phone'></i>
                                 </div>
-                                <input asp-for="Zaposleni.Fiksni" class="form-control" />
+                                <input asp-for="Fiksni" class="form-control" />
                             </div>
-                            <span asp-validation-for="Zaposleni.Fiksni" class="text-danger"></span>
+                            <span asp-validation-for="Fiksni" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
-                            <label class="small mb-1" asp-for="Zaposleni.Mobilni"></label>
+                            <label class="small mb-1" asp-for="Mobilni"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                     <i class='bx bx-mobile'></i>
                                 </div>
-                                <input asp-for="Zaposleni.Mobilni" class="form-control" />
+                                <input asp-for="Mobilni" class="form-control" />
                             </div>
-                            <span asp-validation-for="Zaposleni.Mobilni" class="text-danger"></span>
+                            <span asp-validation-for="Mobilni" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
-                            <label class="small mb-1" asp-for="Zaposleni.StepenStrucneSpremeId"></label>
+                            <label class="small mb-1" asp-for="StepenStrucneSpremeId"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                     <i class='bx bxs-graduation'></i>
                                 </div>
-                                <select asp-for="Zaposleni.StepenStrucneSpremeId" asp-items="@Model.StepenStrucneSpremeLista" class="small form-select">
+                                <select asp-for="StepenStrucneSpremeId" asp-items="@Model.StepenStrucneSpremeLista" class="small form-select">
                                     <option disabled selected>--Odaberi Stepen Obrazovanja--</option>
                                 </select>
                             </div>
                            
-                            <span asp-validation-for="Zaposleni.StepenStrucneSpremeId" class="text-danger"></span>
+                            <span asp-validation-for="StepenStrucneSpremeId" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
-                        <label class="small mb-1" asp-for="Zaposleni.Pol"></label>
+                        <label class="small mb-1" asp-for="Pol"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                     <i class='bx bx-male-female'></i>
                                 </div>
-                                <select asp-for="Zaposleni.Pol" asp-items="@Model.OdaberiPolLista" class="form-select small">
+                                <select asp-for="Pol" asp-items="@Model.OdaberiPolLista" class="form-select small">
                                     <option disabled selected>--Odaberi Pol--</option>
                                 </select>
                             </div>
                       
-                        <span asp-validation-for="Zaposleni.Pol" class="text-danger"></span>
+                        <span asp-validation-for="Pol" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
-                            <label class="small mb-1" asp-for="Zaposleni.Napomena"></label>
+                            <label class="small mb-1" asp-for="Napomena"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                     <i class='bx bx-detail'></i>
                                 </div>
-                                <textarea rows="3" asp-for="Zaposleni.Napomena" class="form-control "></textarea>
+                                <textarea rows="3" asp-for="Napomena" class="form-control "></textarea>
                             </div>
-                            <span asp-validation-for="Zaposleni.Napomena" class="text-danger"></span>
+                            <span asp-validation-for="Napomena" class="text-danger"></span>
                     </div>
                        
                 </div>
@@ -182,7 +180,7 @@
                 <div class="card mb-4 mb-xl-0">
                     <div class="card-header bg-primary text-white ">Fotografija</div>
                     <div class="card-body text-center ">
-                    <img class="img-account rounded-circle mb-2" src="@Model.Zaposleni.ImageUrl" />
+                    <img class="img-account rounded-circle mb-2" src="@Model.ImageUrl" />
                         <div class="small font-italic text-muted mb-4">JPG ili PNG, ne vece od 2MB</div>
                     <label class="small mb-1" ></label>
                     <input  type="file" name="file" class="form-control" />
@@ -191,7 +189,7 @@
         </div>
 
         <div class="col-8 px-3 py-3">
-            @if (Model.Zaposleni.Id != 0)
+            @if (Model.Id != 0)
             {
                 <button type="submit" class="btn btn-success">Izmeni</button>
             }

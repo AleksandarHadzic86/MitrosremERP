@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Localization;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using MitrosremERP.Aplication.AutoMapper;
 using MitrosremERP.Aplication.Data;
 using MitrosremERP.Aplication.Interfaces;
 using MitrosremERP.Infrastructure.Repositories;
@@ -30,6 +32,8 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
 
 var app = builder.Build();
 app.UseRequestLocalization();
