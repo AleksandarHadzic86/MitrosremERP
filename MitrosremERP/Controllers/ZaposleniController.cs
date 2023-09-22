@@ -52,7 +52,8 @@ namespace MitrosremERP.Controllers
                 var zaposleni = _unitOfWork.ZaposleniRepository.GetFirstOrDefault(i => i.Id == id);
                 if (zaposleni == null)
                 {
-                    return NotFound();
+                    Response.StatusCode = 404;
+                    return View("ZaposleniNijePronadjen");
                 }
                 else
                 {
@@ -130,7 +131,8 @@ namespace MitrosremERP.Controllers
                     var postojiZaposleni = _unitOfWork.ZaposleniRepository.GetFirstOrDefault(i => i.Id == zaposleniVM.Id);
                     if(postojiZaposleni == null)
                     {
-                        return NotFound();
+                        Response.StatusCode = 404;
+                        return View("ZaposleniNijePronadjen");
                     }
                     _autoMapper.Map(zaposleniVM, postojiZaposleni);
                     TempData["success"] = "Uspesno izmenjeni podaci";
@@ -162,30 +164,48 @@ namespace MitrosremERP.Controllers
         [HttpGet]
         public IActionResult Delete(int? id)
         {
-            ZaposleniVM zaposleniVM = new()
+            //ZaposleniVM zaposleniVM = new()
+            //{
+            //    StepenStrucneSpremeLista = _unitOfWork.StepenStrucneSpremeRepository.GetAll().Select(i => new SelectListItem
+            //    {
+            //        Text = i.StepenObrazovanja,
+            //        Value = i.Id.ToString()
+            //    }),
+            //    OdaberiPolLista = new List<SelectListItem>
+            //    {
+            //        new SelectListItem { Value = "Musko", Text = "Musko" },
+            //        new SelectListItem { Value = "Zensko", Text = "Zensko" }
+            //    },
+
+            //};
+            if (id == null || id == 0)
             {
-                StepenStrucneSpremeLista = _unitOfWork.StepenStrucneSpremeRepository.GetAll().Select(i => new SelectListItem
+                Response.StatusCode = 404;
+                return View("ZaposleniNijePronadjen");
+            }
+
+            var zaposleni = _unitOfWork.ZaposleniRepository.GetFirstOrDefault(i => i.Id == id);
+            if (zaposleni != null)
+            {
+                var zaposleniVMMapper = _autoMapper.Map<ZaposleniVM>(zaposleni);
+                zaposleniVMMapper.StepenStrucneSpremeLista = _unitOfWork.StepenStrucneSpremeRepository.GetAll().Select(i => new SelectListItem
                 {
                     Text = i.StepenObrazovanja,
                     Value = i.Id.ToString()
-                }),
-                OdaberiPolLista = new List<SelectListItem>
+                });
+                zaposleniVMMapper.OdaberiPolLista = new List<SelectListItem>
                 {
                     new SelectListItem { Value = "Musko", Text = "Musko" },
                     new SelectListItem { Value = "Zensko", Text = "Zensko" }
-                },
-               
-            };
-            if (id == null || id == 0)
-            {
-                return NotFound();
+                };
+                return View(zaposleniVMMapper);
             }
             else
             {
-                var zaposleni = _unitOfWork.ZaposleniRepository.GetFirstOrDefault(i => i.Id == id);              
-                var zaposleniVMMapper = _autoMapper.Map<ZaposleniVM>(zaposleni);
-                return View(zaposleniVMMapper);
+                Response.StatusCode = 404;
+                return View("ZaposleniNijePronadjen");
             }
+
         }
         [HttpPost]
         public IActionResult DeletePost(int? id)
@@ -193,7 +213,8 @@ namespace MitrosremERP.Controllers
             var zaposleniObrisi = _unitOfWork.ZaposleniRepository.GetFirstOrDefault(u => u.Id == id);
             if (zaposleniObrisi == null)
             {
-                return NotFound();
+                Response.StatusCode = 404;
+                return View("ZaposleniNijePronadjen");
             }
             var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, zaposleniObrisi.ImageUrl.TrimStart('\\'));
             List<string> exclusions = new List<string>

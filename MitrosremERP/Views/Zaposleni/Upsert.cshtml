@@ -1,5 +1,9 @@
 ﻿@model MitrosremERP.Aplication.ViewModels.ZaposleniVM
 
+@{
+    ViewBag.Title = (Model.Id != 0) ? "Izmeni Zaposlenog" : "Kreiraj Zaposlenog";
+}
+
   <div class="container-fluid mt-5 mb-5">
     <form method="post" class="row" autocomplete="off" enctype="multipart/form-data">
         <div class="col-lg-8 px-3">

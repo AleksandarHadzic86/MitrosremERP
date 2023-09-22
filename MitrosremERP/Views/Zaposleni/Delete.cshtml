@@ -1,9 +1,11 @@
 ﻿@model MitrosremERP.Aplication.ViewModels.ZaposleniVM
 
-
+@{
+    ViewBag.Title = "Obrisi Zaposlenog";
+}
 
 <div class="container-fluid mt-5 mb-5">
-    <form method="post" class="row" autocomplete="off" enctype="multipart/form-data">
+    <form asp-controller="Zaposleni" asp-action="DeletePost" asp-route-id="@Model.Id" method="post" class="row" autocomplete="off" enctype="multipart/form-data">
         <div class="col-lg-8 px-3">
             <div class="card mb-4 mb-xl-0">
                 <input asp-for="Id" hidden />
@@ -183,11 +185,14 @@
             </div>
         </div>
 
-        <div class="col-8 px-3 py-3">         
-             <button type="submit" class="btn btn-danger" asp-controller="Zaposleni" asp-action="DeletePost" asp-route-id="@Model.Id">Obrisi</button>            
+        <div class="col-8 px-3 py-3">
+
+            <button onclick="confirmDelete('@Model.Ime', '@Model.Prezime')" type="button" class="btn btn-danger">Obrisi</button>
             <a asp-controller="Zaposleni" asp-action="Index" class="btn btn-secondary">Povratak na listu</a>
         </div>
     </form>
 </div>
 
-
+@section Scripts {
+    @await Html.PartialAsync("_SweetAlertBrisanje");
+}
