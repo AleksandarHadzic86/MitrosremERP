@@ -148,17 +148,17 @@
                             <span asp-validation-for="StepenStrucneSpremeId" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
-                        <label class="small mb-1" asp-for="Pol"></label>
+                        <label class="small mb-1" asp-for="PolOsobeId"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                     <i class='bx bx-male-female'></i>
                                 </div>
-                                <select asp-for="Pol" asp-items="@Model.OdaberiPolLista" class="form-select small">
+                                <select asp-for="PolOsobeId" asp-items="@Model.PolOsobaLista" class="form-select small">
                                     <option disabled selected>--Odaberi Pol--</option>
                                 </select>
                             </div>
                       
-                        <span asp-validation-for="Pol" class="text-danger"></span>
+                        <span asp-validation-for="PolOsobaLista" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
                             <label class="small mb-1" asp-for="Napomena"></label>

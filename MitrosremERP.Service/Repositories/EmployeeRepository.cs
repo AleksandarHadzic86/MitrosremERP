@@ -29,7 +29,6 @@ namespace MitrosremERP.Infrastructure.Repositories
                 zaposleniFromDb.Email = zaposleni.Email;
                 zaposleniFromDb.JMBG = zaposleni.JMBG;
                 zaposleniFromDb.DatumRodjenja = zaposleni.DatumRodjenja;
-                zaposleniFromDb.Pol = zaposleni.Pol;
                 zaposleniFromDb.Profesija = zaposleni.Profesija;
                 zaposleniFromDb.RadnoMesto = zaposleni.RadnoMesto;
                 zaposleniFromDb.Grad = zaposleni.Grad;

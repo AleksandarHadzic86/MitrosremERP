@@ -10,6 +10,7 @@ namespace MitrosremERP.Aplication.Interfaces
     {
         IEmployeeRepository ZaposleniRepository { get; }
         IStepenStrucneSpremeRepository StepenStrucneSpremeRepository { get; }
+        IPolRepository PolRepository { get; }
         void Save();
     }
 }

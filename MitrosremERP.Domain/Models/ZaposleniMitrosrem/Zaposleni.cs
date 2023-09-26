@@ -25,7 +25,6 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
         public string Email { get; set; } = null!;
         public string JMBG { get; set; } = null!;
         public DateTime DatumRodjenja { get; set; }      
-        public string Pol { get; set; } = null!;
         public string Profesija { get; set; } = null!;
         public string RadnoMesto { get; set; } = null!;
         public string Grad { get; set; } = null!;
@@ -36,7 +35,11 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
         public string? ImageUrl { get; set; }
         [ForeignKey("StepenStrucneSpremeId")]
         public int StepenStrucneSpremeId { get; set; }      
-        public StepenStrucneSpreme? StepenStrucneSpreme { get; set; }      
+        public StepenStrucneSpreme? StepenStrucneSpreme { get; set; }
+
+        [ForeignKey("PolOsobeId")]
+        public int PolOsobeId {  get; set; }
+        public Pol? PolOsobe { get; set; }
         public ICollection<Ugovor>? Ugovori { get; set; }
         public ICollection<Bolovanje>? Bolovanja { get; set; }
         public ICollection<GodisnjiOdmor>? GodisnjiOdmori { get; set; }

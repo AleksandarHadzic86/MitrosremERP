@@ -17,11 +17,13 @@ namespace MitrosremERP.Infrastructure.Repositories
             _context = context;
             ZaposleniRepository = new EmployeeRepository(_context);
             StepenStrucneSpremeRepository = new StepenStrucneSpremeRepository(_context);
-        
+            PolRepository = new PolRepository(_context);
         }
         public IEmployeeRepository ZaposleniRepository { get; private set; }
 
         public IStepenStrucneSpremeRepository StepenStrucneSpremeRepository { get; private set; }   
+
+        public IPolRepository PolRepository { get; private set; }
 
         public void Save()
         {

@@ -53,10 +53,6 @@ namespace MitrosremERP.Aplication.ViewModels
         }
 
         [StringLength(50)]
-        [Required(ErrorMessage = "Morate odabrati pol")]
-        public string Pol { get; set; } = null!;
-
-        [StringLength(50)]
         [Required(ErrorMessage = "Morate uneti profesiju Zaposlenog")]
         public string Profesija { get; set; } = null!;
 
@@ -79,20 +75,25 @@ namespace MitrosremERP.Aplication.ViewModels
         [Required(ErrorMessage = "Morate uneti mobilni telefon")]
         public string Mobilni { get; set; } = null!;
         public string? Napomena { get; set; }
-
-
         public string? ImageUrl { get; set; }
+      
+
+        [Required(ErrorMessage = "Id ne moze da bude prazan")]
+        public int PolOsobeId { get; set; }
+        [ValidateNever]
+        public PolVM PolVM { get; set; } = null!;
+        [ValidateNever]   
+        public IEnumerable<SelectListItem> PolOsobaLista { get; set; } = null!;
+
 
         [Required(ErrorMessage = "Obavezan unos")]
         [Display(Name = "Stepen strucne spreme")]
         [ForeignKey("StepenStrucneSpremeId")]
         public int StepenStrucneSpremeId { get; set; }
-
         [ValidateNever]
-        public StepenStrucneSpreme StepenStrucneSpreme { get; set; } = null!;
+        public StepenStrucneSpremeVM StepenStrucneSpremeVM { get; set; } = null!;
         [ValidateNever]      
         public IEnumerable<SelectListItem> StepenStrucneSpremeLista { get; set; } = null!;
-        [ValidateNever]
-        public IEnumerable<SelectListItem> OdaberiPolLista { get; set; } = null!;
+
     }
 }

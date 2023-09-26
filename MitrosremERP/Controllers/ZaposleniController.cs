@@ -30,24 +30,15 @@ namespace MitrosremERP.Controllers
         [HttpGet]
         public IActionResult Upsert(int? id)
         {
-            ZaposleniVM zaposleniVM = new()
-            {
-                StepenStrucneSpremeLista = _unitOfWork.StepenStrucneSpremeRepository.GetAll().Select(i => new SelectListItem
-                {
-                    Text = i.StepenObrazovanja,
-                    Value = i.Id.ToString()
-                }),
-                OdaberiPolLista = new List<SelectListItem>
-                {
-                    new SelectListItem { Value = "Musko", Text = "Musko" },
-                    new SelectListItem { Value = "Zensko", Text = "Zensko" }
-                },
-            };
-            if (id == null || id == 0)
+            ZaposleniVM zaposleniVM = new ZaposleniVM(); 
+            zaposleniVM.StepenStrucneSpremeLista = LoadStepenStrucneSpremeListItems("Zaposleni");
+            zaposleniVM.PolOsobaLista = LoadPolOsobeListItems();
+
+            if (id == null || id == 0) 
             {
                 return View(zaposleniVM);
             }
-            else
+            else 
             {
                 var zaposleni = _unitOfWork.ZaposleniRepository.GetFirstOrDefault(i => i.Id == id);
                 if (zaposleni == null)
@@ -58,19 +49,8 @@ namespace MitrosremERP.Controllers
                 else
                 {
                     var zaposleniVMMapper = _autoMapper.Map<ZaposleniVM>(zaposleni);
-                    {
-                        zaposleniVMMapper.StepenStrucneSpremeLista = _unitOfWork.StepenStrucneSpremeRepository.GetAll().Select(i => new SelectListItem
-                        {
-                            Text = i.StepenObrazovanja,
-                            Value = i.Id.ToString()
-                        });
-                        zaposleniVMMapper.OdaberiPolLista = new List<SelectListItem>
-                        {
-                            new SelectListItem { Value = "Musko", Text = "Musko" },
-                            new SelectListItem { Value = "Zensko", Text = "Zensko" }
-                        };
-                    };
-
+                    zaposleniVMMapper.StepenStrucneSpremeLista = LoadStepenStrucneSpremeListItems();
+                    zaposleniVMMapper.PolOsobaLista = LoadPolOsobeListItems();
                     return View(zaposleniVMMapper);
                 }
             }
@@ -80,104 +60,42 @@ namespace MitrosremERP.Controllers
         {
             if (ModelState.IsValid)
             {
-                string imagePath = _webHostEnvironment.WebRootPath;
-                if (file != null)
-                {
-                    string filename = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                    var uploads = Path.Combine(imagePath, @"images\zaposleni");
+                HandleImageUpload(zaposleniVM, file);
 
-                    if (!string.IsNullOrEmpty(zaposleniVM.ImageUrl))
-                    {
-                        var oldImagePath = Path.Combine(imagePath, zaposleniVM.ImageUrl.TrimStart('\\'));
-                        List<string> images = new List<string>
-                        {
-                            "user.jpg",
-                            "userW.jpg"
-                        };
-                        if (!images.Contains(Path.GetFileName(oldImagePath)))
-                        {
-                            if (System.IO.File.Exists(oldImagePath))
-                            {
-                                System.IO.File.Delete(oldImagePath);
-                            }
-                        }
-
-                    }
-                    using (var fileStreams = new FileStream(Path.Combine(uploads, filename), FileMode.Create))
-                    {
-                        file.CopyTo(fileStreams);
-                    }
-                    zaposleniVM.ImageUrl = @"\images\zaposleni\" + filename;
-                }
-                else
+                if (zaposleniVM.Id == 0 )  //ako nema iD kreiraj zaposlenog
                 {
-                    if (zaposleniVM.Pol == "Musko")
-                    {
-                        zaposleniVM.ImageUrl = @"\images\default\user.jpg";
-                    }
-                    else if (zaposleniVM.Pol == "Zensko")
-                    {
-                        zaposleniVM.ImageUrl = @"\images\default\userW.jpg";
-                    }
-                }
-                if (zaposleniVM.Id == 0)
-                {
-                    var zaposleniMapper = _autoMapper.Map<Zaposleni>(zaposleniVM);  
+                    var zaposleniMapper = _autoMapper.Map<Zaposleni>(zaposleniVM);
                     _unitOfWork.ZaposleniRepository.Add(zaposleniMapper);
-                    TempData["success"] = "Zaposleni uspesno kreiran";
+                    TempData["success"] = "Zaposleni uspešno kreiran";
                 }
-                else
+
+                else  //alo ima update
                 {
                     var postojiZaposleni = _unitOfWork.ZaposleniRepository.GetFirstOrDefault(i => i.Id == zaposleniVM.Id);
-                    if(postojiZaposleni == null)
+                    if (postojiZaposleni == null)
                     {
                         Response.StatusCode = 404;
                         return View("ZaposleniNijePronadjen");
                     }
-                    _autoMapper.Map(zaposleniVM, postojiZaposleni);
-                    TempData["success"] = "Uspesno izmenjeni podaci";
-
-                    //_unitOfWork.ZaposleniRepository.Update(zaposleniVM);
+                    else
+                    {
+                        _autoMapper.Map(zaposleniVM, postojiZaposleni);
+                        TempData["success"] = "Uspešno izmenjeni podaci";
+                    }                   
                 }
-
                 _unitOfWork.Save();
                 return RedirectToAction("Index");
             }
-
-            ///Popuni podatke dropdown liste ako model nije dobar posle post zahteva
             else
             {
-                zaposleniVM.StepenStrucneSpremeLista = _unitOfWork.StepenStrucneSpremeRepository.GetAll().Select(i => new SelectListItem
-                {
-                    Text = i.StepenObrazovanja,
-                    Value = i.Id.ToString()
-                });
-                zaposleniVM.OdaberiPolLista = new List<SelectListItem>
-                        {
-                            new SelectListItem { Value = "Musko", Text = "Musko" },
-                            new SelectListItem { Value = "Zensko", Text = "Zensko" }
-                        };
+                zaposleniVM.StepenStrucneSpremeLista = LoadStepenStrucneSpremeListItems();
+                zaposleniVM.PolOsobaLista = LoadPolOsobeListItems();
                 return View(zaposleniVM);
             }
         }
-
         [HttpGet]
         public IActionResult Delete(int? id)
         {
-            //ZaposleniVM zaposleniVM = new()
-            //{
-            //    StepenStrucneSpremeLista = _unitOfWork.StepenStrucneSpremeRepository.GetAll().Select(i => new SelectListItem
-            //    {
-            //        Text = i.StepenObrazovanja,
-            //        Value = i.Id.ToString()
-            //    }),
-            //    OdaberiPolLista = new List<SelectListItem>
-            //    {
-            //        new SelectListItem { Value = "Musko", Text = "Musko" },
-            //        new SelectListItem { Value = "Zensko", Text = "Zensko" }
-            //    },
-
-            //};
             if (id == null || id == 0)
             {
                 Response.StatusCode = 404;
@@ -188,16 +106,8 @@ namespace MitrosremERP.Controllers
             if (zaposleni != null)
             {
                 var zaposleniVMMapper = _autoMapper.Map<ZaposleniVM>(zaposleni);
-                zaposleniVMMapper.StepenStrucneSpremeLista = _unitOfWork.StepenStrucneSpremeRepository.GetAll().Select(i => new SelectListItem
-                {
-                    Text = i.StepenObrazovanja,
-                    Value = i.Id.ToString()
-                });
-                zaposleniVMMapper.OdaberiPolLista = new List<SelectListItem>
-                {
-                    new SelectListItem { Value = "Musko", Text = "Musko" },
-                    new SelectListItem { Value = "Zensko", Text = "Zensko" }
-                };
+                zaposleniVMMapper.StepenStrucneSpremeLista = LoadStepenStrucneSpremeListItems();
+                zaposleniVMMapper.PolOsobaLista = LoadPolOsobeListItems();
                 return View(zaposleniVMMapper);
             }
             else
@@ -205,7 +115,6 @@ namespace MitrosremERP.Controllers
                 Response.StatusCode = 404;
                 return View("ZaposleniNijePronadjen");
             }
-
         }
         [HttpPost]
         public IActionResult DeletePost(int? id)
@@ -232,5 +141,65 @@ namespace MitrosremERP.Controllers
             TempData["success"] = "Zaposleni uspesno obrisan";
             return RedirectToAction("Index");
         }
+
+        /*        HandleImageUpload         */
+        private void HandleImageUpload(ZaposleniVM zaposleniVM, IFormFile? file)
+        {
+            string imagePath = _webHostEnvironment.WebRootPath;
+            if (file != null)
+            {
+                string filename = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                var uploads = Path.Combine(imagePath, @"images\zaposleni");
+
+                if (!string.IsNullOrEmpty(zaposleniVM.ImageUrl))
+                {
+                    var oldImagePath = Path.Combine(imagePath, zaposleniVM.ImageUrl.TrimStart('\\'));
+                    List<string> images = new List<string>
+                        {
+                            "user.jpg",
+                            "userW.jpg"
+                        };
+                    if (!images.Contains(Path.GetFileName(oldImagePath)))
+                    {
+                        if (System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+                    }
+
+                }
+                using (var fileStreams = new FileStream(Path.Combine(uploads, filename), FileMode.Create))
+                {
+                    file.CopyTo(fileStreams);
+                }
+                zaposleniVM.ImageUrl = @"\images\zaposleni\" + filename;
+            }
+            else
+            {
+                if (zaposleniVM.PolOsobeId == 1 && zaposleniVM.ImageUrl == null)
+                {
+                    zaposleniVM.ImageUrl = @"\images\default\user.jpg";
+                }
+                if (zaposleniVM.PolOsobeId == 2 && zaposleniVM.ImageUrl == null)
+                {
+                    zaposleniVM.ImageUrl = @"\images\default\userW.jpg";
+                }
+            }
+        }
+
+        /*   LoadDropDownStrucnaSprema i pol   */
+
+        private IEnumerable<SelectListItem> LoadStepenStrucneSpremeListItems(string? includeProperties = null)
+        {
+            var stepenStrucneSpremeEntities = _unitOfWork.StepenStrucneSpremeRepository.GetAll(includeProperties);
+            return _autoMapper.Map<IEnumerable<SelectListItem>>(stepenStrucneSpremeEntities);
+        }
+
+        private IEnumerable<SelectListItem> LoadPolOsobeListItems()
+        {
+            var polosobeLista = _unitOfWork.PolRepository.GetAll();
+            return _autoMapper.Map<IEnumerable<SelectListItem>>(polosobeLista);
+        }
+
     }
 }
