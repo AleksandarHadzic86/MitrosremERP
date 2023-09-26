@@ -33,7 +33,7 @@ namespace MitrosremERP.CustomTagHelpers
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            if (IsActive)
+            if (IsActive && ViewContext.RouteData.Values.ContainsKey("controller") && ViewContext.RouteData.Values.ContainsKey("action"))
             {
                 var urlHelper = _urlHelperFactory.GetUrlHelper(ViewContext);
                 var currentController = ViewContext.RouteData.Values["controller"].ToString();

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MitrosremERP.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class polOsobe : Migration
+    public partial class PrvaMigracija : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
