@@ -1,0 +1,209 @@
+﻿@model MitrosremERP.Aplication.ViewModels.ZaposleniVM
+
+@{
+    ViewBag.Title = "Izmeni Zaposlenog";
+}
+
+  <div class="container-fluid mt-5 mb-5">
+    <form method="post" class="row" autocomplete="off" enctype="multipart/form-data">
+        <div class="col-lg-8 px-3">
+           <div class="card mb-4 mb-xl-0">
+           
+            <input asp-for="Id" hidden />
+            <input asp-for="ImageUrl" hidden/>
+
+                  <h-3 class="card-header bg-primary text-white">@(Model.Id != 0 ? "Izmeni" : "Kreiraj") Zaposlenog</h-3> 
+           
+                <div class="row px-3">
+                <div class="col-lg-4 col-sm-8 card-body" >
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Ime"></label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class='bx bxs-user-circle'></i>
+                                </div>
+                                <input asp-for="Ime" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Ime" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Prezime"></label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class='bx bxs-user-circle'></i>
+                                </div>
+                                <input asp-for="Prezime" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Prezime" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Email"></label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class='bx bx-envelope'></i>
+                                </div>
+                                <input asp-for="Email" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="JMBG"></label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class='bx bx-id-card'></i>
+                                </div>
+                                <input asp-for="JMBG" class="form-control jmbgText" />
+                            </div>
+
+                            <span asp-validation-for="JMBG" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="DatumRodjenja"></label>
+                             <div class="input-group">
+                                 <div  class="input-group-text" >
+                                     <i class='bx bx-calendar'></i>
+                                 </div>
+                                <input readonly asp-for="DatumRodjenja" type="text" name="Zaposleni.DatumRodjenja" id="Zaposleni.DatumRodjenja" value="@Model.DatumRodjenja.ToString("dd.MMMM.yyyy")" class="datepicker form-control" />
+                             </div>
+                            <span asp-validation-for="DatumRodjenja" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Profesija"></label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class='bx bxs-school'></i>
+                                </div>
+                                <input asp-for="Profesija" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Profesija" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1"  asp-for="RadnoMesto"></label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class='bx bx-briefcase'></i>
+                                </div>
+                                <input asp-for="RadnoMesto" class="form-control" />
+                            </div>
+                            <span asp-validation-for="RadnoMesto" class="text-danger"></span>
+                        </div>
+                      
+                                           
+                </div>
+
+
+                <div class="col-lg-4 col-sm-8 card-body ">
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Grad"></label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class='bx bxs-city'></i>
+                                </div>
+                                <input asp-for="Grad" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Grad" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Adresa"></label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class='bx bx-home'></i>
+                                </div>
+                                <input asp-for="Adresa" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Adresa" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Fiksni"></label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class='bx bx-phone'></i>
+                                </div>
+                                <input asp-for="Fiksni" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Fiksni" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Mobilni"></label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class='bx bx-mobile'></i>
+                                </div>
+                                <input asp-for="Mobilni" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Mobilni" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="StepenStrucneSpremeId"></label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class='bx bxs-graduation'></i>
+                                </div>
+                                <select asp-for="StepenStrucneSpremeId" asp-items="@Model.StepenStrucneSpremeLista" class="small form-select">
+                                    <option disabled selected>--Odaberi Stepen Obrazovanja--</option>
+                                </select>
+                            </div>
+                           
+                            <span asp-validation-for="StepenStrucneSpremeId" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="small mb-1" asp-for="PolOsobeId"></label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class='bx bx-male-female'></i>
+                                </div>
+                                <select asp-for="PolOsobeId" asp-items="@Model.PolOsobaLista" class="form-select small">
+                                    <option disabled selected>--Odaberi Pol--</option>
+                                </select>
+                            </div>
+                      
+                        <span asp-validation-for="PolOsobaLista" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                            <label class="small mb-1" asp-for="Napomena"></label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class='bx bx-detail'></i>
+                                </div>
+                                <textarea rows="3" asp-for="Napomena" class="form-control "></textarea>
+                            </div>
+                            <span asp-validation-for="Napomena" class="text-danger"></span>
+                    </div>
+                       
+                </div>
+            </div>
+         </div>
+      </div>
+      
+
+
+
+
+        <div class="col-lg-4 px-3">
+                <div class="card mb-4 mb-xl-0">
+                    <div class="card-header bg-primary text-white ">Fotografija</div>
+                    <div class="card-body text-center ">
+                    <img class="img-account rounded-circle mb-2" src="@Model.ImageUrl" />
+                        <div class="small font-italic text-muted mb-4">JPG ili PNG, ne vece od 2MB</div>
+                    <label class="small mb-1" ></label>
+                    <input  type="file" name="file" class="form-control" />
+                    </div>
+                </div>
+        </div>
+
+        <div class="col-8 px-3 py-3">
+           <button type="submit" class="btn btn-success">Izmeni</button>
+            <a asp-controller="Zaposleni" asp-action="Index" class="btn btn-secondary">Povratak na listu</a>
+        </div>
+    </form>
+</div>  
+
+@section Scripts{
+    @{
+        @await Html.PartialAsync("_DatePicker")
+        @await Html.PartialAsync("_ValidationScriptsPartial")
+    }
+}
+
+    

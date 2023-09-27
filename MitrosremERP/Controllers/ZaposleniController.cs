@@ -41,47 +41,34 @@ namespace MitrosremERP.Controllers
             }
         }
         [HttpGet]
-        [Route("Zaposleni/Upsert")]
-        [Route("Zaposleni/Upsert/{id?}")]
-        public IActionResult Upsert(int? id)
+        public IActionResult Update(int? id)
         {
             try
             {
-                ZaposleniVM zaposleniVM = new ZaposleniVM();
-                zaposleniVM.StepenStrucneSpremeLista = LoadStepenStrucneSpremeListItems();
-                zaposleniVM.PolOsobaLista = LoadPolOsobeListItems();
-
-                if (id == null || id == 0)
+                var zaposleni = _unitOfWork.ZaposleniRepository.GetFirstOrDefault(i => i.Id == id);
+                if (zaposleni == null)
                 {
-                    return View(zaposleniVM);
+                    Response.StatusCode = 404;
+                    return View("ZaposleniNijePronadjen");
                 }
                 else
                 {
-                    var zaposleni = _unitOfWork.ZaposleniRepository.GetFirstOrDefault(i => i.Id == id);
-                    if (zaposleni == null)
-                    {
-                        Response.StatusCode = 404;
-                        return View("ZaposleniNijePronadjen");
-                    }
-                    else
-                    {
-                        var zaposleniVMMapper = _autoMapper.Map<ZaposleniVM>(zaposleni);
-                        zaposleniVMMapper.StepenStrucneSpremeLista = LoadStepenStrucneSpremeListItems();
-                        zaposleniVMMapper.PolOsobaLista = LoadPolOsobeListItems();
-                        return View(zaposleniVMMapper);
-                    }
-                }
+                    var zaposleniVMMapper = _autoMapper.Map<ZaposleniVM>(zaposleni);
+                    zaposleniVMMapper.StepenStrucneSpremeLista = LoadStepenStrucneSpremeListItems();
+                    zaposleniVMMapper.PolOsobaLista = LoadPolOsobeListItems();
+                    return View(zaposleniVMMapper);
+                }              
             }
             catch (Exception ex)
             {
                 Response.StatusCode = 500;
                 _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
-                return View("InternalServerError");
+                return View("../ErrorCodes/InternalServerError");
             }
         }
         [HttpPost]
-        [Route("Zaposleni/Upsert")]
-        public IActionResult Upsert(ZaposleniVM zaposleniVM, IFormFile? file)
+        [ValidateAntiForgeryToken]
+        public IActionResult Update(ZaposleniVM zaposleniVM, IFormFile? file)
         {
             try
             {
@@ -96,7 +83,7 @@ namespace MitrosremERP.Controllers
                         TempData["success"] = "Zaposleni uspešno kreiran";
                     }
 
-                    else  //alo ima update
+                    else  //ako ima update
                     {
                         var postojiZaposleni = _unitOfWork.ZaposleniRepository.GetFirstOrDefault(i => i.Id == zaposleniVM.Id);
                         if (postojiZaposleni == null)
@@ -122,69 +109,129 @@ namespace MitrosremERP.Controllers
             }
             catch(Exception ex)
             {
-                _logger.LogError(ex, "Doslo je do greske");
+                Response.StatusCode = 500;
+                _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
+                return View("InternalServerError");
+
+            }
+        }
+        [HttpGet]
+        [Route("Zaposleni/Create")]
+        public IActionResult Create()
+        {
+            try
+            {
+                ZaposleniVM zaposleniVM = new ZaposleniVM();
+                zaposleniVM.StepenStrucneSpremeLista = LoadStepenStrucneSpremeListItems();
+                zaposleniVM.PolOsobaLista = LoadPolOsobeListItems();
+                return View(zaposleniVM);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 500;
+                _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
+                return View("InternalServerError");
+            }
+            
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(ZaposleniVM zaposleniVM, IFormFile? file)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    HandleImageUpload(zaposleniVM, file);
+
+                    var zaposleniMapper = _autoMapper.Map<Zaposleni>(zaposleniVM);
+                    _unitOfWork.ZaposleniRepository.Add(zaposleniMapper);
+                    _unitOfWork.Save();
+                    TempData["success"] = "Zaposleni uspešno kreiran";
+                    return RedirectToAction("Index");
+                }
                 return View(zaposleniVM);
 
             }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 500;
+                _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
+                return View("InternalServerError");
+            }
         }
-        
 
         [HttpGet]
-        [Route("Zaposleni/Delete/{id}")]
         public IActionResult Delete(int? id)
         {
-            if (id == null || id == 0)
+            try
             {
-                Response.StatusCode = 404;
-                return View("ZaposleniNijePronadjen");
-            }
-
-            var zaposleni = _unitOfWork.ZaposleniRepository.GetFirstOrDefault(i => i.Id == id);
-            if (zaposleni != null)
-            {
-                var zaposleniVMMapper = _autoMapper.Map<ZaposleniVM>(zaposleni);
-                zaposleniVMMapper.StepenStrucneSpremeLista = LoadStepenStrucneSpremeListItems();
-                zaposleniVMMapper.PolOsobaLista = LoadPolOsobeListItems();
-                return View(zaposleniVMMapper);
-            }
-            else
-            {
-                Response.StatusCode = 404;
-                return View("ZaposleniNijePronadjen");
-            }
-        }
-        [HttpPost]
-        [Route("Zaposleni/DeletePost")]
-        public IActionResult DeletePost(int? id)
-        {
-            var zaposleniObrisi = _unitOfWork.ZaposleniRepository.GetFirstOrDefault(u => u.Id == id);
-            if (zaposleniObrisi == null)
-            {
-                Response.StatusCode = 404;
-                return View("ZaposleniNijePronadjen");
-            }
-            var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, zaposleniObrisi.ImageUrl.TrimStart('\\'));
-            List<string> exclusions = new List<string>
-            {  "user.jpg", "userW.jpg" };
-            if (!exclusions.Contains(Path.GetFileName(oldImagePath)))
-            {
-                if (System.IO.File.Exists(oldImagePath))
+                if (id == null || id == 0)
                 {
-                    System.IO.File.Delete(oldImagePath);
+                    Response.StatusCode = 404;
+                    return View("ZaposleniNijePronadjen");
+                }
+                var zaposleni = _unitOfWork.ZaposleniRepository.GetFirstOrDefault(i => i.Id == id);
+                if (zaposleni != null)
+                {
+                    var zaposleniVMMapper = _autoMapper.Map<ZaposleniVM>(zaposleni);
+                    zaposleniVMMapper.StepenStrucneSpremeLista = LoadStepenStrucneSpremeListItems();
+                    zaposleniVMMapper.PolOsobaLista = LoadPolOsobeListItems();
+                    return View(zaposleniVMMapper);
+                }
+                else
+                {
+                    Response.StatusCode = 404;
+                    return View("ZaposleniNijePronadjen");
                 }
             }
-            
-            _unitOfWork.ZaposleniRepository.Remove(zaposleniObrisi);
-            _unitOfWork.Save();
-            TempData["success"] = "Zaposleni uspesno obrisan";
-            return RedirectToAction("Index");
+            catch(Exception ex)
+            {
+                Response.StatusCode = 500;
+                _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
+                return View("InternalServerError");
+            }           
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletePost(int? id)
+        {
+            try
+            {
+                var zaposleniObrisi = _unitOfWork.ZaposleniRepository.GetFirstOrDefault(u => u.Id == id);
+                if (zaposleniObrisi == null)
+                {
+                    Response.StatusCode = 404;
+                    return View("ZaposleniNijePronadjen");
+                }
+                var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, zaposleniObrisi.ImageUrl.TrimStart('\\'));
+                List<string> exclusions = new List<string>
+                     {  "user.jpg", "userW.jpg" };
+                if (!exclusions.Contains(Path.GetFileName(oldImagePath)))
+                {
+                    if (System.IO.File.Exists(oldImagePath))
+                    {
+                        System.IO.File.Delete(oldImagePath);
+                    }
+                }
+
+                _unitOfWork.ZaposleniRepository.Remove(zaposleniObrisi);
+                _unitOfWork.Save();
+                TempData["success"] = "Zaposleni uspesno obrisan";
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 500;
+                _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
+                return View("InternalServerError");
+            }           
         }
 
-        /*        HandleImageUpload         */
         private void HandleImageUpload(ZaposleniVM zaposleniVM, IFormFile? file)
         {
             string imagePath = _webHostEnvironment.WebRootPath;
-            if (file != null)
+            if (file != null && file.Length > 0)
             {
                 string filename = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                 var uploads = Path.Combine(imagePath, @"images\zaposleni");
@@ -214,25 +261,21 @@ namespace MitrosremERP.Controllers
             }
             else
             {
-                if (zaposleniVM.PolOsobeId == 1 && zaposleniVM.ImageUrl == null)
+                if (zaposleniVM.PolOsobeId == 1 && zaposleniVM.ImageUrl == null )
                 {
                     zaposleniVM.ImageUrl = @"\images\default\user.jpg";
                 }
-                if (zaposleniVM.PolOsobeId == 2 && zaposleniVM.ImageUrl == null)
+                if (zaposleniVM.PolOsobeId == 2 && zaposleniVM.ImageUrl == null )
                 {
                     zaposleniVM.ImageUrl = @"\images\default\userW.jpg";
                 }
             }
         }
-
-        /*   LoadDropDownStrucnaSprema i pol   */
-
         private IEnumerable<SelectListItem> LoadStepenStrucneSpremeListItems()
         {
             var stepenStrucneSpremeEntities = _unitOfWork.StepenStrucneSpremeRepository.GetAll();
             return _autoMapper.Map<IEnumerable<SelectListItem>>(stepenStrucneSpremeEntities);
         }
-
         private IEnumerable<SelectListItem> LoadPolOsobeListItems()
         {
             var polosobeLista = _unitOfWork.PolRepository.GetAll();
