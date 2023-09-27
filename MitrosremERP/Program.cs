@@ -8,6 +8,7 @@ using MitrosremERP.Aplication.Interfaces;
 using MitrosremERP.Infrastructure.Repositories;
 using System.Globalization;
 using Microsoft.AspNetCore.Identity;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,10 +39,14 @@ builder.Services.AddRazorPages();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
 
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration).CreateLogger();
+
+builder.Host.UseSerilog();
 var app = builder.Build();
 
-app.UseRequestLocalization();
 
+app.UseRequestLocalization();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -49,6 +54,8 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();   
 }
+app.UseSerilogRequestLogging();
+
 app.UseDeveloperExceptionPage();
 app.UseStatusCodePagesWithReExecute("/Error/{0}");
 
@@ -64,6 +71,7 @@ app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}"
+ );
 
 app.Run();

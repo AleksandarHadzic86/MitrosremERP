@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using MitrosremERP.Aplication.Data;
 using MitrosremERP.Aplication.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -27,15 +29,17 @@ namespace MitrosremERP.Infrastructure.Repositories
 
         public IEnumerable<T> GetAll(string? includeProperties = null)
         {
-            IQueryable<T> query = _dbSet;
-            if (includeProperties != null)
-            {
-                foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+
+                IQueryable<T> query = _dbSet;
+                if (includeProperties != null)
                 {
-                    query = query.Include(includeProp);
+                    foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        query = query.Include(includeProp);
+                    }
                 }
-            }
-            return query.ToList();
+                return query.ToList();
+
         }
 
         public T GetFirstOrDefault(Expression<Func<T, bool>> filter, string? includeProperties = null)

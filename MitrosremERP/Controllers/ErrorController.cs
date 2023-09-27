@@ -14,6 +14,9 @@ namespace MitrosremERP.Controllers
                 case 404:
                     ViewBag.ErrorMessage = "Zao mi je, resurs koji zahtevate ne mozemo da pronadjemo";
                     break;
+                case 500:
+                    ViewBag.ErrorMessage = "Zao mi je, server je trenutno nedostupan, radimo na otklanjanju problema";
+                    break;
             }
 
             return View("NotFound");

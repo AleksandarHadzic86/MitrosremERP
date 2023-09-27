@@ -6,94 +6,131 @@ using MitrosremERP.Aplication.ViewModels;
 using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 using MitrosremERP.Infrastructure.Repositories;
 using AutoMapper;
+using System.Data;
 
 namespace MitrosremERP.Controllers
 {
+   
     public class ZaposleniController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IMapper _autoMapper;
+        private readonly ILogger _logger;
 
-        public ZaposleniController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment, IMapper autoMapper)
+        public ZaposleniController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment, IMapper autoMapper, ILogger<ZaposleniController> logger)
         {
             _unitOfWork = unitOfWork;
             _webHostEnvironment = webHostEnvironment;
             _autoMapper = autoMapper;
+            _logger = logger;
         }
         public IActionResult Index()
         {
-            IEnumerable<Zaposleni> lista = _unitOfWork.ZaposleniRepository.GetAll();
-            var zaposleniVM = _autoMapper.Map<IEnumerable<ZaposleniVM>>(lista);
-            return View(zaposleniVM);
+            try
+            {
+                IEnumerable<Zaposleni> lista = _unitOfWork.ZaposleniRepository.GetAll();
+                var zaposleniVM = _autoMapper.Map<IEnumerable<ZaposleniVM>>(lista);
+                return View(zaposleniVM);
+            }          
+              catch(Exception ex)
+            {
+                Response.StatusCode = 500;
+                _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
+                return View("../ErrorCodes/InternalServerError");
+            }
         }
         [HttpGet]
+        [Route("Zaposleni/Upsert")]
+        [Route("Zaposleni/Upsert/{id?}")]
         public IActionResult Upsert(int? id)
         {
-            ZaposleniVM zaposleniVM = new ZaposleniVM(); 
-            zaposleniVM.StepenStrucneSpremeLista = LoadStepenStrucneSpremeListItems("Zaposleni");
-            zaposleniVM.PolOsobaLista = LoadPolOsobeListItems();
+            try
+            {
+                ZaposleniVM zaposleniVM = new ZaposleniVM();
+                zaposleniVM.StepenStrucneSpremeLista = LoadStepenStrucneSpremeListItems();
+                zaposleniVM.PolOsobaLista = LoadPolOsobeListItems();
 
-            if (id == null || id == 0) 
-            {
-                return View(zaposleniVM);
-            }
-            else 
-            {
-                var zaposleni = _unitOfWork.ZaposleniRepository.GetFirstOrDefault(i => i.Id == id);
-                if (zaposleni == null)
+                if (id == null || id == 0)
                 {
-                    Response.StatusCode = 404;
-                    return View("ZaposleniNijePronadjen");
+                    return View(zaposleniVM);
                 }
                 else
                 {
-                    var zaposleniVMMapper = _autoMapper.Map<ZaposleniVM>(zaposleni);
-                    zaposleniVMMapper.StepenStrucneSpremeLista = LoadStepenStrucneSpremeListItems();
-                    zaposleniVMMapper.PolOsobaLista = LoadPolOsobeListItems();
-                    return View(zaposleniVMMapper);
-                }
-            }
-        }
-        [HttpPost]
-        public IActionResult Upsert(ZaposleniVM zaposleniVM, IFormFile? file)
-        {
-            if (ModelState.IsValid)
-            {
-                HandleImageUpload(zaposleniVM, file);
-
-                if (zaposleniVM.Id == 0 )  //ako nema iD kreiraj zaposlenog
-                {
-                    var zaposleniMapper = _autoMapper.Map<Zaposleni>(zaposleniVM);
-                    _unitOfWork.ZaposleniRepository.Add(zaposleniMapper);
-                    TempData["success"] = "Zaposleni uspešno kreiran";
-                }
-
-                else  //alo ima update
-                {
-                    var postojiZaposleni = _unitOfWork.ZaposleniRepository.GetFirstOrDefault(i => i.Id == zaposleniVM.Id);
-                    if (postojiZaposleni == null)
+                    var zaposleni = _unitOfWork.ZaposleniRepository.GetFirstOrDefault(i => i.Id == id);
+                    if (zaposleni == null)
                     {
                         Response.StatusCode = 404;
                         return View("ZaposleniNijePronadjen");
                     }
                     else
                     {
-                        _autoMapper.Map(zaposleniVM, postojiZaposleni);
-                        TempData["success"] = "Uspešno izmenjeni podaci";
-                    }                   
+                        var zaposleniVMMapper = _autoMapper.Map<ZaposleniVM>(zaposleni);
+                        zaposleniVMMapper.StepenStrucneSpremeLista = LoadStepenStrucneSpremeListItems();
+                        zaposleniVMMapper.PolOsobaLista = LoadPolOsobeListItems();
+                        return View(zaposleniVMMapper);
+                    }
                 }
-                _unitOfWork.Save();
-                return RedirectToAction("Index");
             }
-            else
+            catch (Exception ex)
             {
-                zaposleniVM.StepenStrucneSpremeLista = LoadStepenStrucneSpremeListItems();
-                zaposleniVM.PolOsobaLista = LoadPolOsobeListItems();
-                return View(zaposleniVM);
+                Response.StatusCode = 500;
+                _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
+                return View("InternalServerError");
             }
         }
+        [HttpPost]
+        [Route("Zaposleni/Upsert")]
+        public IActionResult Upsert(ZaposleniVM zaposleniVM, IFormFile? file)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    HandleImageUpload(zaposleniVM, file);
+
+                    if (zaposleniVM.Id == 0)  //ako nema iD kreiraj zaposlenog
+                    {
+                        var zaposleniMapper = _autoMapper.Map<Zaposleni>(zaposleniVM);
+                        _unitOfWork.ZaposleniRepository.Add(zaposleniMapper);
+                        TempData["success"] = "Zaposleni uspešno kreiran";
+                    }
+
+                    else  //alo ima update
+                    {
+                        var postojiZaposleni = _unitOfWork.ZaposleniRepository.GetFirstOrDefault(i => i.Id == zaposleniVM.Id);
+                        if (postojiZaposleni == null)
+                        {
+                            Response.StatusCode = 404;
+                            return View("ZaposleniNijePronadjen");
+                        }
+                        else
+                        {
+                            _autoMapper.Map(zaposleniVM, postojiZaposleni);
+                            TempData["success"] = "Uspešno izmenjeni podaci";
+                        }
+                    }
+                    _unitOfWork.Save();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    zaposleniVM.StepenStrucneSpremeLista = LoadStepenStrucneSpremeListItems();
+                    zaposleniVM.PolOsobaLista = LoadPolOsobeListItems();
+                    return View(zaposleniVM);
+                }
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex, "Doslo je do greske");
+                return View(zaposleniVM);
+
+            }
+        }
+        
+
         [HttpGet]
+        [Route("Zaposleni/Delete/{id}")]
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
@@ -117,6 +154,7 @@ namespace MitrosremERP.Controllers
             }
         }
         [HttpPost]
+        [Route("Zaposleni/DeletePost")]
         public IActionResult DeletePost(int? id)
         {
             var zaposleniObrisi = _unitOfWork.ZaposleniRepository.GetFirstOrDefault(u => u.Id == id);
@@ -189,9 +227,9 @@ namespace MitrosremERP.Controllers
 
         /*   LoadDropDownStrucnaSprema i pol   */
 
-        private IEnumerable<SelectListItem> LoadStepenStrucneSpremeListItems(string? includeProperties = null)
+        private IEnumerable<SelectListItem> LoadStepenStrucneSpremeListItems()
         {
-            var stepenStrucneSpremeEntities = _unitOfWork.StepenStrucneSpremeRepository.GetAll(includeProperties);
+            var stepenStrucneSpremeEntities = _unitOfWork.StepenStrucneSpremeRepository.GetAll();
             return _autoMapper.Map<IEnumerable<SelectListItem>>(stepenStrucneSpremeEntities);
         }
 
