@@ -1,0 +1,29 @@
+2023-09-27 17:25:20.593 +02:00 [INF] Now listening on: https://localhost:7196
+2023-09-27 17:25:20.628 +02:00 [INF] Now listening on: http://localhost:5165
+2023-09-27 17:25:20.630 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-27 17:25:20.631 +02:00 [INF] Hosting environment: Development
+2023-09-27 17:25:20.631 +02:00 [INF] Content root path: C:\Users\Hadzic\Source\Repos\AleksandarHadzic86\MitrosremERP\MitrosremERP
+2023-09-27 17:25:21.838 +02:00 [INF] HTTP GET / responded 200 in 419.6145 ms
+2023-09-27 17:25:21.894 +02:00 [INF] HTTP GET /css/profildetalji.css responded 200 in 20.4160 ms
+2023-09-27 17:25:21.894 +02:00 [INF] HTTP GET /css/navbar.css responded 200 in 20.8049 ms
+2023-09-27 17:25:22.722 +02:00 [INF] HTTP GET /sweetalert/css/sweetalert2.min.css responded 200 in 848.8001 ms
+2023-09-27 17:25:22.732 +02:00 [INF] HTTP GET /images/logo/logocorn.png responded 200 in 840.6311 ms
+2023-09-27 17:25:22.737 +02:00 [INF] HTTP GET /images/logo/logomitrosremcut.png responded 200 in 845.3551 ms
+2023-09-27 17:25:22.737 +02:00 [INF] HTTP GET /lib/jquery-ui-1.13.2.custom/jquery-ui.min.css responded 200 in 16.9839 ms
+2023-09-27 17:25:22.744 +02:00 [INF] HTTP GET /css/bootswatchthemes.css responded 200 in 870.4921 ms
+2023-09-27 17:25:22.756 +02:00 [INF] HTTP GET /lib/jquery/dist/jquery.min.js responded 200 in 18.4096 ms
+2023-09-27 17:25:22.817 +02:00 [INF] HTTP GET /js/navbar.js responded 200 in 1.7249 ms
+2023-09-27 17:25:22.861 +02:00 [INF] HTTP GET /js/serbiandatepicker.js responded 200 in 12.6481 ms
+2023-09-27 17:25:22.878 +02:00 [INF] HTTP GET /sweetalert/js/sweetalert2.min.js responded 200 in 29.5425 ms
+2023-09-27 17:25:22.880 +02:00 [INF] HTTP GET /lib/jquery-ui-1.13.2.custom/jquery-ui.min.js responded 200 in 51.3605 ms
+2023-09-27 17:25:23.147 +02:00 [INF] HTTP GET /favicon.ico responded 200 in 4.5401 ms
+2023-09-27 17:25:26.428 +02:00 [INF] HTTP GET /Zaposleni responded 200 in 1093.0262 ms
+2023-09-27 17:25:26.451 +02:00 [INF] HTTP GET /images/default/user.jpg responded 200 in 5.7377 ms
+2023-09-27 17:25:26.451 +02:00 [INF] HTTP GET /images/default/userW.jpg responded 200 in 5.2196 ms
+2023-09-27 17:25:29.098 +02:00 [INF] HTTP GET /Zaposleni/Upsert responded 200 in 151.9358 ms
+2023-09-27 17:25:29.121 +02:00 [INF] HTTP GET /js/datepicker.js responded 200 in 4.6109 ms
+2023-09-27 17:25:29.128 +02:00 [INF] HTTP GET /lib/jquery-validation/dist/jquery.validate.min.js responded 200 in 11.6306 ms
+2023-09-27 17:25:29.134 +02:00 [INF] HTTP GET /lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js responded 200 in 7.0496 ms
+2023-09-27 17:25:37.637 +02:00 [INF] HTTP GET /Zaposleni/Upsert/Delete responded 200 in 21.9478 ms
+2023-09-27 17:25:43.760 +02:00 [INF] HTTP GET /Zaposleni/Upsert/Delete/Index responded 404 in 11.9221 ms
+2023-09-27 17:25:51.512 +02:00 [INF] HTTP GET /Zaposleni/Upsert/Index responded 200 in 7.5941 ms
