@@ -13,7 +13,7 @@ namespace MitrosremERP.Aplication.IRepositories
     {
         Task<T?> GetByIdAsync(int id);
         Task<IEnumerable<T>> GetAllAsync();
-        Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> expression);
+        //Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> expression);
         void Insert (T entity);
         void Delete (T entity);
         IQueryable<T> GetQueryable(Expression<Func<T, bool>> predicate);

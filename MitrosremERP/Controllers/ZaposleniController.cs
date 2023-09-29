@@ -189,7 +189,7 @@ namespace MitrosremERP.Controllers
         {
             try
             {
-                var zaposleni = await _unitOfWork.ZaposleniRepository.FirstOrDefaultAsync(z => z.Id == zaposleniVM.Id);
+                var zaposleni = _unitOfWork.ZaposleniRepository.GetQueryable(z => z.Id == zaposleniVM.Id);
                 if (zaposleni == null)
                 {
                     Response.StatusCode = 404;
@@ -197,7 +197,7 @@ namespace MitrosremERP.Controllers
                 }
                 else
                 {
-                    var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, zaposleni.ImageUrl.TrimStart('\\'));
+                    var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, zaposleniVM.ImageUrl.TrimStart('\\'));
                     List<string> exclusions = new List<string>
                      {  "user.jpg", "userW.jpg" };
                     if (!exclusions.Contains(Path.GetFileName(oldImagePath)))
@@ -207,7 +207,9 @@ namespace MitrosremERP.Controllers
                             System.IO.File.Delete(oldImagePath);
                         }
                     }
-                    _unitOfWork.ZaposleniRepository.Delete(zaposleni);
+
+                    var zaposleniMapper = _autoMapper.Map<Zaposleni>(zaposleniVM);
+                    _unitOfWork.ZaposleniRepository.Delete(zaposleniMapper);
                     await _unitOfWork.SaveAsync();
                     TempData["success"] = "Zaposleni uspesno obrisan";
                     return RedirectToAction("Index");

@@ -41,10 +41,10 @@ namespace MitrosremERP.Infrastructure.Repositories
             _repository.Set<T>().AddAsync(entity);
         }
 
-        public async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> expression)
-        {
-            return await _repository.Set<T>().FirstOrDefaultAsync(expression);
-        }
+        //public async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> expression)
+        //{
+        //    return await _repository.Set<T>().FirstOrDefaultAsync(expression);
+        //}
 
         public virtual IQueryable<T> GetQueryable(Expression<Func<T, bool>> predicate)
         {
