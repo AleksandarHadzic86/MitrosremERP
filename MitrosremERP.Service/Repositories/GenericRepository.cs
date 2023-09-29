@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using MitrosremERP.Aplication.Data;
 using MitrosremERP.Aplication.IRepositories;
+using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -15,42 +16,39 @@ namespace MitrosremERP.Infrastructure.Repositories
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         private readonly ApplicationDbContext _repository;
-        private readonly DbSet<T> _dbSet;
 
         public GenericRepository(ApplicationDbContext repository)
         {
             _repository = repository;
-            _dbSet = repository.Set<T>();   
-        }
-
-        public async Task AddAsync(T entity)
-        {
-            await _dbSet.AddAsync(entity);
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return await _dbSet.ToListAsync();
+            return await _repository.Set<T>().ToListAsync();
         }
 
 
-        public async Task<T> GetByIdAsync(int id)
+        public async Task<T?> GetByIdAsync(int id)
         {
-            if(id == null)
-            {
-                return null;
-            }
-            return await _dbSet.FindAsync(id);
+            return await _repository.Set<T>().FindAsync(id);
         }
-        public async Task RemoveAsync(int id)
+        public void Delete(T entity)
         {
-            var entity = await GetByIdAsync(id);
-            _dbSet.Remove(entity);          
+            _repository.Set<T>().Remove(entity);          
+        }
+        public void Insert(T entity)
+        {
+            _repository.Set<T>().AddAsync(entity);
         }
 
         public async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> expression)
         {
-            return await _dbSet.FirstOrDefaultAsync(expression);
+            return await _repository.Set<T>().FirstOrDefaultAsync(expression);
+        }
+
+        public virtual IQueryable<T> GetQueryable(Expression<Func<T, bool>> predicate)
+        {
+            return _repository.Set<T>();
         }
     }
 }

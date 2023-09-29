@@ -5,7 +5,7 @@
 }
 
 <div class="container-fluid mt-5 mb-5">
-    <form asp-controller="Zaposleni" asp-action="DeletePost" asp-route-id="@Model.Id" id="forma" method="post" class="row" autocomplete="off" enctype="multipart/form-data">
+    <form asp-controller="Zaposleni" asp-action="DeletePost" asp-route-id="@Model.Id" method="post" class="row" autocomplete="off" enctype="multipart/form-data">
         <div class="col-lg-8 px-3">
             <div class="card mb-4 mb-xl-0">
                 <input asp-for="Id" hidden />
@@ -195,6 +195,4 @@
 
 @section Scripts {
     @await Html.PartialAsync("_SweetAlertBrisanje");
-    @await Html.PartialAsync("_EnterHitSendRequest")
-
 }

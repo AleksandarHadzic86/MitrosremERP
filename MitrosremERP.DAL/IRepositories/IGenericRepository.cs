@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.FileIO;
+using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -9,10 +11,12 @@ namespace MitrosremERP.Aplication.IRepositories
 {
     public interface IGenericRepository<T> where T : class
     {
-        Task<T> GetByIdAsync(int id);
+        Task<T?> GetByIdAsync(int id);
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> expression);
-        Task AddAsync(T entity);
-        Task RemoveAsync(int id);
+        void Insert (T entity);
+        void Delete (T entity);
+        IQueryable<T> GetQueryable(Expression<Func<T, bool>> predicate);
     }
 }
+ 

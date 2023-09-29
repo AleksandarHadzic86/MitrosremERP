@@ -54,7 +54,6 @@ namespace MitrosremERP.Controllers
                 }
                 else
                 {
-                    HttpContext.Session.SetInt32("ProveraIdZaposlenog", id);
                     var zaposleniVMMapper = _autoMapper.Map<ZaposleniVM>(zaposleni);
                     zaposleniVMMapper.StepenStrucneSpremeLista = await LoadStepenStrucneSpremeListItems();
                     zaposleniVMMapper.PolOsobaLista = await LoadPolOsobeListItems();
@@ -77,10 +76,9 @@ namespace MitrosremERP.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var postojiZaposleni = await _unitOfWork.ZaposleniRepository.FirstOrDefaultAsync(z => z.Id == zaposleniVM.Id);
-                    int proveraZaposlenogId = HttpContext.Session.GetInt32("ProveraIdZaposlenog") ?? 0;
+                    var postojiZaposleni = _unitOfWork.ZaposleniRepository.GetQueryable(z => z.Id == zaposleniVM.Id);
 
-                    if (postojiZaposleni == null || postojiZaposleni.Id != proveraZaposlenogId)
+                    if (postojiZaposleni == null)
                     {
                         Response.StatusCode = 404;
                         return View("ZaposleniNijePronadjen");
@@ -89,7 +87,7 @@ namespace MitrosremERP.Controllers
                     {
                         HandleImageUpload(zaposleniVM, file);
                         var zaposleni = _autoMapper.Map<Zaposleni>(zaposleniVM);
-                        await _unitOfWork.ZaposleniRepository.UpdateAsync(zaposleni);
+                        _unitOfWork.ZaposleniRepository.Update(zaposleni);
                         TempData["success"] = "Uspešno izmenjeni podaci";
                     }
                     
@@ -141,7 +139,7 @@ namespace MitrosremERP.Controllers
                     HandleImageUpload(zaposleniVM, file);
 
                     var zaposleniMapper = _autoMapper.Map<Zaposleni>(zaposleniVM);
-                    await _unitOfWork.ZaposleniRepository.AddAsync(zaposleniMapper);
+                    _unitOfWork.ZaposleniRepository.Insert(zaposleniMapper);
                     await _unitOfWork.SaveAsync();
                     TempData["success"] = "Zaposleni uspešno kreiran";
                     return RedirectToAction("Index");
@@ -171,7 +169,6 @@ namespace MitrosremERP.Controllers
                 }
                 else 
                 {
-                    HttpContext.Session.SetInt32("ProveraIdZaposlenog", id);
                     var zaposleniVMMapper = _autoMapper.Map<ZaposleniVM>(zaposleni);
                     zaposleniVMMapper.StepenStrucneSpremeLista = await LoadStepenStrucneSpremeListItems();
                     zaposleniVMMapper.PolOsobaLista = await LoadPolOsobeListItems();
@@ -188,14 +185,12 @@ namespace MitrosremERP.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeletePost(int id)
+        public async Task<IActionResult> DeletePost(ZaposleniVM zaposleniVM)
         {
             try
             {
-                var zaposleni = await _unitOfWork.ZaposleniRepository.GetByIdAsync(id);
-                int proveraZaposlenogId = HttpContext.Session.GetInt32("ProveraIdZaposlenog") ?? 0;
-
-                if (zaposleni == null || zaposleni.Id != proveraZaposlenogId)
+                var zaposleni = await _unitOfWork.ZaposleniRepository.FirstOrDefaultAsync(z => z.Id == zaposleniVM.Id);
+                if (zaposleni == null)
                 {
                     Response.StatusCode = 404;
                     return View("ZaposleniNijePronadjen");
@@ -212,7 +207,7 @@ namespace MitrosremERP.Controllers
                             System.IO.File.Delete(oldImagePath);
                         }
                     }
-                    await _unitOfWork.ZaposleniRepository.RemoveAsync(id);
+                    _unitOfWork.ZaposleniRepository.Delete(zaposleni);
                     await _unitOfWork.SaveAsync();
                     TempData["success"] = "Zaposleni uspesno obrisan";
                     return RedirectToAction("Index");

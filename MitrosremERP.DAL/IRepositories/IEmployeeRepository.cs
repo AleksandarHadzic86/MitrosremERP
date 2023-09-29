@@ -2,13 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MitrosremERP.Aplication.IRepositories
 {
     public interface IEmployeeRepository:IGenericRepository<Zaposleni>
-    {
-        Task<Zaposleni> UpdateAsync(Zaposleni zaposleni);
+    {   
+        void Update(Zaposleni zaposleni);
     }
 }

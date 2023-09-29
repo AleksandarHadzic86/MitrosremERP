@@ -6,6 +6,7 @@ using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,10 +19,14 @@ namespace MitrosremERP.Infrastructure.Repositories
         {
             _context = context; 
         }
-
-        public async Task<Zaposleni> UpdateAsync(Zaposleni zaposleni)
+        public override IQueryable<Zaposleni> GetQueryable(Expression<Func<Zaposleni, bool>> predicate)
         {
-            var zaposleniFromDb = await _context.Zaposleni.FirstOrDefaultAsync(u => u.Id == zaposleni.Id);
+            return _context.Zaposleni.Where(predicate);
+
+        }
+        public void Update(Zaposleni zaposleni)
+        {
+            var zaposleniFromDb = _context.Zaposleni.FirstOrDefault(u => u.Id == zaposleni.Id);
             if(zaposleniFromDb != null)
             {
                 zaposleniFromDb.Ime = zaposleni.Ime;
@@ -43,7 +48,6 @@ namespace MitrosremERP.Infrastructure.Repositories
                 }
               
             }
-            return zaposleniFromDb;
         }
     }
 }
