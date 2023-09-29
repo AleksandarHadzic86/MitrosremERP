@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MitrosremERP.Aplication.Interfaces
+namespace MitrosremERP.Aplication.IRepositories
 {
-    public interface IPolRepository:IRepository<Pol>
+    public interface IPolRepository:IGenericRepository<Pol>
     {
     }
 }

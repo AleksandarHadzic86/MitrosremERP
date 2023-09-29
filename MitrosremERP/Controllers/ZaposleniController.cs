@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MitrosremERP.Aplication.Data;
-using MitrosremERP.Aplication.Interfaces;
+using MitrosremERP.Aplication.IRepositories;
 using MitrosremERP.Aplication.ViewModels;
 using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 using MitrosremERP.Infrastructure.Repositories;
@@ -25,11 +25,11 @@ namespace MitrosremERP.Controllers
             _autoMapper = autoMapper;
             _logger = logger;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             try
             {
-                IEnumerable<Zaposleni> lista = _unitOfWork.ZaposleniRepository.GetAll();
+                IEnumerable<Zaposleni> lista = await _unitOfWork.ZaposleniRepository.GetAllAsync();
                 var zaposleniVM = _autoMapper.Map<IEnumerable<ZaposleniVM>>(lista);
                 return View(zaposleniVM);
             }          
@@ -41,11 +41,12 @@ namespace MitrosremERP.Controllers
             }
         }
         [HttpGet]
-        public IActionResult Update(int? id)
+        public async Task<IActionResult> Update(int id)
         {
             try
             {
-                var zaposleni = _unitOfWork.ZaposleniRepository.GetFirstOrDefault(i => i.Id == id);
+                var zaposleni = await _unitOfWork.ZaposleniRepository.GetByIdAsync(id);
+
                 if (zaposleni == null)
                 {
                     Response.StatusCode = 404;
@@ -53,11 +54,13 @@ namespace MitrosremERP.Controllers
                 }
                 else
                 {
+                    HttpContext.Session.SetInt32("ProveraIdZaposlenog", id);
                     var zaposleniVMMapper = _autoMapper.Map<ZaposleniVM>(zaposleni);
-                    zaposleniVMMapper.StepenStrucneSpremeLista = LoadStepenStrucneSpremeListItems();
-                    zaposleniVMMapper.PolOsobaLista = LoadPolOsobeListItems();
+                    zaposleniVMMapper.StepenStrucneSpremeLista = await LoadStepenStrucneSpremeListItems();
+                    zaposleniVMMapper.PolOsobaLista = await LoadPolOsobeListItems();
                     return View(zaposleniVMMapper);
-                }              
+
+                }
             }
             catch (Exception ex)
             {
@@ -68,42 +71,35 @@ namespace MitrosremERP.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Update(ZaposleniVM zaposleniVM, IFormFile? file)
+        public async Task<IActionResult> Update(ZaposleniVM zaposleniVM, IFormFile? file)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    HandleImageUpload(zaposleniVM, file);
+                    var postojiZaposleni = await _unitOfWork.ZaposleniRepository.FirstOrDefaultAsync(z => z.Id == zaposleniVM.Id);
+                    int proveraZaposlenogId = HttpContext.Session.GetInt32("ProveraIdZaposlenog") ?? 0;
 
-                    if (zaposleniVM.Id == 0)  //ako nema iD kreiraj zaposlenog
+                    if (postojiZaposleni == null || postojiZaposleni.Id != proveraZaposlenogId)
                     {
-                        var zaposleniMapper = _autoMapper.Map<Zaposleni>(zaposleniVM);
-                        _unitOfWork.ZaposleniRepository.Add(zaposleniMapper);
-                        TempData["success"] = "Zaposleni uspešno kreiran";
+                        Response.StatusCode = 404;
+                        return View("ZaposleniNijePronadjen");
                     }
-
-                    else  //ako ima update
+                    else
                     {
-                        var postojiZaposleni = _unitOfWork.ZaposleniRepository.GetFirstOrDefault(i => i.Id == zaposleniVM.Id);
-                        if (postojiZaposleni == null)
-                        {
-                            Response.StatusCode = 404;
-                            return View("ZaposleniNijePronadjen");
-                        }
-                        else
-                        {
-                            _autoMapper.Map(zaposleniVM, postojiZaposleni);
-                            TempData["success"] = "Uspešno izmenjeni podaci";
-                        }
+                        HandleImageUpload(zaposleniVM, file);
+                        var zaposleni = _autoMapper.Map<Zaposleni>(zaposleniVM);
+                        await _unitOfWork.ZaposleniRepository.UpdateAsync(zaposleni);
+                        TempData["success"] = "Uspešno izmenjeni podaci";
                     }
-                    _unitOfWork.Save();
+                    
+                    await _unitOfWork.SaveAsync();
                     return RedirectToAction("Index");
                 }
                 else
                 {
-                    zaposleniVM.StepenStrucneSpremeLista = LoadStepenStrucneSpremeListItems();
-                    zaposleniVM.PolOsobaLista = LoadPolOsobeListItems();
+                    zaposleniVM.StepenStrucneSpremeLista = await LoadStepenStrucneSpremeListItems();
+                    zaposleniVM.PolOsobaLista = await LoadPolOsobeListItems();
                     return View(zaposleniVM);
                 }
             }
@@ -117,13 +113,13 @@ namespace MitrosremERP.Controllers
         }
         [HttpGet]
         [Route("Zaposleni/Create")]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             try
             {
                 ZaposleniVM zaposleniVM = new ZaposleniVM();
-                zaposleniVM.StepenStrucneSpremeLista = LoadStepenStrucneSpremeListItems();
-                zaposleniVM.PolOsobaLista = LoadPolOsobeListItems();
+                zaposleniVM.StepenStrucneSpremeLista = await LoadStepenStrucneSpremeListItems();
+                zaposleniVM.PolOsobaLista = await LoadPolOsobeListItems();
                 return View(zaposleniVM);
             }
             catch (Exception ex)
@@ -136,7 +132,7 @@ namespace MitrosremERP.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(ZaposleniVM zaposleniVM, IFormFile? file)
+        public async Task<IActionResult> Create(ZaposleniVM zaposleniVM, IFormFile? file)
         {
             try
             {
@@ -145,8 +141,8 @@ namespace MitrosremERP.Controllers
                     HandleImageUpload(zaposleniVM, file);
 
                     var zaposleniMapper = _autoMapper.Map<Zaposleni>(zaposleniVM);
-                    _unitOfWork.ZaposleniRepository.Add(zaposleniMapper);
-                    _unitOfWork.Save();
+                    await _unitOfWork.ZaposleniRepository.AddAsync(zaposleniMapper);
+                    await _unitOfWork.SaveAsync();
                     TempData["success"] = "Zaposleni uspešno kreiran";
                     return RedirectToAction("Index");
                 }
@@ -162,30 +158,28 @@ namespace MitrosremERP.Controllers
         }
 
         [HttpGet]
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                if (id == null || id == 0)
+                var zaposleni = await _unitOfWork.ZaposleniRepository.GetByIdAsync(id);
+
+                if (zaposleni == null)
                 {
                     Response.StatusCode = 404;
                     return View("ZaposleniNijePronadjen");
                 }
-                var zaposleni = _unitOfWork.ZaposleniRepository.GetFirstOrDefault(i => i.Id == id);
-                if (zaposleni != null)
+                else 
                 {
+                    HttpContext.Session.SetInt32("ProveraIdZaposlenog", id);
                     var zaposleniVMMapper = _autoMapper.Map<ZaposleniVM>(zaposleni);
-                    zaposleniVMMapper.StepenStrucneSpremeLista = LoadStepenStrucneSpremeListItems();
-                    zaposleniVMMapper.PolOsobaLista = LoadPolOsobeListItems();
+                    zaposleniVMMapper.StepenStrucneSpremeLista = await LoadStepenStrucneSpremeListItems();
+                    zaposleniVMMapper.PolOsobaLista = await LoadPolOsobeListItems();
                     return View(zaposleniVMMapper);
                 }
-                else
-                {
-                    Response.StatusCode = 404;
-                    return View("ZaposleniNijePronadjen");
-                }
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Response.StatusCode = 500;
                 _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
@@ -194,31 +188,36 @@ namespace MitrosremERP.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult DeletePost(int? id)
+        public async Task<IActionResult> DeletePost(int id)
         {
             try
             {
-                var zaposleniObrisi = _unitOfWork.ZaposleniRepository.GetFirstOrDefault(u => u.Id == id);
-                if (zaposleniObrisi == null)
+                var zaposleni = await _unitOfWork.ZaposleniRepository.GetByIdAsync(id);
+                int proveraZaposlenogId = HttpContext.Session.GetInt32("ProveraIdZaposlenog") ?? 0;
+
+                if (zaposleni == null || zaposleni.Id != proveraZaposlenogId)
                 {
                     Response.StatusCode = 404;
                     return View("ZaposleniNijePronadjen");
                 }
-                var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, zaposleniObrisi.ImageUrl.TrimStart('\\'));
-                List<string> exclusions = new List<string>
-                     {  "user.jpg", "userW.jpg" };
-                if (!exclusions.Contains(Path.GetFileName(oldImagePath)))
+                else
                 {
-                    if (System.IO.File.Exists(oldImagePath))
+                    var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, zaposleni.ImageUrl.TrimStart('\\'));
+                    List<string> exclusions = new List<string>
+                     {  "user.jpg", "userW.jpg" };
+                    if (!exclusions.Contains(Path.GetFileName(oldImagePath)))
                     {
-                        System.IO.File.Delete(oldImagePath);
+                        if (System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
                     }
+                    await _unitOfWork.ZaposleniRepository.RemoveAsync(id);
+                    await _unitOfWork.SaveAsync();
+                    TempData["success"] = "Zaposleni uspesno obrisan";
+                    return RedirectToAction("Index");
                 }
-
-                _unitOfWork.ZaposleniRepository.Remove(zaposleniObrisi);
-                _unitOfWork.Save();
-                TempData["success"] = "Zaposleni uspesno obrisan";
-                return RedirectToAction("Index");
+                             
             }
             catch (Exception ex)
             {
@@ -271,16 +270,17 @@ namespace MitrosremERP.Controllers
                 }
             }
         }
-        private IEnumerable<SelectListItem> LoadStepenStrucneSpremeListItems()
+        private async Task<IEnumerable<SelectListItem>> LoadStepenStrucneSpremeListItems()
         {
-            var stepenStrucneSpremeEntities = _unitOfWork.StepenStrucneSpremeRepository.GetAll();
+            var stepenStrucneSpremeEntities = await _unitOfWork.StepenStrucneSpremeRepository.GetAllAsync();
             return _autoMapper.Map<IEnumerable<SelectListItem>>(stepenStrucneSpremeEntities);
         }
-        private IEnumerable<SelectListItem> LoadPolOsobeListItems()
+        private async Task<IEnumerable<SelectListItem>> LoadPolOsobeListItems()
         {
-            var polosobeLista = _unitOfWork.PolRepository.GetAll();
+            var polosobeLista = await _unitOfWork.PolRepository.GetAllAsync();
             return _autoMapper.Map<IEnumerable<SelectListItem>>(polosobeLista);
         }
 
+        
     }
 }

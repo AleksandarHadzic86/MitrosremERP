@@ -1,5 +1,5 @@
 ﻿using MitrosremERP.Aplication.Data;
-using MitrosremERP.Aplication.Interfaces;
+using MitrosremERP.Aplication.IRepositories;
 using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MitrosremERP.Infrastructure.Repositories
 {
-    public class StepenStrucneSpremeRepository : Repository<StepenStrucneSpreme>, IStepenStrucneSpremeRepository
+    public class StepenStrucneSpremeRepository : GenericRepository<StepenStrucneSpreme>, IStepenStrucneSpremeRepository
     {
         private readonly ApplicationDbContext _context;
         public StepenStrucneSpremeRepository(ApplicationDbContext repository) : base(repository)

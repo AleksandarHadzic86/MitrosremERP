@@ -4,17 +4,25 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using MitrosremERP.Aplication.AutoMapper;
 using MitrosremERP.Aplication.Data;
-using MitrosremERP.Aplication.Interfaces;
 using MitrosremERP.Infrastructure.Repositories;
 using System.Globalization;
 using Microsoft.AspNetCore.Identity;
 using Serilog;
+using MitrosremERP.Aplication.IRepositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+//Session
+builder.Services.AddDistributedMemoryCache();
 
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(10);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 // Add services localization settings.
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
@@ -67,6 +75,8 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseSession();
+
 app.MapRazorPages();
 
 app.MapControllerRoute(

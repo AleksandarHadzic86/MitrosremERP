@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MitrosremERP.Aplication.Data;
-using MitrosremERP.Aplication.Interfaces;
+using MitrosremERP.Aplication.IRepositories;
 using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 
 using System;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MitrosremERP.Infrastructure.Repositories
 {
-    public class EmployeeRepository : Repository<Zaposleni>, IEmployeeRepository
+    public class EmployeeRepository : GenericRepository<Zaposleni>, IEmployeeRepository
     {
         private readonly ApplicationDbContext _context;
         public EmployeeRepository(ApplicationDbContext context) :base(context)
@@ -19,9 +19,9 @@ namespace MitrosremERP.Infrastructure.Repositories
             _context = context; 
         }
 
-        public void Update(Zaposleni zaposleni)
+        public async Task<Zaposleni> UpdateAsync(Zaposleni zaposleni)
         {
-            var zaposleniFromDb = _context.Zaposleni.FirstOrDefault(u => u.Id == zaposleni.Id);
+            var zaposleniFromDb = await _context.Zaposleni.FirstOrDefaultAsync(u => u.Id == zaposleni.Id);
             if(zaposleniFromDb != null)
             {
                 zaposleniFromDb.Ime = zaposleni.Ime;
@@ -43,6 +43,7 @@ namespace MitrosremERP.Infrastructure.Repositories
                 }
               
             }
+            return zaposleniFromDb;
         }
     }
 }

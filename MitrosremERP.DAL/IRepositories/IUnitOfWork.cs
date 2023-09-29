@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MitrosremERP.Aplication.Interfaces
+namespace MitrosremERP.Aplication.IRepositories
 {
     public interface IUnitOfWork
     {
         IEmployeeRepository ZaposleniRepository { get; }
         IStepenStrucneSpremeRepository StepenStrucneSpremeRepository { get; }
         IPolRepository PolRepository { get; }
-        void Save();
+        Task SaveAsync();
     }
 }

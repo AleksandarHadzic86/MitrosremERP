@@ -1,5 +1,6 @@
-﻿using MitrosremERP.Aplication.Data;
-using MitrosremERP.Aplication.Interfaces;
+﻿using Microsoft.Extensions.Logging;
+using MitrosremERP.Aplication.Data;
+using MitrosremERP.Aplication.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +9,15 @@ using System.Threading.Tasks;
 
 namespace MitrosremERP.Infrastructure.Repositories
 {
-    public class UnitOfWork:IUnitOfWork
+    public class UnitOfWork:IUnitOfWork,IDisposable
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
+        private readonly ILogger<UnitOfWork> _logger;
 
-        public UnitOfWork(ApplicationDbContext context)
+        public UnitOfWork(ApplicationDbContext context, ILogger<UnitOfWork> logger)
         {
             _context = context;
+            _logger = logger;
             ZaposleniRepository = new EmployeeRepository(_context);
             StepenStrucneSpremeRepository = new StepenStrucneSpremeRepository(_context);
             PolRepository = new PolRepository(_context);
@@ -25,9 +28,20 @@ namespace MitrosremERP.Infrastructure.Repositories
 
         public IPolRepository PolRepository { get; private set; }
 
-        public void Save()
+        public async Task SaveAsync()
         {
-            _context.SaveChanges();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch(Exception ex) 
+            {
+                _logger.LogError(ex, "Doslo je do greske prilikom cuvanja");
+            }
+        }
+        public async void Dispose()
+        {
+           await _context.DisposeAsync();
         }
     }
 

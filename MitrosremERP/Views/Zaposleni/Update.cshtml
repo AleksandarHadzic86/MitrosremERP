@@ -5,7 +5,7 @@
 }
 
   <div class="container-fluid mt-5 mb-5">
-    <form method="post" class="row" autocomplete="off" enctype="multipart/form-data">
+    <form method="post" class="row" autocomplete="off" id="forma" enctype="multipart/form-data">
         <div class="col-lg-8 px-3">
            <div class="card mb-4 mb-xl-0">
            
@@ -203,7 +203,9 @@
     @{
         @await Html.PartialAsync("_DatePicker")
         @await Html.PartialAsync("_ValidationScriptsPartial")
+        @await Html.PartialAsync("_EnterHitSendRequest")
     }
+    
 }
 
     
