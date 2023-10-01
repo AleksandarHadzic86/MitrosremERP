@@ -1,4 +1,5 @@
-﻿using MitrosremERP.Aplication.Data;
+﻿using Microsoft.Extensions.Logging;
+using MitrosremERP.Aplication.Data;
 using MitrosremERP.Aplication.IRepositories;
 using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 using System;
@@ -13,7 +14,7 @@ namespace MitrosremERP.Infrastructure.Repositories
     public class StepenStrucneSpremeRepository : GenericRepository<StepenStrucneSpreme>, IStepenStrucneSpremeRepository
     {
         private readonly ApplicationDbContext _context;
-        public StepenStrucneSpremeRepository(ApplicationDbContext repository) : base(repository)
+        public StepenStrucneSpremeRepository(ApplicationDbContext repository, ILogger logger) : base(repository, logger)
         {
             _context = repository;
         }

@@ -76,7 +76,6 @@ namespace MitrosremERP.Aplication.ViewModels
         public string Mobilni { get; set; } = null!;
         public string? Napomena { get; set; }
         public string? ImageUrl { get; set; }
-      
 
         [Required(ErrorMessage = "Id ne moze da bude prazan")]
         public int PolOsobeId { get; set; }

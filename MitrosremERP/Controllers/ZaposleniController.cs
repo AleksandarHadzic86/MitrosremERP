@@ -7,6 +7,9 @@ using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 using MitrosremERP.Infrastructure.Repositories;
 using AutoMapper;
 using System.Data;
+using System.Drawing.Printing;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 
 namespace MitrosremERP.Controllers
 {
@@ -25,13 +28,65 @@ namespace MitrosremERP.Controllers
             _autoMapper = autoMapper;
             _logger = logger;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
             try
             {
-                IEnumerable<Zaposleni> lista = await _unitOfWork.ZaposleniRepository.GetAllAsync();
-                var zaposleniVM = _autoMapper.Map<IEnumerable<ZaposleniVM>>(lista);
-                return View(zaposleniVM);
+                ViewData["CurrentSort"] = sortOrder;
+                ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+                ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+
+                if (searchString != null)
+                {
+                    pageNumber = 1;
+                }
+                else
+                {
+                    searchString = currentFilter;
+                }
+
+                ViewData["CurrentFilter"] = searchString;
+
+                var zaposleni = from s in _unitOfWork.ZaposleniRepository.GetAll()
+                               select s;
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    zaposleni = zaposleni.Where(s => s.Ime.Contains(searchString)
+                                           || s.Prezime.Contains(searchString));
+                }
+                switch (sortOrder)
+                {
+                    case "name_desc":
+                        zaposleni = zaposleni.OrderByDescending(s => s.Ime);
+                        break;
+                    case "Date":
+                        zaposleni = zaposleni.OrderBy(s => s.Prezime);
+                        break;
+                    case "date_desc":
+                        zaposleni = zaposleni.OrderByDescending(s => s.Prezime);
+                        break;
+                    default:
+                        zaposleni = zaposleni.OrderBy(s => s.Ime);
+                        break;
+                }
+
+                int pageSize = 3;
+                var zaposleniLista = await PaginatedList<Zaposleni>.CreateAsync(zaposleni.AsNoTracking(), pageNumber ?? 1, 8);
+                var zaposleniVMs = zaposleniLista.Select(z => _autoMapper.Map<ZaposleniVM>(z));
+
+                var zaposleniVMList = zaposleniVMs.ToList();
+                var zaposleniVMPaginatedList = new PaginatedList<ZaposleniVM>(
+                     zaposleniVMList,
+                     zaposleniLista.Count, // Use the total count from the original query
+                     pageNumber ?? 1,
+                     pageSize
+                );
+                //var lista = await _unitOfWork.ZaposleniRepository.GetAllAsync();
+                //var zaposleniVM = _autoMapper.Map<IEnumerable<ZaposleniVM>>(lista);
+
+
+                return View(zaposleniVMPaginatedList);
+
             }          
               catch(Exception ex)
             {

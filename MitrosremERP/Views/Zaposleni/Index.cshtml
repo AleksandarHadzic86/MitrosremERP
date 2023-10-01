@@ -1,5 +1,7 @@
 ﻿@using MitrosremERP.Aplication.ViewModels;
-@model IEnumerable<ZaposleniVM>
+@using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
+
+@model PaginatedList<ZaposleniVM>
 @{
     ViewBag.Title = "Lista Zaposlenih";
 }
@@ -17,7 +19,23 @@
 
         </div>
     </div>
-
+    <form asp-action="Index" method="get" >
+        <div class="d-flex justify-content-start col-xxl-5 col-xl-8">
+            <div class="input-group mb-3 no-color w-10">
+                <div class="input-group-text">
+                    <i class='bx bx-search'></i>
+                </div>
+                <input type="text" class="form-control" placeholder="Pretraga ime ili prezime" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                <input type="submit" value="Search" class="btn btn-outline-secondary" />
+                <div class="input-group-text">
+                    <a asp-action="Index" class="text-danger"><i class='bx bx-refresh '></i></a>
+                </div>
+            </div>
+            <div>
+                
+            </div>
+        </div>
+    </form>
     <div class="card">
             <table class="table mt-2 align-middle mb-0 bg-white">
                 
@@ -68,9 +86,26 @@
 
        </table>
 
+    </div>  
+    @{
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    }
+
+    <div class="my-2">
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-pageNumber="@(Model.PageIndex - 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-outline-secondary text-black @prevDisabled">
+            Previous
+        </a>
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-pageNumber="@(Model.PageIndex + 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-outline-secondary text-black @nextDisabled">
+            Next
+        </a>
     </div>
 </div>  
- 
-
-
-

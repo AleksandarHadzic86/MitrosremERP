@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using MitrosremERP.Aplication.Data;
 using MitrosremERP.Aplication.IRepositories;
+using MitrosremERP.Aplication.ViewModels;
 using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 using System;
 using System.Collections.Generic;
@@ -16,10 +17,12 @@ namespace MitrosremERP.Infrastructure.Repositories
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         private readonly ApplicationDbContext _repository;
+        private readonly ILogger _logger;
 
-        public GenericRepository(ApplicationDbContext repository)
+        public GenericRepository(ApplicationDbContext repository, ILogger logger)
         {
             _repository = repository;
+            _logger = logger;
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
@@ -47,6 +50,18 @@ namespace MitrosremERP.Infrastructure.Repositories
         //}
 
         public virtual IQueryable<T> GetQueryable(Expression<Func<T, bool>> predicate)
+        {
+            return _repository.Set<T>();
+        }
+
+        public async Task<IEnumerable<T>> GetPaginatedAsync(string sortOrder, string searchString, int pageNumber, int pageSize)
+        {
+            return await _repository.Set<T>().Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+        }
+
+        public IQueryable<T> GetAll()
         {
             return _repository.Set<T>();
         }

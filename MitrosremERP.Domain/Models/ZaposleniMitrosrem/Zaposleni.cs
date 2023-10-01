@@ -33,6 +33,7 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
         public string Mobilni { get; set; } = null!;
         public string? Napomena { get; set; }       
         public string? ImageUrl { get; set; }
+
         [ForeignKey("StepenStrucneSpremeId")]
         public int StepenStrucneSpremeId { get; set; }      
         public StepenStrucneSpreme? StepenStrucneSpreme { get; set; }

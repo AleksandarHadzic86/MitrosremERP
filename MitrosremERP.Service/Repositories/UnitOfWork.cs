@@ -18,9 +18,9 @@ namespace MitrosremERP.Infrastructure.Repositories
         {
             _context = context;
             _logger = logger;
-            ZaposleniRepository = new EmployeeRepository(_context);
-            StepenStrucneSpremeRepository = new StepenStrucneSpremeRepository(_context);
-            PolRepository = new PolRepository(_context);
+            ZaposleniRepository = new EmployeeRepository(_context, logger);
+            StepenStrucneSpremeRepository = new StepenStrucneSpremeRepository(_context, logger);
+            PolRepository = new PolRepository(_context, logger);
         }
         public IEmployeeRepository ZaposleniRepository { get; private set; }
 

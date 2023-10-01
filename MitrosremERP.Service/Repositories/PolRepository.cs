@@ -1,4 +1,5 @@
-﻿using MitrosremERP.Aplication.Data;
+﻿using Microsoft.Extensions.Logging;
+using MitrosremERP.Aplication.Data;
 using MitrosremERP.Aplication.IRepositories;
 using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 using System;
@@ -11,7 +12,9 @@ namespace MitrosremERP.Infrastructure.Repositories
 {
     public class PolRepository : GenericRepository<Pol>, IPolRepository
     {
-        public PolRepository(ApplicationDbContext repository) : base(repository)
+       
+
+        public PolRepository(ApplicationDbContext repository, ILogger logger) : base(repository, logger)
         {
         }
     }
