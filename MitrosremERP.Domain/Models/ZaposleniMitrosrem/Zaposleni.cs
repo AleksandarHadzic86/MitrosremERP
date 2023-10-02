@@ -19,7 +19,7 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
     public class Zaposleni
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Ime { get; set; } = null!;   
         public string Prezime { get; set; } = null!;
         public string Email { get; set; } = null!;

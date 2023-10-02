@@ -226,11 +226,9 @@ namespace MitrosremERP.Infrastructure.Migrations
 
             modelBuilder.Entity("MitrosremERP.Domain.Models.ZaposleniMitrosrem.Bolovanje", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int?>("BrojDanaBolovanja")
                         .HasColumnType("int");
@@ -248,8 +246,8 @@ namespace MitrosremERP.Infrastructure.Migrations
                     b.Property<DateOnly?>("ZakljucenoBolovanje")
                         .HasColumnType("date");
 
-                    b.Property<int>("ZaposleniId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ZaposleniId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -260,11 +258,9 @@ namespace MitrosremERP.Infrastructure.Migrations
 
             modelBuilder.Entity("MitrosremERP.Domain.Models.ZaposleniMitrosrem.GodisnjiOdmor", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("BrojDanaGodisnjeg")
                         .HasColumnType("int");
@@ -279,8 +275,8 @@ namespace MitrosremERP.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ZaposleniId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ZaposleniId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateOnly>("ZavrsetakGodisnjegOdmora")
                         .HasColumnType("date");
@@ -382,11 +378,9 @@ namespace MitrosremERP.Infrastructure.Migrations
 
             modelBuilder.Entity("MitrosremERP.Domain.Models.ZaposleniMitrosrem.Ugovor", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("BrojDanaGodisnjeg")
                         .HasColumnType("int");
@@ -408,8 +402,8 @@ namespace MitrosremERP.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ZaposleniId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ZaposleniId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -420,22 +414,20 @@ namespace MitrosremERP.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = new Guid("ce164626-a2c3-4328-bab2-935dc5f40d84"),
                             BrojDanaGodisnjeg = 22,
                             BrojUgovora = "MS0001",
                             DatumPocetka = new DateOnly(1992, 2, 17),
                             TipUgovora = "Odredjeno",
-                            ZaposleniId = 1
+                            ZaposleniId = new Guid("7f4194fa-d2c2-4b37-9cd3-da909d03d908")
                         });
                 });
 
             modelBuilder.Entity("MitrosremERP.Domain.Models.ZaposleniMitrosrem.Zaposleni", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Adresa")
                         .IsRequired()
@@ -502,7 +494,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = new Guid("7f4194fa-d2c2-4b37-9cd3-da909d03d908"),
                             Adresa = "Stari Sor",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -519,7 +511,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = 2,
+                            Id = new Guid("d19ef44f-c055-4200-a95a-ea0c3bfe52c5"),
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -536,7 +528,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = 3,
+                            Id = new Guid("97f63497-9667-481e-98c2-464249946319"),
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -545,7 +537,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Ime = "Jovan",
                             JMBG = "2132986890023",
                             Mobilni = "0605574477",
-                            PolOsobeId = 1,
+                            PolOsobeId = 2,
                             Prezime = "Jovanovic",
                             Profesija = "Diplomirani Tehnolog",
                             RadnoMesto = "Tehnolog hrane",
@@ -553,7 +545,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = 4,
+                            Id = new Guid("e379d8a7-b006-47b8-905d-7232d76486ab"),
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -570,7 +562,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = 5,
+                            Id = new Guid("c78f028f-2fb2-4318-bd3b-0f3cfb8208d5"),
                             Adresa = "Stari Sor",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -587,7 +579,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = 6,
+                            Id = new Guid("4207589f-973c-4d0c-b64f-27faaec07f94"),
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -604,7 +596,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = 7,
+                            Id = new Guid("ea32abcb-6b88-4a02-9b6d-12245121dd01"),
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -613,7 +605,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Ime = "Zorana",
                             JMBG = "2132986890023",
                             Mobilni = "0605574477",
-                            PolOsobeId = 1,
+                            PolOsobeId = 2,
                             Prezime = "Zoranovic",
                             Profesija = "Diplomirani Ekonomista",
                             RadnoMesto = "Racunovodstvo",
@@ -621,7 +613,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = 8,
+                            Id = new Guid("4b8141ab-105d-448d-8a90-f83148b8ddf6"),
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -634,7 +626,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Prezime = "Stevanovic",
                             Profesija = "Trgovac",
                             RadnoMesto = "Maloprodaja",
-                            StepenStrucneSpremeId = 3
+                            StepenStrucneSpremeId = 6
                         });
                 });
 

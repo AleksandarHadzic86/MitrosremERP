@@ -11,7 +11,7 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
     public class GodisnjiOdmor
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public DateOnly PocetakGodisnjegOdmora { get; set; }
         public DateOnly ZavrsetakGodisnjegOdmora { get; set; }
         public int BrojDanaGodisnjeg { get; set; }
@@ -19,7 +19,7 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
         public string? Napomena { get; set; }
 
         [ForeignKey("ZaposleniId")]
-        public int ZaposleniId { get; set; }
+        public Guid ZaposleniId { get; set; }
         public Zaposleni Zaposleni { get; set; } = null!;
     }
 }

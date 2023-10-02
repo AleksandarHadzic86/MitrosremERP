@@ -14,7 +14,7 @@ namespace MitrosremERP.Aplication.ViewModels
     public class ZaposleniVM
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [StringLength(50)]
         [Required(ErrorMessage = "Morate uneti Ime")]

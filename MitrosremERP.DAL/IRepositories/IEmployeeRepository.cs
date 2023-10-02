@@ -13,7 +13,7 @@ namespace MitrosremERP.Aplication.IRepositories
     public interface IEmployeeRepository:IGenericRepository<Zaposleni>
     {   
         void Update(Zaposleni zaposleni);
-        //Task<PaginatedList<Zaposleni>> GetZaposleniPaginationAsync(string sortOrder, string searchString, int pageNumber, int pageSize);
+        Task<PaginatedList<Zaposleni>> GetZaposleniPaginationAsync(string sortOrder, string searchString, int pageNumber, int pageSize);
 
     }
 }

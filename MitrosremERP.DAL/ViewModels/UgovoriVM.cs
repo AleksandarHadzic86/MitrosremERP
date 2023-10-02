@@ -12,7 +12,7 @@ namespace MitrosremERP.Aplication.ViewModels
     public class UgovoriVM
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [StringLength(50, ErrorMessage = "Maksimalan broj karaktera 50")]
         [Required(ErrorMessage = "Broj ugovora obavezan")]
@@ -42,7 +42,7 @@ namespace MitrosremERP.Aplication.ViewModels
 
 
         [ForeignKey("ZaposleniId")]
-        public int ZaposleniId { get; set; }
+        public Guid ZaposleniId { get; set; }
         public Zaposleni Zaposleni { get; set; } = null!;
     }
 }

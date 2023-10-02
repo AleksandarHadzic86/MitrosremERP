@@ -31,7 +31,7 @@ namespace MitrosremERP.Infrastructure.Repositories
         }
 
 
-        public async Task<T?> GetByIdAsync(int id)
+        public async Task<T?> GetByIdAsync(Guid id)
         {
             return await _repository.Set<T>().FindAsync(id);
         }
@@ -61,9 +61,9 @@ namespace MitrosremERP.Infrastructure.Repositories
             .ToListAsync();
         }
 
-        public IQueryable<T> GetAll()
+        public IQueryable<T> GetQueryable()
         {
-            return _repository.Set<T>();
+            return _repository.Set<T>().AsQueryable();
         }
     }
 }

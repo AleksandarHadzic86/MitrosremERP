@@ -12,7 +12,7 @@ namespace MitrosremERP.Aplication.ViewModels
     public class BolovanjeVM
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [DataType(DataType.Date, ErrorMessage = "Obavezan unos pocetak bolovanja")]
         [Display(Name = "Datum od: ")]
@@ -34,7 +34,7 @@ namespace MitrosremERP.Aplication.ViewModels
 
 
         [ForeignKey("ZaposleniId")]
-        public int ZaposleniId { get; set; }
+        public Guid ZaposleniId { get; set; }
         public Zaposleni Zaposleni { get; set; } = null!;
       
 

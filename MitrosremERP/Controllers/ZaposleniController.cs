@@ -32,58 +32,16 @@ namespace MitrosremERP.Controllers
         {
             try
             {
-                ViewData["CurrentSort"] = sortOrder;
-                ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-                ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+                var pageSize = 3;
+                var zaposleniLista = await _unitOfWork.ZaposleniRepository.GetZaposleniPaginationAsync(sortOrder, searchString, pageNumber ?? 1, 8);
+                var zaposleniVMs = _autoMapper.Map<IEnumerable<ZaposleniVM>>(zaposleniLista);
 
-                if (searchString != null)
-                {
-                    pageNumber = 1;
-                }
-                else
-                {
-                    searchString = currentFilter;
-                }
-
-                ViewData["CurrentFilter"] = searchString;
-
-                var zaposleni = from s in _unitOfWork.ZaposleniRepository.GetAll()
-                               select s;
-                if (!String.IsNullOrEmpty(searchString))
-                {
-                    zaposleni = zaposleni.Where(s => s.Ime.Contains(searchString)
-                                           || s.Prezime.Contains(searchString));
-                }
-                switch (sortOrder)
-                {
-                    case "name_desc":
-                        zaposleni = zaposleni.OrderByDescending(s => s.Ime);
-                        break;
-                    case "Date":
-                        zaposleni = zaposleni.OrderBy(s => s.Prezime);
-                        break;
-                    case "date_desc":
-                        zaposleni = zaposleni.OrderByDescending(s => s.Prezime);
-                        break;
-                    default:
-                        zaposleni = zaposleni.OrderBy(s => s.Ime);
-                        break;
-                }
-
-                int pageSize = 3;
-                var zaposleniLista = await PaginatedList<Zaposleni>.CreateAsync(zaposleni.AsNoTracking(), pageNumber ?? 1, 8);
-                var zaposleniVMs = zaposleniLista.Select(z => _autoMapper.Map<ZaposleniVM>(z));
-
-                var zaposleniVMList = zaposleniVMs.ToList();
                 var zaposleniVMPaginatedList = new PaginatedList<ZaposleniVM>(
-                     zaposleniVMList,
-                     zaposleniLista.Count, // Use the total count from the original query
-                     pageNumber ?? 1,
-                     pageSize
+                    zaposleniVMs.ToList(),
+                    zaposleniLista.Count,
+                    pageNumber ?? 1,
+                    pageSize
                 );
-                //var lista = await _unitOfWork.ZaposleniRepository.GetAllAsync();
-                //var zaposleniVM = _autoMapper.Map<IEnumerable<ZaposleniVM>>(lista);
-
 
                 return View(zaposleniVMPaginatedList);
 
@@ -96,10 +54,11 @@ namespace MitrosremERP.Controllers
             }
         }
         [HttpGet]
-        public async Task<IActionResult> Update(int id)
+        public async Task<IActionResult> Update(Guid id)
         {
             try
             {
+
                 var zaposleni = await _unitOfWork.ZaposleniRepository.GetByIdAsync(id);
 
                 if (zaposleni == null)
@@ -145,7 +104,7 @@ namespace MitrosremERP.Controllers
                         _unitOfWork.ZaposleniRepository.Update(zaposleni);
                         TempData["success"] = "Uspešno izmenjeni podaci";
                     }
-                    
+
                     await _unitOfWork.SaveAsync();
                     return RedirectToAction("Index");
                 }
@@ -156,7 +115,7 @@ namespace MitrosremERP.Controllers
                     return View(zaposleniVM);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Response.StatusCode = 500;
                 _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
@@ -181,7 +140,7 @@ namespace MitrosremERP.Controllers
                 _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
                 return View("InternalServerError");
             }
-            
+
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -211,7 +170,7 @@ namespace MitrosremERP.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             try
             {
@@ -222,7 +181,7 @@ namespace MitrosremERP.Controllers
                     Response.StatusCode = 404;
                     return View("ZaposleniNijePronadjen");
                 }
-                else 
+                else
                 {
                     var zaposleniVMMapper = _autoMapper.Map<ZaposleniVM>(zaposleni);
                     zaposleniVMMapper.StepenStrucneSpremeLista = await LoadStepenStrucneSpremeListItems();
@@ -236,7 +195,7 @@ namespace MitrosremERP.Controllers
                 Response.StatusCode = 500;
                 _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
                 return View("InternalServerError");
-            }           
+            }
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -269,14 +228,14 @@ namespace MitrosremERP.Controllers
                     TempData["success"] = "Zaposleni uspesno obrisan";
                     return RedirectToAction("Index");
                 }
-                             
+
             }
             catch (Exception ex)
             {
                 Response.StatusCode = 500;
                 _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
                 return View("InternalServerError");
-            }           
+            }
         }
 
         private void HandleImageUpload(ZaposleniVM zaposleniVM, IFormFile? file)
@@ -312,11 +271,11 @@ namespace MitrosremERP.Controllers
             }
             else
             {
-                if (zaposleniVM.PolOsobeId == 1 && zaposleniVM.ImageUrl == null )
+                if (zaposleniVM.PolOsobeId == 1 && zaposleniVM.ImageUrl == null)
                 {
                     zaposleniVM.ImageUrl = @"\images\default\user.jpg";
                 }
-                if (zaposleniVM.PolOsobeId == 2 && zaposleniVM.ImageUrl == null )
+                if (zaposleniVM.PolOsobeId == 2 && zaposleniVM.ImageUrl == null)
                 {
                     zaposleniVM.ImageUrl = @"\images\default\userW.jpg";
                 }

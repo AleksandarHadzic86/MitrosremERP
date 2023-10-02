@@ -25,71 +25,90 @@ namespace MitrosremERP.Infrastructure.Repositories
         }
 
 
-        //public async Task<PaginatedList<Zaposleni>> GetZaposleniPaginationAsync(string sortOrder, string searchString, int pageNumber, int pageSize)
-        //{
-        //    try
-        //    {
-        //        var zaposleni = _context.Zaposleni.AsQueryable();
+        public async Task<PaginatedList<Zaposleni>> GetZaposleniPaginationAsync(string sortOrder, string searchString, int pageNumber, int pageSize)
+        {
+            try
+            {
+                var query = GetQueryable();
 
-        //        if (!string.IsNullOrEmpty(searchString))
-        //        {
-        //            zaposleni = zaposleni.Where(c => c.Ime.Contains(searchString));
-        //        }
+                if (!string.IsNullOrEmpty(searchString))
+                {
+                    query = query.Where(c => c.Ime.Contains(searchString) || c.Prezime.Contains(searchString));
+                }
 
-        //        switch (sortOrder)
-        //        {
-        //            case "name_desc":
-        //                zaposleni = zaposleni.OrderByDescending(c => c.Ime);
-        //                break;
-        //            case "Date":
-        //                zaposleni = zaposleni.OrderBy(c => c.Prezime);
-        //                break;
-        //            case "date_desc":
-        //                zaposleni = zaposleni.OrderByDescending(c => c.Prezime);
-        //                break;
-        //            default:
-        //                zaposleni = zaposleni.OrderBy(c => c.Ime);
-        //                break;
-        //        }
+                switch (sortOrder)
+                {
+                    case "name_desc":
+                        query = query.OrderByDescending(c => c.Ime);
+                        break;
+                    case "Date":
+                        query = query.OrderBy(c => c.Prezime);
+                        break;
+                    case "date_desc":
+                        query = query.OrderByDescending(c => c.Prezime);
+                        break;
+                    default:
+                        query = query.OrderBy(c => c.Ime);
+                        break;
+                }
 
-        //        return await PaginatedList<Zaposleni>.CreateAsync(zaposleni.AsNoTracking(), pageNumber, pageSize);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError(ex, "{Repo} All method error", typeof(Zaposleni));
-        //        throw;
-        //    }
-        //}
+                var count = await query.CountAsync();
+                var items = await query.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+
+                return new PaginatedList<Zaposleni>(items, count, pageNumber, pageSize);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "{Repo} Greska prilikom paginacije, metoda GetZaposleniPaginationAsync", typeof(Zaposleni));
+                throw;
+            }
+        }
 
         public override IQueryable<Zaposleni> GetQueryable(Expression<Func<Zaposleni, bool>> predicate)
         {
-            return _context.Zaposleni.Where(predicate);
-
+            try
+            {
+                return _context.Zaposleni.Where(predicate);
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex, "{Repo} Greska prilikom izvrsavanje GetQueryable metode", typeof(Zaposleni));
+                throw;
+            }
         }
         public void Update(Zaposleni zaposleni)
         {
-            var zaposleniFromDb = _context.Zaposleni.FirstOrDefault(u => u.Id == zaposleni.Id);
-            if(zaposleniFromDb != null)
+            try
             {
-                zaposleniFromDb.Ime = zaposleni.Ime;
-                zaposleniFromDb.Prezime = zaposleni.Prezime;
-                zaposleniFromDb.Email = zaposleni.Email;
-                zaposleniFromDb.JMBG = zaposleni.JMBG;
-                zaposleniFromDb.DatumRodjenja = zaposleni.DatumRodjenja;
-                zaposleniFromDb.Profesija = zaposleni.Profesija;
-                zaposleniFromDb.RadnoMesto = zaposleni.RadnoMesto;
-                zaposleniFromDb.Grad = zaposleni.Grad;
-                zaposleniFromDb.Adresa = zaposleni.Adresa;
-                zaposleniFromDb.Fiksni = zaposleni.Fiksni;
-                zaposleniFromDb.Mobilni = zaposleni.Mobilni;
-                zaposleniFromDb.Napomena = zaposleni.Napomena;
-                zaposleniFromDb.StepenStrucneSpremeId = zaposleni.StepenStrucneSpremeId;
-                if (zaposleniFromDb.ImageUrl != null)
+                var zaposleniFromDb = _context.Zaposleni.FirstOrDefault(u => u.Id == zaposleni.Id);
+                if (zaposleniFromDb != null)
                 {
-                    zaposleniFromDb.ImageUrl = zaposleni.ImageUrl;
+                    zaposleniFromDb.Ime = zaposleni.Ime;
+                    zaposleniFromDb.Prezime = zaposleni.Prezime;
+                    zaposleniFromDb.Email = zaposleni.Email;
+                    zaposleniFromDb.JMBG = zaposleni.JMBG;
+                    zaposleniFromDb.DatumRodjenja = zaposleni.DatumRodjenja;
+                    zaposleniFromDb.Profesija = zaposleni.Profesija;
+                    zaposleniFromDb.RadnoMesto = zaposleni.RadnoMesto;
+                    zaposleniFromDb.Grad = zaposleni.Grad;
+                    zaposleniFromDb.Adresa = zaposleni.Adresa;
+                    zaposleniFromDb.Fiksni = zaposleni.Fiksni;
+                    zaposleniFromDb.Mobilni = zaposleni.Mobilni;
+                    zaposleniFromDb.Napomena = zaposleni.Napomena;
+                    zaposleniFromDb.StepenStrucneSpremeId = zaposleni.StepenStrucneSpremeId;
+                    if (zaposleniFromDb.ImageUrl != null)
+                    {
+                        zaposleniFromDb.ImageUrl = zaposleni.ImageUrl;
+                    }
+
                 }
-              
             }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex, "{Repo} Greska prilikom update zaposlenog", typeof(Zaposleni));
+                throw;
+            }
+           
         }
     }
 }

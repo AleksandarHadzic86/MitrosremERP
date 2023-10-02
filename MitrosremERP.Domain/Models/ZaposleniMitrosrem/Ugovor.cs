@@ -14,7 +14,7 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
     public class Ugovor
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string BrojUgovora { get; set; } = null!;
         public string TipUgovora { get; set; } = null!;
         public DateOnly DatumPocetka { get; set; }
@@ -24,7 +24,7 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
 
 
         [ForeignKey("ZaposleniId")]
-        public int ZaposleniId { get; set; }
+        public Guid ZaposleniId { get; set; }
         public Zaposleni Zaposleni { get; set; } = null!;
     }
 }
