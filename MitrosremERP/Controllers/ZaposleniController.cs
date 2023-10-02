@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MitrosremERP.Aplication.Data;
 using MitrosremERP.Aplication.IRepositories;
-using MitrosremERP.Aplication.ViewModels;
+using MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM;
 using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 using MitrosremERP.Infrastructure.Repositories;
 using AutoMapper;
@@ -10,6 +10,7 @@ using System.Data;
 using System.Drawing.Printing;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using MitrosremERP.Aplication.ViewModels;
 
 namespace MitrosremERP.Controllers
 {
@@ -34,9 +35,9 @@ namespace MitrosremERP.Controllers
             {
                 var pageSize = 3;
                 var zaposleniLista = await _unitOfWork.ZaposleniRepository.GetZaposleniPaginationAsync(sortOrder, searchString, pageNumber ?? 1, 8);
-                var zaposleniVMs = _autoMapper.Map<IEnumerable<ZaposleniVM>>(zaposleniLista);
+                var zaposleniVMs = _autoMapper.Map<IEnumerable<ZaposleniVMIndex>>(zaposleniLista);
 
-                var zaposleniVMPaginatedList = new PaginatedList<ZaposleniVM>(
+                var zaposleniVMPaginatedList = new PaginatedList<ZaposleniVMIndex>(
                     zaposleniVMs.ToList(),
                     zaposleniLista.Count,
                     pageNumber ?? 1,

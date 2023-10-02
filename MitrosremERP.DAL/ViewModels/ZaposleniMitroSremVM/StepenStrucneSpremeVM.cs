@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MitrosremERP.Aplication.ViewModels
+namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
 {
     public class StepenStrucneSpremeVM
     {
@@ -17,6 +17,6 @@ namespace MitrosremERP.Aplication.ViewModels
         [Display(Name = "Stepen obrazovanja")]
         public string StepenObrazovanja { get; set; } = null!;
 
-        public ICollection<Zaposleni> Zaposleni { get; set; } = null!;
+        public ICollection<ZaposleniVM> Zaposleni { get; set; } = null!;
     }
 }

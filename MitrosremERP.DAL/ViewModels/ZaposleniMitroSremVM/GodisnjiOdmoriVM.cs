@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MitrosremERP.Aplication.ViewModels
+namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
 {
     public class GodisnjiOdmoriVM
     {
@@ -36,7 +36,7 @@ namespace MitrosremERP.Aplication.ViewModels
 
         [ForeignKey("ZaposleniId")]
         public Guid ZaposleniId { get; set; }
-        public Zaposleni Zaposleni { get; set; } = null!;
+        public ZaposleniVM Zaposleni { get; set; } = null!;
 
     }
 }
