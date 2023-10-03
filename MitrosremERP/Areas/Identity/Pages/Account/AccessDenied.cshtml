@@ -1,10 +1,18 @@
 ﻿@page
 @model AccessDeniedModel
 @{
-    ViewData["Title"] = "Access denied";
+    ViewData["Title"] = "Zabranjen Pristup";
 }
 
-<header>
-    <h1 class="text-danger">@ViewData["Title"]</h1>
-    <p class="text-danger">You do not have access to this resource.</p>
-</header>
+<div class="my-3">
+    <div class="p-5 text-center">
+        <div class="container py-3">
+            <img class="w-25 my-3"  src="/images/default/stop.png"/>
+            <h1 class="text-body-emphasis">Pristup zabranje!</h1>
+            <p class="col-lg-8 mx-auto lead">
+                Nemate ovlašćenja da pristupite traženoj stranici, obratite se administratoru.
+            </p>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Pocetna</a>
+        </div>
+    </div>
+</div>

@@ -15,9 +15,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using MitrosremERP.Domain.Models.IdentityModel;
 
 namespace MitrosremERP.Areas.Identity.Pages.Account
 {
@@ -29,13 +32,15 @@ namespace MitrosremERP.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -43,6 +48,7 @@ namespace MitrosremERP.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _roleManager = roleManager;
         }
 
         /// <summary>
@@ -74,8 +80,9 @@ namespace MitrosremERP.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Email obavezan")]
+            [EmailAddress(ErrorMessage = "Email adresa nije validna")]
+            [RegularExpression(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", ErrorMessage = "Email adresa nije validna.")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
@@ -83,25 +90,53 @@ namespace MitrosremERP.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-            [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Required(ErrorMessage = "Lozinka obavezna")]
+            [StringLength(100, ErrorMessage = "{0} mora da bude {2} i maksimalno {1} karaktera.", MinimumLength = 6)]
+            [RegularExpression(@"^(?=.*[A-Z])(?=.*[^a-zA-Z\d]).+$", ErrorMessage = "Lozinka mora da sadrži bar jedno veliko slovo i jedan znak (!?.,#%@)")]
+            [Display(Name = "Lozinka")]
             public string Password { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Potvrdi Lozinku")]
+            [Compare("Password", ErrorMessage = "Lozinke se ne podudaraju")]
             public string ConfirmPassword { get; set; }
+
+            [Required(ErrorMessage = "Uloga obavezna")]
+            public string Role { get; set; }
+            [ValidateNever]
+            public IEnumerable<SelectListItem> RoleList { get; set; }
+            [Required(ErrorMessage = "Ime je obavezno")]
+            public string Ime { get; set; }
+            [Required(ErrorMessage = "Prezime je obavezno")]
+            public string Prezime { get; set; }
+            [Required(ErrorMessage = "Adresa obavezna")]
+            public string? Adresa { get; set; }
+            [Required(ErrorMessage = "Grad je obavezan")]
+            public string? Grad { get; set; }
+            [Required(ErrorMessage = "Mobilni obavezan")]
+            public string Mobilni { get; set; }
         }
 
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+            if (!_roleManager.RoleExistsAsync(Roles.Role_Admin).GetAwaiter().GetResult())
+            {
+                _roleManager.CreateAsync(new IdentityRole(Roles.Role_Admin)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(Roles.Role_Zaposleni)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(Roles.Role_Korisnik)).GetAwaiter().GetResult();
+            }
+            Input = new()
+            {
+                RoleList = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem
+                {
+                    Text = i,
+                    Value = i
+                })
+            };
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
@@ -113,9 +148,13 @@ namespace MitrosremERP.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                user.Ime = Input.Ime;
+                user.Prezime = Input.Prezime;
+                user.Adresa = Input.Adresa;
+                user.Grad = Input.Grad;
+                user.Mobilni = Input.Mobilni;
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
@@ -149,21 +188,28 @@ namespace MitrosremERP.Areas.Identity.Pages.Account
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
-
+            Input = new()
+            {
+                RoleList = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem
+                {
+                    Text = i,
+                    Value = i
+                })
+            };
             // If we got this far, something failed, redisplay form
             return Page();
         }
 
-        private IdentityUser CreateUser()
+        private ApplicationUser CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<IdentityUser>();
+                return Activator.CreateInstance<ApplicationUser>();
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(IdentityUser)}'. " +
-                    $"Ensure that '{nameof(IdentityUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(ApplicationUser)}'. " +
+                    $"Ensure that '{nameof(ApplicationUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }

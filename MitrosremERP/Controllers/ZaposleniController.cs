@@ -11,10 +11,12 @@ using System.Drawing.Printing;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using MitrosremERP.Aplication.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using MitrosremERP.Domain.Models.IdentityModel;
 
 namespace MitrosremERP.Controllers
 {
-   
+    [Authorize(Roles = Roles.Role_Admin)]
     public class ZaposleniController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
