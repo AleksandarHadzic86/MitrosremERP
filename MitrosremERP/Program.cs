@@ -10,7 +10,10 @@ using Microsoft.AspNetCore.Identity;
 using Serilog;
 using MitrosremERP.Aplication.IRepositories;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using MitrosremERP.Domain.Models.EmailSender;
+using MitrosremERP.Infrastructure.EmailSevices;
+using System.Configuration;
+using System.Net.Mail;
+using MitrosremERP.Domain.Models.Email;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,15 +50,20 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.LogoutPath = $"/Identity/Account/Logout";
     options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
 });
+
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IEmailSender, EmailSender>();
+builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
 
 Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration).CreateLogger();
 
 builder.Host.UseSerilog();
+//builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+
+
+
 var app = builder.Build();
 
 
