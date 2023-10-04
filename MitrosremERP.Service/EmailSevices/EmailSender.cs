@@ -5,53 +5,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Net.Mail;
 using MitrosremERP.Domain.Models.Email;
-using System.Net;
+using Azure.Core;
+using MimeKit;
+using MailKit.Net.Smtp;
 
 namespace MitrosremERP.Infrastructure.EmailSevices
 {
     public class EmailSender : IEmailSender
     {
-        private readonly EmailSettings _emailSettings;
-
-        public EmailSender(IOptions<EmailSettings> emailSettings)
+        public Task SendEmailAsync(string email, string subject, string Htmlmessage)
         {
-            _emailSettings = emailSettings.Value;
-        }
-        public Task SendEmailAsync(string email, string subject, string message)
-        {
+            var emailToSend = new MimeMessage();
+            emailToSend.From.Add(MailboxAddress.Parse("potvrdaregistracije@duskohadzic.com"));
+            emailToSend.To.Add(MailboxAddress.Parse(email));
+            emailToSend.Subject = subject;  
+            emailToSend.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = Htmlmessage };
 
-            var mail = "potvrdaregistracije@duskohadzic.com";
-            var pw = "sr53ce17";
-            var client = new SmtpClient("mail.duskohadzic.com", 465)
+            using (var emailClient = new SmtpClient())
             {
-                EnableSsl = true,
-                Credentials = new NetworkCredential(mail, pw)
-            };
-            return client.SendMailAsync(
-                new MailMessage(from: mail,
-                                 to: email,
-                                 subject,
-                                 message));
-            //var smtpClient = new SmtpClient
-            //{
-            //    Host = _emailSettings.SmtpServer,
-            //    Port = _emailSettings.SmtpPort,
-            //    Credentials = new NetworkCredential(_emailSettings.UserName, _emailSettings.Password),
-            //    EnableSsl = true,
-            //};
-
-            //var mailMessage = new MailMessage
-            //{
-            //    From = new MailAddress(_emailSettings.SenderEmail, _emailSettings.SenderName),
-            //    Subject = subject,
-            //    IsBodyHtml = true,
-            //    Body = htmlMessage, // Use the htmlMessage parameter for the email body.
-            //};
-
-            //mailMessage.To.Add(email);
-            //await smtpClient.SendMailAsync(mailMessage);
+                emailClient.Connect("smtp.gmail.com", 587, MailKit.Security.SecureSocketOptions.StartTls);
+                emailClient.Authenticate("duskohadzic1956@gmail.com", "kkbt azls sxgm uofs");
+                emailClient.Send(emailToSend);
+                emailClient.Disconnect(true);
+            }
+            return Task.CompletedTask;
         }
     }
 }
