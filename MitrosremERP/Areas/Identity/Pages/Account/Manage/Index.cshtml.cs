@@ -15,12 +15,12 @@ namespace MitrosremERP.Areas.Identity.Pages.Account.Manage
 {
     public class IndexModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
         public IndexModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -73,15 +73,15 @@ namespace MitrosremERP.Areas.Identity.Pages.Account.Manage
             public string Mobilni { get; set; }
         }
 
-        private async Task LoadAsync(IdentityUser user)
+        private async Task LoadAsync(ApplicationUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            //var ime = user.Ime;
-            //var prezime = user.Prezime;
-            //var adresa = user.Adresa;
-            //var grad = user.Grad;   
-            //var mobilni = user.Mobilni;
+            var ime = user.Ime;
+            var prezime = user.Prezime;
+            var adresa = user.Adresa;
+            var grad = user.Grad;
+            var mobilni = user.Mobilni;
 
 
             Username = userName;
@@ -89,11 +89,11 @@ namespace MitrosremERP.Areas.Identity.Pages.Account.Manage
             Input = new InputModel
             {
                 PhoneNumber = phoneNumber,
-                //Ime = ime,
-                //Prezime = prezime,
-                //Adresa = adresa,    
-                //Grad = grad,
-                //Mobilni = mobilni
+                Ime = ime,
+                Prezime = prezime,
+                Adresa = adresa,
+                Grad = grad,
+                Mobilni = mobilni
             };
         }
 

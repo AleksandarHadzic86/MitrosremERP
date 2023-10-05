@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MitrosremERP.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class ExtendIdentityUser1 : Migration
+    public partial class ExtendApplicationUser1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
