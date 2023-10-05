@@ -24,6 +24,7 @@ using MitrosremERP.Domain.Models.IdentityModel;
 
 namespace MitrosremERP.Areas.Identity.Pages.Account
 {
+    [Authorize(Roles = Roles.Role_Admin)]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -105,6 +106,7 @@ namespace MitrosremERP.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             [Required(ErrorMessage = "Uloga obavezna")]
+            [Display(Name = "Uloga")]
             public string Role { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
@@ -113,9 +115,9 @@ namespace MitrosremERP.Areas.Identity.Pages.Account
             [Required(ErrorMessage = "Prezime je obavezno")]
             public string Prezime { get; set; }
             [Required(ErrorMessage = "Adresa obavezna")]
-            public string? Adresa { get; set; }
+            public string Adresa { get; set; }
             [Required(ErrorMessage = "Grad je obavezan")]
-            public string? Grad { get; set; }
+            public string Grad { get; set; }
             [Required(ErrorMessage = "Mobilni obavezan")]
             public string Mobilni { get; set; }
         }
@@ -159,7 +161,9 @@ namespace MitrosremERP.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
+                    _logger.LogInformation("Korisnik je kreirao nalog sa lozinkom.");
+
+                    await _userManager.AddToRoleAsync(user, Input.Role);
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -170,8 +174,8 @@ namespace MitrosremERP.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    await _emailSender.SendEmailAsync(Input.Email, "Potvrdi email adresu",
+                        $"Molim vas potvrdite nalog <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>kliknite ovde</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

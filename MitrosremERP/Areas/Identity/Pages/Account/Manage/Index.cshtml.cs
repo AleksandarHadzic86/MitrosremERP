@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using MitrosremERP.Domain.Models.IdentityModel;
 
 namespace MitrosremERP.Areas.Identity.Pages.Account.Manage
 {
@@ -58,18 +59,41 @@ namespace MitrosremERP.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            [Required(ErrorMessage = "Ime je obavezno")]
+
+            public string Ime { get; set; }
+            [Required(ErrorMessage = "Prezime je obavezno")]
+            public string Prezime { get; set; }
+            [Required(ErrorMessage = "Adresa obavezna")]
+            public string Adresa { get; set; }
+            [Required(ErrorMessage = "Grad je obavezan")]
+            public string Grad { get; set; }
+            [Required(ErrorMessage = "Mobilni obavezan")]
+            public string Mobilni { get; set; }
         }
 
         private async Task LoadAsync(IdentityUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            //var ime = user.Ime;
+            //var prezime = user.Prezime;
+            //var adresa = user.Adresa;
+            //var grad = user.Grad;   
+            //var mobilni = user.Mobilni;
+
 
             Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                //Ime = ime,
+                //Prezime = prezime,
+                //Adresa = adresa,    
+                //Grad = grad,
+                //Mobilni = mobilni
             };
         }
 

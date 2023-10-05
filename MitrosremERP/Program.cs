@@ -14,6 +14,8 @@ using MitrosremERP.Infrastructure.EmailSevices;
 using System.Configuration;
 using System.Net.Mail;
 using MitrosremERP.Domain.Models.Email;
+using Microsoft.AspNetCore.Builder;
+using MitrosremERP.Domain.Models.IdentityModel;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -96,7 +98,6 @@ app.UseAuthorization();
 app.UseSession();
 
 app.MapRazorPages();
-
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}"

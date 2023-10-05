@@ -1,8 +1,13 @@
 ﻿@page
 @model ConfirmEmailChangeModel
 @{
-    ViewData["Title"] = "Confirm email change";
+    ViewData["Title"] = "Potvedjena promena email-a";
 }
 
-<h1>@ViewData["Title"]</h1>
-<partial name="_StatusMessage" model="Model.StatusMessage" />
+<div class="mt-5 card">
+    <h3 class="card-header text-success">Email uspesno promenjen</h3>
+    <div class="card-body">
+        <partial name="_StatusMessage" model="Model.StatusMessage" />
+    </div>
+</div>
+

@@ -64,23 +64,27 @@ namespace MitrosremERP.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Email obavezan")]
+            [EmailAddress(ErrorMessage = "Email adresa nije validna")]
+            [RegularExpression(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", ErrorMessage = "Email adresa nije validna.")]
+            [Display(Name = "Email")]
             public string Email { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [DataType(DataType.Password)]
+            [Required(ErrorMessage = "Lozinka obavezna")]
+            [StringLength(100, ErrorMessage = "{0} mora da bude {2} i maksimalno {1} karaktera.", MinimumLength = 6)]
+            [RegularExpression(@"^(?=.*[A-Z])(?=.*[^a-zA-Z\d]).+$", ErrorMessage = "Lozinka mora da sadrži bar jedno veliko slovo i jedan znak (!?.,#%@)")]
+            [Display(Name = "Lozinka")]
             public string Password { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Display(Name = "Remember me?")]
+            [Display(Name = "Zapamti me?")]
             public bool RememberMe { get; set; }
         }
 
@@ -114,7 +118,7 @@ namespace MitrosremERP.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
+                    _logger.LogInformation("Korisnik je ulogovan.");
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
@@ -123,12 +127,12 @@ namespace MitrosremERP.Areas.Identity.Pages.Account
                 }
                 if (result.IsLockedOut)
                 {
-                    _logger.LogWarning("User account locked out.");
+                    _logger.LogWarning("Korisnik je izlogovan.");
                     return RedirectToPage("./Lockout");
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Neuspesno logovanje.");
                     return Page();
                 }
             }

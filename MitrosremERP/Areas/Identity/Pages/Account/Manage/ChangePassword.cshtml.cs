@@ -52,28 +52,28 @@ namespace MitrosremERP.Areas.Identity.Pages.Account.Manage
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [DataType(DataType.Password)]
-            [Display(Name = "Current password")]
+            [Required(ErrorMessage = "Lozinka obavezna")]
+            [StringLength(100, ErrorMessage = "{0} mora da bude {2} i maksimalno {1} karaktera.", MinimumLength = 6)]
+            [RegularExpression(@"^(?=.*[A-Z])(?=.*[^a-zA-Z\d]).+$", ErrorMessage = "Lozinka mora da sadrži bar jedno veliko slovo i jedan znak (!?.,#%@)")]
+            [Display(Name = "Trenutna lozinka")]
             public string OldPassword { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-            [DataType(DataType.Password)]
-            [Display(Name = "New password")]
+            [Required(ErrorMessage = "Lozinka obavezna")]
+            [StringLength(100, ErrorMessage = "{0} mora da bude {2} i maksimalno {1} karaktera.", MinimumLength = 6)]
+            [RegularExpression(@"^(?=.*[A-Z])(?=.*[^a-zA-Z\d]).+$", ErrorMessage = "Lozinka mora da sadrži bar jedno veliko slovo i jedan znak (!?.,#%@)")]
+            [Display(Name = "Nova lozinka")]
             public string NewPassword { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [DataType(DataType.Password)]
-            [Display(Name = "Confirm new password")]
-            [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+            [Display(Name = "Potvrdi Lozinku")]
+            [Compare("NewPassword", ErrorMessage = "Lozinke se ne podudaraju")]
             public string ConfirmPassword { get; set; }
         }
 
@@ -82,7 +82,7 @@ namespace MitrosremERP.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Nije moguce ucitati korisnika sa Id '{_userManager.GetUserId(User)}'.");
             }
 
             var hasPassword = await _userManager.HasPasswordAsync(user);
@@ -104,7 +104,7 @@ namespace MitrosremERP.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Nije moguce ucitati korisnika sa ID '{_userManager.GetUserId(User)}'.");
             }
 
             var changePasswordResult = await _userManager.ChangePasswordAsync(user, Input.OldPassword, Input.NewPassword);
@@ -118,8 +118,8 @@ namespace MitrosremERP.Areas.Identity.Pages.Account.Manage
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            _logger.LogInformation("User changed their password successfully.");
-            StatusMessage = "Your password has been changed.";
+            _logger.LogInformation("Korisnik je uspesno promenio lozinku");
+            StatusMessage = "Vasa lozinka je uspesno zamenjena";
 
             return RedirectToPage();
         }

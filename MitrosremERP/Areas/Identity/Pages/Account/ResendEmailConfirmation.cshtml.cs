@@ -45,8 +45,10 @@ namespace MitrosremERP.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Email obavezan")]
+            [EmailAddress(ErrorMessage = "Email adresa nije validna")]
+            [RegularExpression(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", ErrorMessage = "Email adresa nije validna.")]
+            [Display(Name = "Email")]
             public string Email { get; set; }
         }
 
@@ -64,7 +66,7 @@ namespace MitrosremERP.Areas.Identity.Pages.Account
             var user = await _userManager.FindByEmailAsync(Input.Email);
             if (user == null)
             {
-                ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
+                ModelState.AddModelError(string.Empty, "Verifikacioni email je poslat. Proverite email.");
                 return Page();
             }
 
@@ -78,10 +80,10 @@ namespace MitrosremERP.Areas.Identity.Pages.Account
                 protocol: Request.Scheme);
             await _emailSender.SendEmailAsync(
                 Input.Email,
-                "Confirm your email",
-                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                "Potvrdi Email",
+                $"Molim vas potvrdite email <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>kliknite</a>.");
 
-            ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
+            ModelState.AddModelError(string.Empty, "Verifikacioni email poslat, proverite email.");
             return Page();
         }
     }
