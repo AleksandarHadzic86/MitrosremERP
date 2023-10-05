@@ -8,22 +8,22 @@
         Layout = "/Views/Shared/_Layout.cshtml";
     }
 }
+<div class="px-3 d-flex justify-content-center" style="margin-top: 80px;">
+    <div class="col-xxl-8  px-3">
 
-<h1>Uredi svoj nalog</h1>
-
-<div>
-    <h2>Promeni podasavanja svog naloga</h2>
-    <hr />
-    <div class="row">
-        <div class="col-md-3">
-            <partial name="_ManageNav" />
-        </div>
-        <div class="col-md-9">
-            @RenderBody()
+        <div class="card mb-4 mb-xl-0">
+            <h2 class="card-header">Podasavanja naloga</h2>
+            <div class="row my-4">
+                <div class="col-xxl-3">
+                    <partial name="_ManageNav" />
+                </div>
+                <div class="col-xxl-9">
+                    @RenderBody()
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
 @section Scripts {
     @RenderSection("Scripts", required: false)
 }
