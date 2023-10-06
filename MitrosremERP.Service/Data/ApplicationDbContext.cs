@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MitrosremERP.Domain.Models.IdentityModel;
 using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
+using MitrosremERP.Infrastructure.Data;
+using MitrosremERP.Infrastructure.DbInitilizer;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -28,6 +30,10 @@ namespace MitrosremERP.Aplication.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            //modelBuilder.ApplyConfiguration(new RoleSeedConfiguration());
+            //modelBuilder.ApplyConfiguration(new UserSeedConfiguration());
+            //modelBuilder.ApplyConfiguration(new UserRoleSeedConfiguration());
+
 
             Guid zaposleniId1 = Guid.NewGuid();
             Guid zaposleniId2 = Guid.NewGuid();
@@ -41,24 +47,24 @@ namespace MitrosremERP.Aplication.Data
             Guid ugovorId1 = Guid.NewGuid();
 
             modelBuilder.Entity<Zaposleni>().HasData(
-                new Zaposleni { Id = zaposleniId1, Ime = "Aleksandar", Prezime = "Hadzic", Grad = "Sr.Mitrovica", Adresa = "Stari Sor", JMBG = "1702986890023", Mobilni = "0605574477",Profesija = "Elektro Tehnicar",StepenStrucneSpremeId = 4,RadnoMesto = "Odrzavanje el.instalacija",ImageUrl = "", DatumRodjenja = new DateTime(2000, 1, 1), Email = "mitrosrem@ad.rs", PolOsobeId = 1 },
-                new Zaposleni { Id = zaposleniId2, Ime = "Petar", Prezime = "Petrovic", Grad = "Sid", Adresa = "BB", JMBG = "4302386890023", Mobilni = "06553427", Profesija = "Masinski Tehnicar", StepenStrucneSpremeId = 4,RadnoMesto = "Odrzavanje masicna", ImageUrl = "", DatumRodjenja = new DateTime(2000, 1, 1), Email = "mitrosrem@ad.rs", PolOsobeId = 1 },
-                new Zaposleni { Id = zaposleniId3, Ime = "Jovan", Prezime = "Jovanovic", Grad = "Sabac", Adresa = "BB", JMBG = "2132986890023", Mobilni = "0605574477", Profesija = "Diplomirani Tehnolog", StepenStrucneSpremeId = 6,RadnoMesto = "Tehnolog hrane", ImageUrl = "",DatumRodjenja = new DateTime(2000, 1, 1), Email = "mitrosrem@ad.rs", PolOsobeId = 2 },
+                new Zaposleni { Id = zaposleniId1, Ime = "Aleksandar", Prezime = "Hadzic", Grad = "Sr.Mitrovica", Adresa = "Stari Sor", JMBG = "1702986890023", Mobilni = "0605574477", Profesija = "Elektro Tehnicar", StepenStrucneSpremeId = 4, RadnoMesto = "Odrzavanje el.instalacija", ImageUrl = "", DatumRodjenja = new DateTime(2000, 1, 1), Email = "mitrosrem@ad.rs", PolOsobeId = 1 },
+                new Zaposleni { Id = zaposleniId2, Ime = "Petar", Prezime = "Petrovic", Grad = "Sid", Adresa = "BB", JMBG = "4302386890023", Mobilni = "06553427", Profesija = "Masinski Tehnicar", StepenStrucneSpremeId = 4, RadnoMesto = "Odrzavanje masicna", ImageUrl = "", DatumRodjenja = new DateTime(2000, 1, 1), Email = "mitrosrem@ad.rs", PolOsobeId = 1 },
+                new Zaposleni { Id = zaposleniId3, Ime = "Jovan", Prezime = "Jovanovic", Grad = "Sabac", Adresa = "BB", JMBG = "2132986890023", Mobilni = "0605574477", Profesija = "Diplomirani Tehnolog", StepenStrucneSpremeId = 6, RadnoMesto = "Tehnolog hrane", ImageUrl = "", DatumRodjenja = new DateTime(2000, 1, 1), Email = "mitrosrem@ad.rs", PolOsobeId = 2 },
                 new Zaposleni { Id = zaposleniId4, Ime = "Sreten", Prezime = "Sretenovic", Grad = "Beograd", Adresa = "BB", JMBG = "3123986890023", Mobilni = "0605574477", Profesija = "System Administrator", StepenStrucneSpremeId = 5, RadnoMesto = "IT Administrator", ImageUrl = "", DatumRodjenja = new DateTime(2000, 1, 1), Email = "mitrosrem@ad.rs", PolOsobeId = 1 },
                 new Zaposleni { Id = zaposleniId5, Ime = "Goran", Prezime = "Goranic", Grad = "Sr.Mitrovica", Adresa = "Stari Sor", JMBG = "1702986890023", Mobilni = "0605574477", Profesija = "Developer", StepenStrucneSpremeId = 5, RadnoMesto = "Programer", ImageUrl = "", DatumRodjenja = new DateTime(2000, 1, 1), Email = "mitrosrem@ad.rs", PolOsobeId = 1 },
-                new Zaposleni { Id = zaposleniId6, Ime = "MIlan", Prezime = "Milanovic", Grad = "Sid", Adresa = "BB", JMBG = "4302386890023", Mobilni = "06553427", Profesija = "Master Ekonomista", StepenStrucneSpremeId = 7,RadnoMesto = "Finansije", ImageUrl = "", DatumRodjenja = new DateTime(2000, 1, 1), Email = "mitrosrem@ad.rs", PolOsobeId = 1 },
+                new Zaposleni { Id = zaposleniId6, Ime = "MIlan", Prezime = "Milanovic", Grad = "Sid", Adresa = "BB", JMBG = "4302386890023", Mobilni = "06553427", Profesija = "Master Ekonomista", StepenStrucneSpremeId = 7, RadnoMesto = "Finansije", ImageUrl = "", DatumRodjenja = new DateTime(2000, 1, 1), Email = "mitrosrem@ad.rs", PolOsobeId = 1 },
                 new Zaposleni { Id = zaposleniId7, Ime = "Zorana", Prezime = "Zoranovic", Grad = "Sabac", Adresa = "BB", JMBG = "2132986890023", Mobilni = "0605574477", Profesija = "Diplomirani Ekonomista", StepenStrucneSpremeId = 6, RadnoMesto = "Racunovodstvo", ImageUrl = "", DatumRodjenja = new DateTime(2000, 1, 1), Email = "mitrosrem@ad.rs", PolOsobeId = 2 },
                 new Zaposleni { Id = zaposleniId8, Ime = "Stevan", Prezime = "Stevanovic", Grad = "Beograd", Adresa = "BB", JMBG = "3123986890023", Mobilni = "0605574477", Profesija = "Trgovac", StepenStrucneSpremeId = 6, RadnoMesto = "Maloprodaja", ImageUrl = "", DatumRodjenja = new DateTime(2000, 1, 1), Email = "mitrosrem@ad.rs", PolOsobeId = 1 }
                 );
             modelBuilder.Entity<Ugovor>().HasData(
-                new Ugovor { Id = ugovorId1, BrojUgovora = "MS0001", TipUgovora ="Odredjeno", DatumPocetka = new DateOnly(1992, 2, 17),BrojDanaGodisnjeg = 22, ZaposleniId = zaposleniId1}
+                new Ugovor { Id = ugovorId1, BrojUgovora = "MS0001", TipUgovora = "Odredjeno", DatumPocetka = new DateOnly(1992, 2, 17), BrojDanaGodisnjeg = 22, ZaposleniId = zaposleniId1 }
                 );
-            
+
             modelBuilder.Entity<Pol>().HasData(
-                new Pol { Id = 1, PolOsobe = "Musko"},
-                new Pol { Id = 2, PolOsobe = "Zensko"}
+                new Pol { Id = 1, PolOsobe = "Musko" },
+                new Pol { Id = 2, PolOsobe = "Zensko" }
                 );
-            
+
             modelBuilder.Entity<StepenStrucneSpreme>().HasData(
                    new StepenStrucneSpreme { Id = 1, StepenObrazovanja = "I Stepen - Osnovno Obrazovanje." },
                    new StepenStrucneSpreme { Id = 2, StepenObrazovanja = "II Stepen - Strucno osposobljavanje u trajanju do 1 godine." },

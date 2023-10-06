@@ -11,14 +11,22 @@ namespace MitrosremERP.Domain.Models.IdentityModel
     public class ApplicationUser : IdentityUser
     {
         [Required(ErrorMessage = "Ime je obavezno")]
-        public string Ime { get; set; } = null!;
+        [Display(Name = "Ime")]
+        public string ImeKorisnik { get; set; } = null!;
         [Required(ErrorMessage = "Prezime je obavezno")]
-        public string Prezime { get; set; } = null!;
+        [Display(Name = "Prezime")]
+        public string PrezimeKorisnik { get; set; } = null!;
+
         [Required(ErrorMessage = "Adresa obavezna")]
-        public string? Adresa { get; set; }
+        [Display(Name = "Adresa")]
+        public string AdresaKorisnik { get; set; } = null!;
+
         [Required(ErrorMessage = "Grad je obavezan")]
-        public string? Grad { get; set; }
+        [Display(Name = "Grad")]
+        public string GradKorisnik { get; set; } = null!;
+
         [Required(ErrorMessage = "Mobilni obavezan")]
-        public string Mobilni { get; set; } = null!;
+        [Display(Name = "Mobilni")]
+        public string MobilniKorisnik { get; set; } = null!;
     }
 }

@@ -1,0 +1,95 @@
+﻿@using MitrosremERP.Aplication.ViewModels.IdentityVM;
+@model IEnumerable<ApplicationUserVM>
+
+@{
+    ViewBag.Title = "Lista Korisnika";
+}
+
+<div class=" align-items-center container-fluid table-responsive-sm sm-font-size pb-5">
+
+    <div class="row mt-5 mb-3 pb-3 border-bottom ">
+        <div class="d-flex align-items-center col-6">
+            <span class="fs-4 text-primary ">Lista Administratora</span>
+        </div>
+    </div>
+
+    <form asp-action="Index" method="get">
+        <div class="row ">
+            <div class=" col-xxl-5 col-xl-8 col-sm-12 mt-xxl-3 mt-lg-3">
+                <div class="input-group mb-3 no-color w-10">
+                    <div class="input-group-text">
+                        <i class='bx bx-search'></i>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Pretraga ime ili prezime" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                    <input type="submit" value="Search" class="btn btn-outline-secondary" />
+                    <div class="input-group-text ">
+                        <a asp-action="Index" class="text-danger row align-content-center"><i class='bx bx-refresh ' style="font-size: 26px;"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-7 col-xl-4 col-sm-12 mt-xxl-3 mt-lg-3 my-sm-2 text-xxl-end text-xl-end text-lg-end text-sm-end">
+                <a id="register" asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary">
+                    <i class='bx bx-plus-circle'></i>
+                    Kreiraj Korisnika
+                </a>
+            </div>
+        </div>
+    </form>
+    <div class="card">
+        <table class="table mt-2 align-middle mb-0 bg-white">
+
+            <thead class="bg-light ">
+                <tr>
+                    <th>Ime i Prezime</th>
+                    <th>Email</th>
+                    <th>Uloga</th>
+                    <th>Adresa</th>
+                    <th>Grad</th>
+                    <th>Mobilni</th>
+                    <th>Akcija</th>
+                </tr>
+            </thead>
+            @foreach (var korisnici in Model)
+            {
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">                           
+                                <div class="ms-3">
+                                    <p class=" mb-1">@korisnici.Ime @korisnici.Prezime</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">@korisnici.Email</p>
+                        </td>
+                       
+                        <td>
+                            <p class="fw-normal text-white rounded text-center bg-info mb-1">@korisnici.Role</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">@korisnici.Adresa</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">@korisnici.Grad</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">@korisnici.Mobilni</p>
+                        </td>
+                        <td>
+                            <div class="btn btn-group" role="group">
+                                <a asp-controller="Zaposleni" asp-action="Update" asp-route-id="@korisnici.Id" class="btn btn-primary mx-2"><i class='bx bxs-edit'></i>Uredi</a>
+
+                                <a asp-controller="Zaposleni" asp-action="Delete" asp-route-id="@korisnici.Id" class="btn btn-danger mx-2"><i class='bx bx-trash'></i>Obrisi</a>
+                            </div>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            }
+
+        </table>
+
+    </div>
+</div>

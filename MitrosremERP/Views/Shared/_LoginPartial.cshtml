@@ -6,12 +6,12 @@
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
-        <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Zdravo @UserManager.GetUserName(User)!</a>
+        <li class="nav-item">
+            <a id="manage" class="nav-link d-flex align-items-center" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i class='bx bx-user-circle' style="font-size:22px;"></i> <span class="mx-1 pt-1">@UserManager.GetUserName(User)</span> </a>
     </li>
-    <li class="nav-item">
-        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Izloguj se</button>
+        <li class="nav-item">
+            <form id="logoutForm" class="form-inline d-flex align-items-center" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button id="logout" type="submit" class="nav-link btn btn-link  border-0 d-flex align-items-center"><i class='bx bx-log-out-circle' style="font-size:22px;"></i><span class="pt-1 mx-1">Izloguj se</span></button>
         </form>
     </li>
 }
@@ -21,11 +21,13 @@ else
     <li class="nav-item">
         <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Registruj se</a>
     </li> *@
-    <li class="nav-item">
-            <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">
-                <i class='bx bx-log-in' style="font-size:18px;"></i>
-                Uloguj se
-            </a>
+        <li class="nav-item  ">
+
+            <a class="nav-link d-flex align-items-center" id="login" asp-area="Identity" asp-page="/Account/Login">
+                <i class='bx bx-log-in-circle' style="font-size:22px;"></i><span class="mx-1 pt-1">Uloguj se </span>
+@*                 <i class='bx bx-log-in ' style="font-size:22px;"></i><span class="mt-1 mx-1">Uloguj se </span>
+ *@            </a>
+            
     </li>
 }
 </ul>

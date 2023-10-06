@@ -16,6 +16,7 @@ using System.Net.Mail;
 using MitrosremERP.Domain.Models.Email;
 using Microsoft.AspNetCore.Builder;
 using MitrosremERP.Domain.Models.IdentityModel;
+using MitrosremERP.Infrastructure.DbInitilizer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,6 +49,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("CanDeleteRoles", policy =>
+    {
+        policy.RequireRole(Roles.Role_SuperAdmin); 
+    });
+}); 
+
 
 /*builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>();*/
 
@@ -60,7 +69,8 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.AddScoped<IDbinitilizer, DbInitilizer>();
+//builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
 
 Log.Logger = new LoggerConfiguration()
@@ -92,7 +102,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+SeedDatabase();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseSession();
@@ -104,3 +114,12 @@ app.MapControllerRoute(
  );
 
 app.Run();
+
+void SeedDatabase()
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbInitilizer = scope.ServiceProvider.GetRequiredService<IDbinitilizer>();
+        dbInitilizer.Initilizer();
+    }
+}

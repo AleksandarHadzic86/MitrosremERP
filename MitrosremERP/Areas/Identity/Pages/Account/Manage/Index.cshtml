@@ -16,31 +16,36 @@
                 <label asp-for="Username" class="form-label"></label>
             </div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.Ime" class="form-control" placeholder="Molim vas unesite ime." />
-                <label asp-for="Input.Ime" class="form-label"></label>
-                <span asp-validation-for="Input.Ime" class="text-danger"></span>
+                <input asp-for="Input.ImeKorisnik" class="form-control" placeholder="Molim vas unesite ime." />
+                <label asp-for="Input.ImeKorisnik" class="form-label"></label>
+                <span asp-validation-for="Input.ImeKorisnik" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.Prezime" class="form-control" placeholder="Molim vas unesite prezime." />
-                <label asp-for="Input.Prezime" class="form-label"></label>
-                <span asp-validation-for="Input.Prezime" class="text-danger"></span>
+                <input asp-for="Input.PrezimeKorisnik" class="form-control" placeholder="Molim vas unesite prezime." />
+                <label asp-for="Input.PrezimeKorisnik" class="form-label"></label>
+                <span asp-validation-for="Input.PrezimeKorisnik" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.Adresa" class="form-control" placeholder="Molim vas unesite adresu." />
-                <label asp-for="Input.Adresa" class="form-label"></label>
-                <span asp-validation-for="Input.Adresa" class="text-danger"></span>
+                <input asp-for="Input.AdresaKorisnik" class="form-control" placeholder="Molim vas unesite adresu." />
+                <label asp-for="Input.AdresaKorisnik" class="form-label"></label>
+                <span asp-validation-for="Input.AdresaKorisnik" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.Grad" class="form-control" placeholder="Molim vas unesite grad." />
-                <label asp-for="Input.Grad" class="form-label"></label>
-                <span asp-validation-for="Input.Grad" class="text-danger"></span>
+                <input asp-for="Input.GradKorisnik" class="form-control" placeholder="Molim vas unesite grad." />
+                <label asp-for="Input.GradKorisnik" class="form-label"></label>
+                <span asp-validation-for="Input.GradKorisnik" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.MobilniKorisnik" class="form-control" placeholder="Molim vas unesite mobilni." />
+                <label asp-for="Input.MobilniKorisnik" class="form-label"></label>
+                <span asp-validation-for="Input.MobilniKorisnik" class="text-danger"></span>
             </div>
             <div class="form-floating mb-5">
-                <input asp-for="Input.Mobilni" class="form-control" placeholder="Molim vas unesite mobilni." />
-                <label asp-for="Input.Mobilni" class="form-label"></label>
-                <span asp-validation-for="Input.Mobilni" class="text-danger"></span>
+                <select disabled asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select">
+                    <option disabled selected>--Odaberi Ulogu Korisnika--</option>
+                </select>
+                <span asp-validation-for="Input.Role" class="text-danger"></span>
             </div>
-
             <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Sacuvaj</button>
         </form>
     </div>

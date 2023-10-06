@@ -8,7 +8,9 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MitrosremERP.Domain.Models.IdentityModel;
 
 namespace MitrosremERP.Areas.Identity.Pages.Account.Manage
@@ -17,13 +19,16 @@ namespace MitrosremERP.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
         }
 
         /// <summary>
@@ -61,44 +66,63 @@ namespace MitrosremERP.Areas.Identity.Pages.Account.Manage
             public string PhoneNumber { get; set; }
 
             [Required(ErrorMessage = "Ime je obavezno")]
-
-            public string Ime { get; set; }
+            [Display(Name = "Uloga")]
+            public string Role { get; set; }
+            [ValidateNever]
+            public IEnumerable<SelectListItem> RoleList { get; set; }
+            public string ImeKorisnik { get; set; }
             [Required(ErrorMessage = "Prezime je obavezno")]
-            public string Prezime { get; set; }
+            public string PrezimeKorisnik { get; set; }
             [Required(ErrorMessage = "Adresa obavezna")]
-            public string Adresa { get; set; }
+            public string AdresaKorisnik { get; set; }
             [Required(ErrorMessage = "Grad je obavezan")]
-            public string Grad { get; set; }
+            public string GradKorisnik { get; set; }
             [Required(ErrorMessage = "Mobilni obavezan")]
-            public string Mobilni { get; set; }
+            public string MobilniKorisnik { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            var ime = user.Ime;
-            var prezime = user.Prezime;
-            var adresa = user.Adresa;
-            var grad = user.Grad;
-            var mobilni = user.Mobilni;
+            var userRoles = await _userManager.GetRolesAsync(user); 
+            var ime = user.ImeKorisnik;
+            var prezime = user.PrezimeKorisnik;
+            var adresa = user.AdresaKorisnik;
+            var grad = user.GradKorisnik;
+            var mobilni = user.MobilniKorisnik;
 
 
             Username = userName;
 
+
             Input = new InputModel
             {
                 PhoneNumber = phoneNumber,
-                Ime = ime,
-                Prezime = prezime,
-                Adresa = adresa,
-                Grad = grad,
-                Mobilni = mobilni
+                ImeKorisnik = ime,
+                PrezimeKorisnik = prezime,
+                AdresaKorisnik = adresa,
+                GradKorisnik = grad,
+                MobilniKorisnik = mobilni,
+                Role = userRoles.FirstOrDefault(),
+                RoleList = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem
+                {
+                    Text = i,
+                    Value = i
+                })
             };
         }
 
         public async Task<IActionResult> OnGetAsync()
         {
+            Input = new()
+            {
+                RoleList = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem
+                {
+                    Text = i,
+                    Value = i
+                })
+            };
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
