@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,8 @@ using MitrosremERP.Domain.Models.IdentityModel;
 
 namespace MitrosremERP.Controllers
 {
+    [Authorize(Roles = Roles.Role_SuperAdmin)]
+
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;
