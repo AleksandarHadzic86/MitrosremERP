@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Zabranjen Pristup";
+}
+
+<div class="my-3">
+    <div class="p-5 text-center">
+        <div class="container py-3">
+            <img class="w-25 my-3" src="/images/default/stop.png" />
+            <h1 class="text-body-emphasis">Pristup zabranje!</h1>
+            <p class="col-lg-8 mx-auto lead">
+                Nemate ovlašćenja da pristupite traženoj stranici, obratite se administratoru.
+            </p>
+            <a asp-controller="Administration" asp-action="ListUsers" class="btn btn-primary">Lista Korisnika</a>
+        </div>
+    </div>
+</div>

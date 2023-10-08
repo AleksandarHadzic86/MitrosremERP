@@ -192,8 +192,8 @@
                                
                             </a>
                         </li>
-@*                          @if (User.IsInRole(Roles.Role_Admin))
- *@                        { 
+                          @if (User.IsInRole(Roles.Role_SuperAdmin))
+                         { 
                             <li class="nav-item dropdown mx-2">
                                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="" role="button" aria-expanded="false"> Administracija</a>
                                 <ul class="dropdown-menu">
@@ -201,11 +201,10 @@
                                         <a class="dropdown-item" id="register" asp-area="Identity" asp-page="/Account/Register">Registruj Korisnika</a>
                                     </li>
                                     <li><a asp-controller="Administration" asp-action="ListUsers" class="dropdown-item">Korisnici</a></li>
-                                    <li><a class="dropdown-item">Uloge</a></li>
-                                    <li><a class="dropdown-item">Uloge Korisnika</a></li>
+
                                 </ul>
                             </li>
-                         @* } *@                     
+                          }                      
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

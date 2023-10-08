@@ -133,7 +133,7 @@ namespace MitrosremERP.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Neuspesno logovanje, korisnik sa unetom e-postom ne postoji.Obratite se administratoru.");
+                    ModelState.AddModelError(string.Empty, "Neuspesno logovanje, Pogresna lozinka ili e-posta.");
                     return Page();
                 }
             }

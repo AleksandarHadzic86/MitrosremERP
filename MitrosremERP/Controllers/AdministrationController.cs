@@ -11,11 +11,13 @@ namespace MitrosremERP.Controllers
     {
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ILogger _logger;
 
-        public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
+        public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager, ILogger<AdministrationController> logger)
         {
             _roleManager = roleManager;
             _userManager = userManager;
+            _logger = logger;
         }
         public IActionResult Index()
         {
@@ -34,13 +36,14 @@ namespace MitrosremERP.Controllers
 
                 var userVM = new ApplicationUserVM
                 {
-                    Email = user.Email,
+                    Id = user.Id,
+                    UserName = user.UserName,
                     Ime = user.ImeKorisnik,
                     Prezime = user.PrezimeKorisnik,
                     Adresa = user.AdresaKorisnik,
                     Grad = user.GradKorisnik,
                     Mobilni = user.MobilniKorisnik,
-                    Role = userRoles.FirstOrDefault() // Assuming a user has only one role, you can modify this if needed
+                    Role = userRoles.FirstOrDefault()
                 };
 
                 model.Add(userVM);
@@ -48,5 +51,88 @@ namespace MitrosremERP.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> UpdateUser(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if(user == null)
+            {
+                _logger.LogError($"User not found for ID: {id}");
+                Response.StatusCode = 404;
+                return View("KorisnikNijePronadjen");
+            }
+
+            if(user.Email == "aleksandarhadzic1986@gmail.com")
+            {
+                return View("../Administration/ZabranjenPristupAdministracija");
+            }
+            var userRoles = await _userManager.GetRolesAsync(user);
+
+            var model = new ApplicationUserVM
+            {
+                Id = user.Id,
+                UserName = user.UserName,             
+                Email = user.Email,
+                Ime = user.ImeKorisnik,
+                Prezime = user.PrezimeKorisnik,
+                Adresa = user.AdresaKorisnik,
+                Grad = user.GradKorisnik,
+                Mobilni = user.MobilniKorisnik,
+                Role = userRoles.FirstOrDefault(),
+                RoleList = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem
+                {
+                    Text = i,
+                    Value = i
+                })
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdateUser(ApplicationUserVM applicationUserVM)
+        {
+            var isSuperAdmin = User.IsInRole(Roles.Role_SuperAdmin);
+            if (isSuperAdmin)
+            {
+                // Ovde možete primeniti pravila za sprečavanje SuperAdmin korisnika da uređuju i brišu naloge.
+            }
+            var user = await _userManager.FindByIdAsync(applicationUserVM.Id);
+            if (user == null)
+            {
+                _logger.LogError($"User not found for ID: {applicationUserVM.Id}");
+                Response.StatusCode = 404;
+                return View("KorisnikNijePronadjen");
+            }
+
+            else
+            {
+                user.Email = applicationUserVM.Email;
+                user.UserName = applicationUserVM.UserName;
+                user.ImeKorisnik = applicationUserVM.Ime;
+                user.PrezimeKorisnik = applicationUserVM.Prezime;
+                user.AdresaKorisnik = applicationUserVM.Adresa;
+                user.GradKorisnik = applicationUserVM.Grad;
+                user.MobilniKorisnik = applicationUserVM.Mobilni;
+                
+                var result = await _userManager.UpdateAsync(user);
+
+
+                if (result.Succeeded)
+                {
+                    TempData["success"] = "Uspešno izmenjeni podaci";
+                    return RedirectToAction("ListUsers");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                
+
+                return View(applicationUserVM);
+
+            }                   
+        }
+       
     }
 }

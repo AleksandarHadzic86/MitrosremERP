@@ -24,7 +24,7 @@ using MitrosremERP.Domain.Models.IdentityModel;
 
 namespace MitrosremERP.Areas.Identity.Pages.Account
 {
-    //[Authorize(Roles = Roles.Role_SuperAdmin)]
+    [Authorize(Roles = Roles.Role_SuperAdmin)]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
@@ -125,14 +125,6 @@ namespace MitrosremERP.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            //_roleManager.CreateAsync(new IdentityRole(Roles.Role_SuperAdmin)).GetAwaiter().GetResult();
-            //_roleManager.CreateAsync(new IdentityRole(Roles.Role_Admin)).GetAwaiter().GetResult();
-            //_roleManager.CreateAsync(new IdentityRole(Roles.Role_AdminZaposleni)).GetAwaiter().GetResult();
-            //_roleManager.CreateAsync(new IdentityRole(Roles.Role_AdminVozila)).GetAwaiter().GetResult();
-            //_roleManager.CreateAsync(new IdentityRole(Roles.Role_AdminMaloprodaja)).GetAwaiter().GetResult();
-            //_roleManager.CreateAsync(new IdentityRole(Roles.Role_AdminCorn)).GetAwaiter().GetResult();
-            //_roleManager.CreateAsync(new IdentityRole(Roles.Role_AdminFinansije)).GetAwaiter().GetResult();
-            //_roleManager.CreateAsync(new IdentityRole(Roles.Role_Korisnik)).GetAwaiter().GetResult();
             Input = new()
             {
                 RoleList = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem

@@ -14,6 +14,7 @@
     </div>
 
     <form asp-action="Index" method="get">
+        
         <div class="row ">
             <div class=" col-xxl-5 col-xl-8 col-sm-12 mt-xxl-3 mt-lg-3">
                 <div class="input-group mb-3 no-color w-10">
@@ -41,7 +42,7 @@
             <thead class="bg-light ">
                 <tr>
                     <th>Ime i Prezime</th>
-                    <th>Email</th>
+                    <th>Korisnicko Ime</th>
                     <th>Uloga</th>
                     <th>Adresa</th>
                     <th>Grad</th>
@@ -51,22 +52,26 @@
             </thead>
             @foreach (var korisnici in Model)
             {
+                
                 <tbody>
                     <tr>
+
                         <td>
                             <div class="d-flex align-items-center">                           
                                 <div class="ms-3">
                                     <p class=" mb-1">@korisnici.Ime @korisnici.Prezime</p>
+                                    <p hidden class="fw-normal mb-1">@korisnici.Id</p>
+
                                 </div>
                             </div>
                         </td>
                         <td>
-                            <p class="fw-normal mb-1">@korisnici.Email</p>
+                            <p class="fw-normal mb-1">@korisnici.UserName</p>
                         </td>
                        
-                        <td>
+                         <td>
                             <p class="fw-normal text-white rounded text-center bg-info mb-1">@korisnici.Role</p>
-                        </td>
+                        </td> 
                         <td>
                             <p class="fw-normal mb-1">@korisnici.Adresa</p>
                         </td>
@@ -76,13 +81,16 @@
                         <td>
                             <p class="fw-normal mb-1">@korisnici.Mobilni</p>
                         </td>
-                        <td>
-                            <div class="btn btn-group" role="group">
-                                <a asp-controller="Zaposleni" asp-action="Update" asp-route-id="@korisnici.Id" class="btn btn-primary mx-2"><i class='bx bxs-edit'></i>Uredi</a>
 
-                                <a asp-controller="Zaposleni" asp-action="Delete" asp-route-id="@korisnici.Id" class="btn btn-danger mx-2"><i class='bx bx-trash'></i>Obrisi</a>
-                            </div>
-                        </td>
+                            <td>
+                                <div class="btn btn-group" role="group">
+                                    <a asp-controller="Administration" asp-action="UpdateUser" asp-route-id="@korisnici.Id" class="btn btn-primary mx-2"><i class='bx bxs-edit'></i>Uredi</a>
+
+                                    <a asp-controller="Administration" asp-action="DeleteUser" asp-route-id="@korisnici.Id" class="btn btn-danger mx-2"><i class='bx bx-trash'></i>Obrisi</a>
+                                </div>
+                            </td>
+                        
+
 
                     </tr>
 

@@ -4,10 +4,9 @@
     ViewData["Title"] = "Profil";
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
-
-<h3 class="px-3">@ViewData["Title"]</h3>
+<h4 class="px-3 mt-xxl-0 mt-lg-4 mt-md-4 mt-sm-4">@ViewData["Title"]</h4>
 <partial name="_StatusMessage" for="StatusMessage" />
-<div class="row px-2">
+<div class="row px-3">
     <div class="col-xxl-11 ">
         <form id="profile-form" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
@@ -40,14 +39,17 @@
                 <label asp-for="Input.MobilniKorisnik" class="form-label"></label>
                 <span asp-validation-for="Input.MobilniKorisnik" class="text-danger"></span>
             </div>
-            <div class="form-floating mb-5">
+            <div class="form-floating mb-3">
                 <select disabled asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select">
                     <option disabled selected>--Odaberi Ulogu Korisnika--</option>
                 </select>
                 <span asp-validation-for="Input.Role" class="text-danger"></span>
             </div>
-            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Sacuvaj</button>
-        </form>
+            <div class="py-3">
+                <button type="submit" class="btn btn-success">Sačuvaj</button>
+            </div>
+@*             <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Sacuvaj</button>
+ *@        </form>
     </div>
 </div>
 

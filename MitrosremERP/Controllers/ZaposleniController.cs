@@ -16,7 +16,7 @@ using MitrosremERP.Domain.Models.IdentityModel;
 
 namespace MitrosremERP.Controllers
 {
-    //[Authorize(Roles = Roles.Role_SuperAdmin)]
+    [Authorize(Roles = Roles.Role_SuperAdmin +","+ Roles.Role_AdminZaposleni)]
     public class ZaposleniController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

@@ -13,9 +13,9 @@
             <input asp-for="Id" hidden />
             <input asp-for="ImageUrl" hidden/>
 
-                  <h-3 class="card-header bg-primary text-white">Izmeni Zaposlenog</h-3> 
+            <h-3 class="card-header bg-primary text-white">Izmeni Zaposlenog</h-3> 
            
-                <div class="row px-3">
+            <div class="row px-3">
                 <div class="col-lg-4 col-sm-8 card-body" >
                         <div class="mb-3">
                             <label class="small mb-1" asp-for="Ime"></label>
@@ -147,30 +147,30 @@
                             </div>
                            
                             <span asp-validation-for="StepenStrucneSpremeId" class="text-danger"></span>
-                    </div>
-                    <div class="mb-3">
-                        <label class="small mb-1" asp-for="PolOsobeId"></label>
-                            <div class="input-group">
-                                <div class="input-group-text">
-                                    <i class='bx bx-male-female'></i>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="PolOsobeId"></label>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <i class='bx bx-male-female'></i>
+                                    </div>
+                                    <select asp-for="PolOsobeId" asp-items="@Model.PolOsobaLista" class="form-select small">
+                                        <option disabled selected>--Odaberi Pol--</option>
+                                    </select>
                                 </div>
-                                <select asp-for="PolOsobeId" asp-items="@Model.PolOsobaLista" class="form-select small">
-                                    <option disabled selected>--Odaberi Pol--</option>
-                                </select>
-                            </div>
                       
-                        <span asp-validation-for="PolOsobaLista" class="text-danger"></span>
-                    </div>
-                    <div class="mb-3">
-                            <label class="small mb-1" asp-for="Napomena"></label>
-                            <div class="input-group">
-                                <div class="input-group-text">
-                                    <i class='bx bx-detail'></i>
+                            <span asp-validation-for="PolOsobaLista" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                                <label class="small mb-1" asp-for="Napomena"></label>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <i class='bx bx-detail'></i>
+                                    </div>
+                                    <textarea rows="3" asp-for="Napomena" class="form-control "></textarea>
                                 </div>
-                                <textarea rows="3" asp-for="Napomena" class="form-control "></textarea>
-                            </div>
-                            <span asp-validation-for="Napomena" class="text-danger"></span>
-                    </div>
+                                <span asp-validation-for="Napomena" class="text-danger"></span>
+                        </div>
                        
                 </div>
             </div>

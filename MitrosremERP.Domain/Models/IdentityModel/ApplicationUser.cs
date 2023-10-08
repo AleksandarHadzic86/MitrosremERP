@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -28,5 +30,7 @@ namespace MitrosremERP.Domain.Models.IdentityModel
         [Required(ErrorMessage = "Mobilni obavezan")]
         [Display(Name = "Mobilni")]
         public string MobilniKorisnik { get; set; } = null!;
+      
+       
     }
 }
