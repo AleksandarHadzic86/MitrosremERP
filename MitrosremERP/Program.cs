@@ -73,6 +73,8 @@ builder.Services.AddScoped<IDbinitilizer, DbInitilizer>();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
 
+
+
 Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration).CreateLogger();
 

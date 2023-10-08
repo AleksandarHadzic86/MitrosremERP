@@ -1,4 +1,18 @@
-﻿
+﻿@using Azure;
+@using Microsoft.AspNetCore.Identity;
+@using MitrosremERP.Domain.Models.IdentityModel;
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 @{
-    Layout = "/Views/Shared/_Layout.cshtml";
+    if (!SignInManager.IsSignedIn(User))
+    {
+        Layout = "/Views/Shared/_Layout-Login.cshtml";
+
+    }
+    else
+    {
+        Layout = "_Layout";
+    }
+    
+   
 }
