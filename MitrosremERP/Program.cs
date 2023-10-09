@@ -87,7 +87,7 @@ var app = builder.Build();
 
 
 app.UseRequestLocalization();
-// Configure the HTTP request pipeline.
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error/");

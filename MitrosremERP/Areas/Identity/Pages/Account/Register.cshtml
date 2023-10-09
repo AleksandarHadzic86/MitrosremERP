@@ -4,6 +4,150 @@
     ViewData["Title"] = "Registracija";
 }
 
+<div class="container-fluid mt-5 mb-5 ">
+    <form id="registerForm" autocomplete="off" class="row" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <div class="px-3 col-xxl-9 col-lg-12">
+            <div class="card mb-4 mb-xl-0">
+                <h-3 class="card-header bg-primary text-white">Kreiraj Korisnika</h-3>
+
+                <div class="row px-3">
+                    <div class="col-lg-4 col-sm-8 card-body">
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Input.Ime"></label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class='bx bxs-user-circle'></i>
+                                </div>
+                                <input asp-for="Input.Ime" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Input.Ime" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Input.Prezime"></label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class='bx bxs-user-circle'></i>
+                                </div>
+                                <input asp-for="Input.Prezime" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Input.Prezime" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Input.Email"></label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class='bx bx-envelope'></i>
+                                </div>
+                                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                            </div>
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Input.Adresa"></label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class='bx bx-home'></i>
+                                </div>
+                                <input asp-for="Input.Adresa" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Input.Adresa" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Input.Grad"></label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class='bx bxs-city'></i>
+                                </div>
+                                <input asp-for="Input.Grad" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Input.Grad" class="text-danger"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-4 col-sm-8 card-body ">
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Input.Mobilni"></label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class='bx bx-mobile'></i>
+                                </div>
+                                <input asp-for="Input.Mobilni" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Input.Mobilni" class="text-danger"></span>
+                        </div>
+                      
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Input.Password"></label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class='bx bxs-city'></i>
+                                </div>
+                                <input asp-for="Input.Password" type="password" class="form-control" autocomplete="new-password" aria-required="true" />
+                            </div>
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Input.ConfirmPassword"></label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class='bx bxs-city'></i>
+                                </div>
+                                <input asp-for="Input.ConfirmPassword" type="password" class="form-control" autocomplete="new-password" aria-required="true" />
+                            </div>
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Input.Role"></label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class='bx bxs-user-detail'></i>
+                                </div>
+                                <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="small form-select">
+                                    <option disabled selected>--Odaberi ulogu korisnika--</option>
+                                </select>
+                            </div>
+
+                            <span asp-validation-for="Input.Role" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xxl-3 col-lg-12 px-3">
+            <div class="card mb-4 mb-xl-0">
+                <div class="card-header bg-info text-white ">Uloge korisnika Hijerarhija</div>
+                <div class="card-body text-start ">
+                    <p>* SuperAdmin</p>
+                    <p>* Admin</p>
+                    <p>* AdministratorMaloprodaja</p>
+                    <p>* AdministratorCorn</p>
+                    <p>* AdministratorFinansije</p>
+                    <p>* AdministratorZaposleni</p>
+                    <p>* AdministratorVozila</p>
+                    <p>* Korisnik</p>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="col-8 px-3 py-3">
+            <button type="submit" class="btn btn-success">Kreiraj</button>
+            <a asp-controller="Administration" asp-action="ListUsers" class="btn btn-secondary">Povratak na listu</a>
+            <a id="resend-confirmation" class="btn btn-info" asp-page="./ResendEmailConfirmation">Ponovo posalji potvrdni email za registraciju</a>
+             
+        </div>
+    </form>
+
+</div>
+
+
+@* 
   <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
     <div class="px-3 d-flex justify-content-center " style="margin-top: 80px;">
         <div class="card mb-5  col-xxl-7 col-xl-9 col-lg-10 col-md-12 col-sm-12">
@@ -59,7 +203,6 @@
                                     <span asp-validation-for="Input.Role" class="text-danger"></span>
                                 </div>
                                 
-                               @*  <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-secondary">Registruj</button> *@
                          </div>
                     <div class="py-3">
                         <button type="submit" class="btn btn-success">Kreiraj</button>
@@ -69,7 +212,7 @@
                </div>             
            </div>
         </div>
- </form>   
+ </form>    *@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

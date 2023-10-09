@@ -24,7 +24,7 @@
                     title: 'Obrisano!',
                     text: ime + " " + prezime + ' je obrisan.',
                     icon: 'success',
-                    timer: 3000, 
+                    timer: 2500, 
                     showConfirmButton: false 
                 });
                 setTimeout(function () {

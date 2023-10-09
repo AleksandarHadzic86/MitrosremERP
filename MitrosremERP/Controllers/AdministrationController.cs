@@ -94,11 +94,7 @@ namespace MitrosremERP.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateUser(ApplicationUserVM applicationUserVM)
         {
-            var isSuperAdmin = User.IsInRole(Roles.Role_SuperAdmin);
-            if (isSuperAdmin)
-            {
-                // Ovde možete primeniti pravila za sprečavanje SuperAdmin korisnika da uređuju i brišu naloge.
-            }
+
             var user = await _userManager.FindByIdAsync(applicationUserVM.Id);
             if (user == null)
             {
@@ -136,6 +132,37 @@ namespace MitrosremERP.Controllers
 
             }                   
         }
-       
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                _logger.LogError($"User not found for ID: {id}");
+                Response.StatusCode = 404;
+                return View("KorisnikNijePronadjen");
+            }
+            if (user.Email == "aleksandarhadzic1986@gmail.com")
+            {
+                return View("../Administration/ZabranjenPristupAdministracija");
+            }
+            // Add any additional authorization checks here to determine if the user can be deleted
+
+            var result = await _userManager.DeleteAsync(user);
+
+            if (result.Succeeded)
+            {
+                TempData["success"] = "Zaposleni uspesno obrisan";
+                return RedirectToAction("ListUsers");
+            }
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error.Description);
+            }
+
+            return View("ListUsers", id); 
+        }
+
     }
 }
