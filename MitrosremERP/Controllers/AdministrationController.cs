@@ -92,6 +92,8 @@ namespace MitrosremERP.Controllers
             return View(model);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> UpdateUser(ApplicationUserVM applicationUserVM)
         {
 
@@ -133,6 +135,8 @@ namespace MitrosremERP.Controllers
             }                   
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> DeleteUser(string id)
         {
             var user = await _userManager.FindByIdAsync(id);

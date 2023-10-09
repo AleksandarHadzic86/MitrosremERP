@@ -41,13 +41,13 @@
 
             <thead class="bg-light ">
                 <tr>
-                    <th>Ime i Prezime</th>
+                    <th class="px-3">Ime i Prezime</th>
                     <th>Korisnicko Ime</th>
                     <th>Uloga</th>
                     <th>Adresa</th>
                     <th>Grad</th>
                     <th>Mobilni</th>
-                    <th>Akcija</th>
+                    <th class="px-3">Akcija</th>
                 </tr>
             </thead>
             @foreach (var korisnici in Model)
@@ -82,16 +82,17 @@
                             <p class="fw-normal mb-1">@korisnici.Mobilni</p>
                         </td>
 
-                            <td>
-                                <div class="btn btn-group" role="group">
-                                    <a asp-controller="Administration" asp-action="UpdateUser" asp-route-id="@korisnici.Id" class="btn btn-primary mx-2"><i class='bx bxs-edit'></i>Uredi</a>
-                                <form asp-controller="Administration" asp-action="DeleteUser" asp-route-id="@korisnici.Id" method="post">
-                                    <input asp-for="@korisnici.Id" hidden />
-
-                                     <button type="button"  onclick="confirmDelete('@korisnici.Ime', '@korisnici.Prezime')" class="btn btn-danger"><i class='bx bx-trash'></i>Obrisi</button>
-                                </form>
-                                </div>
-                            </td>                       
+                         <td>
+                            <form asp-controller="Administration" asp-action="DeleteUser" asp-route-id="@korisnici.Id" method="post">
+                                <input asp-for="@korisnici.Id" hidden />
+                                <div class="btnbtn-group" role="group">
+                                    <a asp-action="UpdateUser" asp-route-id="@korisnici.Id" class="btn btn-primary mx-2"><i class='bx bxs-edit'></i>Uredi</a>
+                                      <button onclick="confirmDelete('@korisnici.Ime', '@korisnici.Prezime')" type="button" class="btn btn-danger"><i class='bx bx-trash'></i>Obrisi</button>
+@*                                       <a asp-action="DeleteUser" asp-route-id="@korisnici.Id" class="btn btn-danger mx-2"><i class='bx bx-trash'></i>Delete</a>
+ *@                                 
+                              </div>
+                            </form>
+                         </td>                       
                     </tr>
 
                 </tbody>
@@ -99,7 +100,6 @@
         </table>
     </div>
 </div>
-
 @section Scripts {
     @await Html.PartialAsync("_SweetAlertBrisanje");
 }

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Registracija";
 }
 
-<div class="container-fluid mt-5 mb-5 ">
+<div class="container-fluid mt-5 mb-5">
     <form id="registerForm" autocomplete="off" class="row" asp-route-returnUrl="@Model.ReturnUrl" method="post">
         <div class="px-3 col-xxl-9 col-lg-12">
             <div class="card mb-4 mb-xl-0">
@@ -82,7 +82,7 @@
                             <label class="small mb-1" asp-for="Input.Password"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
-                                    <i class='bx bxs-city'></i>
+                                    <i class='bx bx-key'></i>
                                 </div>
                                 <input asp-for="Input.Password" type="password" class="form-control" autocomplete="new-password" aria-required="true" />
                             </div>
@@ -92,7 +92,7 @@
                             <label class="small mb-1" asp-for="Input.ConfirmPassword"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
-                                    <i class='bx bxs-city'></i>
+                                    <i class='bx bx-key'></i>
                                 </div>
                                 <input asp-for="Input.ConfirmPassword" type="password" class="form-control" autocomplete="new-password" aria-required="true" />
                             </div>
