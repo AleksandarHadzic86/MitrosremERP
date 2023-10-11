@@ -65,18 +65,23 @@ namespace MitrosremERP.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
 
-            [Required(ErrorMessage = "Ime je obavezno")]
             [Display(Name = "Uloga")]
             public string Role { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
+
+            [Required(ErrorMessage = "Ime je obavezno")]
             public string ImeKorisnik { get; set; }
+
             [Required(ErrorMessage = "Prezime je obavezno")]
             public string PrezimeKorisnik { get; set; }
+
             [Required(ErrorMessage = "Adresa obavezna")]
             public string AdresaKorisnik { get; set; }
+
             [Required(ErrorMessage = "Grad je obavezan")]
             public string GradKorisnik { get; set; }
+
             [Required(ErrorMessage = "Mobilni obavezan")]
             public string MobilniKorisnik { get; set; }
         }
@@ -136,6 +141,8 @@ namespace MitrosremERP.Areas.Identity.Pages.Account.Manage
         public async Task<IActionResult> OnPostAsync()
         {
             var user = await _userManager.GetUserAsync(User);
+            var userRoles = await _userManager.GetRolesAsync(user);
+
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -147,16 +154,65 @@ namespace MitrosremERP.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
+             // Check if any properties need to be updated
+            bool needUpdate = false;
+
+            if (Input.ImeKorisnik != user.ImeKorisnik)
             {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
+                user.ImeKorisnik = Input.ImeKorisnik;
+                needUpdate = true;
+            }
+
+            if (Input.PrezimeKorisnik != user.PrezimeKorisnik)
+            {
+                user.PrezimeKorisnik = Input.PrezimeKorisnik;
+                needUpdate = true;
+            }
+
+            if (Input.AdresaKorisnik != user.AdresaKorisnik)
+            {
+                user.AdresaKorisnik = Input.AdresaKorisnik;
+                needUpdate = true;
+            }
+
+            if (Input.GradKorisnik != user.GradKorisnik)
+            {
+                user.GradKorisnik = Input.GradKorisnik;
+                needUpdate = true;
+            }
+
+            if (Input.MobilniKorisnik != user.MobilniKorisnik)
+            {
+                user.MobilniKorisnik = Input.MobilniKorisnik;
+                needUpdate = true;
+            }
+
+            if (Input.Role != userRoles.FirstOrDefault())
+            {
+                // Handle role changes here if needed
+                needUpdate = true;
+            }
+
+            if (needUpdate)
+            {
+                var updateResult = await _userManager.UpdateAsync(user);
+                if (!updateResult.Succeeded)
                 {
-                    StatusMessage = "Unexpected error when trying to set phone number.";
-                    return RedirectToPage();
+                    // Handle the error
+                    StatusMessage = "Greska prilikom azuriranja profila.";
+                    return Page();
                 }
             }
+            //var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            //if (Input.PhoneNumber != phoneNumber)
+            //{
+            //    var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
+            //    if (!setPhoneResult.Succeeded)
+            //    {
+            //        StatusMessage = "Unexpected error when trying to set phone number.";
+            //        return RedirectToPage();
+            //    }
+            //}
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";

@@ -1,1 +1,53 @@
-﻿<script src="~/js/sweetalertbrisanje.js"></script>
+﻿@using MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM;
+@model ZaposleniVM
+
+ <script>
+    function confirmDelete(ime, prezime) {
+        // Dohvati CSRF token iz forme
+        var csrfToken = $('input[name="__RequestVerificationToken"]').val();
+
+        // Pripremi podatke za slanje AJAX zahteva
+        var data = {
+            __RequestVerificationToken: csrfToken
+        };
+
+        Swal.fire({
+            title: 'Da li ste sigurni?',
+            text: 'Upravo cete obrisati  ' + ime + " " + prezime,
+            icon: 'warning',
+            showConfirmButton: true,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Da, obrisi!',
+            cancelButtonText: 'Otkazi'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '@Url.Action("DeletePost", "Zaposleni", new { id = Model.Id })', // Pravilan URL za vašu akciju
+                    type: 'POST',
+                    data: data,
+                    success: function (response) {
+                        // Obrada odgovora od servera (npr. prikazivanje poruke o uspehu)
+                        // For example, you can redirect to a different page or update the UI.
+                        Swal.fire({
+                            title: 'Obrisano!',
+                            text: ime + " " + prezime + ' je obrisan.',
+                            icon: 'success',
+                            timer: 2500,
+                            showConfirmButton: false
+                        });
+
+                        setTimeout(function () {
+                            window.location.href = '@Url.Action("Index", "Zaposleni")'; // Redirect to the index page
+                        }, 3000);
+                    },
+                    error: function (error) {
+                        // Obrada grešaka
+                        // Handle errors, such as displaying an error message to the user.
+                    }
+                });
+            }
+        });
+    }
+</script> 

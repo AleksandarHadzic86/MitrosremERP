@@ -206,7 +206,7 @@ namespace MitrosremERP.Controllers
         {
             try
             {
-                var zaposleni = _unitOfWork.ZaposleniRepository.GetQueryable(z => z.Id == zaposleniVM.Id);
+                var zaposleni =  _unitOfWork.ZaposleniRepository.GetQueryable(z => z.Id == zaposleniVM.Id);
                 if (zaposleni == null)
                 {
                     Response.StatusCode = 404;
@@ -214,16 +214,16 @@ namespace MitrosremERP.Controllers
                 }
                 else
                 {
-                    var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, zaposleniVM.ImageUrl.TrimStart('\\'));
-                    List<string> exclusions = new List<string>
-                     {  "user.jpg", "userW.jpg" };
-                    if (!exclusions.Contains(Path.GetFileName(oldImagePath)))
-                    {
-                        if (System.IO.File.Exists(oldImagePath))
-                        {
-                            System.IO.File.Delete(oldImagePath);
-                        }
-                    }
+                    //var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, zaposleniVM.ImageUrl.TrimStart('\\'));
+                    //List<string> exclusions = new List<string>
+                    // {  "user.jpg", "userW.jpg" };
+                    //if (!exclusions.Contains(Path.GetFileName(oldImagePath)))
+                    //{
+                    //    if (System.IO.File.Exists(oldImagePath))
+                    //    {
+                    //        System.IO.File.Delete(oldImagePath);
+                    //    }
+                    //}
 
                     var zaposleniMapper = _autoMapper.Map<Zaposleni>(zaposleniVM);
                     _unitOfWork.ZaposleniRepository.Delete(zaposleniMapper);
