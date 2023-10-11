@@ -6,7 +6,7 @@
 }
 
 <div class="container-fluid mt-5 mb-5">
-    <form asp-controller="Zaposleni" asp-action="DeletePost" asp-route-id="@Model.Id" method="post" class="row" autocomplete="off" enctype="multipart/form-data">
+    <form asp-controller="Zaposleni" asp-action="DeletePost"  method="post" class="row" autocomplete="off" enctype="multipart/form-data">
         <div class="col-lg-8 px-3">
             <div class="card mb-4 mb-xl-0">
                 <input asp-for="Id" hidden />
@@ -188,12 +188,36 @@
 
         <div class="col-8 px-3 py-3">
 
-            <button onclick="confirmDelete('@Model.Ime', '@Model.Prezime')" type="button" class="btn btn-danger">Obrisi</button>
+            <button type="submit" onclick="confirmDelete()" class="btn btn-danger">Obrisi</button>
             <a asp-controller="Zaposleni" asp-action="Index" class="btn btn-secondary">Povratak na listu</a>
         </div>
     </form>
 </div>
 
 @section Scripts {
-    @await Html.PartialAsync("_SweetAlertBrisanje");
+    <script>
+        function confirmDelete() {
+            if (confirm("Da li ste sigurni da želite obrisati?")) {
+                // Dohvati CSRF token iz forme
+                var csrfToken = $('input[name="__RequestVerificationToken"]').val();
+
+                // Pripremi podatke za slanje AJAX zahteva
+                var data = {
+                    __RequestVerificationToken: csrfToken
+                };
+
+                $.ajax({
+                    url: '@Url.Action("DeletePost", "Zaposleni")', // Pravilan URL za vašu akciju
+                    type: 'POST',
+                    data: data,
+                    success: function (response) {
+                        // Obrada odgovora od servera (npr. prikazivanje poruke o uspehu)
+                    },
+                    error: function (error) {
+                        // Obrada grešaka
+                    }
+                });
+            }
+        }
+    </script>
 }
