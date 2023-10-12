@@ -206,14 +206,33 @@ namespace MitrosremERP.Controllers
         {
             try
             {
-                var zaposleni =  _unitOfWork.ZaposleniRepository.GetQueryable(z => z.Id == zaposleniVM.Id);
+                var zaposleni =  _unitOfWork.ZaposleniRepository.GetQueryable(z => z.Id == zaposleniVM.Id).FirstOrDefault();
                 if (zaposleni == null)
                 {
                     Response.StatusCode = 404;
                     return View("ZaposleniNijePronadjen");
                 }
+
                 else
                 {
+                    if (!string.IsNullOrEmpty(zaposleni.ImageUrl))
+                    {
+                        var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, zaposleni.ImageUrl.TrimStart('\\'));
+                        List<string> exclusions = new List<string>
+                                     {  "user.jpg", "userW.jpg" };
+                        if (!exclusions.Contains(Path.GetFileName(oldImagePath)))
+                        {
+                            if (System.IO.File.Exists(oldImagePath))
+                            {
+                                System.IO.File.Delete(oldImagePath);
+                            }
+                        }
+                    }
+                    var zaposleniMapper = _autoMapper.Map<Zaposleni>(zaposleni);
+                    _unitOfWork.ZaposleniRepository.Delete(zaposleniMapper);
+                    await _unitOfWork.SaveAsync();
+                    TempData["success"] = "Zaposleni uspesno obrisan";
+                    return RedirectToAction("Index");
                     //var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, zaposleniVM.ImageUrl.TrimStart('\\'));
                     //List<string> exclusions = new List<string>
                     // {  "user.jpg", "userW.jpg" };
@@ -224,15 +243,10 @@ namespace MitrosremERP.Controllers
                     //        System.IO.File.Delete(oldImagePath);
                     //    }
                     //}
-
-                    var zaposleniMapper = _autoMapper.Map<Zaposleni>(zaposleniVM);
-                    _unitOfWork.ZaposleniRepository.Delete(zaposleniMapper);
-                    await _unitOfWork.SaveAsync();
-                    TempData["success"] = "Zaposleni uspesno obrisan";
-                    return RedirectToAction("Index");
                 }
-
             }
+
+            
             catch (Exception ex)
             {
                 Response.StatusCode = 500;

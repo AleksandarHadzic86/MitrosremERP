@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MitrosremERP.Aplication.ViewModels.IdentityVM;
 using MitrosremERP.Domain.Models.IdentityModel;
+using System.Data;
 
 namespace MitrosremERP.Controllers
 {
@@ -59,14 +60,14 @@ namespace MitrosremERP.Controllers
         public async Task<IActionResult> UpdateUser(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
-            if(user == null)
+            if (user == null)
             {
                 _logger.LogError($"User not found for ID: {id}");
                 Response.StatusCode = 404;
                 return View("KorisnikNijePronadjen");
             }
 
-            if(user.Email == "aleksandarhadzic1986@gmail.com")
+            if (user.Email == "aleksandarhadzic1986@gmail.com")
             {
                 return View("../Administration/ZabranjenPristupAdministracija");
             }
@@ -74,8 +75,10 @@ namespace MitrosremERP.Controllers
 
             var model = new ApplicationUserVM
             {
+
+
                 Id = user.Id,
-                UserName = user.UserName,             
+                UserName = user.UserName,
                 Email = user.Email,
                 Ime = user.ImeKorisnik,
                 Prezime = user.PrezimeKorisnik,
@@ -105,35 +108,42 @@ namespace MitrosremERP.Controllers
                 return View("KorisnikNijePronadjen");
             }
 
+            var userRoles = await _userManager.GetRolesAsync(user);
+
+            user.Email = applicationUserVM.Email;
+            user.UserName = applicationUserVM.UserName;
+            user.ImeKorisnik = applicationUserVM.Ime;
+            user.PrezimeKorisnik = applicationUserVM.Prezime;
+            user.AdresaKorisnik = applicationUserVM.Adresa;
+            user.GradKorisnik = applicationUserVM.Grad;
+            user.MobilniKorisnik = applicationUserVM.Mobilni;
+
+            if (applicationUserVM.Role != null)
+            {
+                var currentRoles = await _userManager.GetRolesAsync(user);
+                await _userManager.RemoveFromRolesAsync(user, currentRoles);
+                await _userManager.AddToRoleAsync(user, applicationUserVM.Role);
+            }
+
+            var result = await _userManager.UpdateAsync(user);
+
+            if (result.Succeeded)
+            {
+                TempData["success"] = "Uspešno izmenjeni podaci";
+                return RedirectToAction("ListUsers");
+            }
+
             else
             {
-                user.Email = applicationUserVM.Email;
-                user.UserName = applicationUserVM.UserName;
-                user.ImeKorisnik = applicationUserVM.Ime;
-                user.PrezimeKorisnik = applicationUserVM.Prezime;
-                user.AdresaKorisnik = applicationUserVM.Adresa;
-                user.GradKorisnik = applicationUserVM.Grad;
-                user.MobilniKorisnik = applicationUserVM.Mobilni;
-                
-                var result = await _userManager.UpdateAsync(user);
-
-
-                if (result.Succeeded)
-                {
-                    TempData["success"] = "Uspešno izmenjeni podaci";
-                    return RedirectToAction("ListUsers");
-                }
-
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError("", error.Description);
                 }
-                
-
-                return View(applicationUserVM);
-
-            }                   
+            }
+           
+            return View(applicationUserVM);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
 

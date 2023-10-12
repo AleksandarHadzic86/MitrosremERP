@@ -84,10 +84,9 @@
 
                          <td>
                             <form asp-controller="Administration" asp-action="DeleteUser" asp-route-id="@korisnici.Id" method="post">
-                                <input asp-for="@korisnici.Id" hidden />
                                 <div class="btnbtn-group" role="group">
                                     <a asp-action="UpdateUser" asp-route-id="@korisnici.Id" class="btn btn-primary mx-2"><i class='bx bxs-edit'></i>Uredi</a>
-                                      <button onclick="confirmDelete('@korisnici.Ime', '@korisnici.Prezime')" type="button" class="btn btn-danger"><i class='bx bx-trash'></i>Obrisi</button>
+                                      <button onclick="confirmDelete('@korisnici.Ime', '@korisnici.Prezime', '@korisnici.Id')" type="button" class="btn btn-danger"><i class='bx bx-trash'></i>Obrisi</button>
 @*                                       <a asp-action="DeleteUser" asp-route-id="@korisnici.Id" class="btn btn-danger mx-2"><i class='bx bx-trash'></i>Delete</a>
  *@                                 
                               </div>
@@ -100,6 +99,6 @@
         </table>
     </div>
 </div>
-@* @section Scripts {
-    @await Html.PartialAsync("_SweetAlertBrisanje");
-} *@
+ @section Scripts {
+    @await Html.PartialAsync("_SweetAlertBrisanjeAdministracija");
+} 

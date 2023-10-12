@@ -131,7 +131,7 @@ namespace MitrosremERP.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Nije moguce ucitati korisnika sa ID '{_userManager.GetUserId(User)}'.");
             }
 
             await LoadAsync(user);
@@ -145,7 +145,7 @@ namespace MitrosremERP.Areas.Identity.Pages.Account.Manage
 
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Nije moguce ucitati korisnika sa ID '{_userManager.GetUserId(User)}'.");
             }
 
             if (!ModelState.IsValid)
@@ -215,7 +215,8 @@ namespace MitrosremERP.Areas.Identity.Pages.Account.Manage
             //}
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            TempData["success"] = "Uspešno izmenjeni podaci";
+            //StatusMessage = "Vaš profil je ažuriran";
             return RedirectToPage();
         }
     }
