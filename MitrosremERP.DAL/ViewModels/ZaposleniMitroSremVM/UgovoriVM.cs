@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
 {
@@ -43,6 +44,7 @@ namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
 
         [ForeignKey("ZaposleniId")]
         public Guid ZaposleniId { get; set; }
+        [ValidateNever]
         public ZaposleniVM Zaposleni { get; set; } = null!;
     }
 }

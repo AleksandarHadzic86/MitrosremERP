@@ -1,0 +1,117 @@
+﻿@using MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM;
+@using MitrosremERP.Aplication.ViewModels;
+@using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
+
+@model PaginatedList<UgovoriVM>
+@{
+    ViewBag.Title = "Ugovori";
+}
+<div class=" align-items-center container-fluid table-responsive-sm sm-font-size pb-5">
+
+    <div class="row mt-5 mb-3 pb-3 border-bottom ">
+        <div class="d-flex align-items-center col-6">
+            <span class="fs-4 text-primary ">Ugovori</span>
+        </div>
+    </div>
+
+    <form asp-action="Index" method="get">
+        <div class="row ">
+            <div class=" col-xxl-5 col-xl-8 col-sm-12 mt-xxl-3 mt-lg-3">
+                <div class="input-group mb-3 no-color w-10">
+                    <div class="input-group-text">
+                        <i class='bx bx-search'></i>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Pretraga ime ili prezime" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                    <input type="submit" value="Search" class="btn btn-outline-secondary" />
+                    <div class="input-group-text ">
+                        <a asp-action="Index" class="text-danger row align-content-center"><i class='bx bx-refresh ' style="font-size: 26px;"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-7 col-xl-4 col-sm-12 mt-xxl-3 mt-lg-3 my-sm-2 text-xxl-end text-xl-end text-lg-end text-sm-end">
+                <a asp-controller="Zaposleni" asp-action="Create" class="btn btn-primary">
+                    <i class='bx bx-plus-circle'></i>
+                    Kreiraj Ugovor
+                </a>
+            </div>
+        </div>
+    </form>
+    <div class="card">
+        <table class="table mt-2 align-middle mb-0 bg-white">
+
+            <thead class="bg-light ">
+                <tr>
+                    <th class="px-3">Ime i Prezime</th>
+                    <th>Broj ugovora</th>
+                    <th>Tip ugovora</th>
+                    <th>Datum pocetka</th>
+                    <th>Datum zavrsetka</th>
+                    <th>Broj dana godisnjeg</th>
+                    <th class="px-3">Akcija</th>
+                </tr>
+            </thead>
+            @foreach (var ugovori in Model)
+            {
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="ms-3">
+                                     <p class="fw-bold mb-1">@ugovori.Zaposleni.Ime @ugovori.Zaposleni.Prezime</p>
+                                    <p class="text-muted mb-0">@ugovori.Zaposleni.Mobilni</p> 
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">@ugovori.BrojUgovora</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">@ugovori.TipUgovora</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">@ugovori.DatumPocetka</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">@ugovori.DatumZavrsetka</p>
+                        </td>
+                        <td>
+                            <div class="btnbtn-group" role="group">
+                               @*  <a asp-controller="Zaposleni" asp-action="Update" asp-route-id="@zaposleni.Id" class="btn btn-primary mx-2"><i class='bx bxs-edit'></i>Uredi</a>
+
+                                @if (User.IsInRole(Roles.Role_SuperAdmin))
+                                {
+                                    <a asp-controller="Zaposleni" asp-action="Delete" asp-route-id="@zaposleni.Id" class="btn btn-danger mx-2"><i class='bx bx-trash'></i>Obrisi</a>
+                                } *@
+                            </div>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            }
+
+        </table>
+
+    </div>
+    @{
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    }
+
+    <div class="my-3">
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-pageNumber="@(Model.PageIndex - 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-outline-secondary text-black @prevDisabled">
+            Previous
+        </a>
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-pageNumber="@(Model.PageIndex + 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-outline-secondary text-black @nextDisabled">
+            Next
+        </a>
+    </div>
+</div>

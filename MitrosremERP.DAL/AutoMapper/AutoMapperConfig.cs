@@ -19,6 +19,7 @@ namespace MitrosremERP.Aplication.AutoMapper
             CreateMap<Pol, SelectListItem>()
                  .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.PolOsobe))           
                  .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id.ToString()));
+            CreateMap<Ugovor, UgovoriVM>().ReverseMap();
         }
     }
 }
