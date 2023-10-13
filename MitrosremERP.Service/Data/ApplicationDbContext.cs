@@ -57,7 +57,7 @@ namespace MitrosremERP.Aplication.Data
                 new Zaposleni { Id = zaposleniId8, Ime = "Stevan", Prezime = "Stevanovic", Grad = "Beograd", Adresa = "BB", JMBG = "3123986890023", Mobilni = "0605574477", Profesija = "Trgovac", StepenStrucneSpremeId = 6, RadnoMesto = "Maloprodaja", ImageUrl = "", DatumRodjenja = new DateTime(2000, 1, 1), Email = "mitrosrem@ad.rs", PolOsobeId = 1 }
                 );
             modelBuilder.Entity<Ugovor>().HasData(
-                new Ugovor { Id = ugovorId1, BrojUgovora = "MS0001", TipUgovora = "Odredjeno", DatumPocetka = new DateOnly(1992, 2, 17), BrojDanaGodisnjeg = 22, ZaposleniId = zaposleniId1 }
+                new Ugovor { Id = ugovorId1, BrojUgovora = "MS0001", TipUgovora = "Odredjeno", DatumPocetka = new DateTime(1992, 2, 17), BrojDanaGodisnjeg = 22, ZaposleniId = zaposleniId1 }
                 );
 
             modelBuilder.Entity<Pol>().HasData(

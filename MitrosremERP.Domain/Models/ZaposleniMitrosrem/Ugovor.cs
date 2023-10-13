@@ -17,8 +17,8 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
         public Guid Id { get; set; }
         public string BrojUgovora { get; set; } = null!;
         public string TipUgovora { get; set; } = null!;
-        public DateOnly DatumPocetka { get; set; }
-        public DateOnly? DatumZavrsetka { get; set; }
+        public DateTime DatumPocetka { get; set; }
+        public DateTime? DatumZavrsetka { get; set; }
         public int BrojDanaGodisnjeg { get; set; }
         public string? Napomena { get; set; }
 

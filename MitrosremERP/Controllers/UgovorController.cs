@@ -3,6 +3,8 @@ using MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM;
 using MitrosremERP.Aplication.ViewModels;
 using AutoMapper;
 using MitrosremERP.Aplication.IRepositories;
+using Microsoft.EntityFrameworkCore;
+using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 
 namespace MitrosremERP.Controllers
 {
@@ -43,5 +45,22 @@ namespace MitrosremERP.Controllers
                 return View("../ErrorCodes/InternalServerError");
             }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Create(Guid id)
+        {
+            var zaposleni = await _unitOfWork.ZaposleniRepository.GetByIdAsync(id);
+
+            if (zaposleni == null)
+            {
+                Response.StatusCode = 404;
+                return View("../Zaposleni/ZaposleniNijePronadjen");
+            }
+                UgovoriVM ugovoriVM = new UgovoriVM();
+                ugovoriVM.Zaposleni = _autoMapper.Map<ZaposleniVM>(zaposleni);
+                return View(ugovoriVM);
+                    
+        }
+
     }
 }

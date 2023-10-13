@@ -25,14 +25,30 @@ namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
         [Display(Name = "Tip ugovora")]
         public string TipUgovora { get; set; } = null!;
 
-        [DataType(DataType.Date, ErrorMessage = "Obavezan unos datuma")]
-        [Display(Name = "Datum Pocetka")]
-        [DisplayFormat(DataFormatString = "{0:dd,MM,yyyy}", ApplyFormatInEditMode = true)]
-        public DateOnly DatumPocetka { get; set; }
 
-        [DataType(DataType.Date)]
+        private DateTime _datumPocetka = DateTime.MinValue;
+
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Datum Pocetka")]
+        [Required(ErrorMessage = "Datum je obavezan")]
+        public DateTime DatumPocetka
+        {
+            get
+            {
+
+                return (_datumPocetka == DateTime.MinValue) ? DateTime.Now : _datumPocetka;
+            }
+            set
+            {
+                _datumPocetka = value;
+            }
+        }
+
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Datum Zavrsetka")]
-        public DateOnly? DatumZavrsetka { get; set; }
+        public DateTime? DatumZavrsetka { get; set; } 
+
+
 
         [Required(ErrorMessage = "Obavezan unos broj dana godisnjeg odmora")]
         [Display(Name = "Broj Dana godisnjeg odmora")]
