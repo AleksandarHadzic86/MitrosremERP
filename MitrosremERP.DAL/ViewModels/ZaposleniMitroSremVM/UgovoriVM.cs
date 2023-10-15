@@ -52,7 +52,7 @@ namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
 
         [Required(ErrorMessage = "Obavezan unos broj dana godisnjeg odmora")]
         [Display(Name = "Broj Dana godisnjeg odmora")]
-        [Length(1, 40, ErrorMessage = "Minimum 1 dan, maksmimum 40 dana godisnjeg odmora")]
+        [Range(1, 40, ErrorMessage = "Minimum 1 dan, maksmimum 40 dana godisnjeg odmora")]
         public int BrojDanaGodisnjeg { get; set; }
 
         public string? Napomena { get; set; }
@@ -61,6 +61,6 @@ namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
         [ForeignKey("ZaposleniId")]
         public Guid ZaposleniId { get; set; }
         [ValidateNever]
-        public ZaposleniVM Zaposleni { get; set; } = null!;
+        public ZaposleniVM ZaposleniVM { get; set; } = null!;
     }
 }

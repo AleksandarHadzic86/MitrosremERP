@@ -9,7 +9,6 @@ using System.Globalization;
 using Microsoft.AspNetCore.Identity;
 using Serilog;
 using MitrosremERP.Aplication.IRepositories;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using MitrosremERP.Infrastructure.EmailSevices;
 using System.Configuration;
 using System.Net.Mail;
@@ -17,6 +16,7 @@ using MitrosremERP.Domain.Models.Email;
 using Microsoft.AspNetCore.Builder;
 using MitrosremERP.Domain.Models.IdentityModel;
 using MitrosremERP.Infrastructure.DbInitilizer;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

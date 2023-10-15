@@ -5,9 +5,11 @@ using AutoMapper;
 using MitrosremERP.Aplication.IRepositories;
 using Microsoft.EntityFrameworkCore;
 using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MitrosremERP.Controllers
 {
+    [AllowAnonymous]
     public class UgovorController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -47,20 +49,93 @@ namespace MitrosremERP.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create(Guid id)
+        public async Task<IActionResult> Create(Guid? id)
         {
-            var zaposleni = await _unitOfWork.ZaposleniRepository.GetByIdAsync(id);
-
-            if (zaposleni == null)
+            try
             {
-                Response.StatusCode = 404;
-                return View("../Zaposleni/ZaposleniNijePronadjen");
-            }
-                UgovoriVM ugovoriVM = new UgovoriVM();
-                ugovoriVM.Zaposleni = _autoMapper.Map<ZaposleniVM>(zaposleni);
-                return View(ugovoriVM);
-                    
-        }
+                var zaposleni = await _unitOfWork.ZaposleniRepository.GetByIdAsync(id);
 
+                if (zaposleni == null)
+                {
+                    Response.StatusCode = 404;
+                    return View("../Zaposleni/ZaposleniNijePronadjen");
+                }
+                else
+                {
+                    ViewBag.Id = zaposleni.Id;
+                    var ugovorZaposleniId =  _unitOfWork.UgovoriRepository.GetQueryable(ugovor => ugovor.ZaposleniId == zaposleni.Id).ToList();
+
+                    KreirajUgovoriVM ugovoriVM = new KreirajUgovoriVM();
+
+                    ugovoriVM.UgovoriVM = new UgovoriVM();
+                    ugovoriVM.UgovoriVMlista = _autoMapper.Map<List<UgovoriVM>>(ugovorZaposleniId);
+                    ugovoriVM.ZaposleniVM = _autoMapper.Map<ZaposleniVM>(zaposleni);
+                    
+                    return View(ugovoriVM);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Response.StatusCode = 500;
+                _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
+                return View("InternalServerError");
+            }
+        }
+        //[HttpGet]
+        //public async Task<IActionResult> Create(Guid? id)
+        //{
+        //    try
+        //    {
+        //        var zaposleni = await _unitOfWork.ZaposleniRepository.GetByIdAsync(id);
+
+        //        if (zaposleni == null)
+        //        {
+        //            Response.StatusCode = 404;
+        //            return View("../Zaposleni/ZaposleniNijePronadjen");
+        //        }
+        //        else
+        //        {
+        //            ViewBag.Id = zaposleni.Id;
+        //            UgovoriVM ugovoriVM = new()
+        //            {
+        //                ZaposleniVM = _autoMapper.Map<ZaposleniVM>(zaposleni)
+        //            };
+        //            return View(ugovoriVM);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        Response.StatusCode = 500;
+        //        _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
+        //        return View("InternalServerError");
+        //    }                            
+        //}
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create(UgovoriVM ugovoriVM)
+        //{
+        //    try
+        //    {
+        //        if (ModelState.IsValid)
+        //        {
+        //            var ugovor = _autoMapper.Map<Ugovor>(ugovoriVM);
+        //            ugovor.ZaposleniId = ugovoriVM.ZaposleniVM.Id;
+        //            _unitOfWork.UgovoriRepository.Insert(ugovor);
+        //            await _unitOfWork.SaveAsync();
+        //            TempData["success"] = "Ugovor uspešno kreiran";
+        //            return RedirectToAction("Create");
+        //        }
+        //        return View(ugovoriVM);
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Response.StatusCode = 500;
+        //        _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
+        //        return View("InternalServerError");
+        //    }
+        //}
     }
 }

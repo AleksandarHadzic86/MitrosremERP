@@ -1,53 +1,72 @@
-﻿@using MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM;
+﻿
+@using MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM;
 
-@model UgovoriVM
+@model KreirajUgovoriVM
+
 
 @{
     ViewBag.Title = "Ugovori";
 }
- @await Html.PartialAsync("_ZaposleniNav"); 
+
+<div class="px-2 mt-5">
+    <ul class="nav nav-tabs">
+         <li class="nav-item">
+        <a class="nav-link text-dark" asp-active="true" asp-controller="Zaposleni" asp-action="Update" asp-route-id="@ViewBag.Id">Zaposleni</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-active="true" asp-controller="Ugovor" asp-action="Create" asp-route-id="@ViewBag.Id">Ugovor</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-active="true" asp-controller="Bolovanje" asp-action="Create" asp-route-id="@ViewBag.Id">Bolovanje</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-active="true" asp-controller="Godisnji" asp-action="Create" asp-route-id="@ViewBag.Id">Godisnji odmor</a>
+        </li>
+    </ul>
+</div>
 
 
-<div class="container-fluid mt-5 mb-5">
-    <form method="post" class="row" autocomplete="off" >
+
+<div class="container-fluid mt-3 mb-5">
+   <div class="row">
         <div class="col-lg-8 px-3">
+            <form method="post" autocomplete="off" >
             <div class="card mb-4 mb-xl-0">
                 <h-3 class="card-header bg-primary text-white">Kreiraj Ugovor</h-3>
-                <input hidden asp-for="Zaposleni.Id"/>
-                <input hidden asp-for="ZaposleniId" />
+                    <input hidden asp-for="ZaposleniVM.Id" />
                 <div class="row px-3">
                     <div class="col-lg-4 col-sm-8 card-body">
                         <div class="mb-3">
-                            <label class="small mb-1" asp-for="BrojUgovora"></label>
+                                <label class="small mb-1" asp-for="UgovoriVM.BrojUgovora"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                     <i class='bx bxs-user-circle'></i>
                                 </div>
-                                <input asp-for="BrojUgovora" class="form-control" />
+                                    <input asp-for="UgovoriVM.BrojUgovora" class="form-control" />
                             </div>
-                            <span asp-validation-for="BrojUgovora" class="text-danger"></span>
+                                <span asp-validation-for="UgovoriVM.BrojUgovora" class="text-danger"></span>
                         </div>
 
-                         <div class="mb-3">
-                            <label class="small mb-1" asp-for="TipUgovora"></label>
+                          <div class="mb-3">
+                                <label class="small mb-1" asp-for="UgovoriVM.TipUgovora"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                     <i class='bx bxs-user-circle'></i>
                                 </div>
-                                <input asp-for="TipUgovora" class="form-control" />
+                                    <input asp-for="UgovoriVM.TipUgovora" class="form-control" />
                             </div>
-                            <span asp-validation-for="TipUgovora" class="text-danger"></span>
+                                <span asp-validation-for="UgovoriVM.TipUgovora" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
-                            <label class="small mb-1" asp-for="BrojDanaGodisnjeg"></label>
+                                <label class="small mb-1" asp-for="UgovoriVM.BrojDanaGodisnjeg"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                     <i class='bx bxs-user-circle'></i>
                                 </div>
-                                <input asp-for="BrojDanaGodisnjeg" class="form-control" />
+                                    <input asp-for="UgovoriVM.BrojDanaGodisnjeg" class="form-control" />
                             </div>
-                            <span asp-validation-for="BrojDanaGodisnjeg" class="text-danger"></span>
+                                <span asp-validation-for="UgovoriVM.BrojDanaGodisnjeg" class="text-danger"></span>
                         </div>
 
 
@@ -58,33 +77,40 @@
 
 
                          <div class="mb-3">
-                            <label class="small mb-1" asp-for="DatumPocetka"></label>
+                                <label class="small mb-1" asp-for="UgovoriVM.DatumPocetka"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                     <i class='bx bx-calendar'></i>
                                 </div>
-                                <input readonly asp-for="DatumPocetka" type="text" name="Zaposleni.DatumRodjenja" id="Zaposleni.DatumRodjenja" value="@Model.DatumPocetka.ToString("dd.MMMM.yyyy")" class="datepicker form-control" />
+                                    <input readonly asp-for="UgovoriVM.DatumPocetka" type="text" name="Zaposleni.DatumPocetka" id="Zaposleni.DatumPocetka" value="@Model.UgovoriVM.DatumPocetka.ToString("dd.MMMM.yyyy")" class="datepicker form-control" />
                             </div>
-                            <span asp-validation-for="DatumPocetka" class="text-danger"></span>
+                                <span asp-validation-for="UgovoriVM.DatumPocetka" class="text-danger"></span>
                         </div> 
                         <div class="mb-3">
-                            <label class="small mb-1" asp-for="DatumZavrsetka"></label>
+                                <label class="small mb-1" asp-for="UgovoriVM.DatumZavrsetka"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                     <i class='bx bx-calendar'></i>
                                 </div>
-                                <input readonly asp-for="DatumZavrsetka" type="text" name="DatumZavrsetka" id="DatumZavrsetka" value="@Model.DatumZavrsetka?.ToString("dd.MM.yyyy")" class="datepicker form-control" />
+                                    <input readonly asp-for="UgovoriVM.DatumZavrsetka" type="text" name="DatumZavrsetka" id="DatumZavrsetka" value="@Model.UgovoriVM.DatumZavrsetka?.ToString("dd.MM.yyyy")" class="datepicker form-control" />
                             </div>
-                            <span asp-validation-for="DatumZavrsetka" class="text-danger"></span>
-                        </div>
+                                <span asp-validation-for="UgovoriVM.DatumZavrsetka" class="text-danger"></span>
+                        </div> 
 
 
 
                     </div>
                 </div>
+                    
             </div>
-        </div> 
-
+            <div class="col-8  py-3">
+                    <button type="submit" class="btn btn-success">Kreiraj</button>
+                    <a asp-controller="Zaposleni" asp-action="Index" class="btn btn-secondary">Povratak na listu</a>
+            </div>
+          </form>
+       </div>
+        
+    
         <div class="col-lg-4 px-3">
             <div class="card mb-4 mb-xl-0">
                 <h-3 class="card-header bg-info text-white">Zaposleni</h-3>
@@ -93,60 +119,112 @@
                     <div class="col-lg-4 col-sm-8 card-body">
                         <div class="mb-3">
 
-                            <label class="small mb-1" asp-for="Zaposleni.Ime"></label>                        
+                            <label class="small mb-1" asp-for="ZaposleniVM.Ime"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                     <i class='bx bxs-user-circle'></i>
                                 </div>
-                                <input readonly asp-for="Zaposleni.Ime" class="form-control" />
+                                <input readonly asp-for="ZaposleniVM.Ime" class="form-control" />
                             </div>
-                            <span asp-validation-for="Zaposleni.Ime" class="text-danger"></span>
+                            <span asp-validation-for="ZaposleniVM.Ime" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
-                            <label class="small mb-1" asp-for="Zaposleni.Prezime"></label>
+                            <label class="small mb-1" asp-for="ZaposleniVM.Prezime"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                     <i class='bx bxs-user-circle'></i>
                                 </div>
-                                <input readonly asp-for="Zaposleni.Prezime" class="form-control" />
+                                <input readonly asp-for="ZaposleniVM.Prezime" class="form-control" />
                             </div>
-                            <span asp-validation-for="Zaposleni.Prezime" class="text-danger"></span>
+                            <span asp-validation-for="ZaposleniVM.Prezime" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
-                            <label class="small mb-1" asp-for="Zaposleni.JMBG"></label>
+                            <label class="small mb-1" asp-for="ZaposleniVM.JMBG"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                     <i class='bx bx-id-card'></i>
                                 </div>
-                                <input readonly asp-for="Zaposleni.JMBG" class="form-control jmbgText" />
+                                <input readonly asp-for="ZaposleniVM.JMBG" class="form-control jmbgText" />
                             </div>
 
-                            <span asp-validation-for="Zaposleni.JMBG" class="text-danger"></span>
+                            <span asp-validation-for="ZaposleniVM.JMBG" class="text-danger"></span>
                         </div>
-                        <div class="mb-3">
-                            <label class="small mb-1" asp-for="Zaposleni.Mobilni"></label>
-                            <div class="input-group">
-                                <div class="input-group-text">
-                                    <i class='bx bx-mobile'></i>
-                                </div>
-                                <input readonly asp-for="Zaposleni.Mobilni" class="form-control" />
-                            </div>
-                            <span asp-validation-for="Zaposleni.Mobilni" class="text-danger"></span>
-                        </div>
+                       
                                        
                     </div>          
                 </div>
             </div>
         </div>
-        <div class="col-8 px-3 py-3">
-            <button type="submit" class="btn btn-success">Kreiraj</button>
-            <a asp-controller="Zaposleni" asp-action="Index" class="btn btn-secondary">Povratak na listu</a>
-        </div>
-    </form>
+        
+    </div>
 </div>
+<!--Tabela-->
+<div class="card">
+    <table class="table mt-2 align-middle mb-0 bg-white">
 
+        <thead class="bg-light ">
+            <tr>
+                <th class="px-3">Ime i Prezime</th>
+                <th>Profesija</th>
+                <th>Status po ugovoru</th>
+                <th>Radno mesto</th>
+                <th class="px-3">Akcija</th>
+            </tr>
+        </thead>
+        @foreach (var ugovori in Model.UgovoriVMlista)
+        {
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center">
+                           @*  <img src="@ugovori.ZaposleniVM.ImageUrl"
+                                 alt=""
+                                 style="width: 45px; height: 45px"
+                                 class="rounded-circle" /> *@
+                            <div class="ms-3">
+@*                                  <p class="fw-bold mb-1">@ugovori.ZaposleniVM.Ime @ugovori.ZaposleniVM.Prezime</p>
+ *@                             </div>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">@ugovori.BrojUgovora</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">@ugovori.Id</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">@ugovori.ZaposleniId</p>
+                    </td>
+                    <td>
+                        <span class="badge badge-success rounded-pill d-inline bg-success">Aktivan</span>
+                    </td>
+                    <td>
+                        <p>@ugovori.DatumPocetka</p>
+                    </td>
+                    <td>
+                        <p>@ugovori.DatumZavrsetka</p>
+                    </td>
+                    <td>
+                        <div class="btnbtn-group" role="group">
+                            <a asp-controller="Zaposleni" asp-action="Update" class="btn btn-primary mx-2"><i class='bx bxs-edit'></i>Detaljnije</a>
+
+                            @if (User.IsInRole(Roles.Role_SuperAdmin))
+                            {
+                                <a asp-controller="Zaposleni" asp-action="Delete"  class="btn btn-danger mx-2"><i class='bx bx-trash'></i>Obrisi</a>
+                            }
+                        </div>
+                    </td>
+
+                </tr>
+
+            </tbody>
+        }
+
+    </table>
+
+</div>
 @section Scripts{
     @{
          @await Html.PartialAsync("_DatePicker")

@@ -31,7 +31,7 @@ namespace MitrosremERP.Infrastructure.Repositories
         }
 
 
-        public async Task<T?> GetByIdAsync(Guid id)
+        public async Task<T?> GetByIdAsync(Guid? id)
         {
             return await _repository.Set<T>().FindAsync(id);
         }
@@ -51,7 +51,7 @@ namespace MitrosremERP.Infrastructure.Repositories
 
         public virtual IQueryable<T> GetQueryable(Expression<Func<T, bool>> predicate)
         {
-            return _repository.Set<T>();
+            return _repository.Set<T>().Where(predicate);
         }
 
         public async Task<IEnumerable<T>> GetPaginatedAsync(string sortOrder, string searchString, int pageNumber, int pageSize)

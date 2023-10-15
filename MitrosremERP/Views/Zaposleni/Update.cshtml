@@ -4,9 +4,24 @@
 @{
     ViewBag.Title = "Izmeni Zaposlenog";
 }
-@await Html.PartialAsync("_ZaposleniNav");
+<div class="px-2 mt-5">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-active="true" asp-controller="Zaposleni" asp-action="Update" asp-route-id="@Model.Id">Zaposleni</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-active="true" asp-controller="Ugovor" asp-action="Create" asp-route-id="@Model.Id">Ugovor</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-active="true" asp-controller="Bolovanje" asp-action="Create" asp-route-id="@Model.Id">Bolovanje</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-active="true" asp-controller="Godisnji" asp-action="Create" asp-route-id="@Model.Id">Godisnji odmor</a>
+        </li>
+    </ul>
+</div>
 
-  <div class="container-fluid mt-5 mb-5">
+  <div class="container-fluid mt-3 mb-5">
     <form method="post" class="row" autocomplete="off" id="forma" enctype="multipart/form-data">
         <div class="col-lg-8 px-3">
            <div class="card mb-4 mb-xl-0">

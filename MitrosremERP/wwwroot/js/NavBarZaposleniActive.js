@@ -1,4 +1,4 @@
-﻿const listItems = document.querySelectorAll(".nav .nav-tabs .nav-item ");
+﻿const listItems = document.querySelectorAll(".nav-item ");
 
 listItems.forEach((item) => {
     item.addEventListener("click", () => {

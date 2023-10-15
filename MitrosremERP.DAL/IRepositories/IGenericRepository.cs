@@ -12,7 +12,7 @@ namespace MitrosremERP.Aplication.IRepositories
 {
     public interface IGenericRepository<T> where T : class
     {
-        Task<T?> GetByIdAsync(Guid id);
+        Task<T?> GetByIdAsync(Guid? id);
         Task<IEnumerable<T>> GetAllAsync();
         IQueryable<T> GetQueryable();
         IQueryable<T> GetQueryable(Expression<Func<T, bool>> predicate);
