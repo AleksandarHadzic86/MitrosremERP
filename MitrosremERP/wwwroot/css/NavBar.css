@@ -151,7 +151,19 @@
 
     /*transition: all .5s ease;*/
 }
+.submenuZaposleni .active-link {
+    /* Add your styles to highlight the active link here */
+    font-weight: bold; /* Example: change font weight */
+    color: white; /* Example: change text color */
+    font-size: 15px;
+    background-color: #e95420;
+}
+.submenuZaposleni a{
 
+    color: white;
+    font-size: 15px;
+
+}
 .submenu .active-link {
     /* Add your styles to highlight the active link here */
     font-weight: bold; /* Example: change font weight */

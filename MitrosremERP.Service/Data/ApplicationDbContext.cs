@@ -44,8 +44,6 @@ namespace MitrosremERP.Aplication.Data
             Guid zaposleniId7 = Guid.NewGuid();
             Guid zaposleniId8 = Guid.NewGuid();
 
-            Guid ugovorId1 = Guid.NewGuid();
-
             modelBuilder.Entity<Zaposleni>().HasData(
                 new Zaposleni { Id = zaposleniId1, Ime = "Aleksandar", Prezime = "Hadzic", Grad = "Sr.Mitrovica", Adresa = "Stari Sor", JMBG = "1702986890023", Mobilni = "0605574477", Profesija = "Elektro Tehnicar", StepenStrucneSpremeId = 4, RadnoMesto = "Odrzavanje el.instalacija", ImageUrl = "", DatumRodjenja = new DateTime(2000, 1, 1), Email = "mitrosrem@ad.rs", PolOsobeId = 1 },
                 new Zaposleni { Id = zaposleniId2, Ime = "Petar", Prezime = "Petrovic", Grad = "Sid", Adresa = "BB", JMBG = "4302386890023", Mobilni = "06553427", Profesija = "Masinski Tehnicar", StepenStrucneSpremeId = 4, RadnoMesto = "Odrzavanje masicna", ImageUrl = "", DatumRodjenja = new DateTime(2000, 1, 1), Email = "mitrosrem@ad.rs", PolOsobeId = 1 },
@@ -56,9 +54,7 @@ namespace MitrosremERP.Aplication.Data
                 new Zaposleni { Id = zaposleniId7, Ime = "Zorana", Prezime = "Zoranovic", Grad = "Sabac", Adresa = "BB", JMBG = "2132986890023", Mobilni = "0605574477", Profesija = "Diplomirani Ekonomista", StepenStrucneSpremeId = 6, RadnoMesto = "Racunovodstvo", ImageUrl = "", DatumRodjenja = new DateTime(2000, 1, 1), Email = "mitrosrem@ad.rs", PolOsobeId = 2 },
                 new Zaposleni { Id = zaposleniId8, Ime = "Stevan", Prezime = "Stevanovic", Grad = "Beograd", Adresa = "BB", JMBG = "3123986890023", Mobilni = "0605574477", Profesija = "Trgovac", StepenStrucneSpremeId = 6, RadnoMesto = "Maloprodaja", ImageUrl = "", DatumRodjenja = new DateTime(2000, 1, 1), Email = "mitrosrem@ad.rs", PolOsobeId = 1 }
                 );
-            modelBuilder.Entity<Ugovor>().HasData(
-                new Ugovor { Id = ugovorId1, BrojUgovora = "MS0001", TipUgovora = "Odredjeno", DatumPocetka = new DateTime(1992, 2, 17), BrojDanaGodisnjeg = 22, ZaposleniId = zaposleniId1 }
-                );
+
 
             modelBuilder.Entity<Pol>().HasData(
                 new Pol { Id = 1, PolOsobe = "Musko" },

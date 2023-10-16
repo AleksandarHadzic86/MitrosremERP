@@ -4,19 +4,19 @@
 @{
     ViewBag.Title = "Izmeni Zaposlenog";
 }
-<div class="px-2 mt-5">
+<div class="px-3 mt-5">
     <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-active="true" asp-controller="Zaposleni" asp-action="Update" asp-route-id="@Model.Id">Zaposleni</a>
+        <li class="submenuZaposleni nav-item">
+            <a class="nav-link " asp-active="true" asp-controller="Zaposleni" asp-action="Update" asp-route-id="@Model.Id">Zaposleni</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-active="true" asp-controller="Ugovor" asp-action="Create" asp-route-id="@Model.Id">Ugovor</a>
+            <a class="nav-link " asp-active="true" asp-controller="Ugovor" asp-action="Create" asp-route-id="@Model.Id">Ugovor</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-active="true" asp-controller="Bolovanje" asp-action="Create" asp-route-id="@Model.Id">Bolovanje</a>
+            <a class="nav-link " asp-active="true" asp-controller="Bolovanje" asp-action="Create" asp-route-id="@Model.Id">Bolovanje</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-active="true" asp-controller="Godisnji" asp-action="Create" asp-route-id="@Model.Id">Godisnji odmor</a>
+            <a class="nav-link" asp-active="true" asp-controller="Godisnji" asp-action="Create" asp-route-id="@Model.Id">Godisnji odmor</a>
         </li>
     </ul>
 </div>
@@ -220,6 +220,8 @@
     @{
         @await Html.PartialAsync("_DatePicker")
         @await Html.PartialAsync("_ValidationScriptsPartial")
+        @await Html.PartialAsync("_ZaposleniNav")
+
     }
     
 }

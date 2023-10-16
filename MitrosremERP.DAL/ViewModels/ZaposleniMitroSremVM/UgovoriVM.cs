@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using MitrosremERP.Domain.Enum;
 
 namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
 {
@@ -19,12 +20,6 @@ namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
         [Required(ErrorMessage = "Broj ugovora obavezan")]
         [Display(Name = "Broj Ugovora")]
         public string BrojUgovora { get; set; } = null!;
-
-        [MaxLength(50, ErrorMessage = "Maksimalan broj karaktera 50")]
-        [Required(ErrorMessage = "Tip Ugovora je obavezan")]
-        [Display(Name = "Tip ugovora")]
-        public string TipUgovora { get; set; } = null!;
-
 
         private DateTime _datumPocetka = DateTime.MinValue;
 
@@ -62,5 +57,7 @@ namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
         public Guid ZaposleniId { get; set; }
         [ValidateNever]
         public ZaposleniVM ZaposleniVM { get; set; } = null!;
+
+        public TipUgovora TipoviUgovora { get; set; }
     }
 }

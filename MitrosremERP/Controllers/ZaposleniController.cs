@@ -109,7 +109,7 @@ namespace MitrosremERP.Controllers
                     }
 
                     await _unitOfWork.SaveAsync();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Update");
                 }
                 else
                 {

@@ -65,7 +65,7 @@ namespace MitrosremERP.Controllers
                     ViewBag.Id = zaposleni.Id;
                     var ugovorZaposleniId =  _unitOfWork.UgovoriRepository.GetQueryable(ugovor => ugovor.ZaposleniId == zaposleni.Id).ToList();
 
-                    KreirajUgovoriVM ugovoriVM = new KreirajUgovoriVM();
+                    KreirajUgovorVM ugovoriVM = new KreirajUgovorVM();
 
                     ugovoriVM.UgovoriVM = new UgovoriVM();
                     ugovoriVM.UgovoriVMlista = _autoMapper.Map<List<UgovoriVM>>(ugovorZaposleniId);
@@ -77,6 +77,31 @@ namespace MitrosremERP.Controllers
             catch (Exception ex)
             {
 
+                Response.StatusCode = 500;
+                _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
+                return View("InternalServerError");
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(KreirajUgovorVM kreirajugovorVM)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var ugovor = _autoMapper.Map<Ugovor>(kreirajugovorVM.UgovoriVM);
+                    ugovor.ZaposleniId = kreirajugovorVM.ZaposleniVM.Id;
+                    _unitOfWork.UgovoriRepository.Insert(ugovor);
+                    await _unitOfWork.SaveAsync();
+                    TempData["success"] = "Ugovor uspešno kreiran";
+                    return RedirectToAction("Create");
+                }
+                return View(kreirajugovorVM);
+
+            }
+            catch (Exception ex)
+            {
                 Response.StatusCode = 500;
                 _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
                 return View("InternalServerError");

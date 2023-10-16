@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualBasic;
+using MitrosremERP.Domain.Enum;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,7 +17,6 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
         [Key]
         public Guid Id { get; set; }
         public string BrojUgovora { get; set; } = null!;
-        public string TipUgovora { get; set; } = null!;
         public DateTime DatumPocetka { get; set; }
         public DateTime? DatumZavrsetka { get; set; }
         public int BrojDanaGodisnjeg { get; set; }
@@ -26,5 +26,7 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
         [ForeignKey("ZaposleniId")]
         public Guid ZaposleniId { get; set; }
         public Zaposleni Zaposleni { get; set; } = null!;
+
+        public TipUgovora TipoviUgovora { get; set; }
     }
 }

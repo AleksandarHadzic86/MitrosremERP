@@ -9,9 +9,11 @@ using System.Threading.Tasks;
 
 namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
 {
-    public class KreirajUgovoriVM
+    public class KreirajUgovorVM
     {
+        [ValidateNever]
         public UgovoriVM UgovoriVM { get; set; }
+        [ValidateNever]
         public List<UgovoriVM> UgovoriVMlista { get; set; }
 
         [ValidateNever]
