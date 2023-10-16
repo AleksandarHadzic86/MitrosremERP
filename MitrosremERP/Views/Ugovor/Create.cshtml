@@ -40,8 +40,8 @@
                                 <label class="small mb-1" asp-for="UgovoriVM.BrojUgovora"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
-                                    <i class='bx bxs-user-circle'></i>
-                                </div>
+                                        <i class='bx bx-key'></i>
+                                    </div>
                                     <input asp-for="UgovoriVM.BrojUgovora" class="form-control" />
                             </div>
                                 <span asp-validation-for="UgovoriVM.BrojUgovora" class="text-danger"></span>
@@ -51,8 +51,8 @@
                                 <label class="small mb-1" asp-for="UgovoriVM.TipUgovora"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
-                                    <i class='bx bxs-user-circle'></i>
-                                </div>
+                                        <i class='bx bx-pen'></i>
+                                    </div>
                                     <input asp-for="UgovoriVM.TipUgovora" class="form-control" />
                             </div>
                                 <span asp-validation-for="UgovoriVM.TipUgovora" class="text-danger"></span>
@@ -62,8 +62,8 @@
                                 <label class="small mb-1" asp-for="UgovoriVM.BrojDanaGodisnjeg"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
-                                    <i class='bx bxs-user-circle'></i>
-                                </div>
+                                        <i class='bx bx-home-smile'></i>
+                                    </div>
                                     <input asp-for="UgovoriVM.BrojDanaGodisnjeg" class="form-control" />
                             </div>
                                 <span asp-validation-for="UgovoriVM.BrojDanaGodisnjeg" class="text-danger"></span>
@@ -82,7 +82,7 @@
                                 <div class="input-group-text">
                                     <i class='bx bx-calendar'></i>
                                 </div>
-                                    <input readonly asp-for="UgovoriVM.DatumPocetka" type="text" name="Zaposleni.DatumPocetka" id="Zaposleni.DatumPocetka" value="@Model.UgovoriVM.DatumPocetka.ToString("dd.MMMM.yyyy")" class="datepicker form-control" />
+                                    <input readonly asp-for="UgovoriVM.DatumPocetka" type="text" name="Zaposleni.DatumPocetka" id="Zaposleni.DatumPocetka" value="@Model.UgovoriVM.DatumPocetka.ToString("dd.MMMM.yyyy")" class="datepickerNormalDate form-control" />
                             </div>
                                 <span asp-validation-for="UgovoriVM.DatumPocetka" class="text-danger"></span>
                         </div> 
@@ -92,7 +92,7 @@
                                 <div class="input-group-text">
                                     <i class='bx bx-calendar'></i>
                                 </div>
-                                    <input readonly asp-for="UgovoriVM.DatumZavrsetka" type="text" name="DatumZavrsetka" id="DatumZavrsetka" value="@Model.UgovoriVM.DatumZavrsetka?.ToString("dd.MM.yyyy")" class="datepicker form-control" />
+                                    <input readonly asp-for="UgovoriVM.DatumZavrsetka" type="text" name="Zaposleni.DatumZavrsetka" id="Zaposleni.DatumZavrsetka" value="@Model.UgovoriVM.DatumZavrsetka?.ToString("dd.MM.yyyy")" class="datepickerNormalDate form-control" />
                             </div>
                                 <span asp-validation-for="UgovoriVM.DatumZavrsetka" class="text-danger"></span>
                         </div> 
@@ -113,7 +113,10 @@
     
         <div class="col-lg-4 px-3">
             <div class="card mb-4 mb-xl-0">
-                <h-3 class="card-header bg-info text-white">Zaposleni</h-3>
+                <div class="card-header p-2 bg-info">
+                    
+                    <img src="@Model.ZaposleniVM.ImageUrl" style="width: 40px; height: 40px" class="rounded-circle " />
+                </div>
 
                 <div class="row px-3">
                     <div class="col-lg-4 col-sm-8 card-body">
@@ -161,15 +164,17 @@
     </div>
 </div>
 <!--Tabela-->
-<div class="card">
+<div class="card mx-3">
     <table class="table mt-2 align-middle mb-0 bg-white">
 
         <thead class="bg-light ">
             <tr>
-                <th class="px-3">Ime i Prezime</th>
-                <th>Profesija</th>
-                <th>Status po ugovoru</th>
-                <th>Radno mesto</th>
+                <th class="px-3">Broj ugovora</th>
+                <th>Tip ugovora</th>
+                <th>Datum pocetka</th>
+                <th>Datum zavrsetka</th>
+                <th>Broj dana godisnjeg</th>
+                <th>Napomena</th>
                 <th class="px-3">Akcija</th>
             </tr>
         </thead>
@@ -178,33 +183,22 @@
             <tbody>
                 <tr>
                     <td>
-                        <div class="d-flex align-items-center">
-                           @*  <img src="@ugovori.ZaposleniVM.ImageUrl"
-                                 alt=""
-                                 style="width: 45px; height: 45px"
-                                 class="rounded-circle" /> *@
-                            <div class="ms-3">
-@*                                  <p class="fw-bold mb-1">@ugovori.ZaposleniVM.Ime @ugovori.ZaposleniVM.Prezime</p>
- *@                             </div>
-                        </div>
+                        <p class="fw-normal mb-1 mx-2">@ugovori.BrojUgovora</p>
                     </td>
                     <td>
-                        <p class="fw-normal mb-1">@ugovori.BrojUgovora</p>
+                        <p class="fw-normal mb-1">@ugovori.TipUgovora</p>
                     </td>
                     <td>
-                        <p class="fw-normal mb-1">@ugovori.Id</p>
+                        <p class="fw-normal mb-1">@ugovori.DatumPocetka.ToString("dd.MM.yyyy")</p>
                     </td>
                     <td>
-                        <p class="fw-normal mb-1">@ugovori.ZaposleniId</p>
+                        <p class="fw-normal mb-1">@ugovori.DatumZavrsetka?.ToString("dd.MM.yyyy")</p>
+                     </td>
+                    <td>
+                        <p class="fw-normal mb-1">@ugovori.BrojDanaGodisnjeg</p>
                     </td>
                     <td>
-                        <span class="badge badge-success rounded-pill d-inline bg-success">Aktivan</span>
-                    </td>
-                    <td>
-                        <p>@ugovori.DatumPocetka</p>
-                    </td>
-                    <td>
-                        <p>@ugovori.DatumZavrsetka</p>
+                        <p class="fw-normal mb-1">@ugovori.Napomena</p>
                     </td>
                     <td>
                         <div class="btnbtn-group" role="group">
@@ -227,7 +221,7 @@
 </div>
 @section Scripts{
     @{
-         @await Html.PartialAsync("_DatePicker")
+        @await Html.PartialAsync("_DatePicker-normalDate")
         @await Html.PartialAsync("_ValidationScriptsPartial")
     }
 }
