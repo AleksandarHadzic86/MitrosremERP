@@ -23,6 +23,9 @@
         <li class="nav-item ">
             <a class="nav-link " asp-active="true" asp-controller="Godisnji" asp-action="Create" asp-route-id="@ViewBag.Id">Godisnji odmor</a>
         </li>
+        <li class="nav-item ">
+            <a class="nav-link " asp-active="true" asp-controller="Dokumenti" asp-action="Create" asp-route-id="@ViewBag.Id">Dokumenti</a>
+        </li>
     </ul>
 </div>
 
@@ -49,7 +52,7 @@
                         </div>
                             
                           <div class="mb-3">
-                                <label class="small mb-1" asp-for="UgovoriVM.TipoviUgovora"></label>
+                                <label class="small mb-1" >Tip ugovora</label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                         <i class='bx bx-pen'></i>
@@ -85,7 +88,7 @@
                                 <div class="input-group-text">
                                     <i class='bx bx-calendar'></i>
                                 </div>
-                                    <input readonly asp-for="UgovoriVM.DatumPocetka" type="text" name="UgovoriVM.DatumPocetka" id="UgovoriVM.DatumPocetka" value="@Model.UgovoriVM.DatumPocetka.ToString("dd.MM.yyyy")" class="datepickerNormalDate form-control" />
+                                    <input readonly asp-for="UgovoriVM.DatumPocetka" type="text" name="UgovoriVM.DatumPocetka" id="UgovoriVM.DatumPocetka" value="@Model.UgovoriVM.DatumPocetka.ToString("dd.MMMM.yyyy")" class="datepickerNormalDate form-control" />
                             </div>
                                 <span asp-validation-for="UgovoriVM.DatumPocetka" class="text-danger"></span>
                         </div> 
@@ -95,11 +98,20 @@
                                 <div class="input-group-text">
                                     <i class='bx bx-calendar'></i>
                                 </div>
-                                    <input readonly asp-for="UgovoriVM.DatumZavrsetka" type="text" name="UgovoriVM.DatumZavrsetka" id="UgovoriVM.DatumZavrsetka" value="@Model.UgovoriVM.DatumZavrsetka?.ToString("dd.MM.yyyy")" class="datepickerNormalDate form-control" />
+                                    <input readonly asp-for="UgovoriVM.DatumZavrsetka" type="text" name="UgovoriVM.DatumZavrsetka" id="UgovoriVM.DatumZavrsetka" value="@Model.UgovoriVM.DatumZavrsetka?.ToString("dd.MMMM.yyyy")" class="datepickerNormalDate form-control" />
                             </div>
                                 <span asp-validation-for="UgovoriVM.DatumZavrsetka" class="text-danger"></span>
-                        </div> 
-
+                        </div>
+                            <div class="mb-3">
+                                <label class="small mb-1" asp-for="UgovoriVM.Napomena"></label>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <i class='bx bx-detail'></i>
+                                    </div>
+                                    <input asp-for="UgovoriVM.Napomena" class="form-control" />
+                                </div>
+                                <span asp-validation-for="UgovoriVM.Napomena" class="text-danger"></span>
+                            </div>
 
 
                     </div>
@@ -181,44 +193,58 @@
                 <th class="px-3">Akcija</th>
             </tr>
         </thead>
-        @foreach (var ugovori in Model.UgovoriVMlista)
+        @if (Model.UgovoriVMlista.Count != 0)
         {
-            <tbody>
-                <tr>
-                    <td>
-                        <p class="fw-normal mb-1 mx-2">@ugovori.BrojUgovora</p>
-                    </td>
-                    <td>
-                         <p class="fw-normal mb-1">@ugovori.TipoviUgovora</p>
-                     </td>
-                    <td>
-                        <p class="fw-normal mb-1">@ugovori.DatumPocetka.ToString("dd.MM.yyyy")</p>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1">@ugovori.DatumZavrsetka?.ToString("dd.MM.yyyy")</p>
-                     </td>
-                    <td>
-                        <p class="fw-normal mb-1">@ugovori.BrojDanaGodisnjeg</p>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1">@ugovori.Napomena</p>
-                    </td>
-                    <td>
-                        <div class="btnbtn-group" role="group">
-                            <a asp-controller="Zaposleni" asp-action="Update" class="btn btn-primary mx-2"><i class='bx bxs-edit'></i>Uredi</a>
+            foreach (var ugovori in Model.UgovoriVMlista)
+            {
+                <tbody>
+                    <tr>
+                        <td>
+                            <p class="fw-normal mb-1 mx-2">@ugovori.BrojUgovora</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">@ugovori.TipoviUgovora</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">@ugovori.DatumPocetka.ToString("dd.MMMM.yyyy")</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">@ugovori.DatumZavrsetka?.ToString("dd.MMMM.yyyy")</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">@ugovori.BrojDanaGodisnjeg</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">@ugovori.Napomena</p>
+                        </td>
+                        <td>
+                            <div class="btnbtn-group" role="group">
+                                <a asp-controller="Ugovor" asp-action="Update" class="btn btn-primary mx-2"><i class='bx bxs-edit'></i>Uredi</a>
 
-                            @if (User.IsInRole(Roles.Role_SuperAdmin))
-                            {
-                                <a asp-controller="Zaposleni" asp-action="Delete"  class="btn btn-danger mx-2"><i class='bx bx-trash'></i>Obrisi</a>
-                            }
-                        </div>
-                    </td>
+                                @if (User.IsInRole(Roles.Role_SuperAdmin))
+                                {
+                                    <a asp-controller="Ugovor" asp-action="Delete" class="btn btn-danger mx-2"><i class='bx bx-trash'></i>Obrisi</a>
+                                }
+                            </div>
+                        </td>
 
-                </tr>
+                    </tr>
 
-            </tbody>
+                </tbody>
+            }
         }
-
+             
+        else
+        {
+        <tbody>
+            <tr>
+                <td colspan="7">
+                    <p class="text-info p-2 py-1">Trenutno nema registrovanih ugovora</p>
+                </td>
+            </tr>
+        </tbody>
+        }
+        
     </table>
 
 </div>

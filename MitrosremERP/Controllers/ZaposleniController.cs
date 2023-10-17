@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using MitrosremERP.Aplication.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using MitrosremERP.Domain.Models.IdentityModel;
+using MitrosremERP.Domain.Enum;
 
 namespace MitrosremERP.Controllers
 {
@@ -73,7 +74,6 @@ namespace MitrosremERP.Controllers
                 {
                     var zaposleniVMMapper = _autoMapper.Map<ZaposleniVM>(zaposleni);
                     zaposleniVMMapper.StepenStrucneSpremeLista = await LoadStepenStrucneSpremeListItems();
-                    zaposleniVMMapper.PolOsobaLista = await LoadPolOsobeListItems();
                     return View(zaposleniVMMapper);
 
                 }
@@ -114,7 +114,6 @@ namespace MitrosremERP.Controllers
                 else
                 {
                     zaposleniVM.StepenStrucneSpremeLista = await LoadStepenStrucneSpremeListItems();
-                    zaposleniVM.PolOsobaLista = await LoadPolOsobeListItems();
                     return View(zaposleniVM);
                 }
             }
@@ -134,7 +133,6 @@ namespace MitrosremERP.Controllers
             {
                 ZaposleniVM zaposleniVM = new ZaposleniVM();
                 zaposleniVM.StepenStrucneSpremeLista = await LoadStepenStrucneSpremeListItems();
-                zaposleniVM.PolOsobaLista = await LoadPolOsobeListItems();
                 return View(zaposleniVM);
             }
             catch (Exception ex)
@@ -188,7 +186,6 @@ namespace MitrosremERP.Controllers
                 {
                     var zaposleniVMMapper = _autoMapper.Map<ZaposleniVM>(zaposleni);
                     zaposleniVMMapper.StepenStrucneSpremeLista = await LoadStepenStrucneSpremeListItems();
-                    zaposleniVMMapper.PolOsobaLista = await LoadPolOsobeListItems();
                     return View(zaposleniVMMapper);
                 }
 
@@ -233,16 +230,6 @@ namespace MitrosremERP.Controllers
                     await _unitOfWork.SaveAsync();
                     TempData["success"] = "Zaposleni uspesno obrisan";
                     return RedirectToAction("Index");
-                    //var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, zaposleniVM.ImageUrl.TrimStart('\\'));
-                    //List<string> exclusions = new List<string>
-                    // {  "user.jpg", "userW.jpg" };
-                    //if (!exclusions.Contains(Path.GetFileName(oldImagePath)))
-                    //{
-                    //    if (System.IO.File.Exists(oldImagePath))
-                    //    {
-                    //        System.IO.File.Delete(oldImagePath);
-                    //    }
-                    //}
                 }
             }
 
@@ -288,11 +275,11 @@ namespace MitrosremERP.Controllers
             }
             else
             {
-                if (zaposleniVM.PolOsobeId == 1 && zaposleniVM.ImageUrl == null)
+                if (zaposleniVM.PolOsobe == PolOsobe.Musko && zaposleniVM.ImageUrl == null)
                 {
                     zaposleniVM.ImageUrl = @"\images\default\user.jpg";
                 }
-                if (zaposleniVM.PolOsobeId == 2 && zaposleniVM.ImageUrl == null)
+                if (zaposleniVM.PolOsobe == PolOsobe.Zensko && zaposleniVM.ImageUrl == null)
                 {
                     zaposleniVM.ImageUrl = @"\images\default\userW.jpg";
                 }
@@ -302,11 +289,6 @@ namespace MitrosremERP.Controllers
         {
             var stepenStrucneSpremeEntities = await _unitOfWork.StepenStrucneSpremeRepository.GetAllAsync();
             return _autoMapper.Map<IEnumerable<SelectListItem>>(stepenStrucneSpremeEntities);
-        }
-        private async Task<IEnumerable<SelectListItem>> LoadPolOsobeListItems()
-        {
-            var polosobeLista = await _unitOfWork.PolRepository.GetAllAsync();
-            return _autoMapper.Map<IEnumerable<SelectListItem>>(polosobeLista);
         }
 
         

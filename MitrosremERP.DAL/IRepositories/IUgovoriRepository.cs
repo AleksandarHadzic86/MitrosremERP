@@ -10,7 +10,6 @@ namespace MitrosremERP.Aplication.IRepositories
 {
     public interface IUgovoriRepository:IGenericRepository<Ugovor>
     {
-        void Update(Ugovor ugovori);
         Task<PaginatedList<Ugovor>> GetUgovorPaginationAsync(string sortOrder, string searchString, int pageNumber, int pageSize);
     }
 }

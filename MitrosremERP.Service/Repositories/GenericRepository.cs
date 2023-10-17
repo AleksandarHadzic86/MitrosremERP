@@ -43,7 +43,10 @@ namespace MitrosremERP.Infrastructure.Repositories
         {
             _repository.Set<T>().AddAsync(entity);
         }
-
+        public void Update(T entity)
+        {
+            _repository.Set<T>().Update(entity);    
+        }
         //public async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> expression)
         //{
         //    return await _repository.Set<T>().FirstOrDefaultAsync(expression);
@@ -65,5 +68,7 @@ namespace MitrosremERP.Infrastructure.Repositories
         {
             return _repository.Set<T>().AsQueryable();
         }
+
+       
     }
 }

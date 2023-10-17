@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using MitrosremERP.Domain.Enum;
 using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 using System;
 using System.Collections.Generic;
@@ -77,13 +78,7 @@ namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
         public string? Napomena { get; set; }
         public string? ImageUrl { get; set; }
 
-        [Required(ErrorMessage = "Id ne moze da bude prazan")]
-        public int PolOsobeId { get; set; }
-        [ValidateNever]
-        public PolVM PolVM { get; set; } = null!;
-        [ValidateNever]   
-        public IEnumerable<SelectListItem> PolOsobaLista { get; set; } = null!;
-
+        public PolOsobe PolOsobe { get; set; }
 
         [Required(ErrorMessage = "Obavezan unos")]
         [Display(Name = "Stepen strucne spreme")]

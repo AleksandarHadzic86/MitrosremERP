@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MitrosremERP.Aplication.IRepositories
 {
-    public interface IPolRepository:IGenericRepository<Pol>
+    public interface IBolovanjeRepository:IGenericRepository<Bolovanje>
     {
     }
 }

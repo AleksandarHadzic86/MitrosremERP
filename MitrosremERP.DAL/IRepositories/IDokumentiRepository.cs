@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MitrosremERP.Aplication.IRepositories
 {
-    public interface IStepenStrucneSpremeRepository:IGenericRepository<StepenStrucneSpreme>
+    public interface IDokumentiRepository:IGenericRepository<DokumentiZaposleni>
     {
     }
 }

@@ -10,8 +10,10 @@ namespace MitrosremERP.Aplication.IRepositories
     {
         IEmployeeRepository ZaposleniRepository { get; }
         IStepenStrucneSpremeRepository StepenStrucneSpremeRepository { get; }
-        IPolRepository PolRepository { get; }
         IUgovoriRepository UgovoriRepository { get; }
+        IBolovanjeRepository BolovanjeRepository { get; }
+        IGodisnjiRepository GodisnjiRepository { get; }
+        IDokumentiRepository DokumentiRepository { get; }
         Task SaveAsync();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MitrosremERP.Domain.Enum;
+using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,14 +8,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
+namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
 {
-    public class GodisnjiOdmor
+    public class GodisnjiVM
     {
         [Key]
         public Guid Id { get; set; }
 
-        private DateTime _pocetakGodisnjeg = DateTime.MinValue;
+        private DateTime _datumPocetkaGodisnjeg = DateTime.MinValue;
+        private DateTime _datumZavrsetkaGodisnjeg = DateTime.MinValue;
 
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Datum pocetka godisnjeg")]
@@ -24,11 +26,11 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
             get
             {
 
-                return (_pocetakGodisnjeg == DateTime.MinValue) ? DateTime.Now : _pocetakGodisnjeg;
+                return (_datumPocetkaGodisnjeg == DateTime.MinValue) ? DateTime.Now : _datumPocetkaGodisnjeg;
             }
             set
             {
-                _pocetakGodisnjeg = value;
+                _datumPocetkaGodisnjeg = value;
             }
         }
 
@@ -40,19 +42,24 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
             get
             {
 
-                return (_pocetakGodisnjeg == DateTime.MinValue) ? DateTime.Now : _pocetakGodisnjeg;
+                return (_datumZavrsetkaGodisnjeg == DateTime.MinValue) ? DateTime.Now : _datumZavrsetkaGodisnjeg;
             }
             set
             {
-                _pocetakGodisnjeg = value;
+                _datumZavrsetkaGodisnjeg = value;
             }
         }
+
+        [Required(ErrorMessage = "Obavezan unos broj dana godisnjeg odmora")]
         public int BrojDanaGodisnjeg { get; set; }
+
+        [StringLength(250)]
         public string? Napomena { get; set; }
+
 
         [ForeignKey("ZaposleniId")]
         public Guid ZaposleniId { get; set; }
-        public Zaposleni Zaposleni { get; set; } = null!;
+        public ZaposleniVM ZaposleniVM { get; set; } = null!;
 
         public StatusBolGod StatusBolGod { get; set; }
     }

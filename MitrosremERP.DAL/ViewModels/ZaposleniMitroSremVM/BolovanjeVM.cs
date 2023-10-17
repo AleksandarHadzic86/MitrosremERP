@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MitrosremERP.Domain.Enum;
 
 namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
 {
@@ -14,20 +15,30 @@ namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
         [Key]
         public Guid Id { get; set; }
 
-        [DataType(DataType.Date, ErrorMessage = "Obavezan unos pocetak bolovanja")]
-        [Display(Name = "Datum od: ")]
-        public DateOnly PocetakBolovanja { get; set; }
+        private DateTime _pocetakBolovanja = DateTime.MinValue;
 
-        [DataType(DataType.Date, ErrorMessage = "Obavezan unos zavrstek bolovanja")]
-        [Display(Name = "Datum do: ")]
-        public DateOnly? ZakljucenoBolovanje { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Datum pocetka bolovanja")]
+        [Required(ErrorMessage = "Datum je obavezan")]
+        public DateTime DatumPocetkaBolovanja
+        {
+            get
+            {
+
+                return (_pocetakBolovanja == DateTime.MinValue) ? DateTime.Now : _pocetakBolovanja;
+            }
+            set
+            {
+                _pocetakBolovanja = value;
+            }
+        }
+
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Datum Zavrsetka")]
+        public DateTime? DatumZavrsetkaBolovanja { get; set; }
 
         [Required(ErrorMessage = "Obavezan unos, broj dana bolovanja")]
         public int? BrojDanaBolovanja { get; set; }
-
-        [StringLength(50)]
-        [Required(ErrorMessage = "Obavezan unos status bolovanja")]
-        public string StatusBolovanja { get; set; } = null!;
 
         [StringLength(250)]
         public string? Napomena { get; set; }
@@ -35,8 +46,8 @@ namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
 
         [ForeignKey("ZaposleniId")]
         public Guid ZaposleniId { get; set; }
-        public ZaposleniVM Zaposleni { get; set; } = null!;
+        public ZaposleniVM ZaposleniVM { get; set; } = null!;
 
-
+        public StatusBolGod StatusBolGod { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using MitrosremERP.Domain.Enum;
 using MitrosremERP.Models;
 using System;
 using System.Collections.Generic;
@@ -38,11 +39,10 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
         public int StepenStrucneSpremeId { get; set; }      
         public StepenStrucneSpreme? StepenStrucneSpreme { get; set; }
 
-        [ForeignKey("PolOsobeId")]
-        public int PolOsobeId {  get; set; }
-        public Pol? PolOsobe { get; set; }
+        public PolOsobe PolOsobe { get; set; }
         public ICollection<Ugovor>? Ugovori { get; set; }
         public ICollection<Bolovanje>? Bolovanja { get; set; }
         public ICollection<GodisnjiOdmor>? GodisnjiOdmori { get; set; }
+        public ICollection<DokumentiZaposleni>? DokumentiZaposleni { get; set; }
     }
 }

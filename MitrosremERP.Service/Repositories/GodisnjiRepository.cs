@@ -10,12 +10,14 @@ using System.Threading.Tasks;
 
 namespace MitrosremERP.Infrastructure.Repositories
 {
-    public class PolRepository : GenericRepository<Pol>, IPolRepository
+    public class GodisnjiRepository : GenericRepository<GodisnjiOdmor>, IGodisnjiRepository
     {
-       
-
-        public PolRepository(ApplicationDbContext repository, ILogger logger) : base(repository, logger)
+        private readonly ILogger _logger;
+        private readonly ApplicationDbContext _context;
+        public GodisnjiRepository(ApplicationDbContext repository, ILogger logger) : base(repository, logger)
         {
+            _logger = logger;
+            _context = repository;
         }
     }
 }

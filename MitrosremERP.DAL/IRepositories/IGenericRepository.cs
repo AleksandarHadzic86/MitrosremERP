@@ -21,7 +21,7 @@ namespace MitrosremERP.Aplication.IRepositories
         //Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> expression);
         void Insert (T entity);
         void Delete (T entity);
-       
+        void Update(T entity);
         
     }
 }

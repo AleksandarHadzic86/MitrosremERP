@@ -16,11 +16,11 @@ namespace MitrosremERP.Aplication.AutoMapper
             CreateMap<StepenStrucneSpreme, SelectListItem>()              
                 .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.StepenObrazovanja))
                 .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id.ToString()));
-            CreateMap<Pol, SelectListItem>()
-                 .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.PolOsobe))           
-                 .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id.ToString()));
             CreateMap<Ugovor, UgovoriVM>().ReverseMap();
             CreateMap<UgovoriVM, Zaposleni>().ReverseMap();
+            CreateMap<Bolovanje, BolovanjeVM>().ReverseMap();
+            CreateMap<GodisnjiOdmor, GodisnjiVM>().ReverseMap();
+            CreateMap<DokumentiZaposleni, DokumentiZaposleniVM>().ReverseMap();
         }
     }
 }

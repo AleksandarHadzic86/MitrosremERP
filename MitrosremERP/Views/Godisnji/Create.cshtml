@@ -1,0 +1,237 @@
+﻿@using MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
+@using MitrosremERP.Domain.Enum
+
+@model KreirajGodisnjiVM
+
+
+@{
+    ViewBag.Title = "Godisnji";
+}
+
+<div class="px-3 mt-5">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link " asp-active="true" asp-controller="Zaposleni" asp-action="Update" asp-route-id="@ViewBag.Id">Zaposleni</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link " asp-active="true" asp-controller="Ugovor" asp-action="Create" asp-route-id="@ViewBag.Id">Ugovor</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link " asp-active="true" asp-controller="Bolovanje" asp-action="Create" asp-route-id="@ViewBag.Id">Bolovanje</a>
+        </li>
+        <li class="nav-item submenuZaposleni">
+            <a class="nav-link " asp-active="true" asp-controller="Godisnji" asp-action="Create" asp-route-id="@ViewBag.Id">Godisnji odmor</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link " asp-active="true" asp-controller="Dokumenti" asp-action="Create" asp-route-id="@ViewBag.Id">Dokumenti</a>
+        </li>
+    </ul>
+</div>
+
+
+
+<div class="container-fluid mt-3 mb-5">
+    <div class="row">
+        <div class="col-lg-8 px-3">
+            <form method="post" autocomplete="off">
+                <div class="card mb-4 mb-xl-0">
+                    <h-3 class="card-header bg-primary text-white">Kreiraj Godisnji</h-3>
+                    <input hidden asp-for="ZaposleniVM.Id" />
+                    <div class="row px-3">
+                        <div class="col-lg-4 col-sm-8 card-body">
+                            <div class="mb-3">
+                                <label class="small mb-1" asp-for="GodisnjiVM.DatumPocetkaGodisnjeg"></label>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <i class='bx bx-calendar'></i>
+                                    </div>
+                                    <input readonly asp-for="GodisnjiVM.DatumPocetkaGodisnjeg" type="text"  value="@Model.GodisnjiVM.DatumPocetkaGodisnjeg.ToString("dd.MMMM.yyyy")" class="datepickerNormalDate form-control" />
+                                </div>
+                                <span asp-validation-for="GodisnjiVM.DatumPocetkaGodisnjeg" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label class="small mb-1" asp-for="GodisnjiVM.DatumZavrsetkaGodisnjeg"></label>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <i class='bx bx-calendar'></i>
+                                    </div>
+                                    <input readonly asp-for="GodisnjiVM.DatumZavrsetkaGodisnjeg" type="text" value="@Model.GodisnjiVM.DatumZavrsetkaGodisnjeg.ToString("dd.MMMM.yyyy")" class="datepickerNormalDate form-control" />
+                                </div>
+                                <span asp-validation-for="GodisnjiVM.DatumZavrsetkaGodisnjeg" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label class="small mb-1" asp-for="GodisnjiVM.Napomena"></label>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <i class='bx bx-detail'></i>
+                                    </div>
+                                    <input asp-for="GodisnjiVM.Napomena" class="form-control" />
+                                </div>
+                                <span asp-validation-for="GodisnjiVM.Napomena" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-sm-8 card-body ">
+                            <div class="mb-3">
+                                <label class="small mb-1">Status godisnji</label>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <i class='bx bx-pen'></i>
+                                    </div>
+                                    <select asp-for="GodisnjiVM.StatusBolGod" asp-items="@Html.GetEnumSelectList<StatusBolGod>()" class="form-control">
+                                        <option disabled selected>--Status Bolovanja--</option>
+                                    </select>
+                                </div>
+                                <span asp-validation-for="GodisnjiVM.StatusBolGod" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="small mb-1" asp-for="GodisnjiVM.BrojDanaGodisnjeg"></label>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <i class='bx bx-home-smile'></i>
+                                    </div>
+                                    <input asp-for="GodisnjiVM.BrojDanaGodisnjeg" class="form-control" />
+                                </div>
+                                <span asp-validation-for="GodisnjiVM.BrojDanaGodisnjeg" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-8  py-3">
+                    <button type="submit" class="btn btn-success">Kreiraj</button>
+                    <a asp-controller="Zaposleni" asp-action="Index" class="btn btn-secondary">Povratak na listu</a>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="col-lg-4 px-3">
+            <div class="card mb-4 mb-xl-0">
+                <div class="card-header p-2 bg-info">
+
+                    <img src="@Model.ZaposleniVM.ImageUrl" style="width: 40px; height: 40px" class="rounded-circle " />
+                </div>
+
+                <div class="row px-3">
+                    <div class="col-lg-4 col-sm-8 card-body">
+                        <div class="mb-3">
+
+                            <label class="small mb-1" asp-for="ZaposleniVM.Ime"></label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class='bx bxs-user-circle'></i>
+                                </div>
+                                <input readonly asp-for="ZaposleniVM.Ime" class="form-control" />
+                            </div>
+                            <span asp-validation-for="ZaposleniVM.Ime" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="ZaposleniVM.Prezime"></label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class='bx bxs-user-circle'></i>
+                                </div>
+                                <input readonly asp-for="ZaposleniVM.Prezime" class="form-control" />
+                            </div>
+                            <span asp-validation-for="ZaposleniVM.Prezime" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="ZaposleniVM.JMBG"></label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class='bx bx-id-card'></i>
+                                </div>
+                                <input readonly asp-for="ZaposleniVM.JMBG" class="form-control jmbgText" />
+                            </div>
+
+                            <span asp-validation-for="ZaposleniVM.JMBG" class="text-danger"></span>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--Tabela-->
+<div class="card mx-3">
+    <table class="table mt-2 align-middle mb-0 bg-white">
+
+        <thead class="bg-light ">
+            <tr>
+                <th class="px-3">Datum pocetka</th>
+                <th>Datum zavrsetka</th>
+                <th>Broj dana bolovanja</th>
+                <th>Status bolovanja</th>
+                <th>Napomena</th>
+                <th class="px-3">Akcija</th>
+            </tr>
+        </thead>
+
+        @if (Model.GodisnjiVMlista.Count != 0)
+        {
+            foreach (var bolovanje in Model.GodisnjiVMlista)
+            {
+                <tbody>
+                    <tr>
+                        <td>
+                            <p class="fw-normal mb-1">@bolovanje.DatumPocetkaGodisnjeg.ToString("dd.MMMM.yyyy")</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">@bolovanje.DatumZavrsetkaGodisnjeg.ToString("dd.MMMM.yyyy")</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">@bolovanje.BrojDanaGodisnjeg</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">@bolovanje.StatusBolGod</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">@bolovanje.Napomena</p>
+                        </td>
+                        <td>
+                            <div class="btnbtn-group" role="group">
+                                <a asp-controller="Bolovanje" asp-action="Update" class="btn btn-primary mx-2"><i class='bx bxs-edit'></i>Uredi</a>
+
+                                @if (User.IsInRole(Roles.Role_SuperAdmin))
+                                {
+                                    <a asp-controller="Bolovanje" asp-action="Delete" class="btn btn-danger mx-2"><i class='bx bx-trash'></i>Obrisi</a>
+                                }
+                            </div>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            }
+        }
+        else
+        {
+            <tbody>
+                <tr>
+                    <td colspan="6">
+                        <p class="text-info p-2 py-1">Trenutno nema registrovanih godisnjih odmora</p>
+                    </td>
+                </tr>
+            </tbody>
+        }
+
+
+    </table>
+
+</div>
+@section Scripts {
+    @{
+        @await Html.PartialAsync("_DatePicker-normalDate")
+        @await Html.PartialAsync("_ValidationScriptsPartial")
+        @await Html.PartialAsync("_ZaposleniNav")
+    }
+}

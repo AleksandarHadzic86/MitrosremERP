@@ -76,7 +76,7 @@ namespace MitrosremERP.Infrastructure.Repositories
                 throw;
             }
         }
-        public void Update(Zaposleni zaposleni)
+        public void UpdateZaposleni(Zaposleni zaposleni)
         {
             try
             {
