@@ -14,7 +14,7 @@
             <span class="fs-4 text-primary ">Ugovori</span>
         </div>
     </div>
-
+   
     <form asp-action="Index" method="get">
         <div class="row ">
             <div class=" col-xxl-5 col-xl-8 col-sm-12 mt-xxl-3 mt-lg-3">
@@ -29,12 +29,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xxl-7 col-xl-4 col-sm-12 mt-xxl-3 mt-lg-3 my-sm-2 text-xxl-end text-xl-end text-lg-end text-sm-end">
-                <a asp-controller="Zaposleni" asp-action="Create" class="btn btn-primary">
-                    <i class='bx bx-plus-circle'></i>
-                    Kreiraj Ugovor
-                </a>
-            </div>
+ 
         </div>
     </form>
     <div class="card">
@@ -51,44 +46,61 @@
                     <th class="px-3">Akcija</th>
                 </tr>
             </thead>
+
+            
             @foreach (var ugovori in Model)
             {
-                <tbody>
-                    <tr>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <div class="ms-3">
-                                     <p class="fw-bold mb-1">@ugovori.ZaposleniVM.Ime @ugovori.ZaposleniVM.Prezime</p>
-                                    <p class="text-muted mb-0">@ugovori.ZaposleniVM.Mobilni</p> 
+                @if(ugovori != null && ugovori.ZaposleniVM != null)
+                {
+                    <tbody>
+                        <tr>
+                             <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="ms-3">
+                                        <p class="fw-bold mb-1">@ugovori.ZaposleniVM.Ime @ugovori.ZaposleniVM.Prezime</p>
+                                        <p class="text-muted mb-0">@ugovori.ZaposleniVM.Mobilni</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">@ugovori.BrojUgovora</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">@ugovori.TipoviUgovora</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">@ugovori.DatumPocetka</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">@ugovori.DatumZavrsetka</p>
-                        </td>
-                        <td>
-                            <div class="btnbtn-group" role="group">
-                               @*  <a asp-controller="Zaposleni" asp-action="Update" asp-route-id="@zaposleni.Id" class="btn btn-primary mx-2"><i class='bx bxs-edit'></i>Uredi</a>
+                            </td> 
+                            <td>
+                                <p class="fw-normal mb-1">@ugovori.BrojUgovora</p>
+                            </td>
+                            <td>
+                                <p class="fw-normal mb-1">@ugovori.TipoviUgovora</p>
+                            </td>
+                            <td>
+                                <p class="fw-normal mb-1">@ugovori.DatumPocetka</p>
+                            </td>
+                            <td>
+                                <p class="fw-normal mb-1">@ugovori.DatumZavrsetka</p>
+                            </td> 
+                            <td>
+                                <div class="btnbtn-group" role="group">
+                                    @*  <a asp-controller="Zaposleni" asp-action="Update" asp-route-id="@zaposleni.Id" class="btn btn-primary mx-2"><i class='bx bxs-edit'></i>Uredi</a>
 
-                                @if (User.IsInRole(Roles.Role_SuperAdmin))
-                                {
-                                    <a asp-controller="Zaposleni" asp-action="Delete" asp-route-id="@zaposleni.Id" class="btn btn-danger mx-2"><i class='bx bx-trash'></i>Obrisi</a>
-                                } *@
-                            </div>
-                        </td>
+                            @if (User.IsInRole(Roles.Role_SuperAdmin))
+                            {
+                            <a asp-controller="Zaposleni" asp-action="Delete" asp-route-id="@zaposleni.Id" class="btn btn-danger mx-2"><i class='bx bx-trash'></i>Obrisi</a>
+                            } *@
+                                </div>
+                            </td>
 
-                    </tr>
+                        </tr>
 
-                </tbody>
+                    </tbody>
+                }
+                else
+                {
+                    <tbody>
+                        <tr>
+                            <td colspan="6">
+                                <p>Trenutno nema registrovanih ugovora</p>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                }
             }
 
         </table>

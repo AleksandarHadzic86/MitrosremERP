@@ -14,6 +14,8 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
         public Guid Id { get; set; }
         public string ImeDokumenta { get; set; } = null!;     
         public string PutanjaDokumenta { get; set; } = null!;
+        public string? Napomena { get; set; }
+
         [ForeignKey("ZaposleniId")]
         public Guid ZaposleniId { get; set; }
         public Zaposleni Zaposleni { get; set; } = null!;

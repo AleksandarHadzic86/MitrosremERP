@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.VisualBasic;
 using MitrosremERP.Domain.Enum;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
 
         [ForeignKey("ZaposleniId")]
         public Guid ZaposleniId { get; set; }
+        [ValidateNever]
         public Zaposleni Zaposleni { get; set; } = null!;
 
         public TipUgovora TipoviUgovora { get; set; }

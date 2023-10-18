@@ -285,11 +285,14 @@ namespace MitrosremERP.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Napomena")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PutanjaDokumenta")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("ZaposleniId")
+                    b.Property<Guid>("ZaposleniId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -328,23 +331,6 @@ namespace MitrosremERP.Infrastructure.Migrations
                     b.HasIndex("ZaposleniId");
 
                     b.ToTable("GodisnjiOdmori");
-                });
-
-            modelBuilder.Entity("MitrosremERP.Domain.Models.ZaposleniMitrosrem.Pol", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("PolOsobe")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Pol");
                 });
 
             modelBuilder.Entity("MitrosremERP.Domain.Models.ZaposleniMitrosrem.StepenStrucneSpreme", b =>
@@ -483,9 +469,6 @@ namespace MitrosremERP.Infrastructure.Migrations
                     b.Property<string>("Napomena")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PolId")
-                        .HasColumnType("int");
-
                     b.Property<int>("PolOsobe")
                         .HasColumnType("int");
 
@@ -506,8 +489,6 @@ namespace MitrosremERP.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PolId");
-
                     b.HasIndex("StepenStrucneSpremeId");
 
                     b.ToTable("Zaposleni");
@@ -515,7 +496,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("716b56d9-1c37-486c-a4d8-e0d39754a7e5"),
+                            Id = new Guid("356c2c2c-3c3b-4bbc-8105-326887af48dc"),
                             Adresa = "Stari Sor",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -532,7 +513,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("944f38cd-156f-4974-bac0-6809dd9f9974"),
+                            Id = new Guid("7d2a18fe-92a1-4230-867f-01440f08d116"),
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -549,7 +530,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("275d4843-576d-414f-aab1-b07929402aca"),
+                            Id = new Guid("ed5ded49-939c-4608-8683-cd6280b7193c"),
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -566,7 +547,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c11d92a5-5315-4cc3-9b06-a3bcf9fb63c8"),
+                            Id = new Guid("16b54ea0-a894-402f-9e29-67fa372cd265"),
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -583,7 +564,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("bd7a3c77-b82f-4934-9236-a50c281999c0"),
+                            Id = new Guid("7b997e50-29ee-46e2-b3e6-89a221cf67df"),
                             Adresa = "Stari Sor",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -600,7 +581,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fbbaa504-bfed-489f-b9b7-de6a37759978"),
+                            Id = new Guid("4c63fe62-26d1-468e-a036-edc64948cf04"),
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -617,7 +598,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c01b1826-eb31-49f2-90e6-de2eeacb3190"),
+                            Id = new Guid("cef58994-c1c1-49dd-9e27-5e1eb3511b92"),
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -626,7 +607,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Ime = "Zorana",
                             JMBG = "2132986890023",
                             Mobilni = "0605574477",
-                            PolOsobe = 0,
+                            PolOsobe = 1,
                             Prezime = "Zoranovic",
                             Profesija = "Diplomirani Ekonomista",
                             RadnoMesto = "Racunovodstvo",
@@ -634,7 +615,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("caedba00-4ff8-4d8c-aa51-ef769029d6d5"),
+                            Id = new Guid("868eb7b6-2ff4-4de5-8ad1-1aac3c5c21fc"),
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -643,7 +624,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                             Ime = "Stevan",
                             JMBG = "3123986890023",
                             Mobilni = "0605574477",
-                            PolOsobe = 1,
+                            PolOsobe = 0,
                             Prezime = "Stevanovic",
                             Profesija = "Trgovac",
                             RadnoMesto = "Maloprodaja",
@@ -715,9 +696,13 @@ namespace MitrosremERP.Infrastructure.Migrations
 
             modelBuilder.Entity("MitrosremERP.Domain.Models.ZaposleniMitrosrem.DokumentiZaposleni", b =>
                 {
-                    b.HasOne("MitrosremERP.Domain.Models.ZaposleniMitrosrem.Zaposleni", null)
+                    b.HasOne("MitrosremERP.Domain.Models.ZaposleniMitrosrem.Zaposleni", "Zaposleni")
                         .WithMany("DokumentiZaposleni")
-                        .HasForeignKey("ZaposleniId");
+                        .HasForeignKey("ZaposleniId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Zaposleni");
                 });
 
             modelBuilder.Entity("MitrosremERP.Domain.Models.ZaposleniMitrosrem.GodisnjiOdmor", b =>
@@ -744,10 +729,6 @@ namespace MitrosremERP.Infrastructure.Migrations
 
             modelBuilder.Entity("MitrosremERP.Domain.Models.ZaposleniMitrosrem.Zaposleni", b =>
                 {
-                    b.HasOne("MitrosremERP.Domain.Models.ZaposleniMitrosrem.Pol", null)
-                        .WithMany("Zaposleni")
-                        .HasForeignKey("PolId");
-
                     b.HasOne("MitrosremERP.Domain.Models.ZaposleniMitrosrem.StepenStrucneSpreme", "StepenStrucneSpreme")
                         .WithMany("Zaposleni")
                         .HasForeignKey("StepenStrucneSpremeId")
@@ -755,11 +736,6 @@ namespace MitrosremERP.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("StepenStrucneSpreme");
-                });
-
-            modelBuilder.Entity("MitrosremERP.Domain.Models.ZaposleniMitrosrem.Pol", b =>
-                {
-                    b.Navigation("Zaposleni");
                 });
 
             modelBuilder.Entity("MitrosremERP.Domain.Models.ZaposleniMitrosrem.StepenStrucneSpreme", b =>

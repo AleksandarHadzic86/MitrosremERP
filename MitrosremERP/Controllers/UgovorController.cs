@@ -6,10 +6,11 @@ using MitrosremERP.Aplication.IRepositories;
 using Microsoft.EntityFrameworkCore;
 using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 using Microsoft.AspNetCore.Authorization;
+using MitrosremERP.Domain.Models.IdentityModel;
 
 namespace MitrosremERP.Controllers
 {
-    [AllowAnonymous]
+    [Authorize(Roles = Roles.Role_SuperAdmin + "," + Roles.Role_AdminZaposleni)]
     public class UgovorController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -29,6 +30,7 @@ namespace MitrosremERP.Controllers
                 var pageSize = 3;
                 var ugovoriLista = await _unitOfWork.UgovoriRepository.GetUgovorPaginationAsync(sortOrder, searchString, pageNumber ?? 1, 8);
                 var ugovoriVM = _autoMapper.Map<IEnumerable<UgovoriVM>>(ugovoriLista);
+               
 
                 var ugovoriVMPaginatedList = new PaginatedList<UgovoriVM>(
                     ugovoriVM.ToList(),

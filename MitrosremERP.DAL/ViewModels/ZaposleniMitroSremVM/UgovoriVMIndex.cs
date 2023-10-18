@@ -7,15 +7,12 @@ using System.Threading.Tasks;
 
 namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
 {
-    public class KreirajDokumenteZaposleniVM
+    public class UgovoriVMIndex
     {
-        
-        public DokumentiZaposleniVM DokumentiZaposleniVM { get; set; }
-
         [ValidateNever]
-        public List<DokumentiZaposleniVM> DokumentiZaposleniVMlista { get; set; }
-
+        public List<UgovoriVM> UgovoriVMlista { get; set; }
         [ValidateNever]
-        public ZaposleniVM ZaposleniVM { get; set; } = null!;
+
+        public ZaposleniVM? ZaposleniVM { get; set; }
     }
 }

@@ -38,9 +38,9 @@ namespace MitrosremERP.Controllers
             {
                 var pageSize = 3;
                 var zaposleniLista = await _unitOfWork.ZaposleniRepository.GetZaposleniPaginationAsync(sortOrder, searchString, pageNumber ?? 1, 8);
-                var zaposleniVMs = _autoMapper.Map<IEnumerable<ZaposleniVMIndex>>(zaposleniLista);
+                var zaposleniVMs = _autoMapper.Map<IEnumerable<ZaposleniVM>>(zaposleniLista);
 
-                var zaposleniVMPaginatedList = new PaginatedList<ZaposleniVMIndex>(
+                var zaposleniVMPaginatedList = new PaginatedList<ZaposleniVM>(
                     zaposleniVMs.ToList(),
                     zaposleniLista.Count,
                     pageNumber ?? 1,

@@ -158,6 +158,7 @@ namespace MitrosremERP.Controllers
             }
             if (user.Email == "aleksandarhadzic1986@gmail.com")
             {
+
                 return View("../Administration/ZabranjenPristupAdministracija");
             }
             // Add any additional authorization checks here to determine if the user can be deleted

@@ -50,9 +50,19 @@
                                 <span asp-validation-for="DokumentiZaposleniVM.ImeDokumenta" class="text-danger"></span>
                             </div>
                             <div class="mb-3">
-                                  <label class="small mb-1" asp-for="DokumentiZaposleniVM.PutanjaDokumenta">Okacite dokument u pdf formatu</label>
-                                <input  type="file" name="file" class="form-control" />
-                                <span asp-validation-for="DokumentiZaposleniVM.PutanjaDokumenta" class="text-danger"></span>
+                                <label class="small mb-1" asp-for="DokumentiZaposleniVM.Napomena"></label>
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <i class='bx bx-detail'></i>
+                                    </div>
+                                    <input asp-for="DokumentiZaposleniVM.Napomena" class=" form-control" />
+                                </div>
+                                <span asp-validation-for="DokumentiZaposleniVM.Napomena" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                  <label class="small mb-1" asp-for="DokumentiZaposleniVM.file">Okacite dokument u pdf formatu</label>
+                                <input type="file" name="DokumentiZaposleniVM.file" class="form-control" />
+                                <span asp-validation-for="DokumentiZaposleniVM.file"  class="text-danger"></span>
                             </div>
                         </div>                     
                     </div>
@@ -125,28 +135,30 @@
         <thead class="bg-light ">
             <tr>
                 <th class="px-3">Ime dokumenta</th>
+                <th >Napomena</th>
                 <th class="px-3">Akcija</th>
             </tr>
         </thead>
 
-        @if (Model.DokumentiZaposleniVMlista.Count != 0)
+         @if (Model.DokumentiZaposleniVMlista.Count != 0)
         {
             foreach (var dokument in Model.DokumentiZaposleniVMlista)
             {
                 <tbody>
                     <tr>
                         <td>
-
                             <p class="fw-normal mb-1 mx-2"><i class='bx bxs-file-doc mx-2'></i>@dokument.ImeDokumenta</p>
                         </td>
-
+                        <td>
+                            <p class="fw-normal mb-1 mx-2">@dokument.Napomena</p>
+                        </td>
                         <td>
                             <div class="btnbtn-group" role="group">
-                                <a asp-controller="Bolovanje" asp-action="Update" class="btn btn-primary mx-2"><i class='bx bxs-edit'></i>Uredi</a>
+                                <a asp-controller="Dokumenti" asp-action="DownloadFile" asp-route-fileId="@dokument.Id" class="btn btn-success mx-2"><i class='bx bxs-download'></i>Preuzmi dokument</a>
 
                                 @if (User.IsInRole(Roles.Role_SuperAdmin))
                                 {
-                                    <a asp-controller="Bolovanje" asp-action="Delete" class="btn btn-danger mx-2"><i class='bx bx-trash'></i>Obrisi</a>
+                                    <a asp-controller="Dokumenti" asp-action="Delete" class="btn btn-danger mx-2"><i class='bx bx-trash'></i>Obrisi</a>
                                 }
                             </div>
                         </td>
@@ -166,7 +178,7 @@
                     </td>
                 </tr>
             </tbody>
-        }
+        } 
 
 
     </table>

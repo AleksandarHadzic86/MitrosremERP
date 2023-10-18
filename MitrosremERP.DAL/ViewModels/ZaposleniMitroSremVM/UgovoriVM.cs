@@ -51,13 +51,12 @@ namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
         public int BrojDanaGodisnjeg { get; set; }
 
         public string? Napomena { get; set; }
-
-
-        [ForeignKey("ZaposleniId")]
-        public Guid ZaposleniId { get; set; }
-        [ValidateNever]
-        public ZaposleniVM ZaposleniVM { get; set; } = null!;
-
         public TipUgovora TipoviUgovora { get; set; }
+
+     
+        [ValidateNever]
+        public ZaposleniVM? ZaposleniVM { get; set; }
+
+
     }
 }
