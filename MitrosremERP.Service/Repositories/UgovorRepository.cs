@@ -7,6 +7,7 @@ using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,6 +22,8 @@ namespace MitrosremERP.Infrastructure.Repositories
             _logger = logger;
             _repository = repository;
         }
+
+      
         public async Task<PaginatedList<Ugovor>> GetUgovorPaginationAsync(string sortOrder, string searchString, int pageNumber, int pageSize)
         {
             try

@@ -27,8 +27,7 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
         [ForeignKey("ZaposleniId")]
         public Guid ZaposleniId { get; set; }
         [ValidateNever]
-        public Zaposleni Zaposleni { get; set; } = null!;
-
+        public Zaposleni Zaposleni { get; set; }
         public TipUgovora TipoviUgovora { get; set; }
     }
 }

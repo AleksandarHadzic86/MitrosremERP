@@ -2,7 +2,7 @@
 @using MitrosremERP.Aplication.ViewModels;
 @using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 
-@model PaginatedList<UgovoriVM>
+@model PaginatedList<UgovoriVMIndex>
 @{
     ViewBag.Title = "Ugovori";
 }
@@ -43,25 +43,28 @@
                     <th>Datum pocetka</th>
                     <th>Datum zavrsetka</th>
                     <th>Broj dana godisnjeg</th>
-                    <th class="px-3">Akcija</th>
                 </tr>
             </thead>
 
             
             @foreach (var ugovori in Model)
             {
-                @if(ugovori != null && ugovori.ZaposleniVM != null)
+                @if(ugovori != null)
                 {
                     <tbody>
                         <tr>
-                             <td>
+                            <td>
                                 <div class="d-flex align-items-center">
+                                    <img src="@ugovori.ZaposleniImageUrl"
+                                         alt=""
+                                         style="width: 45px; height: 45px"
+                                         class="rounded-circle" />
                                     <div class="ms-3">
-                                        <p class="fw-bold mb-1">@ugovori.ZaposleniVM.Ime @ugovori.ZaposleniVM.Prezime</p>
-                                        <p class="text-muted mb-0">@ugovori.ZaposleniVM.Mobilni</p>
+                                        <p class="fw-bold mb-1">@ugovori.ZaposleniIme @ugovori.ZaposleniPrezime</p>
+
                                     </div>
                                 </div>
-                            </td> 
+                            </td>
                             <td>
                                 <p class="fw-normal mb-1">@ugovori.BrojUgovora</p>
                             </td>
@@ -69,20 +72,13 @@
                                 <p class="fw-normal mb-1">@ugovori.TipoviUgovora</p>
                             </td>
                             <td>
-                                <p class="fw-normal mb-1">@ugovori.DatumPocetka</p>
+                                <p class="fw-normal mb-1">@ugovori.DatumPocetka.ToString("dd.MMMM.yyyy")</p>
                             </td>
                             <td>
-                                <p class="fw-normal mb-1">@ugovori.DatumZavrsetka</p>
-                            </td> 
+                                <p class="fw-normal mb-1">@ugovori.DatumZavrsetka?.ToString("dd.MMMM.yyyy")</p>
+                            </td>
                             <td>
-                                <div class="btnbtn-group" role="group">
-                                    @*  <a asp-controller="Zaposleni" asp-action="Update" asp-route-id="@zaposleni.Id" class="btn btn-primary mx-2"><i class='bx bxs-edit'></i>Uredi</a>
-
-                            @if (User.IsInRole(Roles.Role_SuperAdmin))
-                            {
-                            <a asp-controller="Zaposleni" asp-action="Delete" asp-route-id="@zaposleni.Id" class="btn btn-danger mx-2"><i class='bx bx-trash'></i>Obrisi</a>
-                            } *@
-                                </div>
+                                <p class="fw-normal mb-1">@ugovori.BrojDanaGodisnjeg</p>
                             </td>
 
                         </tr>
@@ -106,7 +102,7 @@
         </table>
 
     </div>
-    @{
+     @{
         var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
         var nextDisabled = !Model.HasNextPage ? "disabled" : "";
     }
@@ -126,5 +122,5 @@
            class="btn btn-outline-secondary text-black @nextDisabled">
             Next
         </a>
-    </div>
+    </div> 
 </div>

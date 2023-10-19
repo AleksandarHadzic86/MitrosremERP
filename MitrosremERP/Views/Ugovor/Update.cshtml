@@ -1,0 +1,126 @@
+﻿@using MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
+@using MitrosremERP.Domain.Enum
+
+@model UgovorUpdateVM
+
+@{
+    ViewBag.Title = "UpdateUgovor";
+}
+
+
+@* <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+
+    <div class="container-fluid mt-3 mb-5">
+        <div class="row">
+            <div class="col-lg-8 px-3">
+                <form method="post" autocomplete="off">
+                    <div class="card mb-4 mb-xl-0">
+                        <h-3 class="card-header bg-primary text-white">Izmeni ugovor</h-3>
+                        <input hidden asp-for="Id" />
+                        <div class="row px-3">
+                            <div class="col-lg-4 col-sm-8 card-body">
+                                <div class="mb-3">
+                                    <label class="small mb-1" asp-for="BrojUgovora"></label>
+                                    <div class="input-group">
+                                        <div class="input-group-text">
+                                            <i class='bx bx-key'></i>
+                                        </div>
+                                        <input asp-for="BrojUgovora" class="form-control" />
+                                    </div>
+                                    <span asp-validation-for="BrojUgovora" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="small mb-1">Tip ugovora</label>
+                                    <div class="input-group">
+                                        <div class="input-group-text">
+                                            <i class='bx bx-pen'></i>
+                                        </div>
+                                        <select asp-for="TipoviUgovora" asp-items="@Html.GetEnumSelectList<TipUgovora>()" class="form-control">
+                                            <option disabled selected>--Izaberite tip ugovora--</option>
+                                        </select>
+                                    </div>
+                                    <span asp-validation-for="TipoviUgovora" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="small mb-1" asp-for="BrojDanaGodisnjeg"></label>
+                                    <div class="input-group">
+                                        <div class="input-group-text">
+                                            <i class='bx bx-home-smile'></i>
+                                        </div>
+                                        <input asp-for="BrojDanaGodisnjeg" class="form-control" />
+                                    </div>
+                                    <span asp-validation-for="BrojDanaGodisnjeg" class="text-danger"></span>
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="col-lg-4 col-sm-8 card-body ">
+
+
+                                <div class="mb-3">
+                                    <label class="small mb-1" asp-for="DatumPocetka"></label>
+                                    <div class="input-group">
+                                        <div class="input-group-text">
+                                            <i class='bx bx-calendar'></i>
+                                        </div>
+                                        <input readonly asp-for="DatumPocetka" type="text" name="DatumPocetka" id="DatumPocetka" value="@Model.DatumPocetka.ToString("dd.MMMM.yyyy")" class="datepickerNormalDate form-control" />
+                                    </div>
+                                    <span asp-validation-for="DatumPocetka" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="small mb-1" asp-for="DatumZavrsetka"></label>
+                                    <div class="input-group">
+                                        <div class="input-group-text">
+                                            <i class='bx bx-calendar'></i>
+                                        </div>
+                                        <input readonly asp-for="DatumZavrsetka" type="text" name="UgovoriVM.DatumZavrsetka" id="UgovoriVM.DatumZavrsetka" value="@Model.DatumZavrsetka?.ToString("dd.MMMM.yyyy")" class="datepickerNormalDate form-control" />
+                                    </div>
+                                    <span asp-validation-for="DatumZavrsetka" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="small mb-1" asp-for="Napomena"></label>
+                                    <div class="input-group">
+                                        <div class="input-group-text">
+                                            <i class='bx bx-detail'></i>
+                                        </div>
+                                        <input asp-for="Napomena" class="form-control" />
+                                    </div>
+                                    <span asp-validation-for="Napomena" class="text-danger"></span>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-8  py-3">
+                        <button type="submit" class="btn btn-success">Kreiraj</button>
+                        <a asp-controller="Zaposleni" asp-action="Index" class="btn btn-secondary">Povratak na listu</a>
+                    </div>
+                </form>
+            </div>
+         
+        </div>
+    </div>
+  </div>
+</div> *@
+
+@section Scripts{
+    @{
+    <script>
+            var myModal = document.getElementById('myModal')
+            var myInput = document.getElementById('myInput')
+
+            myModal.addEventListener('shown.bs.modal', function () {
+                myInput.focus()
+            })
+    </script>
+    }
+  
+}

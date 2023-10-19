@@ -27,7 +27,7 @@ namespace MitrosremERP.Infrastructure.Repositories
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return await _repository.Set<T>().ToListAsync();
+            return  _repository.Set<T>().ToList();
         }
 
 

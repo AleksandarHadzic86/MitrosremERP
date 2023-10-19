@@ -14,6 +14,7 @@ namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
     {
         public Guid Id { get; set; }
         [Required(ErrorMessage = "Ime dokumenta obavezno")]
+        [Display(Name = "Naziv dokumenta")]
         public string ImeDokumenta { get; set; } = null!;
         public string? Napomena { get; set; }
         public string? PutanjaDokumenta { get; set; }

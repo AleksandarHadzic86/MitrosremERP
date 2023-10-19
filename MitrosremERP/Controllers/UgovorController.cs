@@ -23,16 +23,44 @@ namespace MitrosremERP.Controllers
             _autoMapper = autoMapper;
             _logger = logger;
         }
+        //public async Task<IActionResult> Index()
+        //{
+        //    //verzija1//
+        //    //var zaposleniLista = await _unitOfWork.ZaposleniRepository.GetAllAsync();
+        //    //var zaposleniIds = zaposleniLista.Select(zl => zl.Id );
+        //    //var ugovoriForZaposleni = _unitOfWork.UgovoriRepository.GetQueryable().Where(u => zaposleniIds.Contains(u.ZaposleniId));
+        //    //var ugovoriVM = _autoMapper.Map<IEnumerable<UgovoriVM>>(ugovoriForZaposleni);
+        //    //return View(ugovoriVM);
+
+        //    //verzija2
+        //    //var zaposleniLista = await _unitOfWork.ZaposleniRepository.GetAllAsync();
+        //    //var ugovoriVMlista = new List<UgovoriVM>();
+        //    //foreach (var zaposleni in zaposleniLista)
+        //    //{
+        //    //    var ugovoriForZaposleni = _unitOfWork.UgovoriRepository.GetQueryable().Where(z => z.ZaposleniId == zaposleni.Id).ToList();
+        //    //    var ugovoriVMForZaposleni = _autoMapper.Map<IEnumerable<UgovoriVM>>(ugovoriForZaposleni);
+
+        //    //    ugovoriVMlista.AddRange(ugovoriVMForZaposleni);
+        //    //}
+        //    //return View(zaposleniLista);
+
+
+
+        //    var ugovoriZaposleni = _unitOfWork.UgovoriRepository.GetQueryable().Include(z => z.Zaposleni);
+
+        //   var ugovoriVM = _autoMapper.Map<IEnumerable<UgovoriVMIndex>>(ugovoriZaposleni);
+        //    return View(ugovoriVM);
+        //}
         public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
             try
             {
                 var pageSize = 3;
                 var ugovoriLista = await _unitOfWork.UgovoriRepository.GetUgovorPaginationAsync(sortOrder, searchString, pageNumber ?? 1, 8);
-                var ugovoriVM = _autoMapper.Map<IEnumerable<UgovoriVM>>(ugovoriLista);
-               
+                var ugovoriVM = _autoMapper.Map<IEnumerable<UgovoriVMIndex>>(ugovoriLista);
 
-                var ugovoriVMPaginatedList = new PaginatedList<UgovoriVM>(
+
+                var ugovoriVMPaginatedList = new PaginatedList<UgovoriVMIndex>(
                     ugovoriVM.ToList(),
                     ugovoriLista.Count,
                     pageNumber ?? 1,
@@ -109,61 +137,34 @@ namespace MitrosremERP.Controllers
                 return View("InternalServerError");
             }
         }
+        [HttpGet]
+        public async Task<IActionResult> Update(Guid? id)
+        {
+            try
+            {
+                var ugovorId = await _unitOfWork.UgovoriRepository.GetByIdAsync(id);
 
-        //[HttpGet]
-        //public async Task<IActionResult> Create(Guid? id)
-        //{
-        //    try
-        //    {
-        //        var zaposleni = await _unitOfWork.ZaposleniRepository.GetByIdAsync(id);
+                if (ugovorId == null)
+                {
+                    Response.StatusCode = 404;
+                    return View("../Zaposleni/ZaposleniNijePronadjen");
+                }
+                else
+                {
 
-        //        if (zaposleni == null)
-        //        {
-        //            Response.StatusCode = 404;
-        //            return View("../Zaposleni/ZaposleniNijePronadjen");
-        //        }
-        //        else
-        //        {
-        //            ViewBag.Id = zaposleni.Id;
-        //            UgovoriVM ugovoriVM = new()
-        //            {
-        //                ZaposleniVM = _autoMapper.Map<ZaposleniVM>(zaposleni)
-        //            };
-        //            return View(ugovoriVM);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
+                    var ugovorVM = _autoMapper.Map<UgovorUpdateVM>(ugovorId);
 
-        //        Response.StatusCode = 500;
-        //        _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
-        //        return View("InternalServerError");
-        //    }                            
-        //}
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create(UgovoriVM ugovoriVM)
-        //{
-        //    try
-        //    {
-        //        if (ModelState.IsValid)
-        //        {
-        //            var ugovor = _autoMapper.Map<Ugovor>(ugovoriVM);
-        //            ugovor.ZaposleniId = ugovoriVM.ZaposleniVM.Id;
-        //            _unitOfWork.UgovoriRepository.Insert(ugovor);
-        //            await _unitOfWork.SaveAsync();
-        //            TempData["success"] = "Ugovor uspešno kreiran";
-        //            return RedirectToAction("Create");
-        //        }
-        //        return View(ugovoriVM);
+                    return View(ugovorVM);
+                }
+            }
+            catch (Exception ex)
+            {
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Response.StatusCode = 500;
-        //        _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
-        //        return View("InternalServerError");
-        //    }
-        //}
+                Response.StatusCode = 500;
+                _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
+                return View("InternalServerError");
+            }
+        }
+
     }
 }

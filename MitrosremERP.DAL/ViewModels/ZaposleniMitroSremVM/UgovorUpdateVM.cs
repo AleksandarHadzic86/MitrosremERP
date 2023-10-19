@@ -1,19 +1,16 @@
-﻿using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using MitrosremERP.Domain.Enum;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using MitrosremERP.Domain.Enum;
 
 namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
 {
-    public class UgovoriVM
+    public class UgovorUpdateVM
     {
-        [Key]
         public Guid Id { get; set; }
 
         [StringLength(50, ErrorMessage = "Maksimalan broj karaktera 50")]
@@ -41,7 +38,7 @@ namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
 
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Datum Zavrsetka")]
-        public DateTime? DatumZavrsetka { get; set; } 
+        public DateTime? DatumZavrsetka { get; set; }
 
 
 
@@ -57,7 +54,5 @@ namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
         public Guid ZaposleniId { get; set; }
         [ValidateNever]
         public ZaposleniVM ZaposleniVM { get; set; }
-        //public string ZaposleniIme { get; set; } = null!;
-        //public string ZaposleniPrezime { get; set; } = null!;
     }
 }
