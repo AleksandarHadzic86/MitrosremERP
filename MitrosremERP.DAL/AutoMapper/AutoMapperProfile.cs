@@ -33,7 +33,8 @@ namespace MitrosremERP.Aplication.AutoMapper
                 .ForMember(dest => dest.UgovorDatumZavrsetka, opt => opt.MapFrom(src => src.DatumZavrsetka))
                 .ForMember(dest => dest.UgovorBrojDanaGodisnjeg, opt => opt.MapFrom(src => src.BrojDanaGodisnjeg))
                 .ForMember(dest => dest.UgovorNapomena, opt => opt.MapFrom(src => src.Napomena))
-                .ForMember(dest => dest.ZaposleniId, opt => opt.MapFrom(src => src.ZaposleniId));
+                .ForMember(dest => dest.ZaposleniId, opt => opt.MapFrom(src => src.ZaposleniId))
+                .ForMember(dest => dest.ZaposleniVM, opt => opt.Ignore());
 
             // Add more properties as needed
 
@@ -45,8 +46,8 @@ namespace MitrosremERP.Aplication.AutoMapper
                 .ForMember(dest => dest.DatumZavrsetka, opt => opt.MapFrom(src => src.UgovorDatumZavrsetka))
                 .ForMember(dest => dest.BrojDanaGodisnjeg, opt => opt.MapFrom(src => src.UgovorBrojDanaGodisnjeg))
                 .ForMember(dest => dest.Napomena, opt => opt.MapFrom(src => src.UgovorNapomena))
-                .ForMember(dest => dest.ZaposleniId, opt => opt.MapFrom(src => src.ZaposleniId));
-
+                .ForMember(dest => dest.ZaposleniId, opt => opt.MapFrom(src => src.ZaposleniId))
+                .ForMember(dest => dest.Zaposleni, opt => opt.Ignore());
             // Add more properties as needed
         }
     }

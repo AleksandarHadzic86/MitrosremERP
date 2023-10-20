@@ -60,8 +60,8 @@
                                 <span asp-validation-for="DokumentiZaposleniVM.Napomena" class="text-danger"></span>
                             </div>
                             <div class="mb-3">
-                                  <label class="small mb-1" asp-for="DokumentiZaposleniVM.file">Okacite dokument u pdf formatu</label>
-                                <input type="file" name="DokumentiZaposleniVM.file" class="form-control" />
+                                <label for="file-input"  class="small mb-1 text-white" asp-for="DokumentiZaposleniVM.file"></label>
+                                <input id="file-input" type="file" name="DokumentiZaposleniVM.file" class="form-control" />
                                 <span asp-validation-for="DokumentiZaposleniVM.file"  class="text-danger"></span>
                             </div>
                         </div>                     

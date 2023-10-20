@@ -17,8 +17,42 @@ $(document).ready(function () {
         });
     });
 
-     
-$(document).on('submi', '.my-form', function (e) {
+    // $(document).on('submit', '#my-form', function (e) {
+    //     e.preventDefault();
+
+    //     // Retrieve the CSRF token from the form
+    //     var csrfToken = $('input[name="__RequestVerificationToken"]').val();
+
+    //     // Serialize the form data
+    //     var formData = $(this).serialize();
+
+    //     // Prepare the data for the AJAX request, including the CSRF token
+    //     var requestData = {
+    //         __RequestVerificationToken: csrfToken,
+    //         formData: formData // You can add more data if needed
+    //     };
+
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: '/Ugovor/Update',
+    //         data: requestData, // Send the prepared data
+    //         success: function (response) {
+    //             if (response.success) {
+    //                 // Handle a successful response, e.g., close modal, update UI
+    //                 $('#editModal').modal('hide');
+    //                 // You can also refresh the data on the page or update the UI.
+    //             } else {
+    //                 // Handle validation errors or other issues
+    //                 // Display errors on the form if necessary
+    //             }
+    //         },
+    //         error: function () {
+    //             // Handle AJAX errors, such as a failed request
+    //             // You may want to display an error message to the user
+    //         }
+    //     });
+    // });
+$(document).on('submit', '#my-form', function (e) {
     e.preventDefault();
 
     var formId = $(this).attr('id'); // Get the ID of the submitted form
@@ -33,8 +67,8 @@ $(document).on('submi', '.my-form', function (e) {
             if (response.success) {
                 // Close the modal and handle any other UI updates as needed
                 $('#editModal').modal('hide');
-                // You can also refresh the data on the page or update the UI.
-            } else {
+                    location.reload();
+                } else {
                 // Handle validation errors or other issues
                 // Display errors on the form if necessary
             }

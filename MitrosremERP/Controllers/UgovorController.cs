@@ -191,6 +191,7 @@ namespace MitrosremERP.Controllers
         {
             try
             {
+
                 if (ModelState.IsValid)
                 {
                     var ugovorPostoji = _unitOfWork.UgovoriRepository.GetQueryable(u => u.Id == kreirajUgovorVM.UgovorId);
@@ -208,7 +209,7 @@ namespace MitrosremERP.Controllers
                         TempData["success"] = "Uspesno izmenjeni podaci";
                     }
                     await _unitOfWork.SaveAsync();
-                    return RedirectToAction("Create");
+                    return Json(new { success = true });
                 }
                 else
                 {

@@ -12,8 +12,8 @@ using MitrosremERP.Aplication.Data;
 namespace MitrosremERP.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231019094523_SeedData")]
-    partial class SeedData
+    [Migration("20231020153204_PrvaMigracija")]
+    partial class PrvaMigracija
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -499,7 +499,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2d82faed-500b-4ec1-97fd-19a338b2d50c"),
+                            Id = new Guid("bbd5e414-1639-4b04-baf8-ad89edd16112"),
                             Adresa = "Stari Sor",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -516,7 +516,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("143eaee4-d70d-44dd-af35-c2c11f74fd16"),
+                            Id = new Guid("2f328d41-ae49-44ec-bc52-dfb5e829ef8d"),
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -533,7 +533,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e8e85be0-56ac-4091-890f-c09e7fe560fe"),
+                            Id = new Guid("db524567-5f3c-4249-97b6-57ce8e72bf30"),
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -550,7 +550,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d6c2ffd6-3686-4f0c-841c-a8f758fb0a77"),
+                            Id = new Guid("a1059536-726a-4a77-a7fe-9ae31d381193"),
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -567,7 +567,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4420d70c-ce75-4f0c-96d0-dedb00aa7ab9"),
+                            Id = new Guid("3583303b-ea48-428d-a2e4-8d0c8b826409"),
                             Adresa = "Stari Sor",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -584,7 +584,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1fc0c585-1b73-4527-abe9-b268f59b4818"),
+                            Id = new Guid("5300aea9-1835-44ea-a316-cf70415e1bfa"),
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -601,7 +601,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d724ce07-180c-4778-8637-0da2495c07f9"),
+                            Id = new Guid("89f40f91-c652-4ac9-85b3-6187e56bcbe3"),
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -618,7 +618,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f01f0f99-565a-4e45-8a72-2d3710b89293"),
+                            Id = new Guid("b3a352d6-a8c3-4f55-b9ee-7b6c501b11d6"),
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",

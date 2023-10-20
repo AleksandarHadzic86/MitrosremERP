@@ -56,7 +56,7 @@ namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
         public List<UgovoriVM> UgovoriVMlista { get; set; }
 
         [ValidateNever]
-        public ZaposleniVM ZaposleniVM { get; set; } = null!;
+        public ZaposleniVM ZaposleniVM { get; set; }
 
 
     }

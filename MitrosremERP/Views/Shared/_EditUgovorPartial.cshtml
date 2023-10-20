@@ -4,16 +4,15 @@
 <!-- Modal -->
 @model KreirajUgovorVM
     <div class="modal-dialog modal-xl modal-dialog-centered ">
-        <div class="modal-dialog">
             <div class="modal-content">
 
-                <div class="row">
 
                     <div class="modal-body p-0 m-0">
-                    <form asp-controller="Ugovor" asp-action="Update" class="my-form" method="post" autocomplete="off">
-                            <div class="card mb-4 mb-xl-0">
+                    <form asp-controller="Ugovor" asp-action="Update" id="my-form" method="post" autocomplete="off">
+                            <div class="card mb-xl-0">
                                 <h-3 class="card-header bg-primary text-white">Izmeni ugovor</h-3>
                                 <input hidden asp-for="UgovorId" />
+                                <input hidden asp-for="ZaposleniId"/>
                                 <div class="row px-3">
                                     <div class="col-lg-4 col-sm-8 card-body">
                                         <div class="mb-3">
@@ -100,7 +99,7 @@
 
                         </form>
                     </div>
-                </div>
+           
             </div>
-        </div>
+      
     </div>

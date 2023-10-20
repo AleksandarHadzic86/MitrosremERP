@@ -20,6 +20,7 @@ html {
 body {
   margin-bottom: 60px;
 }*/
+
 @media (max-width: 560px) {
     .sm-font-size {
         font-size: 13px;

@@ -38,6 +38,7 @@
             <div class="card mb-4 mb-xl-0">
                 <h-3 class="card-header bg-primary text-white">Kreiraj Ugovor</h-3>
                     <input hidden asp-for="ZaposleniVM.Id" />
+                  
                 <div class="row px-3">
                     <div class="col-lg-4 col-sm-8 card-body">
                         <div class="mb-3">
@@ -88,7 +89,7 @@
                                 <div class="input-group-text">
                                     <i class='bx bx-calendar'></i>
                                 </div>
-                                    <input readonly asp-for="UgovorDatumPocetka" type="text" name="UgovoriVM.DatumPocetka" id="UgovoriVM.DatumPocetka" value="@Model.UgovorDatumPocetka.ToString("dd.MMMM.yyyy")" class="datepickerNormalDate form-control" />
+                                    <input readonly asp-for="UgovorDatumPocetka" type="text" name="UgovoriVM.DatumPocetka" id="UgovoriVM.DatumPocetka" class="datepickerNormalDate form-control" />
                             </div>
                                 <span asp-validation-for="UgovorDatumPocetka" class="text-danger"></span>
                         </div> 
@@ -98,7 +99,7 @@
                                 <div class="input-group-text">
                                     <i class='bx bx-calendar'></i>
                                 </div>
-                                    <input readonly asp-for="UgovorDatumZavrsetka" type="text" name="UgovoriVM.DatumZavrsetka" id="UgovoriVM.DatumZavrsetka" value="@Model.UgovorDatumZavrsetka?.ToString("dd.MMMM.yyyy")" class="datepickerNormalDate form-control" />
+                                    <input readonly asp-for="UgovorDatumZavrsetka" type="text" name="UgovoriVM.DatumZavrsetka" id="UgovoriVM.DatumZavrsetka"  class="datepickerNormalDate form-control" />
                             </div>
                                 <span asp-validation-for="UgovorDatumZavrsetka" class="text-danger"></span>
                         </div>
@@ -249,14 +250,8 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body p-0 m-0">
-                @await Html.PartialAsync("_EditUgovorPartial") <!-- This line calls the _EditUgovorPartial partial view -->
-            </div>
-        </div>
-    </div>
+<div class="modal fade " id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    @await Html.PartialAsync("_EditUgovorPartial")
 </div>
 
 
