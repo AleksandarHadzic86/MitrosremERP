@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 using Microsoft.AspNetCore.Authorization;
 using MitrosremERP.Domain.Models.IdentityModel;
+using MitrosremERP.Aplication.AutoMapper;
 
 namespace MitrosremERP.Controllers
 {
@@ -97,7 +98,7 @@ namespace MitrosremERP.Controllers
 
                     KreirajUgovorVM ugovoriVM = new KreirajUgovorVM();
 
-                    ugovoriVM.UgovoriVM = new UgovoriVM();
+                    //ugovoriVM.UgovoriVM = new UgovoriVM();
                     ugovoriVM.UgovoriVMlista = _autoMapper.Map<List<UgovoriVM>>(ugovorZaposleniId);
                     ugovoriVM.ZaposleniVM = _autoMapper.Map<ZaposleniVM>(zaposleni);
                     
@@ -120,7 +121,7 @@ namespace MitrosremERP.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var ugovor = _autoMapper.Map<Ugovor>(kreirajugovorVM.UgovoriVM);
+                    var ugovor = _autoMapper.Map<Ugovor>(kreirajugovorVM);
                     ugovor.ZaposleniId = kreirajugovorVM.ZaposleniVM.Id;
                     _unitOfWork.UgovoriRepository.Insert(ugovor);
                     await _unitOfWork.SaveAsync();
@@ -138,7 +139,7 @@ namespace MitrosremERP.Controllers
             }
         }
         [HttpGet]
-        public async Task<IActionResult> Update(Guid? id)
+        public async Task<IActionResult> GetUgovor(Guid? id)
         {
             try
             {
@@ -152,9 +153,67 @@ namespace MitrosremERP.Controllers
                 else
                 {
 
-                    var ugovorVM = _autoMapper.Map<UgovorUpdateVM>(ugovorId);
+                    var ugovorVM = _autoMapper.Map<KreirajUgovorVM>(ugovorId);
+                    return PartialView("_EditUgovorPartial", ugovorVM);
+                    
+                    //return View(ugovorVM);
+                }
+            }
+            catch (Exception ex)
+            {
 
-                    return View(ugovorVM);
+                Response.StatusCode = 500;
+                _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
+                return View("InternalServerError");
+            }
+
+        }
+        //[HttpPost]
+        //public IActionResult Update(KreirajUgovorVM kreirajUgovorVM)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        // Update the Ugovor in the database using the model
+        //        var ugovor = _autoMapper.Map<Ugovor>(kreirajUgovorVM);
+        //        _unitOfWork.UgovoriRepository.Update(ugovor);
+
+        //        // Optionally, you can return a success message or other data
+        //        return Json(new { success = true });
+        //    }
+        //    else
+        //    {
+        //        // Handle validation errors
+        //        return Json(new { success = false, errors = ModelState.SelectMany(x => x.Value.Errors).Select(x => x.ErrorMessage) });
+        //    }
+        //}
+        [HttpPost]
+        public async Task<IActionResult> Update(KreirajUgovorVM kreirajUgovorVM)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var ugovorPostoji = _unitOfWork.UgovoriRepository.GetQueryable(u => u.Id == kreirajUgovorVM.UgovorId);
+
+                    if (ugovorPostoji == null)
+                    {
+                        Response.StatusCode = 404;
+                        return View("../Ugovor/UgovorNijePronadjen");
+                    }
+                    else
+                    {
+
+                        var ugovor = _autoMapper.Map<Ugovor>(kreirajUgovorVM);
+                        _unitOfWork.UgovoriRepository.Update(ugovor);
+                        TempData["success"] = "Uspesno izmenjeni podaci";
+                    }
+                    await _unitOfWork.SaveAsync();
+                    return RedirectToAction("Create");
+                }
+                else
+                {
+
+                    return View(kreirajUgovorVM);
                 }
             }
             catch (Exception ex)
@@ -165,6 +224,5 @@ namespace MitrosremERP.Controllers
                 return View("InternalServerError");
             }
         }
-
     }
 }

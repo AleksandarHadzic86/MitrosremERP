@@ -34,21 +34,21 @@
 <div class="container-fluid mt-3 mb-5" >
    <div class="row">
         <div class="col-lg-8 px-3">
-            <form method="post" autocomplete="off" >
+            <form method="post" autocomplete="off" id="formaKreirajUgovor" >
             <div class="card mb-4 mb-xl-0">
                 <h-3 class="card-header bg-primary text-white">Kreiraj Ugovor</h-3>
                     <input hidden asp-for="ZaposleniVM.Id" />
                 <div class="row px-3">
                     <div class="col-lg-4 col-sm-8 card-body">
                         <div class="mb-3">
-                                <label class="small mb-1" asp-for="UgovoriVM.BrojUgovora"></label>
+                                <label class="small mb-1" asp-for="UgovorBrojUgovora"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                         <i class='bx bx-key'></i>
                                     </div>
-                                    <input asp-for="UgovoriVM.BrojUgovora" class="form-control" />
+                                    <input asp-for="UgovorBrojUgovora" class="form-control" />
                             </div>
-                                <span asp-validation-for="UgovoriVM.BrojUgovora" class="text-danger"></span>
+                                <span asp-validation-for="UgovorBrojUgovora" class="text-danger"></span>
                         </div>
                             
                           <div class="mb-3">
@@ -57,22 +57,22 @@
                                 <div class="input-group-text">
                                         <i class='bx bx-pen'></i>
                                  </div>
-                                 <select asp-for="UgovoriVM.TipoviUgovora" asp-items="@Html.GetEnumSelectList<TipUgovora>()" class="form-control">
+                                 <select asp-for="TipoviUgovora" asp-items="@Html.GetEnumSelectList<TipUgovora>()" class="form-control">
                                      <option disabled selected>--Izaberite tip ugovora--</option>
                                  </select>
                             </div>
-                                <span asp-validation-for="UgovoriVM.TipoviUgovora" class="text-danger"></span>
+                                <span asp-validation-for="TipoviUgovora" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
-                                <label class="small mb-1" asp-for="UgovoriVM.BrojDanaGodisnjeg"></label>
+                                <label class="small mb-1" asp-for="UgovorBrojDanaGodisnjeg"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                         <i class='bx bx-home-smile'></i>
                                     </div>
-                                    <input asp-for="UgovoriVM.BrojDanaGodisnjeg" class="form-control" />
+                                    <input asp-for="UgovorBrojDanaGodisnjeg" class="form-control" />
                             </div>
-                                <span asp-validation-for="UgovoriVM.BrojDanaGodisnjeg" class="text-danger"></span>
+                                <span asp-validation-for="UgovorBrojDanaGodisnjeg" class="text-danger"></span>
                         </div>
 
 
@@ -83,34 +83,34 @@
 
 
                          <div class="mb-3">
-                                <label class="small mb-1" asp-for="UgovoriVM.DatumPocetka"></label>
+                                <label class="small mb-1" asp-for="UgovorDatumPocetka"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                     <i class='bx bx-calendar'></i>
                                 </div>
-                                    <input readonly asp-for="UgovoriVM.DatumPocetka" type="text" name="UgovoriVM.DatumPocetka" id="UgovoriVM.DatumPocetka" value="@Model.UgovoriVM.DatumPocetka.ToString("dd.MMMM.yyyy")" class="datepickerNormalDate form-control" />
+                                    <input readonly asp-for="UgovorDatumPocetka" type="text" name="UgovoriVM.DatumPocetka" id="UgovoriVM.DatumPocetka" value="@Model.UgovorDatumPocetka.ToString("dd.MMMM.yyyy")" class="datepickerNormalDate form-control" />
                             </div>
-                                <span asp-validation-for="UgovoriVM.DatumPocetka" class="text-danger"></span>
+                                <span asp-validation-for="UgovorDatumPocetka" class="text-danger"></span>
                         </div> 
                         <div class="mb-3">
-                                <label class="small mb-1" asp-for="UgovoriVM.DatumZavrsetka"></label>
+                                <label class="small mb-1" asp-for="UgovorDatumZavrsetka"></label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                     <i class='bx bx-calendar'></i>
                                 </div>
-                                    <input readonly asp-for="UgovoriVM.DatumZavrsetka" type="text" name="UgovoriVM.DatumZavrsetka" id="UgovoriVM.DatumZavrsetka" value="@Model.UgovoriVM.DatumZavrsetka?.ToString("dd.MMMM.yyyy")" class="datepickerNormalDate form-control" />
+                                    <input readonly asp-for="UgovorDatumZavrsetka" type="text" name="UgovoriVM.DatumZavrsetka" id="UgovoriVM.DatumZavrsetka" value="@Model.UgovorDatumZavrsetka?.ToString("dd.MMMM.yyyy")" class="datepickerNormalDate form-control" />
                             </div>
-                                <span asp-validation-for="UgovoriVM.DatumZavrsetka" class="text-danger"></span>
+                                <span asp-validation-for="UgovorDatumZavrsetka" class="text-danger"></span>
                         </div>
                             <div class="mb-3">
-                                <label class="small mb-1" asp-for="UgovoriVM.Napomena"></label>
+                                <label class="small mb-1" asp-for="UgovorNapomena"></label>
                                 <div class="input-group">
                                     <div class="input-group-text">
                                         <i class='bx bx-detail'></i>
                                     </div>
-                                    <input asp-for="UgovoriVM.Napomena" class="form-control" />
+                                    <input asp-for="UgovorNapomena" class="form-control" />
                                 </div>
-                                <span asp-validation-for="UgovoriVM.Napomena" class="text-danger"></span>
+                                <span asp-validation-for="UgovorNapomena" class="text-danger"></span>
                             </div>
 
 
@@ -219,8 +219,7 @@
                         </td>
                         <td>
                             <div class="btnbtn-group" role="group">
-                                <a asp-controller="Ugovor" asp-action="Update" asp-route-id="@ugovori.Id" data-bs-toggle="modal" data-bs-target="#editModal" class="btn btn-primary mx-2"><i class='bx bxs-edit'></i>Uredi</a>
-
+                                <a asp-controller="Ugovor" asp-action="GetUgovor" asp-route-id="@ugovori.Id" data-bs-toggle="modal" data-bs-target="#editModal" class="btn btn-primary edit-button" data-ugovor-id="@ugovori.Id"><i class='bx bxs-edit'></i>Uredi</a>
                                 @if (User.IsInRole(Roles.Role_SuperAdmin))
                                 {
                                     <a asp-controller="Ugovor" asp-action="Delete" class="btn btn-danger mx-2"><i class='bx bx-trash'></i>Obrisi</a>
@@ -249,121 +248,25 @@
 
 </div>
 
-
-
-<div class="justify-content-center">
 <!-- Modal -->
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">  
-    <div class="modal-dialog modal-xl modal-dialog-centered ">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                        <div class="container-fluid mt-3 mb-5">
-                            <div class="row">
-                                <div class="col-xxl-10 px-3">
-                                <div class="modal-body">
-                                    <form asp-controller="Ugovor" asp-action="Update" method="post" autocomplete="off">
-                                        <div class="card mb-4 mb-xl-0">
-                                            <h-3 class="card-header bg-primary text-white">Izmeni ugovor</h-3>
-                                            <input hidden asp-for="UgovoriVM.Id" />
-                                            <div class="row px-3">
-                                                <div class="col-lg-4 col-sm-8 card-body">
-                                                    <div class="mb-3">
-                                                        <label class="small mb-1" asp-for="UgovoriVM.BrojUgovora"></label>
-                                                        <div class="input-group">
-                                                            <div class="input-group-text">
-                                                                <i class='bx bx-key'></i>
-                                                            </div>
-                                                            <input asp-for="UgovoriVM.BrojUgovora" class="form-control" />
-                                                        </div>
-                                                        <span asp-validation-for="UgovoriVM.BrojUgovora" class="text-danger"></span>
-                                                    </div>
-
-                                                    <div class="mb-3">
-                                                        <label class="small mb-1">Tip ugovora</label>
-                                                        <div class="input-group">
-                                                            <div class="input-group-text">
-                                                                <i class='bx bx-pen'></i>
-                                                            </div>
-                                                            <select asp-for="UgovoriVM.TipoviUgovora" asp-items="@Html.GetEnumSelectList<TipUgovora>()" class="form-control">
-                                                                <option disabled selected>--Izaberite tip ugovora--</option>
-                                                            </select>
-                                                        </div>
-                                                        <span asp-validation-for="UgovoriVM.TipoviUgovora" class="text-danger"></span>
-                                                    </div>
-
-                                                    <div class="mb-3">
-                                                        <label class="small mb-1" asp-for="UgovoriVM.BrojDanaGodisnjeg"></label>
-                                                        <div class="input-group">
-                                                            <div class="input-group-text">
-                                                                <i class='bx bx-home-smile'></i>
-                                                            </div>
-                                                            <input asp-for="UgovoriVM.BrojDanaGodisnjeg" class="form-control" />
-                                                        </div>
-                                                        <span asp-validation-for="UgovoriVM.BrojDanaGodisnjeg" class="text-danger"></span>
-                                                    </div>
-
-
-                                                </div>
-
-
-                                                <div class="col-lg-4 col-sm-8 card-body ">
-
-
-                                                    <div class="mb-3">
-                                                        <label class="small mb-1" asp-for="UgovoriVM.DatumPocetka"></label>
-                                                        <div class="input-group">
-                                                            <div class="input-group-text">
-                                                                <i class='bx bx-calendar'></i>
-                                                            </div>
-                                                            <input readonly asp-for="UgovoriVM.DatumPocetka" type="text" name="DatumPocetka" id="DatumPocetka" value="@Model.UgovoriVM.DatumPocetka.ToString("dd.MMMM.yyyy")" class="datepickerNormalDate form-control" />
-                                                        </div>
-                                                        <span asp-validation-for="UgovoriVM.DatumPocetka" class="text-danger"></span>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label class="small mb-1" asp-for="UgovoriVM.DatumZavrsetka"></label>
-                                                        <div class="input-group">
-                                                            <div class="input-group-text">
-                                                                <i class='bx bx-calendar'></i>
-                                                            </div>
-                                                            <input readonly asp-for="UgovoriVM.DatumZavrsetka" type="text" name="UgovoriVM.DatumZavrsetka" id="UgovoriVM.DatumZavrsetka" value="@Model.UgovoriVM.DatumZavrsetka?.ToString("dd.MMMM.yyyy")" class="datepickerNormalDate form-control" />
-                                                        </div>
-                                                        <span asp-validation-for="UgovoriVM.DatumZavrsetka" class="text-danger"></span>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label class="small mb-1" asp-for="UgovoriVM.Napomena"></label>
-                                                        <div class="input-group">
-                                                            <div class="input-group-text">
-                                                                <i class='bx bx-detail'></i>
-                                                            </div>
-                                                            <input asp-for="UgovoriVM.Napomena" class="form-control" />
-                                                        </div>
-                                                        <span asp-validation-for="UgovoriVM.Napomena" class="text-danger"></span>
-                                                    </div>
-
-
-                                                </div>
-                                            </div>
-                                            <div class="col-8 px-3  py-3">
-                                                <button type="submit" class="btn btn-success">Kreiraj</button>
-                                                <a asp-controller="Zaposleni" asp-action="Index" class="btn btn-secondary">Povratak na listu</a>
-                                            </div>
-                                        </div>
-                       
-                                    </form>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                </div>
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body p-0 m-0">
+                @await Html.PartialAsync("_EditUgovorPartial") <!-- This line calls the _EditUgovorPartial partial view -->
             </div>
+        </div>
     </div>
 </div>
-</div>
+
+
+
+
 @section Scripts{
     @{
         @await Html.PartialAsync("_DatePicker-normalDate")
         @await Html.PartialAsync("_ValidationScriptsPartial")
         @await Html.PartialAsync("_ZaposleniNav")
+        @await Html.PartialAsync("_EditUgovorJSPartial")    
     }
 }

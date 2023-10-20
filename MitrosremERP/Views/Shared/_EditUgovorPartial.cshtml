@@ -1,0 +1,106 @@
+﻿
+@using MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM;
+@using MitrosremERP.Domain.Enum
+<!-- Modal -->
+@model KreirajUgovorVM
+    <div class="modal-dialog modal-xl modal-dialog-centered ">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="row">
+
+                    <div class="modal-body p-0 m-0">
+                    <form asp-controller="Ugovor" asp-action="Update" class="my-form" method="post" autocomplete="off">
+                            <div class="card mb-4 mb-xl-0">
+                                <h-3 class="card-header bg-primary text-white">Izmeni ugovor</h-3>
+                                <input hidden asp-for="UgovorId" />
+                                <div class="row px-3">
+                                    <div class="col-lg-4 col-sm-8 card-body">
+                                        <div class="mb-3">
+                                            <label class="small mb-1" asp-for="UgovorBrojUgovora"></label>
+                                            <div class="input-group">
+                                                <div class="input-group-text">
+                                                    <i class='bx bx-key'></i>
+                                                </div>
+                                            <input asp-for="UgovorBrojUgovora" class="form-control" />
+                                            </div>
+                                        <span asp-validation-for="UgovorBrojUgovora" class="text-danger"></span>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="small mb-1">Tip ugovora</label>
+                                            <div class="input-group">
+                                                <div class="input-group-text">
+                                                    <i class='bx bx-pen'></i>
+                                                </div>
+                                                <select asp-for="TipoviUgovora" asp-items="@Html.GetEnumSelectList<TipUgovora>()" class="form-control">
+                                                    <option disabled selected>--Izaberite tip ugovora--</option>
+                                                </select>
+                                            </div>
+                                            <span asp-validation-for="TipoviUgovora" class="text-danger"></span>
+                                        </div>
+
+                                        <div class="mb-3">
+                                        <label class="small mb-1" asp-for="UgovorBrojDanaGodisnjeg"></label>
+                                            <div class="input-group">
+                                                <div class="input-group-text">
+                                                    <i class='bx bx-home-smile'></i>
+                                                </div>
+                                            <input asp-for="UgovorBrojDanaGodisnjeg" class="form-control" />
+                                            </div>
+                                        <span asp-validation-for="UgovorBrojDanaGodisnjeg" class="text-danger"></span>
+                                        </div>
+
+
+                                    </div>
+
+
+                                    <div class="col-lg-4 col-sm-8 card-body ">
+
+
+                                        <div class="mb-3">
+                                        <label class="small mb-1" asp-for="UgovorDatumPocetka"></label>
+                                            <div class="input-group">
+                                                <div class="input-group-text">
+                                                    <i class='bx bx-calendar'></i>
+                                                </div>
+                                            <input readonly asp-for="UgovorDatumPocetka" type="text" name="DatumPocetka" id="DatumPocetka" value="@Model.UgovorDatumPocetka.ToString("dd.MMMM.yyyy")" class="datepickerNormalDate form-control" />
+                                            </div>
+                                        <span asp-validation-for="UgovorDatumPocetka" class="text-danger"></span>
+                                        </div>
+                                        <div class="mb-3">
+                                        <label class="small mb-1" asp-for="UgovorDatumZavrsetka"></label>
+                                            <div class="input-group">
+                                                <div class="input-group-text">
+                                                    <i class='bx bx-calendar'></i>
+                                                </div>
+                                            <input readonly asp-for="UgovorDatumZavrsetka" type="text" name="UgovoriVM.DatumZavrsetka" id="UgovoriVM.DatumZavrsetka" value="@Model.UgovorDatumZavrsetka?.ToString("dd.MMMM.yyyy")" class="datepickerNormalDate form-control" />
+                                            </div>
+                                        <span asp-validation-for="UgovorDatumZavrsetka" class="text-danger"></span>
+                                        </div>
+                                        <div class="mb-3">
+                                        <label class="small mb-1" asp-for="UgovorNapomena"></label>
+                                            <div class="input-group">
+                                                <div class="input-group-text">
+                                                    <i class='bx bx-detail'></i>
+                                                </div>
+                                            <input asp-for="UgovorNapomena" class="form-control" />
+                                            </div>
+                                        <span asp-validation-for="UgovorNapomena" class="text-danger"></span>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="col-8 px-3  py-3">
+                                    <button type="submit" class="btn btn-success">Kreiraj</button>
+                                    <a data-bs-dismiss="modal" class="btn btn-secondary">Povratak na listu</a>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

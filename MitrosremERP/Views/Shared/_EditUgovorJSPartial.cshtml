@@ -1,0 +1,44 @@
+﻿<script>
+$(document).ready(function () {
+        $('.edit-button').click(function () {
+            var ugovorId = $(this).data('ugovor-id'); // Get the ID from the data attribute
+
+            // Send an Ajax request to get the data for the specified Ugovor
+            $.ajax({
+                type: 'GET',
+                url: '/Ugovor/GetUgovor', // Adjust the URL as needed
+                data: { id: ugovorId },
+                success: function (data) {
+                    // Fill the modal with the retrieved data
+                    $('#editModal').html(data);
+                    $('#editModal').modal('show');
+                }
+            });
+        });
+    });
+
+     
+$(document).on('submi', '.my-form', function (e) {
+    e.preventDefault();
+
+    var formId = $(this).attr('id'); // Get the ID of the submitted form
+
+    var formData = $(this).serialize(); // Serialize the form that was submitted
+
+    $.ajax({
+        type: 'POST',
+        url: '/Ugovor/Update', // Adjust the URL as needed
+        data: formData,
+        success: function (response) {
+            if (response.success) {
+                // Close the modal and handle any other UI updates as needed
+                $('#editModal').modal('hide');
+                // You can also refresh the data on the page or update the UI.
+            } else {
+                // Handle validation errors or other issues
+                // Display errors on the form if necessary
+            }
+        }
+    });
+});
+</script>
