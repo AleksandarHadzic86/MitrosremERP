@@ -1,57 +1,45 @@
 ﻿<script>
-$(document).ready(function () {
-        $('.edit-button').click(function () {
-            var ugovorId = $(this).data('ugovor-id'); // Get the ID from the data attribute
+// $(document).ready(function () {
+//         $('.edit-button').click(function () {
+//             var ugovorId = $(this).data('ugovor-id'); // Get the ID from the data attribute
 
-            // Send an Ajax request to get the data for the specified Ugovor
+//             // Send an Ajax request to get the data for the specified Ugovor
+//             $.ajax({
+//                 type: 'GET',
+//                 url: '/Ugovor/GetUgovor', // Adjust the URL as needed
+//                 data: { id: ugovorId },
+//                 success: function (data) {
+//                     // Fill the modal with the retrieved data
+//                     $('#editModal').html(data);
+//                     $('#editModal').modal('show');
+//                 }
+//             });
+//         });
+//     });
+    $(document).ready(function () {
+        $('.edit-button').click(function () {
+            var ugovorId = $(this).data('ugovor-id');
+
             $.ajax({
                 type: 'GET',
-                url: '/Ugovor/GetUgovor', // Adjust the URL as needed
+                url: '/Ugovor/GetUgovor',
                 data: { id: ugovorId },
                 success: function (data) {
-                    // Fill the modal with the retrieved data
-                    $('#editModal').html(data);
-                    $('#editModal').modal('show');
+                    if (data.includes("modal")) {
+                        $('#editModal').html(data);
+                        $('#editModal').modal('show');
+                    } else {
+                        $('#errorModal').modal('show');
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    $('#errorModal').modal('show');
+                    
                 }
             });
         });
     });
 
-    // $(document).on('submit', '#my-form', function (e) {
-    //     e.preventDefault();
-
-    //     // Retrieve the CSRF token from the form
-    //     var csrfToken = $('input[name="__RequestVerificationToken"]').val();
-
-    //     // Serialize the form data
-    //     var formData = $(this).serialize();
-
-    //     // Prepare the data for the AJAX request, including the CSRF token
-    //     var requestData = {
-    //         __RequestVerificationToken: csrfToken,
-    //         formData: formData // You can add more data if needed
-    //     };
-
-    //     $.ajax({
-    //         type: 'POST',
-    //         url: '/Ugovor/Update',
-    //         data: requestData, // Send the prepared data
-    //         success: function (response) {
-    //             if (response.success) {
-    //                 // Handle a successful response, e.g., close modal, update UI
-    //                 $('#editModal').modal('hide');
-    //                 // You can also refresh the data on the page or update the UI.
-    //             } else {
-    //                 // Handle validation errors or other issues
-    //                 // Display errors on the form if necessary
-    //             }
-    //         },
-    //         error: function () {
-    //             // Handle AJAX errors, such as a failed request
-    //             // You may want to display an error message to the user
-    //         }
-    //     });
-    // });
 $(document).on('submit', '#my-form', function (e) {
     e.preventDefault();
 

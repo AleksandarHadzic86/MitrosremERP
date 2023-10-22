@@ -1,0 +1,17 @@
+﻿<script>
+    $("#fileInput").on("change", function () {
+        var fileInput = this;
+        var imageElement = document.getElementById("profilepicture");
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                imageElement.src = e.target.result;
+            };
+
+            reader.readAsDataURL(fileInput.files[0]);
+        } else {
+            imageElement.src = ""; // Clear the image source if no file is selected
+        }
+    });
+</script>

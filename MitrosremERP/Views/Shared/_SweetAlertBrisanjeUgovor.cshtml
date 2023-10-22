@@ -1,0 +1,54 @@
+﻿@using MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
+@model KreirajUgovorVM
+
+ <script>
+    function confirmDelete(brojugovora,Id) {
+       
+            // Dohvati CSRF token iz forme
+            var csrfToken = $('input[name="__RequestVerificationToken"]').val();
+
+            // Pripremi podatke za slanje AJAX zahteva
+            var data = {
+                __RequestVerificationToken: csrfToken
+            };
+
+            Swal.fire({
+                title: 'Da li ste sigurni?',
+            text: 'Upravo cete obrisati ugovor broj ' + brojugovora,
+                icon: 'warning',
+                showConfirmButton: true,
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Da, obrisi!',
+                cancelButtonText: 'Otkazi'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '@Url.Action("DeleteUgovor", "Ugovor")/' + Id,
+                        type: 'POST',
+                        data: data,
+                        success: function (response) {
+                            Swal.fire({
+                                title: 'Obrisano!',
+                                text: brojugovora + ' je obrisan.',
+                                icon: 'success',
+                                timer: 2500,
+                                showConfirmButton: false
+                            });
+
+                            setTimeout(function () {
+                                window.location.href = '@Url.Action("Create", "Ugovor")'; 
+                            }, 3000);
+                        },
+                        error: function (error) {
+                            // Obrada grešaka
+                            // Handle errors, such as displaying an error message to the user.
+                        }
+                    });
+                }
+            });
+        
+      
+    }
+</script> 

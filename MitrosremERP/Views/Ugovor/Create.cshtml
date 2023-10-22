@@ -223,7 +223,7 @@
                                 <a asp-controller="Ugovor" asp-action="GetUgovor" asp-route-id="@ugovori.Id" data-bs-toggle="modal" data-bs-target="#editModal" class="btn btn-primary edit-button" data-ugovor-id="@ugovori.Id"><i class='bx bxs-edit'></i>Uredi</a>
                                 @if (User.IsInRole(Roles.Role_SuperAdmin))
                                 {
-                                    <a asp-controller="Ugovor" asp-action="Delete" class="btn btn-danger mx-2"><i class='bx bx-trash'></i>Obrisi</a>
+                                    <button onclick="confirmDelete('@ugovori.BrojUgovora', '@ugovori.Id')" type="button" class="btn btn-danger"><i class='bx bx-trash'></i>Obrisi</button>
                                 }
                             </div>
                         </td>
@@ -262,6 +262,8 @@
         @await Html.PartialAsync("_DatePicker-normalDate")
         @await Html.PartialAsync("_ValidationScriptsPartial")
         @await Html.PartialAsync("_ZaposleniNav")
-        @await Html.PartialAsync("_EditUgovorJSPartial")    
+        @await Html.PartialAsync("_EditUgovorJSPartial")  
+        @await Html.PartialAsync("_SweetAlertBrisanjeUgovor")
+        
     }
 }

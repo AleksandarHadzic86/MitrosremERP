@@ -8,6 +8,7 @@ using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 using Microsoft.AspNetCore.Authorization;
 using MitrosremERP.Domain.Models.IdentityModel;
 using MitrosremERP.Aplication.AutoMapper;
+using Microsoft.AspNetCore.Identity;
 
 namespace MitrosremERP.Controllers
 {
@@ -110,7 +111,7 @@ namespace MitrosremERP.Controllers
 
                 Response.StatusCode = 500;
                 _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
-                return View("InternalServerError");
+                return View("../ErrorCodes/InternalServerError");
             }
         }
         [HttpPost]
@@ -135,7 +136,7 @@ namespace MitrosremERP.Controllers
             {
                 Response.StatusCode = 500;
                 _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
-                return View("InternalServerError");
+                return View("../ErrorCodes/InternalServerError");
             }
         }
         [HttpGet]
@@ -147,24 +148,22 @@ namespace MitrosremERP.Controllers
 
                 if (ugovorId == null)
                 {
-                    Response.StatusCode = 404;
-                    return View("../Zaposleni/ZaposleniNijePronadjen");
+                    ViewBag.ErrorMessage = "Ugovor not found.";
+                    return PartialView("_EditUgovorPartialError");
                 }
                 else
                 {
 
                     var ugovorVM = _autoMapper.Map<KreirajUgovorVM>(ugovorId);
                     return PartialView("_EditUgovorPartial", ugovorVM);
-                    
-                    //return View(ugovorVM);
-                }
+                }                
             }
             catch (Exception ex)
             {
 
                 Response.StatusCode = 500;
                 _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
-                return View("InternalServerError");
+                return Json(new { error = "Server Error" });
             }
 
         }
@@ -187,6 +186,7 @@ namespace MitrosremERP.Controllers
         //    }
         //}
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(KreirajUgovorVM kreirajUgovorVM)
         {
             try
@@ -222,8 +222,27 @@ namespace MitrosremERP.Controllers
 
                 Response.StatusCode = 500;
                 _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
-                return View("InternalServerError");
+                return View("../ErrorCodes/InternalServerError");
             }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> DeleteUgovor(Guid id)
+        {
+          
+                var ugovorVM = await _unitOfWork.UgovoriRepository.GetByIdAsync(id);
+                if (ugovorVM == null)
+                {
+                    _logger.LogError($"Ugovor nije pronadjen, ugovor ID: {id}");
+                    Response.StatusCode = 404;
+                    return View("UgovorNijePronadjen");
+                }
+
+                _unitOfWork.UgovoriRepository.Delete(ugovorVM);
+                await _unitOfWork.SaveAsync();
+                return Json(new { success = true });
+         
         }
     }
 }
