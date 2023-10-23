@@ -16,4 +16,8 @@
     <ProjectReference Include="..\MitrosremERP.Domain\MitrosremERP.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\RuteVM\" />
+  </ItemGroup>
+
 </Project>

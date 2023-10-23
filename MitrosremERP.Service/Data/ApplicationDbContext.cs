@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MitrosremERP.Domain.Enum;
 using MitrosremERP.Domain.Models.IdentityModel;
+using MitrosremERP.Domain.Models.Rute;
 using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 using MitrosremERP.Infrastructure.Data;
 using MitrosremERP.Infrastructure.DbInitilizer;
@@ -26,7 +27,12 @@ namespace MitrosremERP.Aplication.Data
         public DbSet<GodisnjiOdmor> GodisnjiOdmori { get; set; }
         public DbSet<StepenStrucneSpreme> StepenStrucneSpreme { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-
+        public DbSet<Vozaci> Vozaci { get; set; }
+        public DbSet<Vozila> Vozila { get; set; }
+        public DbSet<KategorijaVozila> KategorijaVozila { get; set; }
+        public DbSet<Region> Region { get; set; }
+        public DbSet<PutniNalog> PutniNalog { get; set; }
+        public DbSet<PutniNalogVozac> PutniNalogVozac { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
