@@ -1,4 +1,5 @@
-﻿using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
+﻿using MitrosremERP.Aplication.ViewModels;
+using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,7 @@ namespace MitrosremERP.Aplication.IRepositories
 {
     public interface IGodisnjiRepository:IGenericRepository<GodisnjiOdmor>
     {
+        Task<PaginatedList<GodisnjiOdmor>> GetGodisnjiPaginationAsync(string sortOrder, string searchString, int pageNumber, int pageSize);
+
     }
 }

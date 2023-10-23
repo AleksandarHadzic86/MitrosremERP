@@ -205,10 +205,10 @@
                 <div class="card mb-4 mb-xl-0">
                     <div class="card-header bg-primary text-white ">Fotografija</div>
                     <div class="card-body text-center ">
-                    <img class="img-account rounded-circle mb-2" src="@Model.ImageUrl" />
-                        <div class="small font-italic text-muted mb-4">JPG ili PNG, ne vece od 2MB</div>
+                    <img class="img-account rounded-circle mb-2" id="profilepicture" src="@Model.ImageUrl" />
+                    <div class="small font-italic text-muted mb-4">JPG ili PNG, ne vece od 2MB</div>
                     <label class="small mb-1" ></label>
-                    <input  type="file" name="file" class="form-control" />
+                    <input type="file" name="file" id="fileInput" class="form-control" />
                     </div>
                 </div>
         </div>
@@ -225,6 +225,7 @@
         @await Html.PartialAsync("_DatePicker")
         @await Html.PartialAsync("_ValidationScriptsPartial")
         @await Html.PartialAsync("_ZaposleniNav")
+        @await Html.PartialAsync("_ProfilePicturePreview")
 
     }
     

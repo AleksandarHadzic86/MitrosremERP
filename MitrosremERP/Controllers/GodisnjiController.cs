@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using MitrosremERP.Aplication.IRepositories;
+using MitrosremERP.Aplication.ViewModels;
 using MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM;
 
 namespace MitrosremERP.Controllers
@@ -16,9 +17,31 @@ namespace MitrosremERP.Controllers
             _autoMapper = autoMapper;
             _logger = logger;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
-            return View();
+            try
+            {
+                var pageSize = 3;
+                var ugovoriLista = await _unitOfWork.GodisnjiRepository.GetGodisnjiPaginationAsync(sortOrder, searchString, pageNumber ?? 1, 8);
+                var ugovoriVM = _autoMapper.Map<IEnumerable<GodisnjiVMIndex>>(ugovoriLista);
+
+
+                var ugovoriVMPaginatedList = new PaginatedList<GodisnjiVMIndex>(
+                    ugovoriVM.ToList(),
+                    ugovoriLista.Count,
+                    pageNumber ?? 1,
+                    pageSize
+                );
+
+                return View(ugovoriVMPaginatedList);
+
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 500;
+                _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
+                return View("../ErrorCodes/InternalServerError");
+            }
         }
         [HttpGet]
         public async Task<IActionResult> Create(Guid? id)

@@ -89,7 +89,7 @@
                                 <div class="input-group-text">
                                     <i class='bx bx-calendar'></i>
                                 </div>
-                                    <input readonly asp-for="UgovorDatumPocetka" type="text" name="UgovoriVM.DatumPocetka" id="UgovoriVM.DatumPocetka" class="datepickerNormalDate form-control" />
+                                    <input readonly asp-for="UgovorDatumPocetka" type="text" name="UgovoriVM.DatumPocetka" id="UgovoriVM.DatumPocetka" value="@Model.UgovorDatumPocetka.ToString("dd.MMMM.yyyy")" class="datepickerNormalDate form-control" />
                             </div>
                                 <span asp-validation-for="UgovorDatumPocetka" class="text-danger"></span>
                         </div> 
@@ -99,7 +99,7 @@
                                 <div class="input-group-text">
                                     <i class='bx bx-calendar'></i>
                                 </div>
-                                    <input readonly asp-for="UgovorDatumZavrsetka" type="text" name="UgovoriVM.DatumZavrsetka" id="UgovoriVM.DatumZavrsetka"  class="datepickerNormalDate form-control" />
+                                    <input readonly asp-for="UgovorDatumZavrsetka" type="text" name="UgovoriVM.DatumZavrsetka" id="UgovoriVM.DatumZavrsetka" value="@Model.UgovorDatumZavrsetka?.ToString("dd.MMMM.yyyy")" class="datepickerNormalDate form-control" />
                             </div>
                                 <span asp-validation-for="UgovorDatumZavrsetka" class="text-danger"></span>
                         </div>

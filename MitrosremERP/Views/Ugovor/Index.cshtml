@@ -46,10 +46,9 @@
                 </tr>
             </thead>
 
-            
-            @foreach (var ugovori in Model)
+            @if(Model.Count != 0)
             {
-                @if(ugovori != null)
+                @foreach (var ugovori in Model)
                 {
                     <tbody>
                         <tr>
@@ -85,19 +84,21 @@
 
                     </tbody>
                 }
-                else
-                {
+
+            }                               
+            else
+              {
                     <tbody>
                         <tr>
                             <td colspan="6">
-                                <p>Trenutno nema registrovanih ugovora</p>
+                              <p class="text-info p-2 py-1">Trenutno nema registrovanih ugovora</p>
                             </td>
 
                         </tr>
 
                     </tbody>
-                }
-            }
+             }
+            
 
         </table>
 

@@ -16,7 +16,6 @@ namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
         public Guid Id { get; set; }
 
         private DateTime _datumPocetkaGodisnjeg = DateTime.MinValue;
-        private DateTime _datumZavrsetkaGodisnjeg = DateTime.MinValue;
 
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Datum pocetka godisnjeg")]
@@ -33,6 +32,7 @@ namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
                 _datumPocetkaGodisnjeg = value;
             }
         }
+        private DateTime _datumZavrsetkaGodisnjeg = DateTime.MinValue;
 
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Datum zavrsetka godisnjeg")]

@@ -30,17 +30,50 @@
                         $('#editModal').modal('show');
                     } else {
                         $('#errorModal').modal('show');
+                       
+
                     }
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    $('#errorModal').modal('show');
-                    
+                    location.reload();
+
                 }
             });
         });
-    });
 
-$(document).on('submit', '#my-form', function (e) {
+    });
+    // $(document).ready(function () {
+    //     $('.edit-button').click(function () {
+    //         var ugovorId = $(this).data('ugovor-id'); // Get the ID from the data attribute
+
+    //         // Send an Ajax request to get the data for the specified Ugovor
+    //         $.ajax({
+    //             type: 'GET',
+    //             url: '/Ugovor/GetUgovor', // Adjust the URL as needed
+    //             data: { id: ugovorId },
+    //             success: function (data) {
+    //                 // Fill the modal with the retrieved data
+    //                 $('#editModal').html(data);
+    //                 $('#editModal').modal('show');
+    //             },
+    //             error: function (xhr, textStatus, errorThrown) {
+    //                 console.log('Error:', xhr.status, errorThrown);
+    //                 if (xhr.status === 404) {
+    //                     var errorData = JSON.parse(xhr.responseText);
+    //                     var errorMessage = errorData.errorMessage;
+    //                     alert(errorMessage);
+    //                 }
+    //                 else {
+    //                     alert('An error occurred while fetching data.');
+    //                 }
+    //             }
+    //         });
+    //     });
+    // });
+   
+
+
+    $(document).on('submit', '#my-form', function (e) {
     e.preventDefault();
 
     var formId = $(this).attr('id'); // Get the ID of the submitted form

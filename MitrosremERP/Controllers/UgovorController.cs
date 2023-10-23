@@ -25,34 +25,6 @@ namespace MitrosremERP.Controllers
             _autoMapper = autoMapper;
             _logger = logger;
         }
-        //public async Task<IActionResult> Index()
-        //{
-        //    //verzija1//
-        //    //var zaposleniLista = await _unitOfWork.ZaposleniRepository.GetAllAsync();
-        //    //var zaposleniIds = zaposleniLista.Select(zl => zl.Id );
-        //    //var ugovoriForZaposleni = _unitOfWork.UgovoriRepository.GetQueryable().Where(u => zaposleniIds.Contains(u.ZaposleniId));
-        //    //var ugovoriVM = _autoMapper.Map<IEnumerable<UgovoriVM>>(ugovoriForZaposleni);
-        //    //return View(ugovoriVM);
-
-        //    //verzija2
-        //    //var zaposleniLista = await _unitOfWork.ZaposleniRepository.GetAllAsync();
-        //    //var ugovoriVMlista = new List<UgovoriVM>();
-        //    //foreach (var zaposleni in zaposleniLista)
-        //    //{
-        //    //    var ugovoriForZaposleni = _unitOfWork.UgovoriRepository.GetQueryable().Where(z => z.ZaposleniId == zaposleni.Id).ToList();
-        //    //    var ugovoriVMForZaposleni = _autoMapper.Map<IEnumerable<UgovoriVM>>(ugovoriForZaposleni);
-
-        //    //    ugovoriVMlista.AddRange(ugovoriVMForZaposleni);
-        //    //}
-        //    //return View(zaposleniLista);
-
-
-
-        //    var ugovoriZaposleni = _unitOfWork.UgovoriRepository.GetQueryable().Include(z => z.Zaposleni);
-
-        //   var ugovoriVM = _autoMapper.Map<IEnumerable<UgovoriVMIndex>>(ugovoriZaposleni);
-        //    return View(ugovoriVM);
-        //}
         public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
             try
@@ -148,12 +120,13 @@ namespace MitrosremERP.Controllers
 
                 if (ugovorId == null)
                 {
-                    ViewBag.ErrorMessage = "Ugovor not found.";
-                    return PartialView("_EditUgovorPartialError");
+                    _logger.LogError($"Ugovor nije pronadjen, ugovor ID: {id}");
+                    Response.StatusCode = 404;
+                    TempData["error"] = "Ugovor nije pronadjen";
+                    return Json(new { error = true });
                 }
                 else
                 {
-
                     var ugovorVM = _autoMapper.Map<KreirajUgovorVM>(ugovorId);
                     return PartialView("_EditUgovorPartial", ugovorVM);
                 }                
@@ -163,43 +136,27 @@ namespace MitrosremERP.Controllers
 
                 Response.StatusCode = 500;
                 _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
-                return Json(new { error = "Server Error" });
+                TempData["error"] = "Prekid sa serverom";
+                return Json(new { error = true });
             }
 
         }
-        //[HttpPost]
-        //public IActionResult Update(KreirajUgovorVM kreirajUgovorVM)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        // Update the Ugovor in the database using the model
-        //        var ugovor = _autoMapper.Map<Ugovor>(kreirajUgovorVM);
-        //        _unitOfWork.UgovoriRepository.Update(ugovor);
-
-        //        // Optionally, you can return a success message or other data
-        //        return Json(new { success = true });
-        //    }
-        //    else
-        //    {
-        //        // Handle validation errors
-        //        return Json(new { success = false, errors = ModelState.SelectMany(x => x.Value.Errors).Select(x => x.ErrorMessage) });
-        //    }
-        //}
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(KreirajUgovorVM kreirajUgovorVM)
         {
             try
             {
-
                 if (ModelState.IsValid)
                 {
                     var ugovorPostoji = _unitOfWork.UgovoriRepository.GetQueryable(u => u.Id == kreirajUgovorVM.UgovorId);
 
                     if (ugovorPostoji == null)
                     {
+                        _logger.LogError($"Ugovor nije pronadjen, ugovor ID: {ugovorPostoji}");
                         Response.StatusCode = 404;
-                        return View("../Ugovor/UgovorNijePronadjen");
+                        TempData["error"] = "Ugovor nije pronadjen";
+                        return Json(new { error = true });
                     }
                     else
                     {
@@ -222,7 +179,8 @@ namespace MitrosremERP.Controllers
 
                 Response.StatusCode = 500;
                 _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
-                return View("../ErrorCodes/InternalServerError");
+                TempData["error"] = "Prekid sa serverom";
+                return Json(new { error = true });
             }
         }
         [HttpPost]
@@ -230,18 +188,29 @@ namespace MitrosremERP.Controllers
 
         public async Task<IActionResult> DeleteUgovor(Guid id)
         {
-          
+            try
+            {
                 var ugovorVM = await _unitOfWork.UgovoriRepository.GetByIdAsync(id);
                 if (ugovorVM == null)
                 {
                     _logger.LogError($"Ugovor nije pronadjen, ugovor ID: {id}");
                     Response.StatusCode = 404;
-                    return View("UgovorNijePronadjen");
+                    TempData["error"] = "Ugovor nije pronadjen";
+                    return Json(new { error = true });
                 }
 
                 _unitOfWork.UgovoriRepository.Delete(ugovorVM);
                 await _unitOfWork.SaveAsync();
+                _logger.LogInformation($"Ugovor obrisan, broj ugovora :{ugovorVM.BrojUgovora}");
                 return Json(new { success = true });
+            }
+              catch(Exception ex)
+            {
+                Response.StatusCode = 500;
+                _logger.LogError(ex, "Doslo je do prekida u konekciji sa bazom");
+                TempData["error"] = "Prekid sa serverom";
+                return Json(new { error = true });
+            }
          
         }
     }

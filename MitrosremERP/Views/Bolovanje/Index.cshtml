@@ -1,1 +1,124 @@
-﻿<h1>Bolovanje</h1>
+﻿@using MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM;
+@using MitrosremERP.Aplication.ViewModels;
+@using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
+
+@model PaginatedList<BolovanjeVMIndex>
+@{
+    ViewBag.Title = "Bolovanja";
+}
+
+<div class=" align-items-center container-fluid table-responsive-sm sm-font-size pb-5">
+
+    <div class="row mt-5 mb-3 pb-3 border-bottom ">
+        <div class="d-flex align-items-center col-6">
+            <span class="fs-4 text-primary ">Bolovanja</span>
+        </div>
+    </div>
+
+    <form asp-action="Index" method="get">
+        <div class="row ">
+            <div class=" col-xxl-5 col-xl-8 col-sm-12 mt-xxl-3 mt-lg-3">
+                <div class="input-group mb-3 no-color w-10">
+                    <div class="input-group-text">
+                        <i class='bx bx-search'></i>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Pretraga ime ili prezime" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                    <input type="submit" value="Search" class="btn btn-outline-secondary" />
+                    <div class="input-group-text ">
+                        <a asp-action="Index" class="text-danger row align-content-center"><i class='bx bx-refresh ' style="font-size: 26px;"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+    <div class="card">
+        <table class="table mt-2 align-middle mb-0 bg-white">
+
+            <thead class="bg-light ">
+                <tr>
+                    <th class="px-3">Ime i Prezime</th>
+                    <th>Status godisnjeg</th>
+                    <th>Datum pocetka</th>
+                    <th>Datum zavrsetka</th>
+                    <th>Broj dana godisnjeg</th>
+                </tr>
+            </thead>
+
+
+            @if (Model.Count != 0)
+            {
+                @foreach (var bolovanja in Model)
+                {
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <img src="@bolovanja.ZaposleniImageUrl"
+                                         alt=""
+                                         style="width: 45px; height: 45px"
+                                         class="rounded-circle" />
+                                    <div class="ms-3">
+                                        <p class="fw-bold mb-1">@bolovanja.ZaposleniIme @bolovanja.ZaposleniPrezime</p>
+
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="fw-normal mb-1">@bolovanja.StatusBolGod</p>
+                            </td>
+                            <td>
+                                <p class="fw-normal mb-1">@bolovanja.DatumPocetkaBolovanja.ToString("dd.MMMM.yyyy")</p>
+                            </td>
+                            <td>
+                                <p class="fw-normal mb-1">@bolovanja.DatumZavrsetkaBolovanja?.ToString("dd.MMMM.yyyy")</p>
+                            </td>
+                            <td>
+                                <p class="fw-normal mb-1">@bolovanja.BrojDanaBolovanja</p>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                }
+
+            }
+            else
+            {
+                <tbody>
+                    <tr>
+                        <td colspan="6">
+                            <p class="text-info p-2 py-1">Trenutno nema registrovanih bolovanja</p>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            }
+
+
+        </table>
+
+    </div>
+    @{
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    }
+
+    <div class="my-3">
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-pageNumber="@(Model.PageIndex - 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-outline-secondary text-black @prevDisabled">
+            Previous
+        </a>
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-pageNumber="@(Model.PageIndex + 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-outline-secondary text-black @nextDisabled">
+            Next
+        </a>
+    </div>
+</div>
