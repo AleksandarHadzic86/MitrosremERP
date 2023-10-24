@@ -68,6 +68,7 @@ namespace MitrosremERP.Controllers
                 if (zaposleni == null)
                 {
                     Response.StatusCode = 404;
+                    _logger.LogError($"Zaposleni sa Id{id}, nije pronadjen");
                     return View("ZaposleniNijePronadjen");
                 }
                 else
@@ -98,6 +99,7 @@ namespace MitrosremERP.Controllers
                     if (postojiZaposleni == null)
                     {
                         Response.StatusCode = 404;
+                        _logger.LogError($"Zaposleni sa Id{zaposleniVM.Id} nije pronadjen");
                         return View("ZaposleniNijePronadjen");
                     }
                     else
@@ -106,9 +108,8 @@ namespace MitrosremERP.Controllers
                         var zaposleni = _autoMapper.Map<Zaposleni>(zaposleniVM);
                         _unitOfWork.ZaposleniRepository.Update(zaposleni);
                         TempData["success"] = "Uspešno izmenjeni podaci";
+                        await _unitOfWork.SaveAsync();
                     }
-
-                    await _unitOfWork.SaveAsync();
                     return RedirectToAction("Update");
                 }
                 else
@@ -180,6 +181,7 @@ namespace MitrosremERP.Controllers
                 if (zaposleni == null)
                 {
                     Response.StatusCode = 404;
+                    _logger.LogError($"Zaposleni sa Id{id}, nije pronadjen");
                     return View("ZaposleniNijePronadjen");
                 }
                 else
@@ -207,6 +209,7 @@ namespace MitrosremERP.Controllers
                 if (zaposleni == null)
                 {
                     Response.StatusCode = 404;
+                    _logger.LogError($"Zaposleni sa Id{id}, nije pronadjen");
                     return View("ZaposleniNijePronadjen");
                 }
 

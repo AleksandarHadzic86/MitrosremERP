@@ -21,16 +21,26 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
     {
         [Key]
         public Guid Id { get; set; }
-        public string Ime { get; set; } = null!;   
+        [StringLength(50)]
+        public string Ime { get; set; } = null!;
+        [StringLength(50)]
         public string Prezime { get; set; } = null!;
+        [StringLength(50)]
         public string Email { get; set; } = null!;
+        [StringLength(50)]
         public string JMBG { get; set; } = null!;
-        public DateTime DatumRodjenja { get; set; }      
+        public DateTime DatumRodjenja { get; set; }
+        [StringLength(50)]
         public string Profesija { get; set; } = null!;
+        [StringLength(50)]
         public string RadnoMesto { get; set; } = null!;
+        [StringLength(50)]
         public string Grad { get; set; } = null!;
+        [StringLength(50)]
         public string Adresa { get; set; } = null!;
-        public string? Fiksni { get; set; }      
+        [StringLength(50)]
+        public string? Fiksni { get; set; }
+        [StringLength(50)]
         public string Mobilni { get; set; } = null!;
         public string? Napomena { get; set; }       
         public string? ImageUrl { get; set; }
