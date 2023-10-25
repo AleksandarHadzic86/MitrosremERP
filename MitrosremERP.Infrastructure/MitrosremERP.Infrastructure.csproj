@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MitrosremERP.DAL\MitrosremERP.Aplication.csproj" />
+    <ProjectReference Include="..\MitrosremERP.Application\MitrosremERP.Application.csproj" />
     <ProjectReference Include="..\MitrosremERP.Domain\MitrosremERP.Domain.csproj" />
   </ItemGroup>
 

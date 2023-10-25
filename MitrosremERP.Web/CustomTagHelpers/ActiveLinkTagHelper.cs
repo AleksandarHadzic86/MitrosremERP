@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using System.Text.Encodings.Web;
 
-namespace MitrosremERP.CustomTagHelpers
+namespace MitrosremERP.Web.CustomTagHelpers
 {
     [HtmlTargetElement(Attributes = "asp-active")]
 

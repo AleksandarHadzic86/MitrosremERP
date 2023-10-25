@@ -1,15 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using MitrosremERP.Aplication.Data;
 using MitrosremERP.Aplication.IRepositories;
 using MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM;
 using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
-using MitrosremERP.Infrastructure.Repositories;
 using AutoMapper;
-using System.Data;
-using System.Drawing.Printing;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
 using MitrosremERP.Aplication.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using MitrosremERP.Domain.Models.IdentityModel;
@@ -209,7 +203,7 @@ namespace MitrosremERP.Controllers
                 if (zaposleni == null)
                 {
                     Response.StatusCode = 404;
-                    _logger.LogError($"Zaposleni sa Id{id}, nije pronadjen");
+                    _logger.LogError($"Zaposleni sa Id{zaposleniVM.Id}, nije pronadjen");
                     return View("ZaposleniNijePronadjen");
                 }
 

@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Localization;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using MitrosremERP.Aplication.AutoMapper;
 using MitrosremERP.Aplication.Data;
 using MitrosremERP.Infrastructure.Repositories;
@@ -10,10 +8,6 @@ using Microsoft.AspNetCore.Identity;
 using Serilog;
 using MitrosremERP.Aplication.IRepositories;
 using MitrosremERP.Infrastructure.EmailSevices;
-using System.Configuration;
-using System.Net.Mail;
-using MitrosremERP.Domain.Models.Email;
-using Microsoft.AspNetCore.Builder;
 using MitrosremERP.Domain.Models.IdentityModel;
 using MitrosremERP.Infrastructure.DbInitilizer;
 using Microsoft.AspNetCore.Identity.UI.Services;
