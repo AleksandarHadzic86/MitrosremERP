@@ -50,13 +50,11 @@ namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
         public TipUgovora TipoviUgovora { get; set; }
         public Guid ZaposleniId { get; set; }
 
-        //[ValidateNever]
-        //public UgovoriVM UgovoriVM { get; set; }
         [ValidateNever]
-        public List<UgovoriVM> UgovoriVMlista { get; set; }
+        public List<UgovoriVM> UgovoriVMlista { get; set; } = new List<UgovoriVM>();
 
         [ValidateNever]
-        public ZaposleniVM ZaposleniVM { get; set; }
+        public ZaposleniVM ZaposleniVM { get; set; } = new ZaposleniVM();
 
 
     }

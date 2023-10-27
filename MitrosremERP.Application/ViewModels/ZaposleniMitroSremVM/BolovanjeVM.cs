@@ -12,27 +12,18 @@ namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
 {
     public class BolovanjeVM
     {
+        public BolovanjeVM()
+        {
+            DatumPocetkaBolovanja = DateTime.Today;
+        }
         [Key]
         public Guid Id { get; set; }
 
-        private DateTime _pocetakBolovanja = DateTime.MinValue;
-
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMMM-yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Datum pocetka bolovanja")]
         [Required(ErrorMessage = "Datum je obavezan")]
-        public DateTime DatumPocetkaBolovanja
-        {
-            get
-            {
-
-                return (_pocetakBolovanja == DateTime.MinValue) ? DateTime.Now : _pocetakBolovanja;
-            }
-            set
-            {
-                _pocetakBolovanja = value;
-            }
-        }
-
+        public DateTime DatumPocetkaBolovanja { get; set; }
+      
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Datum Zavrsetka")]
         public DateTime? DatumZavrsetkaBolovanja { get; set; }

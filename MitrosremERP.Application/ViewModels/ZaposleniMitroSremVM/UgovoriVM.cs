@@ -13,6 +13,11 @@ namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
 {
     public class UgovoriVM
     {
+        public UgovoriVM()
+        {
+            DatumPocetka = DateTime.Today;
+            ZaposleniVM = new ZaposleniVM();
+        }
         [Key]
         public Guid Id { get; set; }
 
@@ -20,24 +25,11 @@ namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
         [Required(ErrorMessage = "Broj ugovora obavezan")]
         [Display(Name = "Broj Ugovora")]
         public string BrojUgovora { get; set; } = null!;
-
-        private DateTime _datumPocetka = DateTime.MinValue;
-
+    
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Datum Pocetka")]
         [Required(ErrorMessage = "Datum je obavezan")]
-        public DateTime DatumPocetka
-        {
-            get
-            {
-
-                return (_datumPocetka == DateTime.MinValue) ? DateTime.Now : _datumPocetka;
-            }
-            set
-            {
-                _datumPocetka = value;
-            }
-        }
+        public DateTime DatumPocetka { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Datum Zavrsetka")]

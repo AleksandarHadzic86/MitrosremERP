@@ -10,12 +10,12 @@ namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
     public class KreirajDokumenteZaposleniVM
     {
         
-        public DokumentiZaposleniVM DokumentiZaposleniVM { get; set; }
+        public DokumentiZaposleniVM DokumentiZaposleniVM { get; set; } = new DokumentiZaposleniVM();
 
         [ValidateNever]
-        public List<DokumentiZaposleniVM> DokumentiZaposleniVMlista { get; set; }
+        public List<DokumentiZaposleniVM> DokumentiZaposleniVMlista { get; set; } = new List<DokumentiZaposleniVM>();
 
         [ValidateNever]
-        public ZaposleniVM ZaposleniVM { get; set; } = null!;
+        public ZaposleniVM ZaposleniVM { get; set; } = new ZaposleniVM();
     }
 }

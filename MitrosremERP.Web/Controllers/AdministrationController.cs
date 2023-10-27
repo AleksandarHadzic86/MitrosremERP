@@ -23,6 +23,7 @@ namespace MitrosremERP.Controllers
             _userManager = userManager;
             _logger = logger;
         }
+
         public IActionResult Index()
         {
             return View();
@@ -37,7 +38,7 @@ namespace MitrosremERP.Controllers
             foreach (var user in users)
             {
                 var userRoles = await _userManager.GetRolesAsync(user);
-
+           
                 var userVM = new ApplicationUserVM
                 {
                     Id = user.Id,

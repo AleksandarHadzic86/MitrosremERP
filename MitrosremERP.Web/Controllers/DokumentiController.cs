@@ -49,7 +49,7 @@ namespace MitrosremERP.Controllers
                     bolovanjeVM.DokumentiZaposleniVMlista = _autoMapper.Map<List<DokumentiZaposleniVM>>(dokumentiZaposleniId);
                     bolovanjeVM.ZaposleniVM = _autoMapper.Map<ZaposleniVM>(zaposleni);
 
-                    return View(bolovanjeVM);
+                    return View("Create",bolovanjeVM);
                 }
             }
             catch (Exception ex)

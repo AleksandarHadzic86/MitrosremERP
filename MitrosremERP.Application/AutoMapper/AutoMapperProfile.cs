@@ -22,6 +22,7 @@ namespace MitrosremERP.Aplication.AutoMapper
             CreateMap<Ugovor, UgovorUpdateVM>().ReverseMap();
             CreateMap<UgovoriVM, Zaposleni>().ReverseMap();
             CreateMap<Bolovanje, BolovanjeVM>().ReverseMap();
+            CreateMap<Bolovanje, BolovanjeVMIndex>().ReverseMap();
             CreateMap<GodisnjiOdmor, GodisnjiVM>().ReverseMap();
             CreateMap<DokumentiZaposleni, DokumentiZaposleniVM>().ReverseMap();
 

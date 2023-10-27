@@ -44,7 +44,7 @@ namespace MitrosremERP.Controllers
             }
         }
         [HttpGet]
-        public async Task<IActionResult> Create(Guid? id)
+        public async Task<IActionResult> Create(Guid id)
         {
             try
             {
@@ -66,7 +66,7 @@ namespace MitrosremERP.Controllers
                     bolovanjeVM.BolovanjeVMlista = _autoMapper.Map<List<BolovanjeVM>>(bolovanjeZaposleniId);
                     bolovanjeVM.ZaposleniVM = _autoMapper.Map<ZaposleniVM>(zaposleni);
 
-                    return View(bolovanjeVM);
+                    return View("Create", bolovanjeVM);
                 }
             }
             catch (Exception ex)
