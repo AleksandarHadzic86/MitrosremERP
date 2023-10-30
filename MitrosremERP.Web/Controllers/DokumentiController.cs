@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
-using MitrosremERP.Aplication.IRepositories;
-using MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM;
+using MitrosremERP.Application.IRepositories;
+using MitrosremERP.Application.ViewModels.ZaposleniMitroSremVM;
 using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 
 
-namespace MitrosremERP.Controllers
+namespace MitrosremERP.Web.Controllers
 {
     public class DokumentiController : Controller
     {

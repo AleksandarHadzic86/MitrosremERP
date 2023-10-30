@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using MitrosremERP.Aplication.ViewModels.IdentityVM;
+using MitrosremERP.Application.ViewModels.IdentityVM;
 using MitrosremERP.Domain.Models.IdentityModel;
 using System.Data;
 
-namespace MitrosremERP.Controllers
+namespace MitrosremERP.Web.Controllers
 {
     [Authorize(Roles = Roles.Role_SuperAdmin)]
 

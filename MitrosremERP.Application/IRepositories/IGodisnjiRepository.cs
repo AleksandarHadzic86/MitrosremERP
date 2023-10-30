@@ -1,4 +1,4 @@
-﻿using MitrosremERP.Aplication.ViewModels;
+﻿using MitrosremERP.Application.ViewModels;
 using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MitrosremERP.Aplication.IRepositories
+namespace MitrosremERP.Application.IRepositories
 {
     public interface IGodisnjiRepository:IGenericRepository<GodisnjiOdmor>
     {

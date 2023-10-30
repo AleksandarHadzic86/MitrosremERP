@@ -1,10 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using MitrosremERP.Aplication.Data;
-using MitrosremERP.Aplication.IRepositories;
-using MitrosremERP.Aplication.ViewModels;
+using MitrosremERP.Application.IRepositories;
+using MitrosremERP.Application.ViewModels;
 using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
-
+using MitrosremERP.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;

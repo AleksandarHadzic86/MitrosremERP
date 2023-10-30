@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
+namespace MitrosremERP.Application.ViewModels.ZaposleniMitroSremVM
 {
     public class GodisnjiVM
     {

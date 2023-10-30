@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MitrosremERP.Aplication.Data;
 using Microsoft.EntityFrameworkCore;
 using Azure.Identity;
+using MitrosremERP.Infrastructure.Data;
 
 namespace MitrosremERP.Infrastructure.DbInitilizer
 {

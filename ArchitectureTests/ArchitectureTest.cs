@@ -10,7 +10,7 @@ namespace ArchitectureTests
         {
             var result = Types.InCurrentDomain()
                 .That()
-                .ResideInNamespace("MitrosremERP.Aplication")
+                .ResideInNamespace("MitrosremERP.Application")
                 .ShouldNot()
                 .HaveDependencyOn("MitrosremERP.Web")
                 .GetResult();
@@ -22,7 +22,7 @@ namespace ArchitectureTests
         {
             var result = Types.InCurrentDomain()
                 .That()
-                .ResideInNamespace("MitrosremERP.Aplication")
+                .ResideInNamespace("MitrosremERP.Application")
                 .ShouldNot()
                 .HaveDependencyOn("MitrosremERP.Infrastructure")
                 .GetResult();

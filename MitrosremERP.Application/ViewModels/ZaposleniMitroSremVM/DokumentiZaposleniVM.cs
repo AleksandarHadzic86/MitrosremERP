@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
+namespace MitrosremERP.Application.ViewModels.ZaposleniMitroSremVM
 {
     public class DokumentiZaposleniVM
     {

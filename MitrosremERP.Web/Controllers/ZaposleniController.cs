@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using MitrosremERP.Aplication.IRepositories;
-using MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM;
+using MitrosremERP.Application.IRepositories;
+using MitrosremERP.Application.ViewModels.ZaposleniMitroSremVM;
 using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 using AutoMapper;
-using MitrosremERP.Aplication.ViewModels;
+using MitrosremERP.Application.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using MitrosremERP.Domain.Models.IdentityModel;
 using MitrosremERP.Domain.Enum;
 
-namespace MitrosremERP.Controllers
+namespace MitrosremERP.Web.Controllers
 {
     [Authorize(Roles = Roles.Role_SuperAdmin +","+ Roles.Role_AdminZaposleni)]
     public class ZaposleniController : Controller

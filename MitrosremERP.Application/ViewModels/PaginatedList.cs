@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MitrosremERP.Aplication.ViewModels
+namespace MitrosremERP.Application.ViewModels
 {
     public class PaginatedList<T> : List<T>
     {

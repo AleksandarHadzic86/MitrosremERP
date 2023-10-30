@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using MitrosremERP.Aplication.IRepositories;
-using MitrosremERP.Aplication.ViewModels;
-using MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM;
+using MitrosremERP.Application.IRepositories;
+using MitrosremERP.Application.ViewModels;
+using MitrosremERP.Application.ViewModels.ZaposleniMitroSremVM;
 
-namespace MitrosremERP.Controllers
+namespace MitrosremERP.Web.Controllers
 {
     public class BolovanjeController : Controller
     {

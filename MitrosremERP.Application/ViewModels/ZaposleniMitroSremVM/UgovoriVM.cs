@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using MitrosremERP.Domain.Enum;
 
-namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
+namespace MitrosremERP.Application.ViewModels.ZaposleniMitroSremVM
 {
     public class UgovoriVM
     {

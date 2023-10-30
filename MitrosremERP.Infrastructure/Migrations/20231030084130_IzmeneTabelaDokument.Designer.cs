@@ -7,14 +7,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MitrosremERP.Infrastructure.Data;
 
-
 #nullable disable
 
 namespace MitrosremERP.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231020153204_PrvaMigracija")]
-    partial class PrvaMigracija
+    [Migration("20231030084130_IzmeneTabelaDokument")]
+    partial class IzmeneTabelaDokument
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -248,6 +247,226 @@ namespace MitrosremERP.Infrastructure.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("MitrosremERP.Domain.Models.Rute.KategorijaVozila", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("NazivKategorije")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<decimal>("Vrednost")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("KategorijaVozila");
+                });
+
+            modelBuilder.Entity("MitrosremERP.Domain.Models.Rute.PutniNalog", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("BrPonetihLodni")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BrPonetihPaleta")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BrVracenihLodni")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BrVracenihPaleta")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BrojIstovarnihMesta")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BrojPutnogNaloga")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BrojTovarnogLista")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DatumPutnogNaloga")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NasutoLitara")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("NetoKg")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("RegionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("StanjeKMsata")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("VozilaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RegionId");
+
+                    b.HasIndex("VozilaId");
+
+                    b.ToTable("PutniNalog");
+                });
+
+            modelBuilder.Entity("MitrosremERP.Domain.Models.Rute.PutniNalogVozac", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PutniNalogId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("VozaciId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PutniNalogId");
+
+                    b.HasIndex("VozaciId");
+
+                    b.ToTable("PutniNalogVozac");
+                });
+
+            modelBuilder.Entity("MitrosremERP.Domain.Models.Rute.Region", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Dnevnica")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("NazivRegiona")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SifraRegiona")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Vrednost")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Region");
+                });
+
+            modelBuilder.Entity("MitrosremERP.Domain.Models.Rute.Vozaci", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("KarticaTahografaDo")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("KvalifikacionaKarticaDo")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LekarskoUverenjeDo")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SifraVozaca")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Vozacka")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("VozackaDozvolaDo")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ZaposleniId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ZaposleniId");
+
+                    b.ToTable("Vozaci");
+                });
+
+            modelBuilder.Entity("MitrosremERP.Domain.Models.Rute.Vozila", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Boja")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("BrojSasije")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("BrojSedista")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("GodinaProizvodnje")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Gorivo")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("KategorijaVozilaId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MarkaVozila")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("ModelVozila")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Napomena")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nosivost")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("RegistarskeOznake")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime>("RegistrovanDo")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SifraVozila")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("KategorijaVozilaId");
+
+                    b.ToTable("Vozila");
+                });
+
             modelBuilder.Entity("MitrosremERP.Domain.Models.ZaposleniMitrosrem.Bolovanje", b =>
                 {
                     b.Property<Guid>("Id")
@@ -287,7 +506,8 @@ namespace MitrosremERP.Infrastructure.Migrations
 
                     b.Property<string>("ImeDokumenta")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Napomena")
                         .HasColumnType("nvarchar(max)");
@@ -439,36 +659,43 @@ namespace MitrosremERP.Infrastructure.Migrations
 
                     b.Property<string>("Adresa")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("DatumRodjenja")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Fiksni")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Grad")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Ime")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("JMBG")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Mobilni")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Napomena")
                         .HasColumnType("nvarchar(max)");
@@ -478,15 +705,18 @@ namespace MitrosremERP.Infrastructure.Migrations
 
                     b.Property<string>("Prezime")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Profesija")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("RadnoMesto")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("StepenStrucneSpremeId")
                         .HasColumnType("int");
@@ -500,7 +730,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("bbd5e414-1639-4b04-baf8-ad89edd16112"),
+                            Id = new Guid("bbf012b1-9d1d-4833-96e9-33f465d567e3"),
                             Adresa = "Stari Sor",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -517,7 +747,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2f328d41-ae49-44ec-bc52-dfb5e829ef8d"),
+                            Id = new Guid("1c39b8dc-d9fc-473e-98b0-aadea29ca30c"),
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -534,7 +764,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("db524567-5f3c-4249-97b6-57ce8e72bf30"),
+                            Id = new Guid("30497e80-477c-4f66-9ef0-0e0bec3f1117"),
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -551,7 +781,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a1059536-726a-4a77-a7fe-9ae31d381193"),
+                            Id = new Guid("9de93537-d7a4-4bbf-bc88-58b59376d13e"),
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -568,7 +798,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3583303b-ea48-428d-a2e4-8d0c8b826409"),
+                            Id = new Guid("71c51a75-e514-4659-95d3-e11193982a48"),
                             Adresa = "Stari Sor",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -585,7 +815,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5300aea9-1835-44ea-a316-cf70415e1bfa"),
+                            Id = new Guid("5e7bed96-1926-4425-8462-ace12347236a"),
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -602,7 +832,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("89f40f91-c652-4ac9-85b3-6187e56bcbe3"),
+                            Id = new Guid("3a34bcf8-9a4d-4a04-a348-52751ccf0424"),
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -619,7 +849,7 @@ namespace MitrosremERP.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b3a352d6-a8c3-4f55-b9ee-7b6c501b11d6"),
+                            Id = new Guid("d39ef05f-f83f-4f97-97a4-2670e012b799"),
                             Adresa = "BB",
                             DatumRodjenja = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mitrosrem@ad.rs",
@@ -687,6 +917,66 @@ namespace MitrosremERP.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MitrosremERP.Domain.Models.Rute.PutniNalog", b =>
+                {
+                    b.HasOne("MitrosremERP.Domain.Models.Rute.Region", "Region")
+                        .WithMany()
+                        .HasForeignKey("RegionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MitrosremERP.Domain.Models.Rute.Vozila", "Vozila")
+                        .WithMany()
+                        .HasForeignKey("VozilaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Region");
+
+                    b.Navigation("Vozila");
+                });
+
+            modelBuilder.Entity("MitrosremERP.Domain.Models.Rute.PutniNalogVozac", b =>
+                {
+                    b.HasOne("MitrosremERP.Domain.Models.Rute.PutniNalog", "PutniNalog")
+                        .WithMany("PutniNalogVozac")
+                        .HasForeignKey("PutniNalogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MitrosremERP.Domain.Models.Rute.Vozaci", "Vozaci")
+                        .WithMany("PutniNalogVozac")
+                        .HasForeignKey("VozaciId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PutniNalog");
+
+                    b.Navigation("Vozaci");
+                });
+
+            modelBuilder.Entity("MitrosremERP.Domain.Models.Rute.Vozaci", b =>
+                {
+                    b.HasOne("MitrosremERP.Domain.Models.ZaposleniMitrosrem.Zaposleni", "Zaposleni")
+                        .WithMany()
+                        .HasForeignKey("ZaposleniId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Zaposleni");
+                });
+
+            modelBuilder.Entity("MitrosremERP.Domain.Models.Rute.Vozila", b =>
+                {
+                    b.HasOne("MitrosremERP.Domain.Models.Rute.KategorijaVozila", "KategorijaVozila")
+                        .WithMany()
+                        .HasForeignKey("KategorijaVozilaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("KategorijaVozila");
+                });
+
             modelBuilder.Entity("MitrosremERP.Domain.Models.ZaposleniMitrosrem.Bolovanje", b =>
                 {
                     b.HasOne("MitrosremERP.Domain.Models.ZaposleniMitrosrem.Zaposleni", "Zaposleni")
@@ -740,6 +1030,16 @@ namespace MitrosremERP.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("StepenStrucneSpreme");
+                });
+
+            modelBuilder.Entity("MitrosremERP.Domain.Models.Rute.PutniNalog", b =>
+                {
+                    b.Navigation("PutniNalogVozac");
+                });
+
+            modelBuilder.Entity("MitrosremERP.Domain.Models.Rute.Vozaci", b =>
+                {
+                    b.Navigation("PutniNalogVozac");
                 });
 
             modelBuilder.Entity("MitrosremERP.Domain.Models.ZaposleniMitrosrem.StepenStrucneSpreme", b =>

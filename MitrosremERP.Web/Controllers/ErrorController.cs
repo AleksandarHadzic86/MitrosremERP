@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MitrosremERP.Controllers
+namespace MitrosremERP.Web.Controllers
 {
     public class ErrorController : Controller
     {

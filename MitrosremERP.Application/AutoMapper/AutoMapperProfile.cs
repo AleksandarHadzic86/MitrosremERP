@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
-using MitrosremERP.Aplication.ViewModels;
-using MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM;
+using MitrosremERP.Application.ViewModels;
+using MitrosremERP.Application.ViewModels.ZaposleniMitroSremVM;
 using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 
-namespace MitrosremERP.Aplication.AutoMapper
+namespace MitrosremERP.Application.AutoMapper
 {
     public class AutoMapperProfile:Profile
     {

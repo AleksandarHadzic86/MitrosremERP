@@ -1,16 +1,16 @@
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
-using MitrosremERP.Aplication.AutoMapper;
-using MitrosremERP.Aplication.Data;
+using MitrosremERP.Application.AutoMapper;
 using MitrosremERP.Infrastructure.Repositories;
 using System.Globalization;
 using Microsoft.AspNetCore.Identity;
 using Serilog;
-using MitrosremERP.Aplication.IRepositories;
+using MitrosremERP.Application.IRepositories;
 using MitrosremERP.Infrastructure.EmailSevices;
 using MitrosremERP.Domain.Models.IdentityModel;
 using MitrosremERP.Infrastructure.DbInitilizer;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using MitrosremERP.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

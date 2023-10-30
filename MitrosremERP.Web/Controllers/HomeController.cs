@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using MitrosremERP.Models;
 using System.Diagnostics;
 
-namespace MitrosremERP.Controllers
+namespace MitrosremERP.Web.Controllers
 {
     public class HomeController : Controller
     {

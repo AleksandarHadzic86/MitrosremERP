@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
-using MitrosremERP.Aplication.Data;
-using MitrosremERP.Aplication.IRepositories;
+using MitrosremERP.Application.IRepositories;
 using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
+using MitrosremERP.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;

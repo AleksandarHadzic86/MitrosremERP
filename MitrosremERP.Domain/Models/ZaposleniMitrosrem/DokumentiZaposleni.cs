@@ -14,7 +14,6 @@ namespace MitrosremERP.Domain.Models.ZaposleniMitrosrem
         public Guid Id { get; set; }
         [StringLength(50)]
         public string ImeDokumenta { get; set; } = null!;
-        [StringLength(50)]
         public string PutanjaDokumenta { get; set; } = null!;
         public string? Napomena { get; set; }
 

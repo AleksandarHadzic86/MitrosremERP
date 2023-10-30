@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MitrosremERP.Aplication.ViewModels.IdentityVM
+namespace MitrosremERP.Application.ViewModels.IdentityVM
 {
     public class ChangeUserPasswordVM
     {

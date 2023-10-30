@@ -2,20 +2,13 @@
 using FakeItEasy;
 using FluentAssertions;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Primitives;
-using MitrosremERP.Aplication.IRepositories;
-using MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM;
-using MitrosremERP.Controllers;
+using MitrosremERP.Application.IRepositories;
+using MitrosremERP.Application.ViewModels.ZaposleniMitroSremVM;
+using MitrosremERP.Web.Controllers;
 using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace UnitTests.ControllerTests
 {

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MitrosremERP.Domain.Enum;
 
-namespace MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM
+namespace MitrosremERP.Application.ViewModels.ZaposleniMitroSremVM
 {
     public class BolovanjeVM
     {

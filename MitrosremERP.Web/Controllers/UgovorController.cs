@@ -1,16 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MitrosremERP.Aplication.ViewModels.ZaposleniMitroSremVM;
-using MitrosremERP.Aplication.ViewModels;
+using MitrosremERP.Application.ViewModels.ZaposleniMitroSremVM;
+using MitrosremERP.Application.ViewModels;
 using AutoMapper;
-using MitrosremERP.Aplication.IRepositories;
-using Microsoft.EntityFrameworkCore;
+using MitrosremERP.Application.IRepositories;
 using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
 using Microsoft.AspNetCore.Authorization;
 using MitrosremERP.Domain.Models.IdentityModel;
-using MitrosremERP.Aplication.AutoMapper;
-using Microsoft.AspNetCore.Identity;
 
-namespace MitrosremERP.Controllers
+
+namespace MitrosremERP.Web.Controllers
 {
     [Authorize(Roles = Roles.Role_SuperAdmin + "," + Roles.Role_AdminZaposleni)]
     public class UgovorController : Controller

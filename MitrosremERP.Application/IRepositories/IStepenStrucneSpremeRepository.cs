@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MitrosremERP.Aplication.IRepositories
+namespace MitrosremERP.Application.IRepositories
 {
     public interface IStepenStrucneSpremeRepository:IGenericRepository<StepenStrucneSpreme>
     {

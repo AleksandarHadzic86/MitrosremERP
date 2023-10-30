@@ -1,20 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MitrosremERP.Domain.Enum;
 using MitrosremERP.Domain.Models.IdentityModel;
 using MitrosremERP.Domain.Models.Rute;
 using MitrosremERP.Domain.Models.ZaposleniMitrosrem;
-using MitrosremERP.Infrastructure.Data;
-using MitrosremERP.Infrastructure.DbInitilizer;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MitrosremERP.Aplication.Data
+namespace MitrosremERP.Infrastructure.Data
 {
     public class ApplicationDbContext:IdentityDbContext<ApplicationUser>
     {
@@ -24,6 +15,7 @@ namespace MitrosremERP.Aplication.Data
         public DbSet<Zaposleni> Zaposleni { get; set; }
         public DbSet<Ugovor> Ugovori { get; set; }
         public DbSet<Bolovanje> Bolovanja { get; set; }
+        public DbSet<DokumentiZaposleni> DokumentiZaposleni { get; set; }
         public DbSet<GodisnjiOdmor> GodisnjiOdmori { get; set; }
         public DbSet<StepenStrucneSpreme> StepenStrucneSpreme { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
