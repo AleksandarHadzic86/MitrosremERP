@@ -25,12 +25,6 @@ namespace MitrosremERP.Infrastructure.Repositories
             _logger = logger;
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
-        {
-            return await _repository.Set<T>().ToListAsync();
-        }
-
-
         public async Task<T?> GetByIdAsync(Guid? id)
         {
             return await _repository.Set<T>().FindAsync(id);
@@ -47,10 +41,6 @@ namespace MitrosremERP.Infrastructure.Repositories
         {
             _repository.Set<T>().Update(entity);    
         }
-        //public async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> expression)
-        //{
-        //    return await _repository.Set<T>().FirstOrDefaultAsync(expression);
-        //}
 
         public virtual IQueryable<T> GetQueryable(Expression<Func<T, bool>> predicate)
         {

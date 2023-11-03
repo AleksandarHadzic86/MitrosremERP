@@ -31,7 +31,7 @@ namespace MitrosremERP.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> ListUsers()
         {
-            var users = await _userManager.Users.ToListAsync(); // Fetch the list of users
+            var users = await _userManager.Users.ToListAsync(); 
 
             var model = new List<ApplicationUserVM>();
 
@@ -162,8 +162,6 @@ namespace MitrosremERP.Web.Controllers
 
                 return View("../Administration/ZabranjenPristupAdministracija");
             }
-            // Add any additional authorization checks here to determine if the user can be deleted
-
             var result = await _userManager.DeleteAsync(user);
 
             if (result.Succeeded)

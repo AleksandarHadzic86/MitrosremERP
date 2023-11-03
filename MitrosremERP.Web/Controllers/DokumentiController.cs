@@ -118,7 +118,6 @@ namespace MitrosremERP.Web.Controllers
        /// Preuzimanje fajlova////     
         public async Task<string> GetFilePath(Guid fileId)
         {
-            // Implement logic to retrieve the file path from your data store (e.g., a database)
             var file = await _unitOfWork.DokumentiRepository.GetByIdAsync(fileId);
             if (file != null)
             {
@@ -147,66 +146,17 @@ namespace MitrosremERP.Web.Controllers
 
             if (System.IO.File.Exists(filePath))
             {
-                // Read the file into a byte array
-                string mimeType = GetMimeType(filePath);
-
-                // Read the file into a byte array
+                string mimeType = GetMimeType(filePath);                
                 byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
-
-                // Get the file name from the path (you may want to store the original file name)
                 string fileName = Path.GetFileName(filePath);
-
-                // Return the file as a FileResult
                 return File(fileBytes, mimeType, fileName);
             }
             else
             {
-                // Handle the case where the file does not exist
                 _logger.LogWarning("File not found: {fileId}");
                 return NotFound();
             }
 
-        }
-        //private void HandleFileUpload(KreirajDokumenteZaposleniVM kreirajDokumenteZaposleniVM)
-        //{
-
-        //    //string filePath = _webHostEnvironment.WebRootPath;
-
-        //    //if (file != null && file.Length > 0)
-        //    //{
-        //    //    var allowedExtensions = new[] { ".docx", ".pdf" };
-        //    //    var fileExtension = Path.GetExtension(file.FileName);
-
-        //    //    if(allowedExtensions.Contains(fileExtension, StringComparer.OrdinalIgnoreCase))
-        //    //    {
-
-        //    //        var uploads = Path.Combine(filePath, "dokumenti", "zaposleni");
-        //    //        var filename = Guid.NewGuid().ToString() + fileExtension;
-
-        //    //        kreirajDokumenteZaposleniVM.DokumentiZaposleniVM.PutanjaDokumenta = Path.Combine("dokumenti", "zaposleni", filename);
-
-        //    //        if (!string.IsNullOrEmpty(kreirajDokumenteZaposleniVM.DokumentiZaposleniVM.PutanjaDokumenta))
-        //    //        {
-        //    //            var staraPutanja = Path.Combine(filePath, kreirajDokumenteZaposleniVM.DokumentiZaposleniVM.PutanjaDokumenta.TrimStart('\\'));
-        //    //            if (System.IO.File.Exists(staraPutanja))
-        //    //            {
-        //    //                System.IO.File.Delete(staraPutanja);
-        //    //            }
-
-        //    //        }
-        //    //        using (var fileStreams = new FileStream(Path.Combine(uploads, filename), FileMode.Create))
-        //    //        {
-        //    //            file.CopyTo(fileStreams);
-        //    //        }
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        ModelState.AddModelError("DokumentiZaposleniVM.PutanjaDokumenta", "Dozvoljeni su samo .docx i .pdf fajlovi");
-        //    //        return;
-        //    //    }
-        //    //}
-
-
-        //}
+        }      
     }
 }

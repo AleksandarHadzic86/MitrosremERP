@@ -68,7 +68,7 @@ namespace MitrosremERP.Web.Controllers
                 else
                 {
                     var zaposleniVMMapper = _autoMapper.Map<ZaposleniVM>(zaposleni);
-                    zaposleniVMMapper.StepenStrucneSpremeLista = await LoadStepenStrucneSpremeListItems();
+                    zaposleniVMMapper.StepenStrucneSpremeLista =  LoadStepenStrucneSpremeListItems();
                     return View(zaposleniVMMapper);
 
                 }
@@ -108,7 +108,7 @@ namespace MitrosremERP.Web.Controllers
                 }
                 else
                 {
-                    zaposleniVM.StepenStrucneSpremeLista = await LoadStepenStrucneSpremeListItems();
+                    zaposleniVM.StepenStrucneSpremeLista =  LoadStepenStrucneSpremeListItems();
                     return View(zaposleniVM);
                 }
             }
@@ -127,7 +127,7 @@ namespace MitrosremERP.Web.Controllers
             try
             {
                 ZaposleniVM zaposleniVM = new ZaposleniVM();
-                zaposleniVM.StepenStrucneSpremeLista = await LoadStepenStrucneSpremeListItems();
+                zaposleniVM.StepenStrucneSpremeLista = LoadStepenStrucneSpremeListItems();
                 return View(zaposleniVM);
             }
             catch (Exception ex)
@@ -181,7 +181,7 @@ namespace MitrosremERP.Web.Controllers
                 else
                 {
                     var zaposleniVMMapper = _autoMapper.Map<ZaposleniVM>(zaposleni);
-                    zaposleniVMMapper.StepenStrucneSpremeLista = await LoadStepenStrucneSpremeListItems();
+                    zaposleniVMMapper.StepenStrucneSpremeLista = LoadStepenStrucneSpremeListItems();
                     return View(zaposleniVMMapper);
                 }
 
@@ -282,9 +282,9 @@ namespace MitrosremERP.Web.Controllers
                 }
             }
         }
-        private async Task<IEnumerable<SelectListItem>> LoadStepenStrucneSpremeListItems()
+        private IEnumerable<SelectListItem> LoadStepenStrucneSpremeListItems()
         {
-            var stepenStrucneSpremeEntities = await _unitOfWork.StepenStrucneSpremeRepository.GetAllAsync();
+            var stepenStrucneSpremeEntities = _unitOfWork.StepenStrucneSpremeRepository.GetQueryable().ToList();
             return _autoMapper.Map<IEnumerable<SelectListItem>>(stepenStrucneSpremeEntities);
         }
 

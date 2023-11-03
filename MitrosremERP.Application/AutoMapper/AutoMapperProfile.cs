@@ -36,10 +36,6 @@ namespace MitrosremERP.Application.AutoMapper
                 .ForMember(dest => dest.UgovorNapomena, opt => opt.MapFrom(src => src.Napomena))
                 .ForMember(dest => dest.ZaposleniId, opt => opt.MapFrom(src => src.ZaposleniId))
                 .ForMember(dest => dest.ZaposleniVM, opt => opt.Ignore());
-
-            // Add more properties as needed
-
-            // Reverse map (if needed)
             CreateMap<KreirajUgovorVM, Ugovor>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.UgovorId))
                 .ForMember(dest => dest.BrojUgovora, opt => opt.MapFrom(src => src.UgovorBrojUgovora))
@@ -49,7 +45,6 @@ namespace MitrosremERP.Application.AutoMapper
                 .ForMember(dest => dest.Napomena, opt => opt.MapFrom(src => src.UgovorNapomena))
                 .ForMember(dest => dest.ZaposleniId, opt => opt.MapFrom(src => src.ZaposleniId))
                 .ForMember(dest => dest.Zaposleni, opt => opt.Ignore());
-            // Add more properties as needed
         }
     }
     

@@ -14,9 +14,7 @@ using MitrosremERP.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
-//Session
 builder.Services.AddDistributedMemoryCache();
 
 builder.Services.AddSession(options =>
@@ -25,13 +23,12 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
-// Add services localization settings.
+
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
     var supportedCultures = new[]
     {
-            new CultureInfo("sr-Latn-RS"), // Serbian in Latin script
-            // Add more supported cultures if needed
+            new CultureInfo("sr-Latn-RS"), 
         };
 
     options.DefaultRequestCulture = new RequestCulture("sr-Latn-RS");
@@ -50,9 +47,6 @@ builder.Services.AddAuthorization(options =>
         policy.RequireRole(Roles.Role_SuperAdmin); 
     });
 }); 
-
-
-/*builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>();*/
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -73,13 +67,7 @@ Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration).CreateLogger();
 
 builder.Host.UseSerilog();
-//builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
-
-
-
 var app = builder.Build();
-
-
 app.UseRequestLocalization();
 
 if (!app.Environment.IsDevelopment())
